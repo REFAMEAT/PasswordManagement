@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using MaterialDesignThemes.Wpf;
 using PasswordManagement.Backend.Xml;
+using MColor = System.Windows.Media.Color;
+using DColor = System.Drawing.Color;
 
 namespace PasswordManagement
 {
@@ -17,18 +15,44 @@ namespace PasswordManagement
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             XmlData data = new XmlHelper().GetData();
-            ResourceDictionary dictionary = new ResourceDictionary();
-            switch (data.Language)
-            {
-                case Language.English:
-                    dictionary.Source = new Uri("..\\Resources\\StringResources.EN.xaml", UriKind.Relative); 
-                    break;
-                case Language.German:
-                    dictionary.Source = new Uri("..\\Resources\\StringResources.DE.xaml", UriKind.Relative); 
-                    break;
-            }
+            AdjustApplicationStyle(data);
+        }
+        
+        /// <summary>
+        /// Adjust the UI to the UI-Config
+        /// </summary>
+        /// <param name="data"></param>
+        public static void AdjustApplicationStyle(XmlData data)
+        {
+            Current.Resources.Clear();
 
-            Resources.MergedDictionaries.Add(dictionary);
+            ResourceDictionary languageDictionary = new ResourceDictionary();
+            languageDictionary.Source = data.Language switch
+            {
+                Language.English => new Uri("..\\Resources\\StringResources.EN.xaml", UriKind.Relative),
+                Language.German => new Uri("..\\Resources\\StringResources.DE.xaml", UriKind.Relative),
+                _ => languageDictionary.Source
+            };
+
+            ResourceDictionary styleDictionary = new ResourceDictionary()
+            {
+                Source = new Uri(
+                    "pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml",
+                    UriKind.Absolute)
+            };
+
+            DColor color = DColor.FromName(data.PrimaryColor);
+
+            CustomColorTheme theme = new CustomColorTheme()
+            {
+                BaseTheme = data.Theme,
+                PrimaryColor = MColor.FromArgb(color.A, color.R, color.G, color.B),
+                SecondaryColor = MColor.FromArgb(color.A, color.R, color.G, color.B),
+            };
+
+            Current.Resources.MergedDictionaries.Add(languageDictionary);
+            Current.Resources.MergedDictionaries.Add(styleDictionary);
+            Current.Resources.MergedDictionaries.Add(theme);
         }
     }
 }

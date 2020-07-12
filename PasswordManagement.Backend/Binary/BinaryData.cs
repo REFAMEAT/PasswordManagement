@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PasswordManagement.Backend.BinarySerializer;
 
 namespace PasswordManagement.Backend.BinarySerializer
 {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace PasswordManagement.Backend.Xml
@@ -24,9 +23,24 @@ namespace PasswordManagement.Backend.Xml
             }
             catch (Exception)
             {
-                serializer.Serialize(s,  new XmlData());
+                serializer.Serialize(s, new XmlData());
                 return new XmlData();
             }
+        }
+
+        public void Write(XmlData value)
+        {
+            using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName), FileMode.Truncate);
+
+            try
+            {
+                serializer.Serialize(s, value);
+            }
+            catch (Exception)
+            {
+                // TODO: implement logging
+            }
+
         }
     }
 }

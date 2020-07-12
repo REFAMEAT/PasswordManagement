@@ -3,7 +3,6 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
-using PasswordManagement.Backend.Xml;
 
 namespace PasswordManagement.Backend.BinarySerializer
 {

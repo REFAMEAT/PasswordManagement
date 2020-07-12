@@ -12,6 +12,7 @@
     Background="{DynamicResource MaterialDesignPaper}"
     ResizeMode="CanMinimize"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.InputBindings>
         <KeyBinding
@@ -49,6 +50,7 @@
             Content="{DynamicResource LoginUserName}"
             FontSize="15" />
         <TextBox
+            x:Name="userNameTextBox"
             Grid.Row="1"
             Grid.Column="1"
             Width="200"
@@ -80,7 +82,7 @@
                 Margin="2"
                 Content="{DynamicResource LoginCancel}"
                 FontSize="15"
-                Style="{DynamicResource MaterialDesignIconForegroundButton}" />
+                Style="{DynamicResource MaterialDesignFlatButton}" />
             <Button
                 Margin="1"
                 Command="{Binding ButtonCommandLogin}"

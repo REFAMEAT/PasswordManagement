@@ -18,4 +18,9 @@
     <system:String x:Key="MainSave">Save</system:String>
     <system:String x:Key="MainSettings">Settings</system:String>
     <system:String x:Key="SettingsTheme">Theme</system:String>
+    <system:String x:Key="SettingsLanguage">Language</system:String>
+    <system:String x:Key="AddDescription">Description</system:String>
+    <system:String x:Key="AddCancel">Cancel</system:String>
+    <system:String x:Key="AddApply">Apply</system:String>
+    <system:String x:Key="SettingsColor">UI-Color</system:String>
 </ResourceDictionary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using MaterialDesignThemes.Wpf;
 
 namespace PasswordManagement.Backend.Xml
@@ -9,9 +8,9 @@ namespace PasswordManagement.Backend.Xml
     {
         public Language Language { get; set; }
 
-        public Color PrimaryColor { get; set; }
+        public string PrimaryColor { get; set; }
 
-        public Color SecondaryColor { get; set; }
+        public string SecondaryColor { get; set; }
 
         public BaseTheme Theme { get; set; }
     }

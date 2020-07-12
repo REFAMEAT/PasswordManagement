@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Windows.Controls;
 using System.Windows.Input;
-using PasswordManagement.Backend;
 using PasswordManagement.Backend.BinarySerializer;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;

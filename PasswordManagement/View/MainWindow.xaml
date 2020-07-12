@@ -10,6 +10,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    WindowStartupLocation="CenterScreen"
     Background="{DynamicResource MaterialDesignPaper}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     mc:Ignorable="d">
@@ -23,7 +24,7 @@
         </Grid.RowDefinitions>
         <ToolBarTray>
             <ToolBar>
-                <Button>
+                <Button Command="{Binding ButtonCommandAddItem}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Add" />
                         <Label VerticalContentAlignment="Center" Content="{DynamicResource MainAdd}" />
@@ -39,14 +40,6 @@
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Edit" />
                         <Label Content="{DynamicResource MainEdit}" />
-                    </StackPanel>
-                </Button>
-            </ToolBar>
-            <ToolBar>
-                <Button>
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="ContentSave" />
-                        <Label Content="{DynamicResource MainSave}" />
                     </StackPanel>
                 </Button>
             </ToolBar>

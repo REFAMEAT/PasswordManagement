@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace PasswordManagement.View
 {
@@ -20,6 +10,16 @@ namespace PasswordManagement.View
         public Settings()
         {
             InitializeComponent();
+
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Application curApp = Application.Current;
+            Window mainWindow = curApp.Windows[0]; 
+            Left = mainWindow.Left + (mainWindow.Width - this.ActualWidth) / 2;
+            Top = mainWindow.Top + (mainWindow.Height - this.ActualHeight) / 2;
         }
     }
 }
