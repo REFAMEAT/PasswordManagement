@@ -1,0 +1,29 @@
+﻿<Window
+    x:Class="PasswordManagement.View.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PasswordManagement.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="clr-namespace:PasswordManagement.ViewModel"
+    Title="Settings"
+    Width="800"
+    Height="450"
+    Background="{DynamicResource MaterialDesignPaper}"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <viewModel:SettingsViewModel />
+    </Window.DataContext>
+    <StackPanel Margin="10">
+        
+        <StackPanel Orientation="Horizontal">
+            <Label Width="100" Content="{DynamicResource SettingsTheme}" />
+            <ComboBox Width="200" ItemsSource="{Binding ThemeItems}" />
+        </StackPanel>
+        <StackPanel>
+            <Label></Label>
+        </StackPanel>
+    </StackPanel>
+
+</Window>

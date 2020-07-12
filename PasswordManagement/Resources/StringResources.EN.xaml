@@ -1,0 +1,21 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PasswordManagement.Resources"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <system:String x:Key="LoginText">Please enter credentials</system:String>
+    <system:String x:Key="LoginUserName">Username</system:String>
+    <system:String x:Key="LoginPassword">Password</system:String>
+    <system:String x:Key="LoginCancel">Cancel</system:String>
+    <system:String x:Key="LoginLogin">Login</system:String>
+    <system:String x:Key="MainAdd">Add</system:String>
+    <system:String x:Key="MainDelete">Delete</system:String>
+    <system:String x:Key="MainEdit">Edit</system:String>
+    <system:String x:Key="MainGridDescription">Description</system:String>
+    <system:String x:Key="MainGridPassword">Password</system:String>
+    <system:String x:Key="MainGridComments">Comment</system:String>
+    <system:String x:Key="MainSave">Save</system:String>
+    <system:String x:Key="MainSettings">Settings</system:String>
+    <system:String x:Key="SettingsTheme">Theme</system:String>
+</ResourceDictionary>
