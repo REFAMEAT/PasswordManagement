@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace PasswordManagement.Backend.Xml
 {
+    [Obsolete("Use Json Serializer!!!")]
     public class XmlHelper
     {
         public const string xmlConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\config.xml";
@@ -11,26 +13,33 @@ namespace PasswordManagement.Backend.Xml
 
         public XmlHelper()
         {
-            serializer = new XmlSerializer(typeof(XmlData));
+            serializer = new XmlSerializer(typeof(ThemeData));
         }
 
-        public XmlData GetData()
+        public ThemeData GetData()
         {
-            using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName), FileMode.OpenOrCreate);
+            using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName), FileMode.Truncate);
             try
             {
-                return (XmlData)serializer.Deserialize(s);
+                return (ThemeData)serializer.Deserialize(s);
             }
             catch (Exception)
             {
-                serializer.Serialize(s, new XmlData());
-                return new XmlData();
+                serializer.Serialize(s, new ThemeData());
+                return new ThemeData();
             }
         }
 
-        public void Write(XmlData value)
+        public void Write(ThemeData value)
         {
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName), FileMode.Truncate);
+
+            FileInfo fileInfo = new FileInfo(xmlConfigPath.Replace("{user}", Environment.UserName));
+            if (fileInfo.Directory != null 
+                && !Directory.Exists(fileInfo.Directory.FullName))
+            {
+                Directory.CreateDirectory(fileInfo.Directory.FullName);
+            }
 
             try
             {

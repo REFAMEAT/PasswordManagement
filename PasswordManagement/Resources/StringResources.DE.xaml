@@ -22,4 +22,6 @@
     <system:String x:Key="AddCancel">Abbrechen</system:String>
     <system:String x:Key="AddApply">Übernehmen</system:String>
     <system:String x:Key="SettingsColor">UI-Farbe</system:String>
+    <system:String x:Key="AddUserHeaderText">Benutzer anlegen</system:String>
+    <system:String x:Key="AddUserRepeat">Passwort wiederholen</system:String>
 </ResourceDictionary>

@@ -1,10 +1,11 @@
 ﻿using System;
 using MaterialDesignThemes.Wpf;
+using PasswordManagement.Backend.Theme;
 
 namespace PasswordManagement.Backend.Xml
 {
     [Serializable]
-    public class XmlData
+    public class ThemeData
     {
         public Language Language { get; set; }
 
