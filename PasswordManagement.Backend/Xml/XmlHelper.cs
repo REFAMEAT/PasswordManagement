@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using Newtonsoft.Json;
 
 namespace PasswordManagement.Backend.Xml
 {
@@ -21,7 +20,7 @@ namespace PasswordManagement.Backend.Xml
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName), FileMode.Truncate);
             try
             {
-                return (ThemeData)serializer.Deserialize(s);
+                return (ThemeData) serializer.Deserialize(s);
             }
             catch (Exception)
             {
@@ -35,11 +34,9 @@ namespace PasswordManagement.Backend.Xml
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName), FileMode.Truncate);
 
             FileInfo fileInfo = new FileInfo(xmlConfigPath.Replace("{user}", Environment.UserName));
-            if (fileInfo.Directory != null 
+            if (fileInfo.Directory != null
                 && !Directory.Exists(fileInfo.Directory.FullName))
-            {
                 Directory.CreateDirectory(fileInfo.Directory.FullName);
-            }
 
             try
             {
@@ -49,7 +46,6 @@ namespace PasswordManagement.Backend.Xml
             {
                 // TODO: implement logging
             }
-
         }
     }
 }

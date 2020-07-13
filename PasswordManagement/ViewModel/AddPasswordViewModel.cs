@@ -1,25 +1,34 @@
-﻿using PasswordManagement.Backend.BinarySerializer;
+﻿using System.Windows.Input;
+using PasswordManagement.Backend.Binary;
 using PasswordManagement.Backend.Security;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
-using System.Windows.Input;
 
 namespace PasswordManagement.ViewModel
 {
     public class AddPasswordViewModel : NotifyPropertyChanged
     {
+        private ICommand buttonCommandAddPassword;
         private string comment;
         private string description;
-        private ICommand buttonCommandAddPassword;
 
+        /// <summary>
+        /// The created Item, already Hashed/Salted
+        /// </summary>
         public PasswordData NewItem { get; set; }
 
+        /// <summary>
+        /// The Description of the password
+        /// </summary>
         public string Description
         {
             get => description;
             set => SetProperty(ref description, value);
         }
 
+        /// <summary>
+        /// Optional Comments for the password
+        /// </summary>
         public string Comment
         {
             get => comment;
@@ -28,20 +37,23 @@ namespace PasswordManagement.ViewModel
 
         public ICommand ButtonCommandApply => buttonCommandAddPassword ??= new Command(DoApply);
 
+        /// <summary>
+        /// Create the Data and Close Window
+        /// </summary>
+        /// <param name="obj">The <see cref="AddPassword"/> to close</param>
         private void DoApply(object obj)
         {
-            if (!(obj is AddPassword window))
-            {
-                return;
-            }
+            if (!(obj is AddPassword window)) return;
 
-            PasswordData data = new PasswordData()
+            PasswordData data = new PasswordData
             {
                 Comments = Comment,
-                Password = Encryption.EncryptString(window.password.Password, App.LogedIn)
+                Password = Encryption.EncryptString(window.password.Password, App.LogedIn),
+                Description = Description
             };
 
-            var x = Encryption.DecryptString(data.Password, App.LogedIn);
+            NewItem = data;
+            window.Close();
         }
     }
 }

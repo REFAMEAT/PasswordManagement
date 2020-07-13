@@ -1,32 +1,45 @@
-﻿using MaterialDesignThemes.Wpf;
-using Newtonsoft.Json;
-using PasswordManagement.Backend.Xml;
-using System;
+﻿using System;
 using System.IO;
+using MaterialDesignThemes.Wpf;
+using Newtonsoft.Json;
 using PasswordManagement.Backend.Theme;
+using PasswordManagement.Backend.Xml;
 
 namespace PasswordManagement.Backend.Json
 {
+    /// <summary>
+    /// Serialize and Deserialize JSON files
+    /// </summary>
     public class JsonHelper
     {
+        /// <summary>
+        /// Path to the JSON file
+        /// </summary>
         public const string jsonConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\config.json";
 
-        private static string GetPath() => jsonConfigPath.Replace("{user}", Environment.UserName);
+        private static string GetPath()
+        {
+            return jsonConfigPath.Replace("{user}", Environment.UserName);
+        }
 
+        /// <summary>
+        /// Read a <see cref="ThemeData"/> from the JSON file
+        /// </summary>
+        /// <returns></returns>
         public static ThemeData GetData()
         {
             string content;
 
             try
             {
-               content = File.ReadAllText(GetPath());
+                content = File.ReadAllText(GetPath());
             }
             catch (FileNotFoundException)
             {
-                WriteData(new ThemeData()
+                WriteData(new ThemeData
                 {
-                    Language = Language.English, 
-                    PrimaryColor = "Blue", 
+                    Language = Language.English,
+                    PrimaryColor = "Blue",
                     Theme = BaseTheme.Light
                 });
                 return GetData();
@@ -39,6 +52,10 @@ namespace PasswordManagement.Backend.Json
             return data;
         }
 
+        /// <summary>
+        /// Write a <see cref="ThemeData"/> to a JSON file
+        /// </summary>
+        /// <param name="value"></param>
         public static void WriteData(ThemeData value)
         {
             JsonSerializer serializer = new JsonSerializer();

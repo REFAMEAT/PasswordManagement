@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using PasswordManagement.Annotations;
 
 namespace PasswordManagement.ViewModel.Base
 {
@@ -7,15 +8,17 @@ namespace PasswordManagement.ViewModel.Base
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        [NotifyPropertyChangedInvocator]
+        protected virtual void NotifyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        [NotifyPropertyChangedInvocator]
         protected virtual void SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             field = value;
-            OnPropertyChanged(propertyName);
+            NotifyChanged(propertyName);
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace PasswordManagement.View
 {
     /// <summary>
-    /// Interaction logic for Add.xaml
+    ///     Interaction logic for Add.xaml
     /// </summary>
     public partial class AddPassword : Window
     {
@@ -15,11 +15,11 @@ namespace PasswordManagement.View
 
         private void AddPassword_Loaded(object sender, RoutedEventArgs e)
         {
+            // Pose the Window in the middle-front of the MainWindow
             Application curApp = Application.Current;
             Window mainWindow = curApp.Windows[0];
-            Left = mainWindow.Left + (mainWindow.Width - this.ActualWidth) / 2;
-            Top = mainWindow.Top + (mainWindow.Height - this.ActualHeight) / 2;
+            Left = mainWindow.Left + (mainWindow.Width - ActualWidth) / 2;
+            Top = mainWindow.Top + (mainWindow.Height - ActualHeight) / 2;
         }
     }
 }
-

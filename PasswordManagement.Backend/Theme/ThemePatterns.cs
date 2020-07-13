@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PasswordManagement.Backend.Theme
 {
+    /// <summary>
+    /// All available UI-Themes
+    /// </summary>
     public static class ThemePatterns
     {
+        /// <summary>
+        /// All supported Colors
+        /// </summary>
         public static List<string> SupportedColors = new List<string>
         {
             "Blue",
@@ -16,12 +21,6 @@ namespace PasswordManagement.Backend.Theme
             "LimeGreen",
             "BlueViolet",
             "Lime"
-        };
-
-        public static List<Language> supportedLanguages = new List<Language>
-        {
-            Language.English,
-            Language.German,
         };
     }
 }

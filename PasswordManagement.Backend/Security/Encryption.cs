@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace PasswordManagement.Backend.Security
 {
     /// <summary>
-    /// encrypt and decrypt strings
+    ///     encrypt and decrypt strings
     /// </summary>
     public class Encryption
     {
@@ -37,8 +38,9 @@ namespace PasswordManagement.Backend.Security
         /// <returns></returns>
         public static string EncryptString(string clearText, string Password)
         {
-            byte[] clearBytes = System.Text.Encoding.Unicode.GetBytes(clearText);
-            PasswordDeriveBytes pdb = new PasswordDeriveBytes(Password, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            PasswordDeriveBytes pdb = new PasswordDeriveBytes(Password,
+                new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
             byte[] encryptedData = EncryptString(clearBytes, pdb.GetBytes(32), pdb.GetBytes(16));
             return Convert.ToBase64String(encryptedData);
         }
@@ -72,9 +74,10 @@ namespace PasswordManagement.Backend.Security
         public static string DecryptString(string cipherText, string Password)
         {
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            PasswordDeriveBytes pdb = new PasswordDeriveBytes(Password, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+            PasswordDeriveBytes pdb = new PasswordDeriveBytes(Password,
+                new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
             byte[] decryptedData = DecryptString(cipherBytes, pdb.GetBytes(32), pdb.GetBytes(16));
-            return System.Text.Encoding.Unicode.GetString(decryptedData);
+            return Encoding.Unicode.GetString(decryptedData);
         }
-    } 
+    }
 }

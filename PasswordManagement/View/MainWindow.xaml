@@ -10,9 +10,9 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    WindowStartupLocation="CenterScreen"
     Background="{DynamicResource MaterialDesignPaper}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
         <viewModel:MainViewModel />
@@ -30,7 +30,7 @@
                         <Label VerticalContentAlignment="Center" Content="{DynamicResource MainAdd}" />
                     </StackPanel>
                 </Button>
-                <Button>
+                <Button Command="{Binding ButtonCommandDeleteItem}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Delete" />
                         <Label Content="{DynamicResource MainDelete}" />
@@ -59,12 +59,13 @@
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserDeleteRows="False"
-            ItemsSource="{Binding Items}">
+            ItemsSource="{Binding Items}"
+            SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource MainGridDescription}" />
-                <DataGridTextColumn Binding="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource MainGridPassword}" />
-                <DataGridTextColumn Binding="{Binding Comments, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource MainGridComments}" />
-                <DataGridCheckBoxColumn Header="{DynamicResource MainGridShow}" />
+                <DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="{DynamicResource MainGridDescription}" />
+                <DataGridTextColumn Binding="{Binding PasswordDisplay, Mode=OneWay}" Header="{DynamicResource MainGridPassword}" />
+                <DataGridCheckBoxColumn Binding="{Binding Display, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource MainGridShow}" />
+                <DataGridTextColumn Binding="{Binding Comments, Mode=OneWay}" Header="{DynamicResource MainGridComments}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using PasswordManagement.Backend.BinarySerializer;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
 
@@ -7,13 +6,13 @@ namespace PasswordManagement.ViewModel
 {
     public class AddUserViewModel : NotifyPropertyChanged
     {
-        private string userName;
         private ICommand buttonCommandCreateUser;
         private bool inputOk;
+        private string userName;
 
         public bool InputOk
         {
-            get => inputOk; 
+            get => inputOk;
             set => SetProperty(ref inputOk, value);
         }
 
@@ -27,10 +26,13 @@ namespace PasswordManagement.ViewModel
 
         private void DoCreateUser(object obj)
         {
-            if (!(obj is AddUser login))
+            if (!(obj is AddUser login) || !InputOk)
             {
                 return;
             }
+
+            login.DialogResult = true;
+            login.Close();
         }
     }
 }

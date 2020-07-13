@@ -8,12 +8,14 @@ namespace PasswordManagement.Database.Model
     {
         [Key]
         [Column("USID", TypeName = "nvarchar(50)")]
-        public string USID{get; set; }
+        public string USID { get; set; }
 
         [Column("USUSERNAME", TypeName = "nvarchar(50)")]
-        public string USUSERNAME {get;set;}
+        public string USUSERNAME { get; set; }
 
         [Column("USPASSWORD", TypeName = "nvarchar(MAX)")]
         public string USPASSWORD { get; set; }
+
+        public string USSALT { get; set; }
     }
 }

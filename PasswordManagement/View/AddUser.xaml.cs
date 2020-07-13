@@ -1,15 +1,13 @@
-﻿using PasswordManagement.Backend;
-using PasswordManagement.Database.Model;
-using PasswordManagement.ViewModel;
-using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using PasswordManagement.Backend.Security;
+using PasswordManagement.Database.Model;
+using PasswordManagement.ViewModel;
 
 namespace PasswordManagement.View
 {
     /// <summary>
-    /// Interaction logic for AddUser.xaml
+    ///     Interaction logic for AddUser.xaml
     /// </summary>
     public partial class AddUser
     {
@@ -21,7 +19,7 @@ namespace PasswordManagement.View
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             bool validInput = passwordBox.Password == repeatPasswordBox.Password;
-            ((AddUserViewModel) DataContext).InputOk = validInput;
+            ((AddUserViewModel)DataContext).InputOk = validInput;
 
             passwordBox.Foreground = validInput ? Brushes.Green : Brushes.Red;
             repeatPasswordBox.Foreground = validInput ? Brushes.Green : Brushes.Red;
@@ -32,15 +30,24 @@ namespace PasswordManagement.View
             Close();
         }
 
-        public static USERDATA CreateUser()
+        public static USERDATA CreateUser(bool shutDownAppOnCancel = false)
         {
             AddUser addUser = new AddUser();
-            addUser.ShowDialog();
+            bool? result = addUser.ShowDialog();
 
-            string userName = ((LoginViewModel) addUser.DataContext).UserName;
-            string password = addUser.passwordBox.Password;
+            if (result == true)
+            {
+                string userName = ((AddUserViewModel)addUser.DataContext).UserName;
+                string password = addUser.passwordBox.Password;
 
-            return UserFactory.CreateUser(userName, password);
+                return UserFactory.CreateUser(userName, password);
+            }
+
+            if (shutDownAppOnCancel)
+            {
+                Application.Current.Shutdown();
+            }
+            return null;
         }
     }
 }

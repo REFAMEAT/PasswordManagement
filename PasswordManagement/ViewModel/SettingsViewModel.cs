@@ -13,15 +13,15 @@ namespace PasswordManagement.ViewModel
     public class SettingsViewModel : NotifyPropertyChanged
     {
         private ICommand buttonCommandApplySettings;
-        private string selectedTheme;
         private string selectedColor;
         private string selectedLanguage;
+        private string selectedTheme;
 
         public SettingsViewModel()
         {
             ThemeData data = JsonHelper.GetData();
 
-            List<string> themeItems = new List<string>()
+            List<string> themeItems = new List<string>
             {
                 "Dark", "Light"
             };
@@ -66,11 +66,11 @@ namespace PasswordManagement.ViewModel
 
         private void DoApplySettings(object obj)
         {
-            ThemeData themeData = new ThemeData()
+            ThemeData themeData = new ThemeData
             {
                 Language = Enum.Parse<Language>(SelectedLanguage),
                 Theme = Enum.Parse<BaseTheme>(SelectedTheme),
-                PrimaryColor = SelectedColor,
+                PrimaryColor = SelectedColor
             };
 
             JsonHelper.WriteData(themeData);

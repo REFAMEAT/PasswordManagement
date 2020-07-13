@@ -3,7 +3,7 @@
 namespace PasswordManagement.View
 {
     /// <summary>
-    /// Interaction logic for Settings.xaml
+    ///     Interaction logic for Settings.xaml
     /// </summary>
     public partial class Settings : Window
     {
@@ -17,9 +17,9 @@ namespace PasswordManagement.View
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             Application curApp = Application.Current;
-            Window mainWindow = curApp.Windows[0]; 
-            Left = mainWindow.Left + (mainWindow.Width - this.ActualWidth) / 2;
-            Top = mainWindow.Top + (mainWindow.Height - this.ActualHeight) / 2;
+            Window mainWindow = curApp.Windows[0];
+            Left = mainWindow.Left + (mainWindow.Width - ActualWidth) / 2;
+            Top = mainWindow.Top + (mainWindow.Height - ActualHeight) / 2;
         }
     }
 }

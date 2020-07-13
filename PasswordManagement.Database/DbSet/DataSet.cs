@@ -13,7 +13,7 @@ namespace PasswordManagement.Database.DbSet
             {
                 DataSource = "localhost",
                 InitialCatalog = "PasswordManagement",
-                IntegratedSecurity = true,
+                IntegratedSecurity = true
             }.ToString());
         }
     }

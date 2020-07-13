@@ -19,44 +19,45 @@
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition />
+            <RowDefinition Height="0.2*" />
         </Grid.RowDefinitions>
         <StackPanel Margin="5">
             <DockPanel>
                 <Label
-                Content="{DynamicResource SettingsTheme}"
-                DockPanel.Dock="Top" />
+                    Content="{DynamicResource SettingsTheme}"
+                    DockPanel.Dock="Top" />
                 <ComboBox
-                FontSize="17"
-                DockPanel.Dock="Bottom"
-                ItemsSource="{Binding ThemeItems}"
-                SelectedItem="{Binding SelectedTheme}" />
+                    FontSize="17"
+                    DockPanel.Dock="Bottom"
+                    ItemsSource="{Binding ThemeItems}"
+                    SelectedItem="{Binding SelectedTheme}" />
             </DockPanel>
             <DockPanel>
                 <Label
-                Content="{DynamicResource SettingsLanguage}"
-                DockPanel.Dock="Top" />
+                    Content="{DynamicResource SettingsLanguage}"
+                    DockPanel.Dock="Top" />
                 <ComboBox
-                FontSize="17"
-                DockPanel.Dock="Bottom"
-                ItemsSource="{Binding LanguageItems}"
-                SelectedItem="{Binding SelectedLanguage}" />
+                    FontSize="17"
+                    DockPanel.Dock="Bottom"
+                    ItemsSource="{Binding LanguageItems}"
+                    SelectedItem="{Binding SelectedLanguage}" />
             </DockPanel>
             <DockPanel>
                 <Label
-                Content="{DynamicResource SettingsColor}"
-                DockPanel.Dock="Top" />
+                    Content="{DynamicResource SettingsColor}"
+                    DockPanel.Dock="Top" />
                 <ComboBox
-                FontSize="17"
-                DockPanel.Dock="Bottom"
-                ItemsSource="{Binding AllowedColors}"
-                SelectedItem="{Binding SelectedColor}" />
+                    FontSize="17"
+                    DockPanel.Dock="Bottom"
+                    ItemsSource="{Binding AllowedColors}"
+                    SelectedItem="{Binding SelectedColor}" />
             </DockPanel>
         </StackPanel>
 
         <DockPanel Grid.Row="2" Margin="5">
             <Button
+                IsCancel="True"
                 Width="100"
                 Content="{DynamicResource AddCancel}"
                 DockPanel.Dock="Left"
