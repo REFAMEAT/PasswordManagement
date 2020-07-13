@@ -15,6 +15,7 @@ namespace PasswordManagement.ViewModel.Base
         public Command(Action<object> target, Func<object, bool> canExecute) : this(target)
         {
             this.canExecute = canExecute;
+            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
 
         public bool CanExecute(object parameter)

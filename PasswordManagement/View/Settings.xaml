@@ -8,7 +8,7 @@
     xmlns:viewModel="clr-namespace:PasswordManagement.ViewModel"
     Title="Settings"
     Width="350"
-    Height="200"
+    Height="310"
     Background="{DynamicResource MaterialDesignPaper}"
     ResizeMode="CanMinimize"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -17,38 +17,45 @@
     <Window.DataContext>
         <viewModel:SettingsViewModel />
     </Window.DataContext>
-    <StackPanel Margin="10">
-        <DockPanel>
-            <Label
-                Width="75"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="5">
+            <DockPanel>
+                <Label
                 Content="{DynamicResource SettingsTheme}"
-                DockPanel.Dock="Left" />
-            <ComboBox
-                DockPanel.Dock="Right"
+                DockPanel.Dock="Top" />
+                <ComboBox
+                FontSize="17"
+                DockPanel.Dock="Bottom"
                 ItemsSource="{Binding ThemeItems}"
                 SelectedItem="{Binding SelectedTheme}" />
-        </DockPanel>
-        <DockPanel>
-            <Label
-                Width="75"
+            </DockPanel>
+            <DockPanel>
+                <Label
                 Content="{DynamicResource SettingsLanguage}"
-                DockPanel.Dock="Left" />
-            <ComboBox
-                DockPanel.Dock="Right"
+                DockPanel.Dock="Top" />
+                <ComboBox
+                FontSize="17"
+                DockPanel.Dock="Bottom"
                 ItemsSource="{Binding LanguageItems}"
                 SelectedItem="{Binding SelectedLanguage}" />
-        </DockPanel>
-        <DockPanel>
-            <Label
-                Width="75"
+            </DockPanel>
+            <DockPanel>
+                <Label
                 Content="{DynamicResource SettingsColor}"
-                DockPanel.Dock="Left" />
-            <ComboBox
-                DockPanel.Dock="Right"
+                DockPanel.Dock="Top" />
+                <ComboBox
+                FontSize="17"
+                DockPanel.Dock="Bottom"
                 ItemsSource="{Binding AllowedColors}"
                 SelectedItem="{Binding SelectedColor}" />
-        </DockPanel>
-        <DockPanel Margin="0,10,0,0">
+            </DockPanel>
+        </StackPanel>
+
+        <DockPanel Grid.Row="2" Margin="5">
             <Button
                 Width="100"
                 Content="{DynamicResource AddCancel}"
@@ -59,6 +66,6 @@
                 Content="{DynamicResource AddApply}"
                 DockPanel.Dock="Right" />
         </DockPanel>
-    </StackPanel>
+    </Grid>
 
 </Window>

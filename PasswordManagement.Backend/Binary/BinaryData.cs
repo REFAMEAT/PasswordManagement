@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordManagement.Backend.Security;
+using System;
 using System.Collections.Generic;
 
 namespace PasswordManagement.Backend.BinarySerializer
@@ -8,12 +9,12 @@ namespace PasswordManagement.Backend.BinarySerializer
     {
         public BinaryData(string userName, string password)
         {
-            Salt = Security.GetSalt();
+            Salt = Password.GetSalt();
             Passwords = new List<PasswordData>();
 
             
-            UserNameHash = Security.GetHash(userName + Salt);
-            PasswordHash = Security.GetHash(password + Salt);
+            UserNameHash = Password.GetHash(userName + Salt);
+            PasswordHash = Password.GetHash(password + Salt);
         }
 
         public string UserNameHash { get; }
@@ -23,8 +24,8 @@ namespace PasswordManagement.Backend.BinarySerializer
 
         public bool Validate(string userName, string password)
         {
-            return Security.GetHash(userName + Salt) == UserNameHash 
-                   && Security.GetHash(password + Salt) == PasswordHash;
+            return Password.GetHash(userName + Salt) == UserNameHash 
+                   && Password.GetHash(password + Salt) == PasswordHash;
         }
     }
 }
