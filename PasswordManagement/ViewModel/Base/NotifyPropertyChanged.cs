@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using PasswordManagement.Annotations;
 
 namespace PasswordManagement.ViewModel.Base
 {

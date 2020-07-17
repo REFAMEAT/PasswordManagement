@@ -62,10 +62,10 @@
             ItemsSource="{Binding Items}"
             SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="{DynamicResource MainGridDescription}" />
-                <DataGridTextColumn Binding="{Binding PasswordDisplay, Mode=OneWay}" Header="{DynamicResource MainGridPassword}" />
-                <DataGridCheckBoxColumn Binding="{Binding Display, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource MainGridShow}" />
-                <DataGridTextColumn Binding="{Binding Comments, Mode=OneWay}" Header="{DynamicResource MainGridComments}" />
+                <DataGridTextColumn Width="0.3*" Binding="{Binding Description, Mode=OneWay}" Header="{DynamicResource MainGridDescription}" />
+                <DataGridCheckBoxColumn Width="50" Binding="{Binding Display, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource MainGridShow}" />
+                <DataGridTextColumn Width="0.3*" Binding="{Binding PasswordDisplay, Mode=OneWay}" Header="{DynamicResource MainGridPassword}" />
+                <DataGridTextColumn Width="0.3*" Binding="{Binding Comments, Mode=OneWay}" Header="{DynamicResource MainGridComments}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

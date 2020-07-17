@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Timers;
 using System.Windows.Input;
-using PasswordManagement.Annotations;
 using PasswordManagement.Backend.Binary;
 using PasswordManagement.Backend.Security;
 using PasswordManagement.View;
