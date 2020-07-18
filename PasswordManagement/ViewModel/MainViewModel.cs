@@ -71,7 +71,7 @@ namespace PasswordManagement.ViewModel
             addPassword.Show();
             addPassword.Closed += (sender, e) =>
             {
-                if (!addPassword.DialogResult != true)
+                if (addPassword.Canceled)
                 {
                     return;
                 }

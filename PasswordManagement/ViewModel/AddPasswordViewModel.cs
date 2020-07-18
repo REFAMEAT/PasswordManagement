@@ -51,7 +51,8 @@ namespace PasswordManagement.ViewModel
                 Password = Encryption.EncryptString(window.password.Password, App.LogedIn),
                 Description = Description
             };
-
+            
+            window.Canceled = false;
             NewItem = data;
             window.Close();
         }

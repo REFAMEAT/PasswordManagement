@@ -7,6 +7,7 @@ using PasswordManagement.Backend.Theme;
 using PasswordManagement.Backend.Xml;
 using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
+using PasswordManagement.Logging;
 using PasswordManagement.View;
 using MColor = System.Windows.Media.Color;
 using DColor = System.Drawing.Color;
@@ -23,6 +24,8 @@ namespace PasswordManagement
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            Current.DispatcherUnhandledException += (o, args) => Logger.Current.Error(args.Exception);
+
             ThemeData data = JsonHelper.GetData();
 
             if (data.Theme == BaseTheme.Inherit && data.PrimaryColor == null)
@@ -42,7 +45,7 @@ namespace PasswordManagement
             {
                 USERDATA firstUser = AddUser.CreateUser();
             }
-
+            
             Login login = new Login();
             login.ShowDialog();
             LogedIn = login.passwordBox.Password;
@@ -97,6 +100,8 @@ namespace PasswordManagement
             Current.Resources.MergedDictionaries.Add(languageDictionary);
             Current.Resources.MergedDictionaries.Add(styleDictionary);
             Current.Resources.MergedDictionaries.Add(theme);
+
+            Logger.Current.Debug($"Changed Application Style to: {theme.BaseTheme}");
         }
     }
 }
