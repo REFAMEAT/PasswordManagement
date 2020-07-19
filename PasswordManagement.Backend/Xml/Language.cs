@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Backend.Theme
+﻿namespace PasswordManagement.Backend.Xml
 {
     public enum Language
     {

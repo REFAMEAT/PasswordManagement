@@ -10,11 +10,12 @@ namespace PasswordManagement.ViewModel
     {
         private string userName;
         private ICommand buttonCommandLogin;
+        private BinaryHelper binHelper;
         private BinaryData binData;
 
         public LoginViewModel()
         {
-            BinaryHelper binHelper = new BinaryHelper();
+            binHelper = new BinaryHelper();
 
             try
             {
@@ -22,7 +23,6 @@ namespace PasswordManagement.ViewModel
             }
             catch (Exception)
             {
-                // TODO wird durch erstmalige Anmeldung ersetzt
                 binData = new BinaryData("firstUser", "PASSWORD");
                 binHelper.Write(binData);
             }
@@ -42,10 +42,12 @@ namespace PasswordManagement.ViewModel
             {
                 return;
             }
-
+            
             if (binData.Validate(userName, login.passwordBox.Password))
             {
-                login.DialogResult = true;
+                login.Hide();
+                MainWindow mw = new MainWindow();
+                mw.Show();
                 login.Close();
             }
 

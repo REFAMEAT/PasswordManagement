@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
-using PasswordManagement.Backend.Json;
-using PasswordManagement.Backend.Theme;
 using PasswordManagement.Backend.Xml;
 using PasswordManagement.ViewModel.Base;
 
@@ -19,19 +16,27 @@ namespace PasswordManagement.ViewModel
 
         public SettingsViewModel()
         {
-            ThemeData data = JsonHelper.GetData();
-
             List<string> themeItems = new List<string>()
             {
                 "Dark", "Light"
             };
-
+            
             ThemeItems = themeItems;
 
-            List<Language> languageItems = Enum.GetValues(typeof(Language)).Cast<Language>().ToList();
+            List<string> languageItems = new List<string>();
+            foreach (Language item in Enum.GetValues(typeof(Language)))
+            {
+                languageItems.Add(item.ToString());
+            }
 
-            LanguageItems = languageItems.ConvertAll(x => x.ToString());
-            AllowedColors = ThemePatterns.SupportedColors;
+            LanguageItems = languageItems;
+
+            AllowedColors = new List<string>()
+            {
+                "Blue", "Yellow", "Orange", "Black", "Turquoise", "LimeGreen", "BlueViolet", "Lime"
+            };
+
+            XmlData data = new XmlHelper().GetData();
 
             SelectedLanguage = data.Language.ToString();
             SelectedColor = data.PrimaryColor;
@@ -66,16 +71,16 @@ namespace PasswordManagement.ViewModel
 
         private void DoApplySettings(object obj)
         {
-            ThemeData themeData = new ThemeData()
+            XmlData xmlData = new XmlData()
             {
                 Language = Enum.Parse<Language>(SelectedLanguage),
                 Theme = Enum.Parse<BaseTheme>(SelectedTheme),
                 PrimaryColor = SelectedColor,
             };
 
-            JsonHelper.WriteData(themeData);
+            new XmlHelper().Write(xmlData);
 
-            App.AdjustApplicationStyle(themeData);
+            App.AdjustApplicationStyle(xmlData);
         }
     }
 }

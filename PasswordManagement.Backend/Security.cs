@@ -2,9 +2,9 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PasswordManagement.Backend.Security
+namespace PasswordManagement.Backend
 {
-    public class Password
+    public class Security
     {
         internal static string GetSalt()
         {
