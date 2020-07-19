@@ -18,7 +18,14 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Margin="5" Grid.Row="0" x:Name="textBlock" />
-        <DockPanel Margin="5" Grid.Row="1" x:Name="dockPanel" VerticalAlignment="Bottom" />
+        <TextBlock
+            x:Name="textBlock"
+            Grid.Row="0"
+            Margin="5" />
+        <DockPanel
+            x:Name="dockPanel"
+            Grid.Row="1"
+            Margin="5"
+            VerticalAlignment="Bottom" />
     </Grid>
 </Window>
