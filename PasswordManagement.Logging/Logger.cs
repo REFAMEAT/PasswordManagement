@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.CompilerServices;
-using log4net;
-using log4net.Core;
 using Newtonsoft.Json;
 
 namespace PasswordManagement.Logging
