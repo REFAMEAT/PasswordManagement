@@ -2,9 +2,12 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PasswordManagement.Backend
+namespace PasswordManagement.Backend.Security
 {
-    public class Security
+    /// <summary>
+    /// Class for Hashing and Salting Passwords
+    /// </summary>
+    public class Password
     {
         internal static string GetSalt()
         {
@@ -18,12 +21,12 @@ namespace PasswordManagement.Backend
         {
             // SHA512 is disposable by inheritance.  
             using SHA256 sha256 = SHA256.Create();
-            
+
             // Send a sample text to hash.  
-            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(text));  
-            
+            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(text));
+
             // Get the hashed string.  
             return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-        }  
+        }
     }
 }

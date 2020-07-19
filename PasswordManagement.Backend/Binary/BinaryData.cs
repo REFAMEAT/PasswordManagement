@@ -1,30 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
+using PasswordManagement.Backend.Security;
+using PasswordManagement.Database.Model;
 
-namespace PasswordManagement.Backend.BinarySerializer
+namespace PasswordManagement.Backend.Binary
 {
+    /// <summary>
+    /// Datas to Save in a Binary File
+    /// </summary>
     [Serializable]
     public class BinaryData
     {
+        /// <summary>
+        /// Create new User
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
         public BinaryData(string userName, string password)
         {
-            Salt = Security.GetSalt();
+            Salt = Password.GetSalt();
             Passwords = new List<PasswordData>();
 
-            
-            UserNameHash = Security.GetHash(userName + Salt);
-            PasswordHash = Security.GetHash(password + Salt);
+
+            UserNameHash = Password.GetHash(userName + Salt);
+            PasswordHash = Password.GetHash(password + Salt);
+
+            Passwords = new List<PasswordData>();
         }
 
-        public string UserNameHash { get; }
-        public string PasswordHash { get; }
-        public string Salt { get; set; }
-        public List<PasswordData> Passwords { get; set; }
+        /// <summary>
+        /// Create an existing user
+        /// </summary>
+        /// <param name="existing"></param>
+        public BinaryData(USERDATA existing)
+        {
+            UserNameHash = existing.USUSERNAME;
+            PasswordHash = existing.USPASSWORD;
+            Salt = existing.USSALT;
 
+            Passwords = new List<PasswordData>();
+        }
+
+        /// <summary>
+        /// Hashed Username
+        /// </summary>
+        public string UserNameHash { get; }
+
+        /// <summary>
+        /// Hashed Password
+        /// </summary>
+        public string PasswordHash { get; }
+
+        /// <summary>
+        /// Salt of the Password
+        /// </summary>
+        public string Salt { get; set; }
+
+        /// <summary>
+        /// All Stored Passwords of a User
+        /// </summary>
+        public List<PasswordData> Passwords { get; set; }
+        
+        /// <summary>
+        /// Validate Username and Password
+        /// </summary>
+        /// <param name="userName">The clear-text username</param>
+        /// <param name="password">The clear-text password</param>
+        /// <returns></returns>
         public bool Validate(string userName, string password)
         {
-            return Security.GetHash(userName + Salt) == UserNameHash 
-                   && Security.GetHash(password + Salt) == PasswordHash;
+            return Password.GetHash(userName + Salt) == UserNameHash
+                   && Password.GetHash(password + Salt) == PasswordHash;
         }
     }
 }

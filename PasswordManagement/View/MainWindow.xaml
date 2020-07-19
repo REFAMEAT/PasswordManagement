@@ -10,10 +10,19 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    WindowStartupLocation="CenterScreen"
     Background="{DynamicResource MaterialDesignPaper}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Command="{Binding ButtonCommandDeleteItem}" Header="{DynamicResource MainDelete}">
+                <MenuItem.Icon>
+                    <materialDesign:PackIcon Kind="Delete" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </Window.ContextMenu>
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
@@ -30,7 +39,7 @@
                         <Label VerticalContentAlignment="Center" Content="{DynamicResource MainAdd}" />
                     </StackPanel>
                 </Button>
-                <Button>
+                <Button Command="{Binding ButtonCommandDeleteItem}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Delete" />
                         <Label Content="{DynamicResource MainDelete}" />
@@ -59,12 +68,33 @@
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserDeleteRows="False"
-            ItemsSource="{Binding Items}">
+            ItemsSource="{Binding Items}"
+            SelectedItem="{Binding SelectedItem}">
+            <DataGrid.InputBindings>
+                <KeyBinding Command="{Binding ButtonCommandDeleteItem}" Gesture="Delete" />
+                <KeyBinding
+                    Key="N"
+                    Command="{Binding ButtonCommandAddItem}"
+                    Gesture="CTRL+SHIFT+N"
+                    Modifiers="Ctrl" />
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource MainGridDescription}" />
-                <DataGridTextColumn Binding="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource MainGridPassword}" />
-                <DataGridTextColumn Binding="{Binding Comments, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource MainGridComments}" />
-                <DataGridCheckBoxColumn Header="{DynamicResource MainGridShow}" />
+                <DataGridTextColumn
+                    Width="0.3*"
+                    Binding="{Binding Description, Mode=OneWay}"
+                    Header="{DynamicResource MainGridDescription}" />
+                <DataGridCheckBoxColumn
+                    Width="50"
+                    Binding="{Binding Display, UpdateSourceTrigger=PropertyChanged}"
+                    Header="{DynamicResource MainGridShow}" />
+                <DataGridTextColumn
+                    Width="0.3*"
+                    Binding="{Binding PasswordDisplay, Mode=OneWay}"
+                    Header="{DynamicResource MainGridPassword}" />
+                <DataGridTextColumn
+                    Width="0.3*"
+                    Binding="{Binding Comments, Mode=OneWay}"
+                    Header="{DynamicResource MainGridComments}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

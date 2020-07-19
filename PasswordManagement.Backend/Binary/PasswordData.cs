@@ -1,7 +1,10 @@
 ﻿using System;
 
-namespace PasswordManagement.Backend.BinarySerializer
+namespace PasswordManagement.Backend.Binary
 {
+    /// <summary>
+    /// The password-storaging model 
+    /// </summary>
     [Serializable]
     public class PasswordData
     {
