@@ -17,12 +17,17 @@ namespace PasswordManagement.View
 
         public static void Error(string message)
         {
-            Messagebox mbox = new Messagebox();
-            mbox.textBlock.Text = $"An application Error occured:{Environment.NewLine}{message}";
+            Messagebox mbox = new Messagebox
+            {
+                textBlock = {Text = $"An application Error occured:{Environment.NewLine}{message}"}
+            };
 
-            Button button = new Button();
-            button.Content = "OK";
-            button.Margin = new Thickness(2);
+            Button button = new Button
+            {
+                Content = "OK",
+                Margin = new Thickness(2)
+            };
+
             button.Click += (sender, args) => mbox.Close();
             DockPanel.SetDock(button, Dock.Right);
             mbox.dockPanel.Children.Add(button);
@@ -34,15 +39,25 @@ namespace PasswordManagement.View
         {
             bool isYes = false;
 
-            Messagebox mbox = new Messagebox();
-            mbox.Title = caption;
-            mbox.textBlock.Text = message;
+            Messagebox mbox = new Messagebox
+            {
+                Title = caption,
+                textBlock = { Text = message }
+            };
 
-            Button buttonNo = new Button();
-            Button buttonYes = new Button();
+            Button buttonNo = new Button()
+            {
+                Content = mbox.FindResource("No"),
+                Width = 140,
+                Style = mbox.FindResource("MaterialDesignFlatButton") as Style
+            };
 
-            buttonNo.Content = "No";
-            buttonYes.Content = "Yes";
+            Button buttonYes = new Button
+            {
+                Content = "Yes",
+                Width = 140
+            };
+
 
             buttonNo.Click += (sender, args) => mbox.Close();
             buttonYes.Click += (sender, args) =>
@@ -50,17 +65,12 @@ namespace PasswordManagement.View
                 isYes = true;
                 mbox.Close();
             };
-            
-            buttonNo.Width = 140;
-            buttonYes.Width = 140;
 
             DockPanel.SetDock(buttonNo, Dock.Left);
             DockPanel.SetDock(buttonYes, Dock.Right);
 
             mbox.dockPanel.Children.Add(buttonNo);
             mbox.dockPanel.Children.Add(buttonYes);
-
-            buttonNo.Style = mbox.FindResource("MaterialDesignFlatButton") as Style;
 
             mbox.ShowDialog();
 

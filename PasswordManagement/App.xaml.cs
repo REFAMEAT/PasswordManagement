@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
 using PasswordManagement.Backend.Json;
@@ -22,10 +23,9 @@ namespace PasswordManagement
         public const bool DataBaseActive = false;
         public static string LogedIn;
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        private async void Application_Startup(object sender, StartupEventArgs e)
         {
             Current.DispatcherUnhandledException += (o, args) => Logger.Current.Error(args.Exception);
-
             ThemeData data = JsonHelper.GetData();
 
             if (data.Theme == BaseTheme.Inherit && data.PrimaryColor == null)
@@ -36,7 +36,7 @@ namespace PasswordManagement
                     PrimaryColor = "Blue",
                     Theme = BaseTheme.Light
                 };
-                JsonHelper.WriteData(data);
+                await JsonHelper.WriteDataAsync(data);
             }
 
             AdjustApplicationStyle(data);
@@ -48,16 +48,18 @@ namespace PasswordManagement
             
             Login login = new Login();
             login.ShowDialog();
-            LogedIn = login.passwordBox.Password;
+            
             if (login.DialogResult == true)
             {
+                LogedIn = login.passwordBox.Password;
+
                 MainWindow = new MainWindow();
-                MainWindow.Closed += (o, e) => Shutdown(0);
+                MainWindow.Closed += (o, args) => Shutdown(0);
                 MainWindow.Show();
             }
             else
             {
-                Shutdown();
+                Shutdown(1);
             }
         }
 

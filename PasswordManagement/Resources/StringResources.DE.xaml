@@ -24,4 +24,6 @@
     <system:String x:Key="SettingsColor">UI-Farbe</system:String>
     <system:String x:Key="AddUserHeaderText">Benutzer anlegen</system:String>
     <system:String x:Key="AddUserRepeat">Passwort wiederholen</system:String>
+    <system:String x:Key="Yes">Ja</system:String>
+    <system:String x:Key="No">Nein</system:String>
 </ResourceDictionary>
