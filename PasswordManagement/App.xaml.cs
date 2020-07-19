@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
 using PasswordManagement.Backend.Xml;
-using PasswordManagement.Database.DbSet;
 using MColor = System.Windows.Media.Color;
 using DColor = System.Drawing.Color;
-using PasswordManagement.Database.Model;
-using PasswordManagement.View;
-using System.Reflection;
-using PasswordManagement.Backend.Json;
-using PasswordManagement.Backend.Theme;
 
 namespace PasswordManagement
 {
@@ -19,51 +12,17 @@ namespace PasswordManagement
     /// </summary>
     public partial class App : Application
     {
-        public static string LogedIn;
-        public const bool DataBaseActive = false;
-
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            ThemeData data = JsonHelper.GetData();
-
-            if (data.Theme == BaseTheme.Inherit && data.PrimaryColor == null)
-            {
-                data = new ThemeData()
-                {
-                    Language = Language.English,
-                    PrimaryColor = "Blue",
-                    Theme = BaseTheme.Light,
-                };
-               JsonHelper.WriteData(data);
-            }
-
+            XmlData data = new XmlHelper().GetData();
             AdjustApplicationStyle(data);
-
-            if (!new DataSet<USERDATA>().Entities.Any() && DataBaseActive)
-            {
-                USERDATA firstUser = AddUser.CreateUser();
-            }
-
-            MainWindow = new MainWindow();
-            Login login = new Login();
-            login.ShowDialog();
-            LogedIn = login.passwordBox.Password;
-            if (login.DialogResult == true)
-            {
-                MainWindow.Show(); 
-            }
-            else
-            {
-                MainWindow.Close();
-            }
-
         }
-
+        
         /// <summary>
         /// Adjust the UI to the UI-Config
         /// </summary>
         /// <param name="data"></param>
-        public static void AdjustApplicationStyle(ThemeData data)
+        public static void AdjustApplicationStyle(XmlData data)
         {
             Current.Resources.Clear();
 
@@ -82,17 +41,7 @@ namespace PasswordManagement
                     UriKind.Absolute)
             };
 
-            DColor color = DColor.Black;
-
-            if (data.PrimaryColor != null)
-            {
-                color = DColor.FromName(data.PrimaryColor);
-            }
-
-            if (data.Theme == BaseTheme.Inherit)
-            {
-                data.Theme = BaseTheme.Light;
-            }
+            DColor color = DColor.FromName(data.PrimaryColor);
 
             CustomColorTheme theme = new CustomColorTheme()
             {

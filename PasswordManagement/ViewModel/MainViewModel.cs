@@ -39,16 +39,8 @@ namespace PasswordManagement.ViewModel
 
         private void DoAddItem(object obj)
         {
-            AddPassword addPassword = new AddPassword();
-            addPassword.Show();
-            addPassword.Closed += (sender, e) =>
-            {
-                var newItem = ((AddPasswordViewModel) addPassword.DataContext).NewItem;
-
-                Items.Add(newItem);
-                binaryData.Passwords.Add(newItem);
-            };
-
+            Add add = new Add();
+            add.Show();
         }
     }
 }

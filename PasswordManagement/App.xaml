@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:PasswordManagement"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     Startup="Application_Startup"
-    ShutdownMode="OnMainWindowClose">
+    StartupUri="View\Login.xaml">
 
     <Application.Resources>
         <ResourceDictionary>
