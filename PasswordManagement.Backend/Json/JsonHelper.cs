@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
 using PasswordManagement.Backend.Theme;
@@ -20,6 +21,11 @@ namespace PasswordManagement.Backend.Json
         private static string GetPath()
         {
             return jsonConfigPath.Replace("{user}", Environment.UserName);
+        }
+
+        private static async Task<string> GetPathAsync()
+        {
+            return await Task.Run(() => jsonConfigPath.Replace("{user}", Environment.UserName));
         }
 
         /// <summary>
@@ -64,6 +70,16 @@ namespace PasswordManagement.Backend.Json
             using JsonWriter jsonWriter = new JsonTextWriter(sw);
 
             serializer.Serialize(jsonWriter, value);
+        }
+
+        public static async Task WriteDataAsync(ThemeData value)
+        {
+            JsonSerializer serializer = new JsonSerializer();
+
+            await using StreamWriter sw = new StreamWriter(await GetPathAsync());
+            using JsonWriter jsonWriter = new JsonTextWriter(sw);
+
+            await Task.Run(() => serializer.Serialize(jsonWriter, value));
         }
     }
 }
