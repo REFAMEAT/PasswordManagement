@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using System.Windows.Media;
 using PasswordManagement.Backend.Binary;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
@@ -48,6 +49,11 @@ namespace PasswordManagement.ViewModel
             {
                 login.DialogResult = true;
                 login.Close();
+            }
+            else
+            {
+                login.userNameTextBox.Foreground = Brushes.Red;
+                login.passwordBox.Foreground = Brushes.Red;
             }
         }
     }

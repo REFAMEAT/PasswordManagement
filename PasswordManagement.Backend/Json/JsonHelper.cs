@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
-using PasswordManagement.Backend.Theme;
+using PasswordManagement.Backend.Settings;
 using PasswordManagement.Backend.Xml;
 
 namespace PasswordManagement.Backend.Json

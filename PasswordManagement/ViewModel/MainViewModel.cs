@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Timers;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Documents;
 using System.Windows.Input;
 using PasswordManagement.Backend.Binary;
-using PasswordManagement.Backend.Security;
+using PasswordManagement.Backend.Data;
+using PasswordManagement.Model;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
 
@@ -12,8 +12,7 @@ namespace PasswordManagement.ViewModel
 {
     public class MainViewModel : NotifyPropertyChanged
     {
-        private readonly BinaryData binaryData;
-        private readonly BinaryHelper binaryHelper = new BinaryHelper();
+        private readonly IDataManager<PasswordData> dataManager;
         private ICommand buttonCommandAddItem;
         private ICommand buttonCommandDeleteItem;
         private ICommand buttonCommandOpenSettings;
@@ -23,11 +22,14 @@ namespace PasswordManagement.ViewModel
 
         public MainViewModel()
         {
-            binaryData = binaryHelper.GetData();
+            dataManager = new FileDataManager();
 
-            Items = new ObservableCollection<PasswordDataDisplay>(
-                binaryData.Passwords.ConvertAll(x => new PasswordDataDisplay(x)));
+            Items = ToDisplayData(dataManager.LoadData());
         }
+
+        public ICommand ButtonCommandOpenSettings => buttonCommandOpenSettings ??= new Command(DoOpenSettings);
+        public ICommand ButtonCommandAddItem => buttonCommandAddItem ??= new Command(DoAddItem);
+        public ICommand ButtonCommandDeleteItem => buttonCommandDeleteItem ??= new Command(DoDeleteItem);
 
         public ObservableCollection<PasswordDataDisplay> Items
         {
@@ -41,22 +43,23 @@ namespace PasswordManagement.ViewModel
             set => SetProperty(ref selectedItem, value);
         }
 
-        public ICommand ButtonCommandOpenSettings => buttonCommandOpenSettings ??= new Command(DoOpenSettings);
-        public ICommand ButtonCommandAddItem => buttonCommandAddItem ??= new Command(DoAddItem);
-        public ICommand ButtonCommandDeleteItem => buttonCommandDeleteItem ??= new Command(DoDeleteItem);
-
         private void DoDeleteItem(object obj)
         {
-            if (SelectedItem == null) return;
+            if (SelectedItem == null)
+            {
+                return;
+            }
 
-            PasswordData itemToDelete = binaryData.Passwords
+            PasswordData itemToDelete = dataManager.LoadData()
                 .Find(x => x.Password == SelectedItem.Password
                            && x.Description == SelectedItem.Description
                            && x.Comments == SelectedItem.Comments);
 
-            binaryData.Passwords.Remove(itemToDelete);
-            Items.Remove(SelectedItem);
-            binaryHelper.Write(binaryData);
+            bool deleted = dataManager.Remove(itemToDelete);
+            if (deleted)
+            {
+                Items.Remove(SelectedItem);
+            }
         }
 
         private void DoOpenSettings(object obj)
@@ -76,76 +79,17 @@ namespace PasswordManagement.ViewModel
                     return;
                 }
 
-                PasswordData newItem = ((AddPasswordViewModel) addPassword.DataContext).NewItem;
+                PasswordData newItem = ((AddPasswordViewModel)addPassword.DataContext).NewItem;
 
+                dataManager.AddData(newItem);
                 Items.Add(new PasswordDataDisplay(newItem));
-                binaryData.Passwords.Add(newItem);
-                binaryHelper.Write(binaryData);
             };
         }
-    }
 
-    public class PasswordDataDisplay : PasswordData, INotifyPropertyChanged
-    {
-        private bool display;
-        private readonly Timer displayTimer;
-        private string passwordDisplay;
-
-        public PasswordDataDisplay(PasswordData baseData)
+        private ObservableCollection<PasswordDataDisplay> ToDisplayData(List<PasswordData> data)
         {
-            Password = baseData.Password;
-            Comments = baseData.Comments;
-            Description = baseData.Description;
-            displayTimer = new Timer(2000);
-            displayTimer.AutoReset = false;
-            displayTimer.Elapsed += (sender, args) => Display = false;
-            Display = false;
+            return new ObservableCollection<PasswordDataDisplay>(
+                data.ConvertAll(x => new PasswordDataDisplay(x)));
         }
-
-        public string PasswordDisplay
-        {
-            get => passwordDisplay;
-            set => SetProperty(ref passwordDisplay, value);
-        }
-
-        public bool Display
-        {
-            get => display;
-            set
-            {
-                displayTimer.Enabled = value;
-                if (value)
-                {
-                    PasswordDisplay = Encryption.DecryptString(Password, App.LogedIn);
-                }
-                else
-                {
-                    PasswordDisplay = string.Empty;
-                    for (int i = Encryption.DecryptString(Password, App.LogedIn).Length - 1; i >= 0; i--)
-                        PasswordDisplay += '•';
-                }
-
-                SetProperty(ref display, value);
-            }
-        }
-
-        #region INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            field = value;
-            OnPropertyChanged(propertyName);
-        }
-
-        #endregion
     }
 }

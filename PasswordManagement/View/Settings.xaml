@@ -3,64 +3,94 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:PasswordManagement.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:PasswordManagement.ViewModel"
     Title="Settings"
     Width="350"
-    Height="310"
+    Height="410"
     Background="{DynamicResource MaterialDesignPaper}"
-    ResizeMode="CanMinimize"
+    ResizeMode="CanResize"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     WindowStyle="ToolWindow"
     mc:Ignorable="d">
+
     <Window.DataContext>
         <viewModel:SettingsViewModel />
     </Window.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="45" />
         </Grid.RowDefinitions>
-        <StackPanel Margin="5">
-            <DockPanel>
-                <Label
-                    Content="{DynamicResource SettingsTheme}"
-                    DockPanel.Dock="Top" />
-                <ComboBox
-                    FontSize="17"
-                    DockPanel.Dock="Bottom"
-                    ItemsSource="{Binding ThemeItems}"
-                    SelectedItem="{Binding SelectedTheme}" />
-            </DockPanel>
-            <DockPanel>
-                <Label
-                    Content="{DynamicResource SettingsLanguage}"
-                    DockPanel.Dock="Top" />
-                <ComboBox
-                    FontSize="17"
-                    DockPanel.Dock="Bottom"
-                    ItemsSource="{Binding LanguageItems}"
-                    SelectedItem="{Binding SelectedLanguage}" />
-            </DockPanel>
-            <DockPanel>
-                <Label
-                    Content="{DynamicResource SettingsColor}"
-                    DockPanel.Dock="Top" />
-                <ComboBox
-                    FontSize="17"
-                    DockPanel.Dock="Bottom"
-                    ItemsSource="{Binding AllowedColors}"
-                    SelectedItem="{Binding SelectedColor}" />
-            </DockPanel>
-        </StackPanel>
-
-        <DockPanel Grid.Row="2" Margin="5">
+        <TabControl
+            Margin="2,0"
+            Background="{DynamicResource MaterialDesignPaper}"
+            Foreground="{DynamicResource MaterialDesignBody}">
+            <TabItem
+                Background="{DynamicResource MaterialDesignPaper}"
+                Foreground="{DynamicResource MaterialDesignBody}"
+                Header="Style"
+                Style="{StaticResource StyleTabControl}">
+                <StackPanel Margin="5">
+                    <DockPanel>
+                        <Label Content="{DynamicResource SettingsTheme}" DockPanel.Dock="Top" />
+                        <ComboBox
+                            DockPanel.Dock="Bottom"
+                            FontSize="17"
+                            ItemsSource="{Binding Style.ThemeItems}"
+                            SelectedItem="{Binding Style.SelectedTheme}" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="{DynamicResource SettingsLanguage}" DockPanel.Dock="Top" />
+                        <ComboBox
+                            DockPanel.Dock="Bottom"
+                            FontSize="17"
+                            ItemsSource="{Binding Style.LanguageItems}"
+                            SelectedItem="{Binding Style. SelectedLanguage}" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="{DynamicResource SettingsColor}" DockPanel.Dock="Top" />
+                        <ComboBox
+                            DockPanel.Dock="Bottom"
+                            FontSize="17"
+                            ItemsSource="{Binding Style.AllowedColors}"
+                            SelectedItem="{Binding Style.SelectedColor}" />
+                    </DockPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Data Connection" Style="{StaticResource StyleTabControl}">
+                <StackPanel Margin="5" CanVerticallyScroll="False">
+                    <DockPanel>
+                        <Label DockPanel.Dock="Top">Server</Label>
+                        <TextBox FontSize="17" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label DockPanel.Dock="Top">Database</Label>
+                        <TextBox FontSize="17" />
+                    </DockPanel>
+                    <GroupBox Margin="0,10,0,0" Header="Authentication">
+                        <StackPanel>
+                            <CheckBox x:Name="UseWinAuth">Use Windows Authentication</CheckBox>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Top">Username</Label>
+                                <TextBox FontSize="17" />
+                            </DockPanel>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Top">Password</Label>
+                                <TextBox FontSize="17" />
+                            </DockPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        <DockPanel Grid.Row="1" Margin="5">
             <Button
-                IsCancel="True"
                 Width="100"
                 Content="{DynamicResource AddCancel}"
                 DockPanel.Dock="Left"
+                IsCancel="True"
                 Style="{DynamicResource MaterialDesignFlatButton}" />
             <Button
                 Command="{Binding ButtonCommandApplySettings}"

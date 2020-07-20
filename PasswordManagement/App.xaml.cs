@@ -1,10 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
 using PasswordManagement.Backend.Json;
-using PasswordManagement.Backend.Theme;
+using PasswordManagement.Backend.Settings;
 using PasswordManagement.Backend.Xml;
 using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
@@ -21,10 +21,18 @@ namespace PasswordManagement
     public partial class App : Application
     {
         public const bool DataBaseActive = false;
+        public static string fileRoot =
+            @"C:\Users\{user}\AppData\Roaming\PWManagement".Replace("{user}", Environment.UserName);
+
         public static string LogedIn;
 
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
+            if (!Directory.Exists(fileRoot))
+            {
+                Directory.CreateDirectory(fileRoot);
+            }
+
             Current.DispatcherUnhandledException += (o, args) => Logger.Current.Error(args.Exception);
             ThemeData data = JsonHelper.GetData();
 
@@ -86,6 +94,11 @@ namespace PasswordManagement
                     UriKind.Absolute)
             };
 
+            ResourceDictionary customStlyeDictionary = new ResourceDictionary()
+            {
+                Source = new Uri("../Styles/TabControlStyles.xaml", UriKind.Relative)
+            };
+
             DColor color = DColor.Black;
 
             if (data.PrimaryColor != null) color = DColor.FromName(data.PrimaryColor);
@@ -102,6 +115,7 @@ namespace PasswordManagement
             Current.Resources.MergedDictionaries.Add(languageDictionary);
             Current.Resources.MergedDictionaries.Add(styleDictionary);
             Current.Resources.MergedDictionaries.Add(theme);
+            Current.Resources.MergedDictionaries.Add(customStlyeDictionary);
 
             Logger.Current.Debug($"Changed Application Style to: {theme.BaseTheme}");
         }

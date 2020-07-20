@@ -79,10 +79,10 @@
         <DockPanel Grid.Row="3" Grid.ColumnSpan="2">
             <Button
                 Width="150"
-                IsCancel="True"
                 Margin="2"
                 Content="{DynamicResource LoginCancel}"
                 FontSize="15"
+                IsCancel="True"
                 Style="{DynamicResource MaterialDesignFlatButton}" />
             <Button
                 Margin="1"

@@ -84,7 +84,7 @@
                     Binding="{Binding Description, Mode=OneWay}"
                     Header="{DynamicResource MainGridDescription}" />
                 <DataGridCheckBoxColumn
-                    Width="50"
+                    Width="70"
                     Binding="{Binding Display, UpdateSourceTrigger=PropertyChanged}"
                     Header="{DynamicResource MainGridShow}" />
                 <DataGridTextColumn

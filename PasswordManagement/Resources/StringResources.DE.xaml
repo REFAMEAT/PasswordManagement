@@ -14,6 +14,7 @@
     <system:String x:Key="MainGridDescription">Beschreibung</system:String>
     <system:String x:Key="MainGridPassword">Passwort</system:String>
     <system:String x:Key="MainGridComments">Kommentar</system:String>
+    <system:String x:Key="MainGridShow">Show</system:String>
     <system:String x:Key="MainSave">Speichern</system:String>
     <system:String x:Key="MainSettings">Einstellungen</system:String>
     <system:String x:Key="SettingsTheme">Aussehen</system:String>

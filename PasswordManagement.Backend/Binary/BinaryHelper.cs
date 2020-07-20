@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.AccessControl;
+using System.Security.Permissions;
 
 namespace PasswordManagement.Backend.Binary
 {
@@ -24,7 +27,7 @@ namespace PasswordManagement.Backend.Binary
             IFormatter formatter = new BinaryFormatter();
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
                 FileMode.OpenOrCreate);
-            return (BinaryData) formatter.Deserialize(s);
+            return (BinaryData)formatter.Deserialize(s);
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using PasswordManagement.Model;
+using PasswordManagement.ViewModel;
 
 namespace PasswordManagement.View
 {

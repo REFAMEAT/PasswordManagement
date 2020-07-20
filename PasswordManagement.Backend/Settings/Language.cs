@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Backend.Theme
+﻿namespace PasswordManagement.Backend.Settings
 {
     /// <summary>
     /// All available UI-Languages
