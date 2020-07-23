@@ -5,6 +5,7 @@ using MaterialDesignThemes.Wpf;
 using PasswordManagement.Backend.Json;
 using PasswordManagement.Backend.Settings;
 using PasswordManagement.Backend.Xml;
+using PasswordManagement.View;
 
 namespace PasswordManagement.Model
 {
@@ -57,7 +58,7 @@ namespace PasswordManagement.Model
 
             JsonHelper.WriteData(themeData);
 
-            App.AdjustApplicationStyle(themeData);
+            UiHelper.AdjustApplicationStyle(themeData);
         }
     }
 }

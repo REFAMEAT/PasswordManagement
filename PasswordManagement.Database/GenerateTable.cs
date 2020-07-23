@@ -1,10 +1,7 @@
 ﻿namespace PasswordManagement.Database
 {
-    public abstract class GenerateTable
+    public class GenerateTable
     {
-        public GenerateTable()
-        {
-            
-        }
+        
     }
 }

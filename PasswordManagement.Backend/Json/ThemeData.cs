@@ -8,7 +8,6 @@ namespace PasswordManagement.Backend.Xml
     /// Model for the UI-Theme Data
     /// </summary>
     [Serializable]
-    [Obsolete("Will be ported to Database: Use USERTHEME")]
     public class ThemeData
     {
         /// <summary>

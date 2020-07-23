@@ -36,12 +36,12 @@ namespace PasswordManagement.Model
                 displayTimer.Enabled = value;
                 if (value)
                 {
-                    PasswordDisplay = Encryption.DecryptString(Password, App.LogedIn);
+                    PasswordDisplay = Encryption.DecryptString(Password, App.loginPw);
                 }
                 else
                 {
                     PasswordDisplay = string.Empty;
-                    for (int i = Encryption.DecryptString(Password, App.LogedIn).Length - 1; i >= 0; i--)
+                    for (int i = Encryption.DecryptString(Password, App.loginPw).Length - 1; i >= 0; i--)
                         PasswordDisplay += '•';
                 }
 

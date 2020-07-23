@@ -48,7 +48,7 @@ namespace PasswordManagement.ViewModel
             PasswordData data = new PasswordData
             {
                 Comments = Comment,
-                Password = Encryption.EncryptString(window.password.Password, App.LogedIn),
+                Password = Encryption.EncryptString(window.password.Password, App.loginPw),
                 Description = Description
             };
             
