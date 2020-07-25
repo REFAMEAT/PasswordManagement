@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Backend.Settings
+﻿namespace PasswordManagement.Model.Interfaces
 {
     internal interface ISetting
     {

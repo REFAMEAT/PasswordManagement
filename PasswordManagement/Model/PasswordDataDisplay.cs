@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Timers;
-using PasswordManagement.Backend.Binary;
 using PasswordManagement.Backend.Security;
 
 namespace PasswordManagement.Model

@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
-using PasswordManagement.Backend.Settings;
-using PasswordManagement.Backend.Xml;
 using PasswordManagement.Logging;
+using PasswordManagement.Model.Enums;
+using PasswordManagement.Model.Setting;
 using MColor = System.Windows.Media.Color;
 
 namespace PasswordManagement.View

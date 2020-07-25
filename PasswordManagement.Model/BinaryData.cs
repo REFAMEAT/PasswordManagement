@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PasswordManagement.Backend.Security;
-using PasswordManagement.Database.Model;
 
-namespace PasswordManagement.Backend.Binary
+namespace PasswordManagement.Model
 {
     /// <summary>
     /// Datas to Save in a Binary File
@@ -11,17 +9,11 @@ namespace PasswordManagement.Backend.Binary
     [Serializable]
     internal class BinaryData
     {
-        /// <summary>
-        /// Create an existing user
-        /// </summary>
-        /// <param name="existing"></param>
-        internal BinaryData(USERDATA existing)
+        public BinaryData(string userName, string password, string salt)
         {
-            UserNameHash = existing.USUSERNAME;
-            PasswordHash = existing.USPASSWORD;
-            Salt = existing.USSALT;
-
-            Passwords = new List<PasswordData>();
+            UserNameHash = userName;
+            PasswordHash = password;
+            Salt = salt;
         }
 
         /// <summary>

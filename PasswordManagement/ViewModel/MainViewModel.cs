@@ -2,12 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using PasswordManagement.Backend;
-using PasswordManagement.Backend.Binary;
 using PasswordManagement.Backend.Data;
-using PasswordManagement.Backend.Json;
-using PasswordManagement.Backend.Settings;
-using PasswordManagement.File;
 using PasswordManagement.Model;
+using PasswordManagement.Model.Interfaces;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
 

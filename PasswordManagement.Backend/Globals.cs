@@ -1,7 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
-using PasswordManagement.Backend.Settings;
-using PasswordManagement.Backend.Xml;
-using PasswordManagement.File;
+using PasswordManagement.Model.Enums;
+using PasswordManagement.Model.Setting;
 
 namespace PasswordManagement.Backend
 {

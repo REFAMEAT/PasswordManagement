@@ -1,4 +1,6 @@
-﻿using PasswordManagement.File;
+﻿using PasswordManagement.File.Config;
+using PasswordManagement.Model.Interfaces;
+using PasswordManagement.Model.Setting;
 
 namespace PasswordManagement.Backend.Settings
 {

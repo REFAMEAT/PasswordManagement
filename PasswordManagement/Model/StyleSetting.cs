@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using MaterialDesignThemes.Wpf;
 using PasswordManagement.Backend;
-using PasswordManagement.Backend.Json;
-using PasswordManagement.Backend.Settings;
-using PasswordManagement.Backend.Xml;
-using PasswordManagement.File;
+using PasswordManagement.File.Config;
+using PasswordManagement.Model.Enums;
+using PasswordManagement.Model.Interfaces;
+using PasswordManagement.Model.Setting;
 using PasswordManagement.View;
 
 namespace PasswordManagement.Model

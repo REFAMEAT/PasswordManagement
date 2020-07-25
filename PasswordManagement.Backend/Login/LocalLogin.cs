@@ -1,6 +1,8 @@
 ﻿using System;
-using PasswordManagement.Backend.Binary;
 using PasswordManagement.Backend.Security;
+using PasswordManagement.File.Binary;
+using PasswordManagement.Model;
+using PasswordManagement.Model.Interfaces;
 
 namespace PasswordManagement.Backend.Login
 {

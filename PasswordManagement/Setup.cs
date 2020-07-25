@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using PasswordManagement.Backend;
-using PasswordManagement.Backend.Xml;
+using PasswordManagement.Model;
+using PasswordManagement.Model.Setting;
 using PasswordManagement.View;
 
 namespace PasswordManagement
@@ -40,7 +40,7 @@ namespace PasswordManagement
 
             Application.Current.MainWindow = new MainWindow();
             Application.Current.MainWindow.Closed += (o, args) => Application.Current.Shutdown(0);
-            Application.Current.MainWindow.Show();
+            Application.Current.MainWindow?.Show();
         }
     }
 }

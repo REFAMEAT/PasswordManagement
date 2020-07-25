@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.File
+﻿namespace PasswordManagement.Model.Setting
 {
     public class DatabaseData
     {

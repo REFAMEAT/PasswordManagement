@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
-using PasswordManagement.Backend.Binary;
 using PasswordManagement.Backend.Security;
+using PasswordManagement.Model;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
 

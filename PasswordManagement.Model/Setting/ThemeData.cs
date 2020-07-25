@@ -1,8 +1,7 @@
-﻿using System;
-using MaterialDesignThemes.Wpf;
-using PasswordManagement.Backend.Settings;
+﻿using MaterialDesignThemes.Wpf;
+using PasswordManagement.Model.Enums;
 
-namespace PasswordManagement.Backend.Xml
+namespace PasswordManagement.Model.Setting
 {
     /// <summary>
     /// Model for the UI-Theme Data

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using PasswordManagement.Backend.Binary;
 using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
+using PasswordManagement.Model;
+using PasswordManagement.Model.Interfaces;
 
 namespace PasswordManagement.Backend.Data
 {
@@ -51,7 +51,7 @@ namespace PasswordManagement.Backend.Data
         public bool Remove(PasswordData item)
         {
             PASSWORDDATA itemToDelete = passwordData.Entities.Find(item.Identifier);
-            EntityEntry<PASSWORDDATA> entry = passwordData.Remove(itemToDelete);
+            passwordData.Remove(itemToDelete);
             passwordData.SaveChanges();
 
             return passwordData.Entities.Find(item.Identifier) == null;

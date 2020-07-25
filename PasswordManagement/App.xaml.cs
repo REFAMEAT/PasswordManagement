@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using PasswordManagement.Backend;
 using PasswordManagement.Backend.Binary;
-using PasswordManagement.Backend.Json;
-using PasswordManagement.Backend.Xml;
 using PasswordManagement.Logging;
+using PasswordManagement.Model;
+using PasswordManagement.Model.Setting;
 
 namespace PasswordManagement
 {

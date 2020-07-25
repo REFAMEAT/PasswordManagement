@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PasswordManagement.Backend
+namespace PasswordManagement.Model
 {
     internal class AppCore
     {

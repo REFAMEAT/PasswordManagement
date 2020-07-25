@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using PasswordManagement.Backend.Settings;
 using PasswordManagement.Model;
+using PasswordManagement.Model.Interfaces;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
 

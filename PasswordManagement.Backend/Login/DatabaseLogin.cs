@@ -2,6 +2,7 @@
 using PasswordManagement.Backend.Security;
 using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
+using PasswordManagement.Model.Interfaces;
 
 namespace PasswordManagement.Backend.Login
 {

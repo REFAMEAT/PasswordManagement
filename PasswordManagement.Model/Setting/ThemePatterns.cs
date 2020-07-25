@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PasswordManagement.Backend.Settings
+namespace PasswordManagement.Model.Setting
 {
     /// <summary>
     /// All available UI-Themes

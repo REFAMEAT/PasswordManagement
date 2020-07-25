@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PasswordManagement.Backend.Data
+namespace PasswordManagement.Model.Interfaces
 {
     internal interface IDataManager<T> where T : class
     {

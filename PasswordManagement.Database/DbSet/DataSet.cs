@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using PasswordManagement.File;
+using PasswordManagement.File.Config;
+using PasswordManagement.Model.Setting;
 
 namespace PasswordManagement.Database.DbSet
 {

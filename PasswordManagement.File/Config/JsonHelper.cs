@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
+using PasswordManagement.Logging;
 
-namespace PasswordManagement.File
+namespace PasswordManagement.File.Config
 {
     /// <summary>
     /// Serialize and Deserialize JSON files
@@ -32,10 +32,11 @@ namespace PasswordManagement.File
             {
                 content = System.IO.File.ReadAllText(GetPath());
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException ex)
             {
                 if (defaultValue == null)
                 {
+                    Logger.Current.Error(ex);
                     throw;
                 }
                 WriteData(defaultValue); 

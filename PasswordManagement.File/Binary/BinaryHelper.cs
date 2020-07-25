@@ -2,8 +2,9 @@
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using PasswordManagement.Model;
 
-namespace PasswordManagement.Backend.Binary
+namespace PasswordManagement.File.Binary
 {
     /// <summary>
     /// Helper class for Binaries

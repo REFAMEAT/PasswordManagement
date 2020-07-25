@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
-using PasswordManagement.Backend.Binary;
+using PasswordManagement.File.Binary;
+using PasswordManagement.Model;
+using PasswordManagement.Model.Interfaces;
 
 namespace PasswordManagement.Backend.Data
 {

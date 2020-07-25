@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PasswordManagement.Backend.Binary
+namespace PasswordManagement.Model
 {
     /// <summary>
     /// The password-storaging model 

@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Backend.Settings
+﻿namespace PasswordManagement.Model.Enums
 {
     /// <summary>
     /// All available UI-Languages

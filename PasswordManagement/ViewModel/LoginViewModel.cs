@@ -2,13 +2,15 @@
 using System.Windows.Media;
 using Microsoft.EntityFrameworkCore;
 using PasswordManagement.Backend;
-using PasswordManagement.Backend.Binary;
-using PasswordManagement.Backend.Json;
 using PasswordManagement.Backend.Login;
-using PasswordManagement.Backend.Settings;
 using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
-using PasswordManagement.File;
+using PasswordManagement.File.Binary;
+using PasswordManagement.File.Config;
+using PasswordManagement.Logging;
+using PasswordManagement.Model;
+using PasswordManagement.Model.Interfaces;
+using PasswordManagement.Model.Setting;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
 
@@ -33,9 +35,10 @@ namespace PasswordManagement.ViewModel
                     context.Database.OpenConnection();
                     context.Database.CloseConnection();
                 }
-                catch (System.Exception)
+                catch (System.Exception ex)
                 {
                     Messagebox.Error("Error connecting to the Database \n\r Using local Password Management");
+                    Logger.Current.Error(ex);
                     Globals.UseDatabase = false;
                 }
             }
@@ -58,7 +61,7 @@ namespace PasswordManagement.ViewModel
             }
             else if (firstUser != null)
             {
-                new BinaryHelper().Write(new BinaryData(firstUser));
+                new BinaryHelper().Write(new BinaryData(firstUser.USUSERNAME, firstUser.USPASSWORD, firstUser.USSALT));
             }
         }
 

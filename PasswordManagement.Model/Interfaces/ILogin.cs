@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PasswordManagement.Backend.Login
+namespace PasswordManagement.Model.Interfaces
 {
     internal interface ILogin : IDisposable
     {
