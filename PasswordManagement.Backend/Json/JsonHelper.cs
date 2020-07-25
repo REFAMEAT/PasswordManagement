@@ -11,16 +11,16 @@ namespace PasswordManagement.Backend.Json
     /// <summary>
     /// Serialize and Deserialize JSON files
     /// </summary>
-    public class JsonHelper
+    public class JsonHelper<T> where T : class
     {
         /// <summary>
         /// Path to the JSON file
         /// </summary>
-        public const string jsonConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\config.json";
+        public const string jsonConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\{type}.json";
 
         private static string GetPath()
         {
-            return jsonConfigPath.Replace("{user}", Environment.UserName);
+            return jsonConfigPath.Replace("{user}", Environment.UserName).Replace("{type}", typeof(T).Name);
         }
 
         private static async Task<string> GetPathAsync()
@@ -32,7 +32,7 @@ namespace PasswordManagement.Backend.Json
         /// Read a <see cref="ThemeData"/> from the JSON file
         /// </summary>
         /// <returns></returns>
-        public static ThemeData GetData()
+        public static T GetData(T defaultValue = null)
         {
             string content;
 
@@ -42,18 +42,17 @@ namespace PasswordManagement.Backend.Json
             }
             catch (FileNotFoundException)
             {
-                WriteData(new ThemeData
+                if (defaultValue == null)
                 {
-                    Language = Language.English,
-                    PrimaryColor = "Blue",
-                    Theme = BaseTheme.Light
-                });
-                return GetData();
+                    throw;
+                }
+                WriteData(defaultValue); 
+                return GetData(null);
             }
 
             content = content.Replace("\r\n", null);
 
-            ThemeData data = JsonConvert.DeserializeObject<ThemeData>(content);
+            T data = JsonConvert.DeserializeObject<T>(content);
 
             return data;
         }
@@ -62,7 +61,7 @@ namespace PasswordManagement.Backend.Json
         /// Write a <see cref="ThemeData"/> to a JSON file
         /// </summary>
         /// <param name="value"></param>
-        public static void WriteData(ThemeData value)
+        public static void WriteData(T value)
         {
             JsonSerializer serializer = new JsonSerializer();
 

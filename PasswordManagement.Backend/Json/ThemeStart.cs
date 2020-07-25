@@ -8,7 +8,7 @@ namespace PasswordManagement.Backend.Json
     {
         public static AppCore StartThemes(this AppCore app, out ThemeData theme)
         {
-            theme = JsonHelper.GetData();
+            theme = JsonHelper<ThemeData>.GetData(Globals.DefaultTheme);
 
             if (theme.Theme != BaseTheme.Inherit || theme.PrimaryColor != null)
             {
@@ -21,7 +21,7 @@ namespace PasswordManagement.Backend.Json
                 PrimaryColor = "Blue",
                 Theme = BaseTheme.Light
             };
-            JsonHelper.WriteData(theme);
+            JsonHelper<ThemeData>.WriteData(theme);
 
             return app;
         }

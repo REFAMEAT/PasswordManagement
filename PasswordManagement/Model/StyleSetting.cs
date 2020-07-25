@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MaterialDesignThemes.Wpf;
+using PasswordManagement.Backend;
 using PasswordManagement.Backend.Json;
 using PasswordManagement.Backend.Settings;
 using PasswordManagement.Backend.Xml;
@@ -27,7 +28,7 @@ namespace PasswordManagement.Model
             AllowedColors = ThemePatterns.SupportedColors;
         }
 
-        public List<string> ThemeItems { get; set;  }
+        public List<string> ThemeItems { get; set; }
 
         public List<string> LanguageItems { get; set; }
 
@@ -41,7 +42,7 @@ namespace PasswordManagement.Model
 
         public void Load()
         {
-            ThemeData data = JsonHelper.GetData();
+            ThemeData data = JsonHelper<ThemeData>.GetData(Globals.DefaultTheme);
             SelectedLanguage = data.Language.ToString();
             SelectedColor = data.PrimaryColor;
             SelectedTheme = data.Theme.ToString();
@@ -56,7 +57,7 @@ namespace PasswordManagement.Model
                 PrimaryColor = SelectedColor
             };
 
-            JsonHelper.WriteData(themeData);
+            JsonHelper<ThemeData>.WriteData(themeData);
 
             UiHelper.AdjustApplicationStyle(themeData);
         }

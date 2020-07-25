@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using PasswordManagement.Backend.Json;
 using PasswordManagement.Backend.Settings;
 using PasswordManagement.Backend.Xml;
 using PasswordManagement.Model;
+using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
 
 namespace PasswordManagement.ViewModel
@@ -34,7 +36,11 @@ namespace PasswordManagement.ViewModel
 
         private void DoApplySettings(object obj)
         {
+            Database.Password = (obj as Settings).password.Password;
+
             settings.ForEach(x => x.Save());
+
+            (obj as Settings).Close();
         }
     }
 }

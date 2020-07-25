@@ -12,5 +12,9 @@ namespace PasswordManagement.Database.Model
         public USERDATA USER { get; set; }
 
         public string PWDATA { get; set; }
+
+        public string PWCOMMENT { get; set; }
+
+        public string PWDESCRIPTION { get; set; }
     }
 }
