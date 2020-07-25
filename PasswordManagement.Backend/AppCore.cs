@@ -2,7 +2,7 @@
 
 namespace PasswordManagement.Backend
 {
-    public class AppCore
+    internal class AppCore
     {
         private static bool created = false;
 
@@ -10,7 +10,7 @@ namespace PasswordManagement.Backend
         {
         }
 
-        public static AppCore StartCore()
+        internal static AppCore StartCore()
         {
             // Core can be created once
             if (!created)

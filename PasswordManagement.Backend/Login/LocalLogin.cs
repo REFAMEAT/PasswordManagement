@@ -4,9 +4,14 @@ using PasswordManagement.Backend.Security;
 
 namespace PasswordManagement.Backend.Login
 {
-    public class LocalLogin : ILogin
+    internal class LocalLogin : ILogin
     {
-        BinaryHelper helper = new BinaryHelper();
+        private BinaryHelper helper;
+
+        internal LocalLogin()
+        {
+            helper = new BinaryHelper();
+        }
 
         public void Dispose()
         {

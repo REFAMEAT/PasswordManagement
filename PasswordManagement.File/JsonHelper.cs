@@ -8,28 +8,23 @@ namespace PasswordManagement.File
     /// <summary>
     /// Serialize and Deserialize JSON files
     /// </summary>
-    public class JsonHelper<T> where T : class
+    internal class JsonHelper<T> where T : class
     {
         /// <summary>
         /// Path to the JSON file
         /// </summary>
-        public const string jsonConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\{type}.json";
+        internal const string jsonConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\{type}.json";
 
         private static string GetPath()
         {
             return jsonConfigPath.Replace("{user}", Environment.UserName).Replace("{type}", typeof(T).Name);
         }
 
-        private static async Task<string> GetPathAsync()
-        {
-            return await Task.Run(() => jsonConfigPath.Replace("{user}", Environment.UserName));
-        }
-
         /// <summary>
         /// Read a <see cref="ThemeData"/> from the JSON file
         /// </summary>
         /// <returns></returns>
-        public static T GetData(T defaultValue = null)
+        internal static T GetData(T defaultValue = null)
         {
             string content;
 
@@ -58,12 +53,14 @@ namespace PasswordManagement.File
         /// Write a <see cref="ThemeData"/> to a JSON file
         /// </summary>
         /// <param name="value"></param>
-        public static void WriteData(T value)
+        internal static void WriteData(T value)
         {
             JsonSerializer serializer = new JsonSerializer();
 
             using StreamWriter sw = new StreamWriter(GetPath());
             using JsonWriter jsonWriter = new JsonTextWriter(sw);
+
+            var x = JsonConvert.SerializeObject(value);
 
             serializer.Serialize(jsonWriter, value);
         }

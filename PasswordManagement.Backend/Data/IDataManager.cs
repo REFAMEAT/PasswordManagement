@@ -2,7 +2,7 @@
 
 namespace PasswordManagement.Backend.Data
 {
-    public interface IDataManager<T> where T : class
+    internal interface IDataManager<T> where T : class
     {
         void AddData(T value);
         List<T> LoadData();

@@ -30,7 +30,7 @@ namespace PasswordManagement.View
             Close();
         }
 
-        public static USERDATA CreateUser(bool shutDownAppOnCancel = false)
+        internal static USERDATA CreateUser(bool shutDownAppOnCancel = false)
         {
             AddUser addUser = new AddUser();
             bool? result = addUser.ShowDialog();

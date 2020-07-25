@@ -15,7 +15,7 @@ namespace PasswordManagement.View
         ///     Adjust the UI to the UI-Config
         /// </summary>
         /// <param name="data"></param>
-        public static void AdjustApplicationStyle(ThemeData data)
+        internal static void AdjustApplicationStyle(ThemeData data)
         {
             Application.Current.Resources.Clear();
 

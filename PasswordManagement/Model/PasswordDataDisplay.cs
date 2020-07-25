@@ -12,7 +12,7 @@ namespace PasswordManagement.Model
         private readonly Timer displayTimer;
         private string passwordDisplay;
 
-        public PasswordDataDisplay(PasswordData baseData)
+        internal PasswordDataDisplay(PasswordData baseData)
         {
             Password = baseData.Password;
             Comments = baseData.Comments;
@@ -22,13 +22,13 @@ namespace PasswordManagement.Model
             Display = false;
         }
 
-        public string PasswordDisplay
+        internal string PasswordDisplay
         {
             get => passwordDisplay;
             set => SetProperty(ref passwordDisplay, value);
         }
 
-        public bool Display
+        internal bool Display
         {
             get => display;
             set

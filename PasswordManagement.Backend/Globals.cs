@@ -5,7 +5,7 @@ using PasswordManagement.File;
 
 namespace PasswordManagement.Backend
 {
-    public class Globals
+    internal class Globals
     {
         static Globals()
         {
@@ -28,9 +28,9 @@ namespace PasswordManagement.Backend
             };
         }
 
-        public static string CurrentUserId { get; set; }
-        public static string UserHash { get; set; }
-        public static ThemeData DefaultTheme { get; set; }
-        public static DatabaseData DefaultDb { get; set; }
+        internal static string CurrentUserId { get; set; }
+        internal static string UserHash { get; set; }
+        internal static ThemeData DefaultTheme { get; set; }
+        internal static DatabaseData DefaultDb { get; set; }
     }
 }

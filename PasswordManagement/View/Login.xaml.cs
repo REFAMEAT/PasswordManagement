@@ -7,7 +7,7 @@ namespace PasswordManagement.View
     /// </summary>
     public partial class Login : Window
     {
-        public Login()
+        internal Login()
         {
             InitializeComponent();
 

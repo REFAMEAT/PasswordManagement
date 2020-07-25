@@ -8,7 +8,7 @@ using PasswordManagement.Database.Model;
 
 namespace PasswordManagement.Backend.Data
 {
-    public class DatabaseDataManager : IDataManager<PasswordData>
+    internal class DatabaseDataManager : IDataManager<PasswordData>
     {
         readonly DataSet<PASSWORDDATA> passwordData = new DataSet<PASSWORDDATA>();
 

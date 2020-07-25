@@ -9,12 +9,12 @@ namespace PasswordManagement.View
     /// </summary>
     public partial class Messagebox : Window
     {
-        public Messagebox()
+        internal Messagebox()
         {
             InitializeComponent();
         }
 
-        public static void Error(string message)
+        internal static void Error(string message)
         {
             Messagebox mbox = new Messagebox
             {
@@ -34,7 +34,7 @@ namespace PasswordManagement.View
             mbox.ShowDialog();
         }
 
-        public static bool ShowYesNo(string message, string caption)
+        internal static bool ShowYesNo(string message, string caption)
         {
             bool isYes = false;
 

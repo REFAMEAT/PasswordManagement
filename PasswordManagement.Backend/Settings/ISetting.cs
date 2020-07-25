@@ -1,6 +1,6 @@
 ﻿namespace PasswordManagement.Backend.Settings
 {
-    public interface ISetting
+    internal interface ISetting
     {
         void Load();
         void Save();

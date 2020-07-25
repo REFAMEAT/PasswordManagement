@@ -5,11 +5,11 @@ using PasswordManagement.Database.Model;
 
 namespace PasswordManagement.Backend.Login
 {
-    public class DatabaseLogin : ILogin
+    internal class DatabaseLogin : ILogin
     {
         private readonly DataSet<USERDATA> userdatas;
 
-        public DatabaseLogin()
+        internal DatabaseLogin()
         {
             userdatas = new DataSet<USERDATA>();
         }

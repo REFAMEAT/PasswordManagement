@@ -7,7 +7,6 @@ namespace PasswordManagement.Backend.Xml
     /// <summary>
     /// Model for the UI-Theme Data
     /// </summary>
-    [Serializable]
     public class ThemeData
     {
         /// <summary>

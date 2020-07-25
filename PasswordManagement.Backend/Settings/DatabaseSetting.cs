@@ -13,7 +13,7 @@ namespace PasswordManagement.Backend.Settings
 
         public void Load()
         {
-            DatabaseData data = JsonHelper<DatabaseData>.GetData(new DatabaseData());
+            DatabaseData data = JsonHelper<DatabaseData>.GetData(Globals.DefaultDb);
             DatabaseName = data.DatabaseName;
             ServerName = data.ServerName;
             Password = data.Password;

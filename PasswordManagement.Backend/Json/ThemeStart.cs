@@ -7,7 +7,7 @@ namespace PasswordManagement.Backend.Json
 {
     public static class ThemeStart
     {
-        public static AppCore StartThemes(this AppCore app, out ThemeData theme)
+        internal static AppCore StartThemes(this AppCore app, out ThemeData theme)
         {
             theme = JsonHelper<ThemeData>.GetData(Globals.DefaultTheme);
 

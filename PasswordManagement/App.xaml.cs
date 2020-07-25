@@ -12,7 +12,7 @@ namespace PasswordManagement
     /// </summary>
     public partial class App
     {
-        public static string loginPw;
+        internal static string loginPw;
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {

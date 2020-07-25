@@ -3,12 +3,12 @@ using PasswordManagement.Backend.Binary;
 
 namespace PasswordManagement.Backend.Data
 {
-    public class FileDataManager : IDataManager<PasswordData>
+    internal class FileDataManager : IDataManager<PasswordData>
     {
         private BinaryData binaryData;
         private readonly BinaryHelper binaryHelper = new BinaryHelper();
 
-        public FileDataManager()
+        internal FileDataManager()
         {
             binaryData = binaryHelper.GetData();
         }

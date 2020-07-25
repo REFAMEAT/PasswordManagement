@@ -4,11 +4,11 @@ using PasswordManagement.File;
 
 namespace PasswordManagement.Database.DbSet
 {
-    public class DataSet<TEntity> : DbContext where TEntity : class
+    internal class DataSet<TEntity> : DbContext where TEntity : class
     {
         private readonly DatabaseData config;
 
-        public DataSet(DatabaseData config = null)
+        internal DataSet(DatabaseData config = null)
         {
             if (config == null)
             {
@@ -20,7 +20,7 @@ namespace PasswordManagement.Database.DbSet
             }
         }
 
-        public DbSet<TEntity> Entities { get; set; }
+        internal DbSet<TEntity> Entities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

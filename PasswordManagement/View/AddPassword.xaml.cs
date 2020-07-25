@@ -7,13 +7,13 @@ namespace PasswordManagement.View
     /// </summary>
     public partial class AddPassword : Window
     {
-        public AddPassword()
+        internal AddPassword()
         {
             InitializeComponent();
             Loaded += AddPassword_Loaded;
         }
 
-        public bool Canceled { get; set; } = true;
+        internal bool Canceled { get; set; } = true;
 
         private void AddPassword_Loaded(object sender, RoutedEventArgs e)
         {

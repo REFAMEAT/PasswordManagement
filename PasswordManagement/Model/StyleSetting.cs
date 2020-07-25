@@ -13,7 +13,7 @@ namespace PasswordManagement.Model
 {
     public class StyleSetting : ISetting
     {
-        public StyleSetting()
+        internal StyleSetting()
         {
             List<string> themeItems = new List<string>
             {
@@ -29,17 +29,17 @@ namespace PasswordManagement.Model
             AllowedColors = ThemePatterns.SupportedColors;
         }
 
-        public List<string> ThemeItems { get; set; }
+        internal List<string> ThemeItems { get; set; }
 
-        public List<string> LanguageItems { get; set; }
+        internal List<string> LanguageItems { get; set; }
 
-        public List<string> AllowedColors { get; set; }
+        internal List<string> AllowedColors { get; set; }
 
-        public string SelectedTheme { get; set; }
+        internal string SelectedTheme { get; set; }
 
-        public string SelectedLanguage { get; set; }
+        internal string SelectedLanguage { get; set; }
 
-        public string SelectedColor { get; set; }
+        internal string SelectedColor { get; set; }
 
         public void Load()
         {

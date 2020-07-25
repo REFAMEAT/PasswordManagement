@@ -5,15 +5,15 @@ using PasswordManagement.View;
 
 namespace PasswordManagement
 {
-    public static class Setup
+    internal static class Setup
     {
-        public static AppCore StartUpUi(this AppCore app, ThemeData theme)
+        internal static AppCore StartUpUi(this AppCore app, ThemeData theme)
         {
             UiHelper.AdjustApplicationStyle(theme);
             return app;
         }
 
-        public static AppCore Login(this AppCore app, out bool loginSuccess)
+        internal static AppCore Login(this AppCore app, out bool loginSuccess)
         {
             Login login = new Login();
             login.ShowDialog();
@@ -31,7 +31,7 @@ namespace PasswordManagement
             return app;
         }
 
-        public static void StartMain(this AppCore app, bool loginSuccess)
+        internal static void StartMain(this AppCore app, bool loginSuccess)
         {
             if (!loginSuccess)
             {

@@ -19,7 +19,7 @@ namespace PasswordManagement.Backend.Binary
         /// Read a <see cref="BinaryData"/> from the .bin file
         /// </summary>
         /// <returns></returns>
-        public BinaryData GetData()
+        internal BinaryData GetData()
         {
             IFormatter formatter = new BinaryFormatter();
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
@@ -31,7 +31,7 @@ namespace PasswordManagement.Backend.Binary
         /// Write a <see cref="BinaryData"/> to the .bin File
         /// </summary>
         /// <param name="content"></param>
-        public void Write(BinaryData content)
+        internal void Write(BinaryData content)
         {
             IFormatter formatter = new BinaryFormatter();
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
