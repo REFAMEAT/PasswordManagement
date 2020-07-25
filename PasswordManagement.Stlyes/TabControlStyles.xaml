@@ -6,10 +6,9 @@
                 <ControlTemplate TargetType="TabItem">
                     <Border
                         Name="Border"
-                        Margin="2,0"
                         BorderBrush="{DynamicResource MaterialDesignBody}"
                         BorderThickness="2,2,2,0"
-                        CornerRadius="4,4,0,0">
+                        CornerRadius="8,8,0,0">
                         <ContentPresenter
                             x:Name="ContentSite"
                             Margin="10,4"

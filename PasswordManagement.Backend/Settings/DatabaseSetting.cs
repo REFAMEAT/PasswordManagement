@@ -1,6 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using PasswordManagement.Backend.Json;
-using PasswordManagement.Backend.Security;
+﻿using PasswordManagement.Backend.Json;
 
 namespace PasswordManagement.Backend.Settings
 {

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Controls;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
-using PasswordManagement.Backend.Json;
 using PasswordManagement.Backend.Settings;
-using PasswordManagement.Backend.Xml;
 using PasswordManagement.Model;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;

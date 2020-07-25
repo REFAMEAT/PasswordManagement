@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-using MaterialDesignThemes.Wpf;
-using Microsoft.EntityFrameworkCore;
+﻿using MaterialDesignThemes.Wpf;
 using PasswordManagement.Backend.Settings;
 using PasswordManagement.Backend.Xml;
 

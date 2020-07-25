@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using PasswordManagement.Database.Model;
 
 namespace PasswordManagement.Backend.Data
 {

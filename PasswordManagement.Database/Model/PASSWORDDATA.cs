@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PasswordManagement.Database.Model
 {
+    [Table("PASSWORDDATA")]
     public class PASSWORDDATA : GenerateTable
     {
-        [Required]
-        [StringLength(40)]
-        public string PWUSID { get; set; }
+        [Key] public string PWID { get; set; }
 
         [Required]
         public USERDATA USER { get; set; }
@@ -16,5 +16,7 @@ namespace PasswordManagement.Database.Model
         public string PWCOMMENT { get; set; }
 
         public string PWDESCRIPTION { get; set; }
+
+        public string USERUSID { get; set; }
     }
 }

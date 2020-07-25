@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PasswordManagement.Database.Model
@@ -13,7 +12,7 @@ namespace PasswordManagement.Database.Model
         public string USID { get; set; }
         
         [Required]
-        [Column("USUSERNAME", TypeName = "nvarchar(50)")]
+        [Column("USUSERNAME", TypeName = "nvarchar(MAX)")]
         public string USUSERNAME { get; set; }
         
         [Required]

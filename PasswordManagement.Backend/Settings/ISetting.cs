@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PasswordManagement.Backend.Settings
+﻿namespace PasswordManagement.Backend.Settings
 {
     public interface ISetting
     {

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.AccessControl;
-using System.Security.Permissions;
 
 namespace PasswordManagement.Backend.Binary
 {

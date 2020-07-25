@@ -60,17 +60,5 @@ namespace PasswordManagement.Backend.Binary
         /// All Stored Passwords of a User
         /// </summary>
         public List<PasswordData> Passwords { get; set; }
-        
-        /// <summary>
-        /// Validate Username and Password
-        /// </summary>
-        /// <param name="userName">The clear-text username</param>
-        /// <param name="password">The clear-text password</param>
-        /// <returns></returns>
-        public bool Validate(string userName, string password)
-        {
-            return Password.GetHash(userName + Salt) == UserNameHash
-                   && Password.GetHash(password + Salt) == PasswordHash;
-        }
     }
 }

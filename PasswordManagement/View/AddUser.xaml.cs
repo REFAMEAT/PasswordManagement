@@ -39,7 +39,7 @@ namespace PasswordManagement.View
             {
                 string userName = ((AddUserViewModel)addUser.DataContext).UserName;
                 string password = addUser.passwordBox.Password;
-
+                
                 return UserFactory.CreateUser(userName, password);
             }
 

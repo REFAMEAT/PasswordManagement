@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Documents;
 using System.Windows.Input;
 using PasswordManagement.Backend.Binary;
 using PasswordManagement.Backend.Data;
+using PasswordManagement.Backend.Json;
+using PasswordManagement.Backend.Settings;
 using PasswordManagement.Model;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
@@ -22,7 +23,9 @@ namespace PasswordManagement.ViewModel
 
         public MainViewModel()
         {
-            dataManager = new FileDataManager();
+            bool useDatabase = JsonHelper<DatabaseData>.GetData().UseDatabase;
+
+            dataManager = useDatabase ? (IDataManager<PasswordData>) new DatabaseDataManager() : new FileDataManager();
 
             Items = ToDisplayData(dataManager.LoadData());
         }

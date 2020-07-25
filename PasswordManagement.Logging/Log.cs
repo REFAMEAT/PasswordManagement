@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PasswordManagement.Logging
+﻿namespace PasswordManagement.Logging
 {
     public class Log
     {

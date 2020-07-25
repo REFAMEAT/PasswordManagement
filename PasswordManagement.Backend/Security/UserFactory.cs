@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using PasswordManagement.Database.Model;
 
 namespace PasswordManagement.Backend.Security
@@ -14,6 +15,7 @@ namespace PasswordManagement.Backend.Security
 
             USERDATA newUser = new USERDATA
             {
+                USID = Guid.NewGuid().ToString(),
                 USUSERNAME = Password.GetHash(userName + pwSalt),
                 USPASSWORD = Password.GetHash(password + pwSalt),
                 USSALT = pwSalt

@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:PasswordManagement"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:PasswordManagement.ViewModel"
@@ -35,28 +34,31 @@
             <ToolBar>
                 <Button Command="{Binding ButtonCommandAddItem}">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Add" />
-                        <Label VerticalContentAlignment="Center" Content="{DynamicResource MainAdd}" />
+                        <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueLightBrush}" Kind="Add" />
+                        <Label
+                            VerticalContentAlignment="Center"
+                            Content="{DynamicResource MainAdd}"
+                            Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
-                <Button Command="{Binding ButtonCommandDeleteItem}">
+                <Button Command="{Binding ButtonCommandDeleteItem}" Foreground="{DynamicResource PrimaryHueLightBrush}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Delete" />
-                        <Label Content="{DynamicResource MainDelete}" />
+                        <Label Content="{DynamicResource MainDelete}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
                 <Button>
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Edit" />
-                        <Label Content="{DynamicResource MainEdit}" />
+                        <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueLightBrush}" Kind="Edit" />
+                        <Label Content="{DynamicResource MainEdit}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
             </ToolBar>
             <ToolBar>
                 <Button Command="{Binding ButtonCommandOpenSettings}">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Settings" />
-                        <Label Content="{DynamicResource MainSettings}" />
+                        <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueLightBrush}" Kind="Settings" />
+                        <Label Content="{DynamicResource MainSettings}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
             </ToolBar>
@@ -82,7 +84,8 @@
                 <DataGridTextColumn
                     Width="0.3*"
                     Binding="{Binding Description, Mode=OneWay}"
-                    Header="{DynamicResource MainGridDescription}" />
+                    Header="{DynamicResource MainGridDescription}"
+                    SortDirection="Ascending" />
                 <DataGridCheckBoxColumn
                     Width="70"
                     Binding="{Binding Display, UpdateSourceTrigger=PropertyChanged}"
