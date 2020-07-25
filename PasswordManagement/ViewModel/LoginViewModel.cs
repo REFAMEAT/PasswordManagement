@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.EntityFrameworkCore;
 using PasswordManagement.Backend;
 using PasswordManagement.Backend.Binary;
 using PasswordManagement.Backend.Json;
@@ -21,8 +22,25 @@ namespace PasswordManagement.ViewModel
 
         public LoginViewModel()
         {
-            bool useDatabase = JsonHelper<DatabaseData>.GetData().UseDatabase;
-            iLogin = useDatabase ? (ILogin)new DatabaseLogin() : new LocalLogin();
+            Globals.UseDatabase = JsonHelper<DatabaseData>.GetData().UseDatabase;
+
+
+            if (Globals.UseDatabase)
+            {
+                try
+                {
+                    using DataSet<USERDATA> context = new DataSet<USERDATA>();
+                    context.Database.OpenConnection();
+                    context.Database.CloseConnection();
+                }
+                catch (System.Exception)
+                {
+                    Messagebox.Error("Error connecting to the Database \n\r Using local Password Management");
+                    Globals.UseDatabase = false;
+                }
+            }
+
+            iLogin = Globals.UseDatabase ? (ILogin)new DatabaseLogin() : new LocalLogin();
             bool needFirstUser = iLogin.NeedFirstUser();
 
             if (!needFirstUser)
@@ -32,7 +50,7 @@ namespace PasswordManagement.ViewModel
 
             USERDATA firstUser = AddUser.CreateUser(true);
 
-            if (firstUser != null && useDatabase)
+            if (firstUser != null && Globals.UseDatabase)
             {
                 DataSet<USERDATA> data = new DataSet<USERDATA>();
                 data.Entities.Add(firstUser);

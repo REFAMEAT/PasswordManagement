@@ -8,9 +8,9 @@ namespace PasswordManagement.Backend.Binary
     [Serializable]
     public class PasswordData
     {
-        internal string Identifier { get; set; }
-        internal string Description { get; set; }
-        internal string Password { get; set; }
-        internal string Comments { get; set; }
+        public string Identifier { get; set; }
+        public string Description { get; set; }
+        public string Password { get; set; }
+        public string Comments { get; set; }
     }
 }

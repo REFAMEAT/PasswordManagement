@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using PasswordManagement.Backend;
 using PasswordManagement.Backend.Binary;
 using PasswordManagement.Backend.Data;
 using PasswordManagement.Backend.Json;
@@ -24,7 +25,7 @@ namespace PasswordManagement.ViewModel
 
         public MainViewModel()
         {
-            bool useDatabase = JsonHelper<DatabaseData>.GetData().UseDatabase;
+            bool useDatabase = Globals.UseDatabase;
 
             dataManager = useDatabase ? (IDataManager<PasswordData>) new DatabaseDataManager() : new FileDataManager();
 

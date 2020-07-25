@@ -5,7 +5,7 @@ using PasswordManagement.Database.Model;
 
 namespace PasswordManagement.Backend.Login
 {
-    internal class DatabaseLogin : ILogin
+    public class DatabaseLogin : ILogin
     {
         private readonly DataSet<USERDATA> userdatas;
 

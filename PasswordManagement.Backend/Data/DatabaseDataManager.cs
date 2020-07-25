@@ -54,7 +54,7 @@ namespace PasswordManagement.Backend.Data
             EntityEntry<PASSWORDDATA> entry = passwordData.Remove(itemToDelete);
             passwordData.SaveChanges();
 
-            return entry.State == EntityState.Deleted;
+            return passwordData.Entities.Find(item.Identifier) == null;
         }
     }
 }

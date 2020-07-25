@@ -28,6 +28,7 @@ namespace PasswordManagement.Backend
             };
         }
 
+        internal static bool UseDatabase { get; set; }
         internal static string CurrentUserId { get; set; }
         internal static string UserHash { get; set; }
         internal static ThemeData DefaultTheme { get; set; }

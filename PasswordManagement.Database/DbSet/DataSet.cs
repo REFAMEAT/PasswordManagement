@@ -24,14 +24,16 @@ namespace PasswordManagement.Database.DbSet
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(new SqlConnectionStringBuilder
+            string connectionString = new SqlConnectionStringBuilder
             {
-                DataSource = config.ServerName,
-                InitialCatalog = config.DatabaseName,
+                DataSource = config.ServerName ??= "",
+                InitialCatalog = config.DatabaseName ??= "",
                 IntegratedSecurity = config.IntegratedSecurity,
-                UserID = config.Username,
-                Password = config.Password
-            }.ToString());
+                UserID = config.Username ??= "",
+                Password = config.Password  ??= ""
+            }.ToString();
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }

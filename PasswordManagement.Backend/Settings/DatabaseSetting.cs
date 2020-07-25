@@ -27,10 +27,10 @@ namespace PasswordManagement.Backend.Settings
         {
             JsonHelper<DatabaseData>.WriteData(new DatabaseData()
             {
-                DatabaseName = DatabaseName,
-                Password = Password,
-                ServerName = ServerName,
-                Username = Username,
+                DatabaseName = DatabaseName ??= "",
+                Password = Password ??= "",
+                ServerName = ServerName ??= "",
+                Username = Username ??= "",
                 IntegratedSecurity = IntegratedSecurity,
                 UseDatabase = UseDatabase
             });
