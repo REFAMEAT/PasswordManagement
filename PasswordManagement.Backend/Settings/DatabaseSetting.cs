@@ -1,4 +1,4 @@
-﻿using PasswordManagement.Backend.Json;
+﻿using PasswordManagement.File;
 
 namespace PasswordManagement.Backend.Settings
 {

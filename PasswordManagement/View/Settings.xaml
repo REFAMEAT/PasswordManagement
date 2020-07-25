@@ -71,7 +71,7 @@
                                 VerticalAlignment="Center"
                                 Kind="Server" />
                             <Label x:Name="label" Content="Server" />
-                        </StackPanel>                        
+                        </StackPanel>
                         <TextBox FontSize="17" Text="{Binding Database.ServerName}" />
                     </DockPanel>
                     <DockPanel>

@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Backend.Settings
+﻿namespace PasswordManagement.File
 {
     public class DatabaseData
     {

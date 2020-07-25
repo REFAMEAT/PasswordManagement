@@ -2,9 +2,8 @@
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using PasswordManagement.Backend.Xml;
 
-namespace PasswordManagement.Backend.Json
+namespace PasswordManagement.File
 {
     /// <summary>
     /// Serialize and Deserialize JSON files
@@ -36,7 +35,7 @@ namespace PasswordManagement.Backend.Json
 
             try
             {
-                content = File.ReadAllText(GetPath());
+                content = System.IO.File.ReadAllText(GetPath());
             }
             catch (FileNotFoundException)
             {
@@ -67,16 +66,6 @@ namespace PasswordManagement.Backend.Json
             using JsonWriter jsonWriter = new JsonTextWriter(sw);
 
             serializer.Serialize(jsonWriter, value);
-        }
-
-        public static async Task WriteDataAsync(ThemeData value)
-        {
-            JsonSerializer serializer = new JsonSerializer();
-
-            await using StreamWriter sw = new StreamWriter(await GetPathAsync());
-            using JsonWriter jsonWriter = new JsonTextWriter(sw);
-
-            await Task.Run(() => serializer.Serialize(jsonWriter, value));
         }
     }
 }
