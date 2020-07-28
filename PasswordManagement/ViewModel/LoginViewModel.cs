@@ -24,7 +24,7 @@ namespace PasswordManagement.ViewModel
 
         public LoginViewModel()
         {
-            Globals.UseDatabase = JsonHelper<DatabaseData>.GetData().UseDatabase;
+            Globals.UseDatabase = JsonHelper<DatabaseData>.GetData(Globals.DefaultDb).UseDatabase;
 
 
             if (Globals.UseDatabase)
