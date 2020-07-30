@@ -4,7 +4,7 @@ using PasswordManagement.Model.Setting;
 
 namespace PasswordManagement.Backend
 {
-    internal class Globals
+    internal static class Globals
     {
         static Globals()
         {
@@ -30,7 +30,7 @@ namespace PasswordManagement.Backend
         internal static bool UseDatabase { get; set; }
         internal static string CurrentUserId { get; set; }
         internal static string UserHash { get; set; }
-        internal static ThemeData DefaultTheme { get; set; }
-        internal static DatabaseData DefaultDb { get; set; }
+        internal static ThemeData DefaultTheme { get; private set; }
+        internal static DatabaseData DefaultDb { get; private set; }
     }
 }
