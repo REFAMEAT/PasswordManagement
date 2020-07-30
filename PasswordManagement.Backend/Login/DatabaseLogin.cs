@@ -20,6 +20,12 @@ namespace PasswordManagement.Backend.Login
             userdatas.Dispose();
         }
 
+        /// <summary>
+        /// Validate the users Credentials
+        /// </summary>
+        /// <param name="userName">The clear text user name</param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public string Validate(string userName, string password)
         {
             foreach (USERDATA user in userdatas.Entities)
@@ -34,6 +40,10 @@ namespace PasswordManagement.Backend.Login
             return null;
         }
 
+        /// <summary>
+        /// Check if there is any user in the the Database
+        /// </summary>
+        /// <returns>true: if there is no user</returns>
         public bool NeedFirstUser()
         {
             return !userdatas.Entities.ToList().Any();

@@ -7,10 +7,17 @@ using PasswordManagement.Model.Interfaces;
 
 namespace PasswordManagement.Backend.Data
 {
+    /// <summary>
+    /// A Data-Manager for the connection to the Database
+    /// </summary>
     internal class DatabaseDataManager : IDataManager<PasswordData>
     {
         readonly DataSet<PASSWORDDATA> passwordData = new DataSet<PASSWORDDATA>();
 
+        /// <summary>
+        /// Adds a data set to the Database and saves it
+        /// </summary>
+        /// <param name="value"></param>
         public void AddData(PasswordData value)
         {
             PASSWORDDATA data = new PASSWORDDATA()
@@ -26,6 +33,10 @@ namespace PasswordManagement.Backend.Data
             passwordData.SaveChanges();
         }
 
+        /// <summary>
+        /// Loads all data sets from the Database
+        /// </summary>
+        /// <returns></returns>
         public List<PasswordData> LoadData()
         {
             List<PasswordData> dataDisplay = new List<PasswordData>();
@@ -47,6 +58,11 @@ namespace PasswordManagement.Backend.Data
             return dataDisplay;
         }
 
+        /// <summary>
+        /// Removes a Data Set from the Database and saves it
+        /// </summary>
+        /// <param name="item">The item to delete</param>
+        /// <returns></returns>
         public bool Remove(PasswordData item)
         {
             PASSWORDDATA itemToDelete = passwordData.Entities.Find(item.Identifier);
