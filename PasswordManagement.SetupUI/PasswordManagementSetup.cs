@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Management.Automation;
 using System.Net;
-using System.Resources;
 using System.Threading.Tasks;
-using System.Windows.Documents;
-using PasswordManager.Setup;
 using File = System.IO.File;
 
 namespace PasswordManagement.SetupUI
@@ -133,10 +129,9 @@ namespace PasswordManagement.SetupUI
 
         public bool NeedNewProductVersion()
         {
-            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(local, "PasswordManagement.exe"));
-
             if (File.Exists(Path.Combine(local, "PasswordManagement.exe")))
             {
+                FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(local, "PasswordManagement.exe"));
                 return fileVersionInfo.ProductVersion != Globals.ProductVersion; 
             }
 
