@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
+﻿using MaterialDesignThemes.Wpf;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
-using MaterialDesignThemes.Wpf;
 
 namespace PasswordManagement.SetupUI
 {
@@ -44,7 +44,7 @@ namespace PasswordManagement.SetupUI
 
             if (setup.NeedNewProductVersion())
             {
-                setup.DownloadPasswordManager(((senderPwDownload, argsPwDownload) => SetValueThreadSafe(PasswordManagementDownload, argsPwDownload.ProgressPercentage))); 
+                setup.DownloadPasswordManager(((senderPwDownload, argsPwDownload) => SetValueThreadSafe(PasswordManagementDownload, argsPwDownload.ProgressPercentage)));
             }
             else
             {
