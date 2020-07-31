@@ -14,6 +14,8 @@ namespace PasswordManagement.Model
             UserNameHash = userName;
             PasswordHash = password;
             Salt = salt;
+
+            Passwords = new List<PasswordData>();
         }
 
         /// <summary>

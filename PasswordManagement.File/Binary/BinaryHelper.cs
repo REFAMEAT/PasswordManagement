@@ -25,6 +25,7 @@ namespace PasswordManagement.File.Binary
             IFormatter formatter = new BinaryFormatter();
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
                 FileMode.OpenOrCreate);
+
             return (BinaryData)formatter.Deserialize(s);
         }
 
