@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -26,7 +27,14 @@ namespace PasswordManagement.File.Binary
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
                 FileMode.OpenOrCreate);
 
-            return (BinaryData)formatter.Deserialize(s);
+            BinaryData data = (BinaryData) formatter.Deserialize(s);
+
+            if (data.Passwords == null)
+            {
+                data.Passwords = new List<PasswordData>();
+            }
+
+            return data;
         }
 
         /// <summary>
