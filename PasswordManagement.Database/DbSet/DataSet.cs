@@ -33,7 +33,7 @@ namespace PasswordManagement.Database.DbSet
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (config is null)
+            if (!(config is null))
             {
                 string connectionString = new SqlConnectionStringBuilder
                 {

@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using PasswordManagement.Backend.Security;
 using PasswordManagement.Model;
-using PasswordManagement.Model.Interfaces;
 using PasswordManagement.ViewModel;
 
 namespace PasswordManagement.Tests.ViewModel
@@ -46,26 +44,6 @@ namespace PasswordManagement.Tests.ViewModel
         {
             viewModel.ButtonCommandDeleteItem.Execute(null);
             Assert.That(dataManager.passwordDatas.Count, Is.EqualTo(1));
-        }
-    }
-
-    class TestDataManager : IDataManager<PasswordData>
-    {
-        public List<PasswordData> passwordDatas = new List<PasswordData>();
-
-        public void AddData(PasswordData value)
-        {
-            passwordDatas.Add(value);
-        }
-
-        public List<PasswordData> LoadData()
-        {
-            return passwordDatas;
-        }
-
-        public bool Remove(PasswordData item)
-        {
-            return passwordDatas.Remove(item);
         }
     }
 }
