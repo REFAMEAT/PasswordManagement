@@ -1,12 +1,15 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using PasswordManagement.File.Config;
 using PasswordManagement.Model.Setting;
+using System;
 
 namespace PasswordManagement.Database.DbSet
 {
     internal class DataSet<TEntity> : DbContext where TEntity : class
     {
+        private readonly Action<DbContextOptionsBuilder> onConfiguringAction;
         private readonly DatabaseData config;
 
         internal DataSet(DatabaseData config = null)
@@ -21,20 +24,32 @@ namespace PasswordManagement.Database.DbSet
             }
         }
 
+        internal DataSet(Action<DbContextOptionsBuilder> onConfiguringAction)
+        {
+            this.onConfiguringAction = onConfiguringAction;
+        }
+
         internal DbSet<TEntity> Entities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = new SqlConnectionStringBuilder
+            if (!(config is null))
             {
-                DataSource = config.ServerName ??= "",
-                InitialCatalog = config.DatabaseName ??= "",
-                IntegratedSecurity = config.IntegratedSecurity,
-                UserID = config.Username ??= "",
-                Password = config.Password  ??= ""
-            }.ToString();
+                string connectionString = new SqlConnectionStringBuilder
+                {
+                    DataSource = config.ServerName ??= "",
+                    InitialCatalog = config.DatabaseName ??= "",
+                    IntegratedSecurity = config.IntegratedSecurity,
+                    UserID = config.Username ??= "",
+                    Password = config.Password  ??= ""
+                }.ToString();
 
-            optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseSqlServer(connectionString);
+            }
+            else
+            {
+                onConfiguringAction(optionsBuilder);
+            }
         }
     }
 }

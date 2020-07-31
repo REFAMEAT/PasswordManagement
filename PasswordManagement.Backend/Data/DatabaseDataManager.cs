@@ -5,12 +5,25 @@ using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
 using PasswordManagement.Model;
 using PasswordManagement.Model.Interfaces;
+using PasswordManagement.Model.Setting;
 
 namespace PasswordManagement.Backend.Data
 {
     internal class DatabaseDataManager : IDataManager<PasswordData>
     {
-        readonly DataSet<PASSWORDDATA> passwordData = new DataSet<PASSWORDDATA>();
+        private readonly DataSet<PASSWORDDATA> passwordData;
+
+        public DatabaseDataManager(DatabaseData config = null, DataSet<PASSWORDDATA> dataSet = null)
+        {
+            if (dataSet is null)
+            {
+                passwordData = new DataSet<PASSWORDDATA>(config); 
+            }
+            else
+            {
+                passwordData = dataSet;
+            }
+        }
 
         public void AddData(PasswordData value)
         {

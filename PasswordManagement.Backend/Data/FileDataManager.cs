@@ -8,10 +8,11 @@ namespace PasswordManagement.Backend.Data
     internal class FileDataManager : IDataManager<PasswordData>
     {
         private BinaryData binaryData;
-        private readonly BinaryHelper binaryHelper = new BinaryHelper();
+        private readonly BinaryHelper binaryHelper;
 
-        internal FileDataManager()
+        internal FileDataManager(string path = null)
         {
+            binaryHelper = new BinaryHelper(path);
             binaryData = binaryHelper.GetData();
         }
 

@@ -20,12 +20,16 @@ namespace PasswordManagement.ViewModel
         private ObservableCollection<PasswordDataDisplay> items;
         private PasswordDataDisplay selectedItem;
 
-        public MainViewModel()
+        internal MainViewModel(IDataManager<PasswordData> dataManager)
+        {
+            this.dataManager = dataManager;
+            Items = ToDisplayData(dataManager.LoadData());
+        }
+
+        public MainViewModel() 
         {
             bool useDatabase = Globals.UseDatabase;
-
             dataManager = useDatabase ? (IDataManager<PasswordData>) new DatabaseDataManager() : new FileDataManager();
-
             Items = ToDisplayData(dataManager.LoadData());
         }
 

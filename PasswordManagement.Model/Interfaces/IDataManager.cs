@@ -2,7 +2,7 @@
 
 namespace PasswordManagement.Model.Interfaces
 {
-    internal interface IDataManager<T> where T : class
+    public interface IDataManager<T> where T : class
     {
         void AddData(T value);
         List<T> LoadData();

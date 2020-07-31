@@ -12,10 +12,29 @@ namespace PasswordManagement.File.Binary
     /// </summary>
     public class BinaryHelper
     {
+        public BinaryHelper(string path = null)
+        {
+            if (path != null)
+            {
+                if (!System.IO.File.Exists(path))
+                {
+                    throw new FileNotFoundException("cannot find file", path);
+                }
+
+                xmlConfigPath = path;
+            }
+            else
+            {
+                xmlConfigPath = xmlConfigPathDefault;
+            }
+        }
+
+        private string xmlConfigPath;
+
         /// <summary>
         /// The path to the bin-file
         /// </summary>
-        public const string xmlConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\data.bin";
+        private const string xmlConfigPathDefault = @"C:\Users\{user}\AppData\Roaming\PWManagement\data.bin";
 
         /// <summary>
         /// Read a <see cref="BinaryData"/> from the .bin file
@@ -29,10 +48,7 @@ namespace PasswordManagement.File.Binary
 
             BinaryData data = (BinaryData) formatter.Deserialize(s);
 
-            if (data.Passwords == null)
-            {
-                data.Passwords = new List<PasswordData>();
-            }
+            data.Passwords ??= new List<PasswordData>();
 
             return data;
         }
