@@ -1,31 +1,59 @@
 ﻿using System;
 using System.IO;
+using System.Management.Automation;
 using IWshRuntimeLibrary;
+using File = IWshRuntimeLibrary.File;
 
-namespace PasswordManager.Setup
+namespace PasswordManagement.SetupUI
 {
     public class Shortcut
     {
         internal static void Create(string filePath)
         {
-            FileInfo file = new FileInfo(filePath);
-            
-            if (!file.Exists)
-            {
-                throw new FileNotFoundException("Could not find file", filePath);
-            }
+            FileInfo fi = new FileInfo(filePath);
 
-            string fileName = file.Name.Replace(file.Extension, "");
+            string targetFile = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\{fi.Name}.lnk";
 
-            string shortcutLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\{fileName}.lnk";
+            CreateShortcut(filePath, targetFile, "", "", "", "");
+        }
 
-            WshShell shell = new WshShell();
-            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
 
-            shortcut.Description = fileName;
-            shortcut.TargetPath = filePath;
-            shortcut.IconLocation = filePath;
-            shortcut.Save();
+        /// <summary>
+        /// Create Windows Shorcut
+        /// </summary>
+        /// <param name="SourceFile">A file you want to make shortcut to</param>
+        /// <param name="ShortcutFile">Path and shorcut file name including file extension (.lnk)</param>
+        /// <param name="Description">Shortcut description</param>
+        /// <param name="Arguments">Command line arguments</param>
+        /// <param name="HotKey">Shortcut hot key as a string, for example "Ctrl+F"</param>
+        /// <param name="WorkingDirectory">"Start in" shorcut parameter</param>
+        public static void CreateShortcut(string TargetPath, string ShortcutFile, string Description,
+            string Arguments, string HotKey, string WorkingDirectory)
+        {
+            // Check necessary parameters first:
+            if (String.IsNullOrEmpty(TargetPath))
+                throw new ArgumentNullException("TargetPath");
+            if (String.IsNullOrEmpty(ShortcutFile))
+                throw new ArgumentNullException("ShortcutFile");
+
+            // Create WshShellClass instance:
+            var wshShell = new WshShellClass();
+
+            // Create shortcut object:
+            IWshRuntimeLibrary.IWshShortcut shorcut = (IWshRuntimeLibrary.IWshShortcut)wshShell.CreateShortcut(ShortcutFile);
+
+            // Assign shortcut properties:
+            shorcut.TargetPath = TargetPath;
+            shorcut.Description = Description;
+            if (!String.IsNullOrEmpty(Arguments))
+                shorcut.Arguments = Arguments;
+            if (!String.IsNullOrEmpty(HotKey))
+                shorcut.Hotkey = HotKey;
+            if (!String.IsNullOrEmpty(WorkingDirectory))
+                shorcut.WorkingDirectory = WorkingDirectory;
+
+            // Save the shortcut:
+            shorcut.Save();
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using System;
+using MaterialDesignThemes.Wpf;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -25,13 +27,16 @@ namespace PasswordManagement.SetupUI
             worker.WorkerSupportsCancellation = true;
             worker.DoWork += WorkerOnDoWork;
             worker.RunWorkerAsync();
+
+            buttonStart.IsEnabled = false;
+            worker.RunWorkerCompleted += (sendere, ev) => Dispatcher.Invoke(() => buttonStart.IsEnabled = true);
         }
 
         private void WorkerOnDoWork(object sender, DoWorkEventArgs e)
         {
             PasswordManagementSetup setup = new PasswordManagementSetup(Globals.TotalDownloadPathFtp, Globals.ManagerPath);
 
-            if (!NetCoreDownloader.CoreVersionInstalled())
+            if (!NetCoreDownloader.CoreVersionInstalled() || true)
             {
                 SetValueThreadSafe(NetVersionCheck, 100);
                 NetCoreDownloader.DownloadCore((senderVersionDownload, argsVersionDownload) => SetValueThreadSafe(NetVersionDownload, argsVersionDownload.ProgressPercentage));
@@ -52,7 +57,8 @@ namespace PasswordManagement.SetupUI
                 NoActionNeeded(PasswordManagementCheck);
             }
 
-            //Shortcut.Create(Path.Combine(Globals.ManagerPath, "PasswordManagement.exe"));
+            Shortcut.Create(Path.Combine(Globals.ManagerPath, "PasswordManagement.exe"));
+            NoActionNeeded(Other);
         }
 
         private void NoActionNeeded(ProgressBarDone progressBar)

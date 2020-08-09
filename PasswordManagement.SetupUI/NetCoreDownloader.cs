@@ -5,6 +5,7 @@ using System.IO;
 using System.Management.Automation;
 using System.Net;
 using System.Threading;
+using MaterialDesignThemes.Wpf.Transitions;
 
 namespace PasswordManagement.SetupUI
 {
@@ -24,18 +25,7 @@ namespace PasswordManagement.SetupUI
 
         internal static void DownloadCore(DownloadProgressChangedEventHandler progressChanged)
         {
-            // looking for .NET Core Version
-            var x = PowerShell.Create().AddCommand("dotnet")
-                .AddArgument("--version")
-                .Invoke();
-
-            // if version is not .net 3.1 download new one
-            if (x[0].ToString() == "3.1.302" && false)
-            {
-                return;
-            }
-
-            WebClient request = new WebClient
+           WebClient request = new WebClient
             {
                 Credentials = new NetworkCredential("pwtester", "pwtester")
             };
@@ -53,7 +43,7 @@ namespace PasswordManagement.SetupUI
         {
             byte[] fileData = e.Result;
 
-            FileStream fs = File.Create("O:\\\\File.exe");
+            FileStream fs = File.Create($"{Globals.ManagerPath}\\DotNetCoreSetup.exe");
 
             fs.Write(fileData, 0, fileData.Length);
             fs.Close();

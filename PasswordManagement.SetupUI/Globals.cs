@@ -12,7 +12,7 @@ namespace PasswordManagement.SetupUI
         
         internal const string PasswordManagementDownloadPathFtp = @"ftp://poseidon/array1/DataTransfer/builds/PasswordManager Release/";
 
-        internal const string NetCoreRuntimeDownloadPath = @"\\poseidon\DataTransfer\windowsdesktop-runtime-3.1.6-win-x64.exe";
+        internal const string NetCoreRuntimeDownloadPath = @"https://download.visualstudio.microsoft.com/download/pr/3eb7efa1-96c6-4e97-bb9f-563ecf595f8a/7efd9c1cdd74df8fb0a34c288138a84f/windowsdesktop-runtime-3.1.6-win-x64.exe";
 
         internal const string TotalDownloadPath = PasswordManagementDownloadPath + ProductVersion;
 
