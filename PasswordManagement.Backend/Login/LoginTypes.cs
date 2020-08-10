@@ -2,7 +2,8 @@
 {
     public enum LoginTypes
     {
-        Local,
-        Database,
+        Local = 0,
+        Database = 1,
+        Cloud = 2,
     }
 }
