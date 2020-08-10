@@ -1,0 +1,32 @@
+﻿<Window
+    x:Class="PasswordManagement.DatabaseBuilder.BuilderUI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PasswordManagement.DatabaseBuilder.BuilderUI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="400"
+    Height="180"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <StackPanel>
+        <DockPanel>
+            <Label Width="110">Server Name</Label>
+            <TextBox x:Name="ServerName" Margin="3" />
+        </DockPanel>
+        <DockPanel>
+            <Label Width="110">Database Name</Label>
+            <TextBox x:Name="DatabaseName" Margin="3" />
+        </DockPanel>
+        <DockPanel>
+            <Label  Width="110">User name</Label>
+            <TextBox x:Name="UserName" Margin="3" />
+        </DockPanel>
+        <DockPanel>
+            <Label  Width="110">Password</Label>
+            <PasswordBox x:Name="PasswordBox" Margin="3" />
+        </DockPanel>
+        <Button Click="ButtonBase_OnClick" Margin="5" Height="25" >Create</Button>
+    </StackPanel>
+</Window>

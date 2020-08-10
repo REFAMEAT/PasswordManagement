@@ -1,21 +1,37 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace PasswordManagement.DatabaseBuilder
 {
     public class Database
     {
-        public async Task Build<T>(bool deleteExisting, params Assembly[] assemblies) where T : class
+        public void Build<T>(bool deleteExisting, SqlConnectionStringBuilder connectionStringBuilder, params Assembly[] assemblies) where T : class
         {
-            BuilderContext<T> context = new BuilderContext<T>(assemblies ,"MARS", "PasswordManagement");
-            
-            if (deleteExisting)
+            BuilderContext<T> context;
+            if (!connectionStringBuilder.IntegratedSecurity)
             {
-                await context.Database.EnsureDeletedAsync();
+                context = new BuilderContext<T>(assemblies,
+                        connectionStringBuilder.DataSource,
+                        connectionStringBuilder.InitialCatalog,
+                        connectionStringBuilder.UserID,
+                        connectionStringBuilder.Password);
+            }
+            else
+            {
+                context = new BuilderContext<T>(assemblies,
+                    connectionStringBuilder.DataSource,
+                    connectionStringBuilder.InitialCatalog);
             }
 
-            await context.Database.EnsureCreatedAsync();
-            await context.SaveChangesAsync();
+            if (deleteExisting)
+            {
+                context.Database.EnsureDeleted();
+            }
+
+            context.Database.EnsureCreated();
+            context.SaveChanges();
         }
     }
 }
