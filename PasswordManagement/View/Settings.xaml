@@ -40,7 +40,7 @@
                         <ComboBox
                             DockPanel.Dock="Bottom"
                             FontSize="17"
-                            ItemsSource="{Binding Style.ThemeItems}"
+                            ItemsSource="{Binding Style.ThemeItems, UpdateSourceTrigger=PropertyChanged}"
                             SelectedItem="{Binding Style.SelectedTheme}" />
                     </DockPanel>
                     <DockPanel>
@@ -48,7 +48,7 @@
                         <ComboBox
                             DockPanel.Dock="Bottom"
                             FontSize="17"
-                            ItemsSource="{Binding Style.LanguageItems}"
+                            ItemsSource="{Binding Style.LanguageItems, UpdateSourceTrigger=PropertyChanged}"
                             SelectedItem="{Binding Style. SelectedLanguage}" />
                     </DockPanel>
                     <DockPanel>
