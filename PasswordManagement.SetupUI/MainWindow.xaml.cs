@@ -36,7 +36,7 @@ namespace PasswordManagement.SetupUI
         {
             PasswordManagementSetup setup = new PasswordManagementSetup(Globals.TotalDownloadPathFtp, Globals.ManagerPath);
 
-            if (!NetCoreDownloader.CoreVersionInstalled() || true)
+            if (!NetCoreDownloader.CoreVersionInstalled())
             {
                 SetValueThreadSafe(NetVersionCheck, 100);
                 NetCoreDownloader.DownloadCore((senderVersionDownload, argsVersionDownload) => SetValueThreadSafe(NetVersionDownload, argsVersionDownload.ProgressPercentage));
