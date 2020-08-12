@@ -22,28 +22,16 @@ namespace PasswordManagement.ViewModel
         private ICommand buttonCommandLogin;
         private string userName;
 
-        public LoginViewModel()
+        internal LoginViewModel(ILogin logonMethod)
         {
-            Globals.UseDatabase = JsonHelper<DatabaseData>.GetData(Globals.DefaultDb).UseDatabase;
+            iLogin.Initialize();
 
-
-            if (Globals.UseDatabase)
+            // Fallback, if logon Method doesn't work
+            if (!iLogin.InitSuccessful)
             {
-                try
-                {
-                    using DataSet<USERDATA> context = new DataSet<USERDATA>();
-                    context.Database.OpenConnection();
-                    context.Database.CloseConnection();
-                }
-                catch (System.Exception ex)
-                {
-                    Messagebox.Error("Error connecting to the Database \n\r Using local Password Management");
-                    Logger.Current.Error(ex);
-                    Globals.UseDatabase = false;
-                }
+                iLogin = new LocalLogin();
             }
 
-            iLogin = Globals.UseDatabase ? (ILogin)new DatabaseLogin() : new LocalLogin();
             bool needFirstUser = iLogin.NeedFirstUser();
 
             if (!needFirstUser)

@@ -47,5 +47,10 @@ namespace PasswordManagement.Backend.Login
             return false;
         }
 
+        public bool InitSuccessful { get; set; }
+        public void Initialize()
+        {
+            InitSuccessful = true;
+        }
     }
 }

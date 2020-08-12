@@ -22,13 +22,8 @@ namespace PasswordManagement
                 .SetupBinaries()
                 .StartThemes(out ThemeData data)
                 .StartUpUi(data)
-                .Login(out bool success)
-                .StartMain(success);
-
-            if (!success)
-            {
-                Shutdown(1);
-            } 
+                .Login()
+                .StartMain();
         }
     }
 }

@@ -20,9 +20,6 @@
             Command="{Binding ButtonCommandLogin}"
             CommandParameter="{Binding ElementName=Window}" />
     </Window.InputBindings>
-    <Window.DataContext>
-        <viewModel:LoginViewModel />
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*" />
