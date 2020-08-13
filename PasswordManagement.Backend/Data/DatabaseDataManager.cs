@@ -35,7 +35,7 @@ namespace PasswordManagement.Backend.Data
         {
             PASSWORDDATA data = new PASSWORDDATA()
             {
-                PWID = Guid.NewGuid().ToString(),
+                PWID = value.Identifier,
                 PWDATA = value.Password,
                 PWCOMMENT = value.Comments,
                 PWDESCRIPTION = value.Description,

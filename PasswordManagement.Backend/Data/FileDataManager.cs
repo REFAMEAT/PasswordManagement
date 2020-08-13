@@ -36,7 +36,8 @@ namespace PasswordManagement.Backend.Data
         /// <returns></returns>
         public bool Remove(PasswordData item)
         {
-            bool success = binaryData.Passwords.Remove(item);
+            PasswordData itemToDelete = binaryData.Passwords.Find(x => x.Identifier == item.Identifier);
+            bool success = binaryData.Passwords.Remove(itemToDelete);
             binaryHelper.Write(binaryData);
 
             return success;

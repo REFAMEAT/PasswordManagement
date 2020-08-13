@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -54,7 +55,7 @@ namespace PasswordManagement.DatabaseBuilder.BuilderUI
 
             try
             {
-                new Database().Build<GenerateTable>(true, stringBuilder);
+                new Database().Build<GenerateTable>(true, stringBuilder, Assembly.GetAssembly(typeof(GenerateTable)));
                 MessageBox.Show(this,"Database created", "Finished", MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
             }
