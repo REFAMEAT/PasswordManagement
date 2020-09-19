@@ -6,3 +6,4 @@
 [assembly: InternalsVisibleTo("PasswordManagement.File")]
 [assembly: InternalsVisibleTo("PasswordManagement.Backend.Tests")]
 [assembly: InternalsVisibleTo("PasswordManagement.File.Tests")]
+[assembly: InternalsVisibleTo("PasswordManagement.Settings")]
