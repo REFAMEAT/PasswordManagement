@@ -1,0 +1,47 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+- develop
+
+pool:
+  vmImage: 'windows-latest'
+
+name: $(MajorVersion).$(MinorVersion)$(Rev:.r)
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: Pack Projects
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'byBuildNumber'
+
+- task: DotNetCoreCLI@2
+  displayName: Run Unit Tests
+  inputs:
+    command: 'test'
+    projects:  |
+      **/*.csproj
+
+- task: DotNetCoreCLI@2
+  displayName: Publish to NuGet Feed
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'a4524e36-84b7-4bc9-945a-1d40199dd038'
