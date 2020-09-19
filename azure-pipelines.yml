@@ -37,7 +37,7 @@ steps:
     command: 'test'
     projects:  |
       **/*.csproj
-      PasswordManagement.SetupUI.csproj
+      PasswordManagement.SetupUI\PasswordManagement.SetupUI.csproj
 
 - task: DotNetCoreCLI@2
   displayName: Publish to NuGet Feed
