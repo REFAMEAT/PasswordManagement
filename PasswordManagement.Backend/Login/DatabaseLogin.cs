@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PasswordManagement.Backend.Security;
 using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
+using PasswordManagement.Logging;
 using PasswordManagement.Model.Interfaces;
 
 namespace PasswordManagement.Backend.Login
@@ -47,6 +50,26 @@ namespace PasswordManagement.Backend.Login
         public bool NeedFirstUser()
         {
             return !userdatas.Entities.ToList().Any();
+        }
+
+        public bool InitSuccessful { get; set; }
+
+        public void Initialize()
+        {
+            try
+            {
+                using DataSet<USERDATA> context = new DataSet<USERDATA>();
+                context.Database.OpenConnection();
+                context.Database.CloseConnection();
+                
+                InitSuccessful = true;
+            }
+            catch (System.Exception ex)
+            {
+                InitSuccessful = false;
+                Logger.Current.Error(ex);
+                Globals.UseDatabase = false;
+            }
         }
     }
 }

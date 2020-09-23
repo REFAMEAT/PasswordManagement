@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
-using PasswordManagement.Logging;
 using PasswordManagement.Model.Enums;
 using PasswordManagement.Model.Setting;
 using MColor = System.Windows.Media.Color;
@@ -56,8 +55,6 @@ namespace PasswordManagement.View
             Application.Current.Resources.MergedDictionaries.Add(styleDictionary);
             Application.Current.Resources.MergedDictionaries.Add(theme);
             Application.Current.Resources.MergedDictionaries.Add(customStyleDictionary);
-
-            Logger.Current.Debug($"Changed Application Style to: {theme.BaseTheme}");
         }
 
     }

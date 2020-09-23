@@ -7,5 +7,7 @@ namespace PasswordManagement.Model.Interfaces
         #nullable enable
         string Validate(string userName, string password);
         bool NeedFirstUser();
+        bool InitSuccessful {get;set;}
+        void Initialize();
     }
 }

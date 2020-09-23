@@ -1,4 +1,7 @@
 ﻿using System.Windows;
+using PasswordManagement.Backend.Login;
+using PasswordManagement.File.Config;
+using PasswordManagement.Logging;
 using PasswordManagement.Model;
 using PasswordManagement.Model.Setting;
 using PasswordManagement.View;
@@ -13,31 +16,28 @@ namespace PasswordManagement
             return app;
         }
 
-        internal static AppCore Login(this AppCore app, out bool loginSuccess)
+        internal static AppCore Login(this AppCore app)
         {
-            Login login = new Login();
+            bool useDatabase = JsonHelper<DatabaseData>.GetData().UseDatabase;
+
+            Login login = useDatabase ? new Login(new DatabaseLogin()) : new Login(new LocalLogin());
+
             login.ShowDialog();
 
-            if (login.DialogResult == true)
+            if (login.DialogResult != true)
             {
-                App.loginPw = login.passwordBox.Password;
-                loginSuccess = true;
+                App.Current.Shutdown(1);
             }
             else
             {
-                loginSuccess = false;
+                App.loginPw = login.passwordBox.Password;
             }
 
             return app;
         }
 
-        internal static void StartMain(this AppCore app, bool loginSuccess)
+        internal static void StartMain(this AppCore app)
         {
-            if (!loginSuccess)
-            {
-                return;
-            }
-
             Application.Current.MainWindow = new MainWindow();
             Application.Current.MainWindow.Closed += (o, args) => Application.Current.Shutdown(0);
             Application.Current.MainWindow?.Show();

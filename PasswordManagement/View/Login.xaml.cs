@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using PasswordManagement.ViewModel;
+using System.Windows;
+using PasswordManagement.Model.Interfaces;
 
 namespace PasswordManagement.View
 {
@@ -7,9 +9,11 @@ namespace PasswordManagement.View
     /// </summary>
     public partial class Login : Window
     {
-        internal Login()
+        internal Login(ILogin logonMehtod)
         {
             InitializeComponent();
+
+            DataContext = new LoginViewModel(logonMehtod);
 
             // Focus username text-box on open
             Loaded += (sender, args) => userNameTextBox.Focus();
