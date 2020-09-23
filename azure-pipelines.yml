@@ -58,6 +58,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '&(buildOutputDirectory)'
+    PathtoPublish: '$(buildOutputDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
