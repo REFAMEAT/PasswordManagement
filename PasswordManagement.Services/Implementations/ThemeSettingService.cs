@@ -23,8 +23,11 @@ namespace PasswordManagement.Services.Implementations
         public void Save(ThemeData data)
         {
             JsonHelper<ThemeData>.WriteData(data);
+        }
 
-            Saved?.Invoke(this, EventArgs.Empty);
+        public void OnSaved(EventArgs args)
+        {
+            Saved?.Invoke(this, args);
         }
 
         public event EventHandler Saved;

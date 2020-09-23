@@ -23,7 +23,11 @@ namespace PasswordManagement.Services.Implementations
         public void Save(DatabaseData data)
         {
             JsonHelper<DatabaseData>.WriteData(data);
-            Saved?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnSaved(EventArgs args)
+        {
+            Saved?.Invoke(this, args);
         }
 
         public event EventHandler Saved;
