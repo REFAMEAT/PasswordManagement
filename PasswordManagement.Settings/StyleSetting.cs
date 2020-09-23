@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using MaterialDesignThemes.Wpf;
-using PasswordManagement.Backend;
-using PasswordManagement.File.Config;
 using PasswordManagement.Model.Enums;
 using PasswordManagement.Model.Interfaces;
 using PasswordManagement.Model.Setting;
-using PasswordManagement.View;
+using PasswordManagement.Services.Interfaces;
 
-namespace PasswordManagement.Model
+namespace PasswordManagement.Settings
 {
     public class StyleSetting : ISetting
     {
-        public StyleSetting()
+        private readonly ISettingService<ThemeData> themeSettingService;
+
+        public StyleSetting(ISettingService<ThemeData> themeSettingService)
         {
+            this.themeSettingService = themeSettingService;
+
             List<string> themeItems = new List<string>
             {
                 "Dark",
@@ -43,7 +45,7 @@ namespace PasswordManagement.Model
 
         public void Load()
         {
-            ThemeData data = JsonHelper<ThemeData>.GetData(Globals.DefaultTheme);
+            ThemeData data = themeSettingService.Load();
             SelectedLanguage = data.Language.ToString();
             SelectedColor = data.PrimaryColor;
             SelectedTheme = data.Theme.ToString();
@@ -51,16 +53,14 @@ namespace PasswordManagement.Model
 
         public void Save()
         {
-            ThemeData themeData = new ThemeData
+            themeSettingService.Save(new ThemeData
             {
                 Language = Enum.Parse<Language>(SelectedLanguage),
                 Theme = Enum.Parse<BaseTheme>(SelectedTheme),
                 PrimaryColor = SelectedColor
-            };
+            });
 
-            JsonHelper<ThemeData>.WriteData(themeData);
-
-            UiHelper.AdjustApplicationStyle(themeData);
+            themeSettingService.OnSaved(EventArgs.Empty);
         }
     }
 }

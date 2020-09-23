@@ -1,11 +1,19 @@
-﻿using PasswordManagement.File.Config;
+﻿using System;
 using PasswordManagement.Model.Interfaces;
 using PasswordManagement.Model.Setting;
+using PasswordManagement.Services.Interfaces;
 
-namespace PasswordManagement.Backend.Settings
+namespace PasswordManagement.Settings
 {
     public class DatabaseSetting : ISetting
     {
+        private readonly ISettingService<DatabaseData> databaseSettingService;
+
+        public DatabaseSetting(ISettingService<DatabaseData> databaseSettingService)
+        {
+            this.databaseSettingService = databaseSettingService;
+        }
+
         public string DatabaseName { get; set; }
         public string ServerName { get; set; }
         public string Password { get; set; }
@@ -15,7 +23,7 @@ namespace PasswordManagement.Backend.Settings
 
         public void Load()
         {
-            DatabaseData data = JsonHelper<DatabaseData>.GetData(Globals.DefaultDb);
+            DatabaseData data = databaseSettingService.Load();
             DatabaseName = data.DatabaseName;
             ServerName = data.ServerName;
             Password = data.Password;
@@ -27,7 +35,7 @@ namespace PasswordManagement.Backend.Settings
 
         public void Save()
         {
-            JsonHelper<DatabaseData>.WriteData(new DatabaseData()
+            databaseSettingService.Save(new DatabaseData()
             {
                 DatabaseName = DatabaseName ??= "",
                 Password = Password ??= "",
@@ -36,9 +44,7 @@ namespace PasswordManagement.Backend.Settings
                 IntegratedSecurity = IntegratedSecurity,
                 UseDatabase = UseDatabase
             });
+            databaseSettingService.OnSaved(EventArgs.Empty);
         }
-
-        public static bool Database() => JsonHelper<DatabaseData>.GetData(Globals.DefaultDb).UseDatabase;
-        public static bool WindowsLogin() => JsonHelper<DatabaseData>.GetData(Globals.DefaultDb).IntegratedSecurity;
     }
 }

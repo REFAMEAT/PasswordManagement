@@ -70,7 +70,7 @@ namespace PasswordManagement.ViewModel
 
         private void DoOpenSettings(object obj)
         {
-            Settings settings = new Settings();
+            View.Settings settings = new View.Settings();
             settings.ShowDialog();
         }
 

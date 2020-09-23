@@ -8,14 +8,14 @@ namespace PasswordManagement.File.Config
     /// <summary>
     /// Serialize and Deserialize JSON files
     /// </summary>
-    internal class JsonHelper<T> where T : class
+    public class JsonHelper<T> where T : class
     {
         /// <summary>
         /// Path to the JSON file
         /// </summary>
-        internal const string jsonConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\{type}.json";
+        private const string jsonConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\{type}.json";
 
-        private static string GetPath()
+        public static string GetPath()
         {
             return jsonConfigPath.Replace("{user}", Environment.UserName).Replace("{type}", typeof(T).Name);
         }
@@ -24,7 +24,7 @@ namespace PasswordManagement.File.Config
         /// Read a <see cref="ThemeData"/> from the JSON file
         /// </summary>
         /// <returns></returns>
-        internal static T GetData(T defaultValue = null)
+        public static T GetData(T defaultValue = null)
         {
             string content;
 
@@ -54,7 +54,7 @@ namespace PasswordManagement.File.Config
         /// Write a <see cref="ThemeData"/> to a JSON file
         /// </summary>
         /// <param name="value"></param>
-        internal static void WriteData(T value)
+        public static void WriteData(T value)
         {
             JsonSerializer serializer = new JsonSerializer();
 
