@@ -30,11 +30,12 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '**/*.csproj'
-    arguments: '-o $(buildOutputDirectory)'
+    arguments: '-o $(buildOutputDirectory) -maxcpucount'
 
 - task: DotNetCoreCLI@2
   displayName: Pack Projects
   inputs:
+    arguments: '-maxcpucount'
     command: 'pack'
     packagesToPack: '**/*.csproj'
     packDirectory: '$(nugetPackagesDirectory)'
