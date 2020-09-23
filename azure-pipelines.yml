@@ -16,7 +16,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  nugetPackagesDirectoryPattern: '$(Build.ArtifactStagingDirectory)/NugetPackages/*.nupkg'
+  nugetPackagesDirectory: '$(Build.ArtifactStagingDirectory)/NugetPackages'
   buildOutputDirectory: '$(Build.ArtifactStagingDirectory)/Build'
 
 steps:
@@ -38,6 +38,7 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
+    packDirectory: '$(nugetPackagesDirectory)'
     versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
@@ -51,7 +52,7 @@ steps:
   displayName: Publish to NuGet Feed
   inputs:
     command: 'push'
-    packagesToPush: '$(nugetPackagesDirectoryPattern)'
+    packagesToPush: '$(nugetPackagesDirectory)/*.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: 'a4524e36-84b7-4bc9-945a-1d40199dd038'
 
