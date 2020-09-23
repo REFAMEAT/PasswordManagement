@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Timers;
+using JetBrains.Annotations;
 using PasswordManagement.Backend.Security;
 
 namespace PasswordManagement.Model
