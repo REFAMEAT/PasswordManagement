@@ -10,7 +10,6 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-container:
 name: $(MajorVersion).$(MinorVersion)$(Rev:.r)
 
 variables:
