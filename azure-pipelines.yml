@@ -28,9 +28,11 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build Solution'
-  inputs: 
-    command: build
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/*.csproj'
+    arguments: '-o $(buildOutputDirectory)'
 
 - task: DotNetCoreCLI@2
   displayName: Pack Projects
