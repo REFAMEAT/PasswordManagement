@@ -10,12 +10,15 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+container:
 name: $(MajorVersion).$(MinorVersion)$(Rev:.r)
 
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  nugetPackagesDirectoryPattern: '$(Build.ArtifactStagingDirectory)/NugetPackages/*.nupkg'
+  buildOutputDirectory: '$(Build.ArtifactStagingDirectory)/Build'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -23,6 +26,11 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build Solution'
+  inputs: 
+    command: build
 
 - task: DotNetCoreCLI@2
   displayName: Pack Projects
@@ -48,6 +56,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '%(buildOutputDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
