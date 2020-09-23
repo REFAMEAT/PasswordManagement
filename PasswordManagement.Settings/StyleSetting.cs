@@ -59,6 +59,8 @@ namespace PasswordManagement.Settings
                 Theme = Enum.Parse<BaseTheme>(SelectedTheme),
                 PrimaryColor = SelectedColor
             });
+
+            themeSettingService.OnSaved(EventArgs.Empty);
         }
     }
 }

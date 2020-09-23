@@ -1,4 +1,5 @@
-﻿using PasswordManagement.Model.Interfaces;
+﻿using System;
+using PasswordManagement.Model.Interfaces;
 using PasswordManagement.Model.Setting;
 using PasswordManagement.Services.Interfaces;
 
@@ -43,6 +44,7 @@ namespace PasswordManagement.Settings
                 IntegratedSecurity = IntegratedSecurity,
                 UseDatabase = UseDatabase
             });
+            databaseSettingService.OnSaved(EventArgs.Empty);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace PasswordManagement.Services.Interfaces
     {
         T Load();
         void Save(T data);
+        void OnSaved(EventArgs args);
 
         event EventHandler Saved;
     }
