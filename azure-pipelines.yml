@@ -7,8 +7,7 @@ trigger:
 - master
 - develop
 
-pool:
-  vmImage: 'windows-latest'
+pool: Default
 
 name: $(MajorVersion).$(MinorVersion)$(Rev:.r)
 
@@ -16,6 +15,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  nugetPackagesDirectory: '$(Build.ArtifactStagingDirectory)/NugetPackages'
+  buildOutputDirectory: '$(Build.ArtifactStagingDirectory)/Build'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -25,10 +26,20 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/*.csproj'
+    arguments: '-o $(buildOutputDirectory) -maxcpucount'
+    zipAfterPublish: false
+
+- task: DotNetCoreCLI@2
   displayName: Pack Projects
   inputs:
+    arguments: '-maxcpucount'
     command: 'pack'
     packagesToPack: '**/*.csproj'
+    packDirectory: '$(nugetPackagesDirectory)'
     versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
@@ -42,6 +53,12 @@ steps:
   displayName: Publish to NuGet Feed
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    packagesToPush: '$(nugetPackagesDirectory)/*.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: 'a4524e36-84b7-4bc9-945a-1d40199dd038'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(buildOutputDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
