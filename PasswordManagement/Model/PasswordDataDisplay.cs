@@ -8,8 +8,8 @@ namespace PasswordManagement.Model
 {
     public class PasswordDataDisplay : PasswordData, INotifyPropertyChanged
     {
-        private bool display;
         private readonly Timer displayTimer;
+        private bool display;
         private string passwordDisplay;
 
         public PasswordDataDisplay(PasswordData baseData)

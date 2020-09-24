@@ -1,6 +1,6 @@
-﻿using PasswordManagement.ViewModel;
-using System.Windows;
+﻿using System.Windows;
 using PasswordManagement.Model.Interfaces;
+using PasswordManagement.ViewModel;
 
 namespace PasswordManagement.View
 {

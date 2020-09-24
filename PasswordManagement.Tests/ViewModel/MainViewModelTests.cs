@@ -8,30 +8,30 @@ namespace PasswordManagement.Tests.ViewModel
     [TestFixture]
     public class MainViewModelTests
     {
-        private MainViewModel viewModel;
-        private TestDataManager dataManager;
-
         [SetUp]
         public void Setup()
         {
             dataManager = new TestDataManager();
 
-            dataManager.passwordDatas.Add(new PasswordData()
+            dataManager.passwordDatas.Add(new PasswordData
             {
                 Comments = "TEST",
                 Description = "TEST",
                 Identifier = "TEST",
-                Password = Encryption.EncryptString("SafePassword", "testPW"),
+                Password = Encryption.EncryptString("SafePassword", "testPW")
             });
             App.loginPw = "testPW";
 
             viewModel = new MainViewModel(dataManager);
         }
 
+        private MainViewModel viewModel;
+        private TestDataManager dataManager;
+
         [Test]
         public void TestDeleteItem()
         {
-            PasswordDataDisplay passwordDataDisplay = new PasswordDataDisplay(dataManager.passwordDatas[0]);
+            var passwordDataDisplay = new PasswordDataDisplay(dataManager.passwordDatas[0]);
 
             viewModel.SelectedItem = new PasswordDataDisplay(passwordDataDisplay);
             viewModel.ButtonCommandDeleteItem.Execute(null);

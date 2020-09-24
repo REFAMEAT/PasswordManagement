@@ -1,7 +1,7 @@
-﻿using PasswordManagement.Model;
+﻿using System.Windows;
+using PasswordManagement.Model;
 using PasswordManagement.Model.Interfaces;
 using PasswordManagement.ViewModel;
-using System.Windows;
 
 namespace PasswordManagement.View
 {
@@ -14,11 +14,7 @@ namespace PasswordManagement.View
         {
             InitializeComponent();
 
-            if (!(dataManager is null))
-            {
-                DataContext = new MainViewModel(dataManager);
-
-            }
+            if (!(dataManager is null)) DataContext = new MainViewModel(dataManager);
         }
     }
 }

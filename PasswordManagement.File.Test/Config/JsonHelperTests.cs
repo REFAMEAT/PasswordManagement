@@ -6,6 +6,12 @@ namespace PasswordManagement.File.Config.Tests
     [TestFixture]
     public class JsonHelperTests
     {
+        [TearDown]
+        public void TearDown()
+        {
+            System.IO.File.Delete(JsonHelper<TestModel>.GetPath());
+        }
+
         [Test]
         public void GetDefaultDataTest()
         {
@@ -18,7 +24,7 @@ namespace PasswordManagement.File.Config.Tests
         {
             JsonHelper<TestModel>.GetData(new TestModel());
 
-            JsonHelper<TestModel>.WriteData(new TestModel()
+            JsonHelper<TestModel>.WriteData(new TestModel
             {
                 CharValue = 'x',
                 IntValue = 5,
@@ -36,13 +42,13 @@ namespace PasswordManagement.File.Config.Tests
         [Test]
         public void GetThrows()
         {
-            Assert.That(() => JsonHelper<TestModel>.GetData(null), Throws.TypeOf(typeof(FileNotFoundException)));
+            Assert.That(() => JsonHelper<TestModel>.GetData(), Throws.TypeOf(typeof(FileNotFoundException)));
         }
 
         [Test]
         public void WriteDataTest()
         {
-            JsonHelper<TestModel>.WriteData(new TestModel()
+            JsonHelper<TestModel>.WriteData(new TestModel
             {
                 CharValue = 'y',
                 IntValue = 44,
@@ -54,12 +60,6 @@ namespace PasswordManagement.File.Config.Tests
             Assert.That(model.IntValue, Is.EqualTo(44));
             Assert.That(model.CharValue, Is.EqualTo('y'));
             Assert.That(model.StringValue, Is.EqualTo("HalloTest"));
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            System.IO.File.Delete(JsonHelper<TestModel>.GetPath());
         }
     }
 

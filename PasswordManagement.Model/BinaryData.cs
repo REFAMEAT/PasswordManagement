@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PasswordManagement.Model
 {
     /// <summary>
-    /// Datas to Save in a Binary File
+    ///     Datas to Save in a Binary File
     /// </summary>
     [Serializable]
     internal class BinaryData
@@ -19,22 +19,22 @@ namespace PasswordManagement.Model
         }
 
         /// <summary>
-        /// Hashed Username
+        ///     Hashed Username
         /// </summary>
         internal string UserNameHash { get; }
 
         /// <summary>
-        /// Hashed Password
+        ///     Hashed Password
         /// </summary>
         internal string PasswordHash { get; }
 
         /// <summary>
-        /// Salt of the Password
+        ///     Salt of the Password
         /// </summary>
         internal string Salt { get; set; }
 
         /// <summary>
-        /// All Stored Passwords of a User
+        ///     All Stored Passwords of a User
         /// </summary>
         internal List<PasswordData> Passwords { get; set; }
     }

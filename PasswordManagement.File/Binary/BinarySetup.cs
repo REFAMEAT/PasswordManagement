@@ -11,10 +11,7 @@ namespace PasswordManagement.Backend.Binary
 
         internal static AppCore SetupBinaries(this AppCore app)
         {
-            if (!Directory.Exists(fileRoot))
-            {
-                Directory.CreateDirectory(fileRoot);
-            }
+            if (!Directory.Exists(fileRoot)) Directory.CreateDirectory(fileRoot);
 
             return app;
         }

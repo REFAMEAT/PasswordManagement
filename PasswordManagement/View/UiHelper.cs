@@ -18,7 +18,7 @@ namespace PasswordManagement.View
         {
             Application.Current.Resources.Clear();
 
-            ResourceDictionary languageDictionary = new ResourceDictionary();
+            var languageDictionary = new ResourceDictionary();
             languageDictionary.Source = data.Language switch
             {
                 Language.English => new Uri("..\\Resources\\StringResources.EN.xaml", UriKind.Relative),
@@ -26,16 +26,17 @@ namespace PasswordManagement.View
                 _ => languageDictionary.Source
             };
 
-            ResourceDictionary styleDictionary = new ResourceDictionary
+            var styleDictionary = new ResourceDictionary
             {
                 Source = new Uri(
                     "pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml",
                     UriKind.Absolute)
             };
 
-            ResourceDictionary customStyleDictionary = new ResourceDictionary()
+            var customStyleDictionary = new ResourceDictionary
             {
-                Source = new Uri("pack://application:,,,/PasswordManagement.Styles;component/TabControlStyles.xaml", UriKind.Absolute)
+                Source = new Uri("pack://application:,,,/PasswordManagement.Styles;component/TabControlStyles.xaml",
+                    UriKind.Absolute)
             };
 
             Color color = Color.Black;
@@ -44,7 +45,7 @@ namespace PasswordManagement.View
 
             if (data.Theme == BaseTheme.Inherit) data.Theme = BaseTheme.Light;
 
-            CustomColorTheme theme = new CustomColorTheme
+            var theme = new CustomColorTheme
             {
                 BaseTheme = data.Theme,
                 PrimaryColor = MColor.FromArgb(color.A, color.R, color.G, color.B),
@@ -56,6 +57,5 @@ namespace PasswordManagement.View
             Application.Current.Resources.MergedDictionaries.Add(theme);
             Application.Current.Resources.MergedDictionaries.Add(customStyleDictionary);
         }
-
     }
 }

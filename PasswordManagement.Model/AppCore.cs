@@ -4,7 +4,7 @@ namespace PasswordManagement.Model
 {
     public class AppCore
     {
-        private static bool created = false;
+        private static bool created;
 
         private AppCore()
         {
@@ -16,13 +16,11 @@ namespace PasswordManagement.Model
             if (!created)
             {
                 created = true;
-                AppCore app = new AppCore();
-                return app; 
+                var app = new AppCore();
+                return app;
             }
-            else
-            {
-                throw new ApplicationException();
-            }
+
+            throw new ApplicationException();
         }
     }
 }

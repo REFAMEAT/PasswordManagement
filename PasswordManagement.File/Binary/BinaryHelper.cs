@@ -8,18 +8,22 @@ using PasswordManagement.Model;
 namespace PasswordManagement.File.Binary
 {
     /// <summary>
-    /// Helper class for Binaries
+    ///     Helper class for Binaries
     /// </summary>
     public class BinaryHelper
     {
+        /// <summary>
+        ///     The path to the bin-file
+        /// </summary>
+        private const string xmlConfigPathDefault = @"C:\Users\{user}\AppData\Roaming\PWManagement\data.bin";
+
+        private readonly string xmlConfigPath;
+
         public BinaryHelper(string path = null)
         {
             if (path != null)
             {
-                if (!System.IO.File.Exists(path))
-                {
-                    throw new FileNotFoundException("cannot find file", path);
-                }
+                if (!System.IO.File.Exists(path)) throw new FileNotFoundException("cannot find file", path);
 
                 xmlConfigPath = path;
             }
@@ -29,15 +33,8 @@ namespace PasswordManagement.File.Binary
             }
         }
 
-        private string xmlConfigPath;
-
         /// <summary>
-        /// The path to the bin-file
-        /// </summary>
-        private const string xmlConfigPathDefault = @"C:\Users\{user}\AppData\Roaming\PWManagement\data.bin";
-
-        /// <summary>
-        /// Read a <see cref="BinaryData"/> from the .bin file
+        ///     Read a <see cref="BinaryData" /> from the .bin file
         /// </summary>
         /// <returns></returns>
         internal BinaryData GetData()
@@ -46,7 +43,7 @@ namespace PasswordManagement.File.Binary
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
                 FileMode.OpenOrCreate);
 
-            BinaryData data = (BinaryData) formatter.Deserialize(s);
+            var data = (BinaryData) formatter.Deserialize(s);
 
             data.Passwords ??= new List<PasswordData>();
 
@@ -54,7 +51,7 @@ namespace PasswordManagement.File.Binary
         }
 
         /// <summary>
-        /// Write a <see cref="BinaryData"/> to the .bin File
+        ///     Write a <see cref="BinaryData" /> to the .bin File
         /// </summary>
         /// <param name="content"></param>
         internal void Write(BinaryData content)

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using NUnit.Framework;
 using PasswordManagement.Backend.Data;
-using PasswordManagement.File.Binary;
 using PasswordManagement.Model;
 
 namespace PasswordManagement.Backend.Tests.Data
@@ -20,13 +13,19 @@ namespace PasswordManagement.Backend.Tests.Data
         [SetUp]
         public void Setup()
         {
-            BinaryData data = new BinaryData("", "", "")
+            var data = new BinaryData("", "", "")
             {
                 Passwords = pwData.ToList()
             };
 
-            using Stream s = new FileStream("data.bin", System.IO.FileMode.OpenOrCreate);
+            using Stream s = new FileStream("data.bin", FileMode.OpenOrCreate);
             new BinaryFormatter().Serialize(s, data);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            System.IO.File.Delete("data.bin");
         }
 
         [Test]
@@ -45,9 +44,9 @@ namespace PasswordManagement.Backend.Tests.Data
         public void AddDataTest()
         {
             int countBeforeAdd = pwData.Length;
-            FileDataManager dataManager = new FileDataManager("data.bin");
+            var dataManager = new FileDataManager("data.bin");
 
-            dataManager.AddData(new PasswordData() {Identifier = "NewId1"});
+            dataManager.AddData(new PasswordData {Identifier = "NewId1"});
 
             Assert.That(dataManager.LoadData().Count, Is.EqualTo(++countBeforeAdd));
         }
@@ -56,9 +55,9 @@ namespace PasswordManagement.Backend.Tests.Data
         public void DeleteDataTest()
         {
             int countBeforeDelete = pwData.Length;
-            FileDataManager dataManager = new FileDataManager("data.bin");
+            var dataManager = new FileDataManager("data.bin");
 
-            bool deleted = dataManager.Remove(new PasswordData() {Identifier = "Id1"});
+            bool deleted = dataManager.Remove(new PasswordData {Identifier = "Id1"});
 
             Assert.That(dataManager.LoadData().Count, Is.EqualTo(--countBeforeDelete));
             Assert.That(deleted, Is.True);
@@ -68,21 +67,15 @@ namespace PasswordManagement.Backend.Tests.Data
         public void DeleteWrongFile()
         {
             int countBeforeDelete = pwData.Length;
-            FileDataManager dataManager = new FileDataManager("data.bin");
+            var dataManager = new FileDataManager("data.bin");
 
-            bool deleted = dataManager.Remove(new PasswordData() {Identifier = "WrongId"});
+            bool deleted = dataManager.Remove(new PasswordData {Identifier = "WrongId"});
 
             Assert.That(deleted, Is.False);
             Assert.That(dataManager.LoadData().Count, Is.EqualTo(countBeforeDelete));
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            System.IO.File.Delete("data.bin");
-        }
-
-        private PasswordData[] pwData = new PasswordData[]
+        private readonly PasswordData[] pwData =
         {
             new PasswordData
                 {Comments = "Test1", Description = "Test1", Identifier = "Id1", Password = "superSafe1"},
@@ -105,7 +98,7 @@ namespace PasswordManagement.Backend.Tests.Data
             new PasswordData
                 {Comments = "Test10", Description = "Test10", Identifier = "Id10", Password = "superSafe10"},
             new PasswordData
-                {Comments = "Test11", Description = "Test11", Identifier = "Id11", Password = "superSafe11"},
+                {Comments = "Test11", Description = "Test11", Identifier = "Id11", Password = "superSafe11"}
         };
     }
 }

@@ -44,7 +44,8 @@
                 <Button Command="{Binding ButtonCommandDeleteItem}" Foreground="{DynamicResource PrimaryHueLightBrush}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Delete" />
-                        <Label Content="{DynamicResource MainDelete}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
+                        <Label Content="{DynamicResource MainDelete}"
+                               Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
                 <Button>
@@ -58,7 +59,8 @@
                 <Button Command="{Binding ButtonCommandOpenSettings}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueLightBrush}" Kind="Settings" />
-                        <Label Content="{DynamicResource MainSettings}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
+                        <Label Content="{DynamicResource MainSettings}"
+                               Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
             </ToolBar>

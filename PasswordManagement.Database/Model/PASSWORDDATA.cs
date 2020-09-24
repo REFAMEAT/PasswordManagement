@@ -8,8 +8,7 @@ namespace PasswordManagement.Database.Model
     {
         [Key] public string PWID { get; set; }
 
-        [Required]
-        public USERDATA USER { get; set; }
+        [Required] public USERDATA USER { get; set; }
 
         public string PWDATA { get; set; }
 

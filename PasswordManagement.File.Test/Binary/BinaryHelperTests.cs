@@ -13,7 +13,7 @@ namespace PasswordManagement.File.Test.Binary
         [SetUp]
         public void Setup()
         {
-            BinaryData data = new BinaryData("", "", "")
+            var data = new BinaryData("", "", "")
             {
                 Passwords = new List<PasswordData>
                 {
@@ -38,7 +38,7 @@ namespace PasswordManagement.File.Test.Binary
                     new PasswordData
                         {Comments = "Test10", Description = "Test10", Identifier = "Id10", Password = "superSafe10"},
                     new PasswordData
-                        {Comments = "Test11", Description = "Test11", Identifier = "Id11", Password = "superSafe11"},
+                        {Comments = "Test11", Description = "Test11", Identifier = "Id11", Password = "superSafe11"}
                 }
             };
 
@@ -46,10 +46,16 @@ namespace PasswordManagement.File.Test.Binary
             new BinaryFormatter().Serialize(s, data);
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            System.IO.File.Delete("data.bin");
+        }
+
         [Test]
         public void TestReadDataFromFile()
         {
-            BinaryHelper helper = new BinaryHelper("data.bin");
+            var helper = new BinaryHelper("data.bin");
 
             BinaryData data = helper.GetData();
 
@@ -61,8 +67,11 @@ namespace PasswordManagement.File.Test.Binary
         [Test]
         public void TestWriteDataToFile()
         {
-            BinaryHelper helper = new BinaryHelper("data.bin");
-            PasswordData dataToAdd = new PasswordData() { Comments = "NewComment", Description = "NewDescription", Password = "NewPassword", Identifier = "NewID" };
+            var helper = new BinaryHelper("data.bin");
+            var dataToAdd = new PasswordData
+            {
+                Comments = "NewComment", Description = "NewDescription", Password = "NewPassword", Identifier = "NewID"
+            };
             BinaryData data = helper.GetData();
             data.Passwords.Add(dataToAdd);
 
@@ -70,12 +79,6 @@ namespace PasswordManagement.File.Test.Binary
 
             Assert.That(helper.GetData().Passwords.Count, Is.EqualTo(12));
             Assert.That(helper.GetData().Passwords.Find(x => x.Identifier == "NewID"), Is.Not.Null);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            System.IO.File.Delete("data.bin");
         }
     }
 }

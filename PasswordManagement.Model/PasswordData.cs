@@ -3,7 +3,7 @@
 namespace PasswordManagement.Model
 {
     /// <summary>
-    /// The password-storaging model 
+    ///     The password-storaging model
     /// </summary>
     [Serializable]
     public class PasswordData

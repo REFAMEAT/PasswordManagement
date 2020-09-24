@@ -1,18 +1,10 @@
 ﻿using NUnit.Framework;
-using PasswordManagement.Settings;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using PasswordManagement.Model.Setting;
 
 namespace PasswordManagement.Settings.Tests
 {
-    [TestFixture()]
+    [TestFixture]
     public class DatabaseSettingTests
     {
-        private DatabaseSetting setting;
-        private bool savedCalled;
-
         [SetUp]
         public void Setup()
         {
@@ -22,7 +14,10 @@ namespace PasswordManagement.Settings.Tests
             setting = new DatabaseSetting(databaseSettingServiceMock);
         }
 
-        [Test()]
+        private DatabaseSetting setting;
+        private bool savedCalled;
+
+        [Test]
         public void LoadTest()
         {
             setting.Load();

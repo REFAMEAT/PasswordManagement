@@ -9,16 +9,17 @@ namespace PasswordManagement.DatabaseBuilder
     public class BuilderContext<T> : DbContext where T : class
     {
         private readonly SqlConnectionStringBuilder builder;
-        private Assembly[] assemblies;
+        private readonly Assembly[] assemblies;
 
-        public BuilderContext(Assembly[] assemblies, string serverName, string databaseName, string userName, string password)
+        public BuilderContext(Assembly[] assemblies, string serverName, string databaseName, string userName,
+            string password)
         {
-            builder = new SqlConnectionStringBuilder()
+            builder = new SqlConnectionStringBuilder
             {
                 InitialCatalog = databaseName,
                 DataSource = serverName,
                 UserID = userName,
-                Password = password,
+                Password = password
             };
 
             this.assemblies = assemblies;
@@ -26,7 +27,7 @@ namespace PasswordManagement.DatabaseBuilder
 
         public BuilderContext(Assembly[] assemblies, string serverName, string databaseName)
         {
-            builder = new SqlConnectionStringBuilder()
+            builder = new SqlConnectionStringBuilder
             {
                 DataSource = serverName,
                 InitialCatalog = databaseName,
@@ -43,7 +44,7 @@ namespace PasswordManagement.DatabaseBuilder
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            TableBuilder tableBuilder = new TableBuilder();
+            var tableBuilder = new TableBuilder();
             List<Type> models = tableBuilder.GetModels<T>(assemblies);
             tableBuilder.BuildTables(models, modelBuilder);
 

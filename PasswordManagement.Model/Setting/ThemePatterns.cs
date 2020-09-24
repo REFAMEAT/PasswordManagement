@@ -3,12 +3,12 @@
 namespace PasswordManagement.Model.Setting
 {
     /// <summary>
-    /// All available UI-Themes
+    ///     All available UI-Themes
     /// </summary>
     internal static class ThemePatterns
     {
         /// <summary>
-        /// All supported Colors
+        ///     All supported Colors
         /// </summary>
         internal static List<string> SupportedColors = new List<string>
         {

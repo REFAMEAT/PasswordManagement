@@ -26,7 +26,7 @@ namespace PasswordManagement.ViewModel
             Items = ToDisplayData(dataManager.LoadData());
         }
 
-        public MainViewModel() 
+        public MainViewModel()
         {
             bool useDatabase = Globals.UseDatabase;
             dataManager = useDatabase ? (IDataManager<PasswordData>) new DatabaseDataManager() : new FileDataManager();
@@ -51,10 +51,7 @@ namespace PasswordManagement.ViewModel
 
         private void DoDeleteItem(object obj)
         {
-            if (SelectedItem == null)
-            {
-                return;
-            }
+            if (SelectedItem == null) return;
 
             PasswordData itemToDelete = dataManager.LoadData()
                 .Find(x => x.Password == SelectedItem.Password
@@ -62,30 +59,24 @@ namespace PasswordManagement.ViewModel
                            && x.Comments == SelectedItem.Comments);
 
             bool deleted = dataManager.Remove(itemToDelete);
-            if (deleted)
-            {
-                Items.Remove(SelectedItem);
-            }
+            if (deleted) Items.Remove(SelectedItem);
         }
 
         private void DoOpenSettings(object obj)
         {
-            View.Settings settings = new View.Settings();
+            var settings = new View.Settings();
             settings.ShowDialog();
         }
 
         private void DoAddItem(object obj)
         {
-            AddPassword addPassword = new AddPassword();
+            var addPassword = new AddPassword();
             addPassword.Show();
             addPassword.Closed += (sender, e) =>
             {
-                if (addPassword.Canceled)
-                {
-                    return;
-                }
+                if (addPassword.Canceled) return;
 
-                PasswordData newItem = ((AddPasswordViewModel)addPassword.DataContext).NewItem;
+                PasswordData newItem = ((AddPasswordViewModel) addPassword.DataContext).NewItem;
 
                 dataManager.AddData(newItem);
                 Items.Add(new PasswordDataDisplay(newItem));

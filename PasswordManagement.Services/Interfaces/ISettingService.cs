@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using PasswordManagement.Model.Setting;
 
 namespace PasswordManagement.Services.Interfaces
 {

@@ -26,9 +26,7 @@ namespace PasswordManagement.Backend.Login
 
             if (Password.GetHash(userName + data.Salt) == data.UserNameHash
                 && Password.GetHash(password + data.Salt) == data.PasswordHash)
-            {
                 return data.UserNameHash;
-            }
 
             return null;
         }
@@ -48,6 +46,7 @@ namespace PasswordManagement.Backend.Login
         }
 
         public bool InitSuccessful { get; set; }
+
         public void Initialize()
         {
             InitSuccessful = true;

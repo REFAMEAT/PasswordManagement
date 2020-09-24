@@ -2,7 +2,6 @@
     x:Class="PasswordManagement.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:PasswordManagement"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     ShutdownMode="OnExplicitShutdown"
     Startup="Application_Startup">
@@ -14,9 +13,11 @@
                     BaseTheme="Light"
                     PrimaryColor="Blue"
                     SecondaryColor="Blue" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="..\Resources\StringResources.EN.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/PasswordManagement.Styles;component/TabControlStyles.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/PasswordManagement.Styles;component/TabControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

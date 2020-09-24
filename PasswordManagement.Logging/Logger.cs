@@ -7,24 +7,27 @@ namespace PasswordManagement.Logging
 {
     public class Logger : IDisposable
     {
-        private static Logger current;
-        public static Logger Current => current ??= new Logger();
-
         private const string configPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\Logs.json";
+        private static Logger current;
 
         private Logger()
         {
+        }
 
+        public static Logger Current => current ??= new Logger();
+
+        public void Dispose()
+        {
         }
 
         public void Debug(string info, [CallerMemberName] string caller = null)
         {
-            Log log = new Log
+            var log = new Log
             {
                 ErrorMessage = info,
                 Level = LogLevel.Debug,
                 Caller = caller,
-                TimeStamp = DateTime.Now.ToShortTimeString(),
+                TimeStamp = DateTime.Now.ToShortTimeString()
             };
 
             WriteInternal(log);
@@ -32,12 +35,12 @@ namespace PasswordManagement.Logging
 
         public void Info(string info, [CallerMemberName] string caller = null)
         {
-            Log log = new Log
+            var log = new Log
             {
                 ErrorMessage = info,
                 Level = LogLevel.Info,
                 Caller = caller,
-                TimeStamp = DateTime.Now.ToShortTimeString(),
+                TimeStamp = DateTime.Now.ToShortTimeString()
             };
 
             WriteInternal(log);
@@ -45,12 +48,12 @@ namespace PasswordManagement.Logging
 
         public void Error(Exception ex, [CallerMemberName] string caller = null)
         {
-            Log log = new Log()
+            var log = new Log
             {
                 ErrorMessage = ex.Message,
                 Level = LogLevel.Error,
                 Caller = caller,
-                TimeStamp = DateTime.Now.ToShortTimeString(),
+                TimeStamp = DateTime.Now.ToShortTimeString()
             };
 
             WriteInternal(log);
@@ -61,8 +64,8 @@ namespace PasswordManagement.Logging
             Logs logs = GetInternal();
             logs.SavedLogs.Add(log);
 
-            JsonSerializer serializer = new JsonSerializer();
-            using StreamWriter sw = new StreamWriter(GetLogPath());
+            var serializer = new JsonSerializer();
+            using var sw = new StreamWriter(GetLogPath());
             using JsonWriter jsonWriter = new JsonTextWriter(sw);
 
             serializer.Serialize(jsonWriter, logs);
@@ -78,9 +81,9 @@ namespace PasswordManagement.Logging
             }
             catch (FileNotFoundException)
             {
-                JsonSerializer serializer = new JsonSerializer();
+                var serializer = new JsonSerializer();
 
-                using (StreamWriter sw = new StreamWriter(GetLogPath()))
+                using (var sw = new StreamWriter(GetLogPath()))
                 using (JsonWriter jsonWriter = new JsonTextWriter(sw))
                 {
                     serializer.Serialize(jsonWriter, new Logs
@@ -90,13 +93,15 @@ namespace PasswordManagement.Logging
                         WindowsVersion = Environment.OSVersion.VersionString
                     });
                 }
-                
+
                 content = File.ReadAllText(GetLogPath());
-            };
+            }
+
+            ;
 
             content = content.Replace("\r\n", null);
 
-            Logs data = JsonConvert.DeserializeObject<Logs>(content);
+            var data = JsonConvert.DeserializeObject<Logs>(content);
 
             return data;
         }
@@ -104,11 +109,6 @@ namespace PasswordManagement.Logging
         private string GetLogPath(string user = "")
         {
             return configPath.Replace("{user}", user == string.Empty ? Environment.UserName : user);
-        }
-
-        public void Dispose()
-        {
-
         }
     }
 }

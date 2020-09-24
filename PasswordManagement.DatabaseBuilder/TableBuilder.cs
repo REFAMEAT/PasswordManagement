@@ -12,29 +12,20 @@ namespace PasswordManagement.DatabaseBuilder
     {
         internal List<Type> GetModels<T>(Assembly[] sourceAssemblies) where T : class
         {
-            List<Type> types = new List<Type>();
+            var types = new List<Type>();
 
             foreach (Assembly assembly in sourceAssemblies)
-            {
-                foreach (Type type in assembly.GetTypes())
-                {
-                    if (!types.Contains(type)
-                        && type.BaseType == typeof(T))
-                    {
-                        types.Add(type);
-                    }
-                }
-            }
+            foreach (Type type in assembly.GetTypes())
+                if (!types.Contains(type)
+                    && type.BaseType == typeof(T))
+                    types.Add(type);
 
             return types;
         }
 
         internal ModelBuilder BuildTables(List<Type> models, ModelBuilder builder)
         {
-            foreach (Type type in models)
-            {
-                BuildTable(type, builder);
-            }
+            foreach (Type type in models) BuildTable(type, builder);
 
             return builder;
         }
@@ -45,28 +36,21 @@ namespace PasswordManagement.DatabaseBuilder
             string[] entityKey = GetEntityKeys(model);
 
             if (entityKey.Length > 0)
-            {
                 entityBuilder.HasKey(entityKey);
-            }
             else
-            {
                 entityBuilder.HasNoKey();
-            }
             return builder;
         }
 
         private string[] GetEntityKeys(Type model)
         {
             PropertyInfo[] allProperties = model.GetProperties();
-            List<string> keys = new List<string>();
+            var keys = new List<string>();
 
             foreach (PropertyInfo info in allProperties)
             {
                 IEnumerable<Attribute> attributes = info.GetCustomAttributes();
-                if (attributes.Contains(new KeyAttribute()))
-                {
-                    keys.Add(info.Name);
-                }
+                if (attributes.Contains(new KeyAttribute())) keys.Add(info.Name);
             }
 
             return keys.ToArray();

@@ -5,7 +5,7 @@ using System.Windows.Controls;
 namespace PasswordManagement.View
 {
     /// <summary>
-    /// Interaction logic for Messagebox.xaml
+    ///     Interaction logic for Messagebox.xaml
     /// </summary>
     public partial class Messagebox : Window
     {
@@ -16,12 +16,12 @@ namespace PasswordManagement.View
 
         internal static void Error(string message)
         {
-            Messagebox mbox = new Messagebox
+            var mbox = new Messagebox
             {
                 textBlock = {Text = $"An application Error occured:{Environment.NewLine}{message}"}
             };
 
-            Button button = new Button
+            var button = new Button
             {
                 Content = "OK",
                 Margin = new Thickness(2)
@@ -36,22 +36,22 @@ namespace PasswordManagement.View
 
         internal static bool ShowYesNo(string message, string caption)
         {
-            bool isYes = false;
+            var isYes = false;
 
-            Messagebox mbox = new Messagebox
+            var mbox = new Messagebox
             {
                 Title = caption,
-                textBlock = { Text = message }
+                textBlock = {Text = message}
             };
 
-            Button buttonNo = new Button()
+            var buttonNo = new Button
             {
                 Content = mbox.FindResource("No"),
                 Width = 140,
                 Style = mbox.FindResource("MaterialDesignFlatButton") as Style
             };
 
-            Button buttonYes = new Button
+            var buttonYes = new Button
             {
                 Content = "Yes",
                 Width = 140

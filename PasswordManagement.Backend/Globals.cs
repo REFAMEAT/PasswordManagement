@@ -8,7 +8,7 @@ namespace PasswordManagement.Backend
     {
         static Globals()
         {
-            DefaultTheme = new ThemeData()
+            DefaultTheme = new ThemeData
             {
                 Language = Language.English,
                 PrimaryColor = "Blue",
@@ -23,14 +23,14 @@ namespace PasswordManagement.Backend
                 Username = "",
                 Password = "",
                 ServerName = "",
-                UseDatabase = false,
+                UseDatabase = false
             };
         }
 
         internal static bool UseDatabase { get; set; }
         internal static string CurrentUserId { get; set; }
         internal static string UserHash { get; set; }
-        internal static ThemeData DefaultTheme { get; private set; }
-        internal static DatabaseData DefaultDb { get; private set; }
+        internal static ThemeData DefaultTheme { get; }
+        internal static DatabaseData DefaultDb { get; }
     }
 }

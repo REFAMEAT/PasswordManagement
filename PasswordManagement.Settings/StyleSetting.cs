@@ -17,7 +17,7 @@ namespace PasswordManagement.Settings
         {
             this.themeSettingService = themeSettingService;
 
-            List<string> themeItems = new List<string>
+            var themeItems = new List<string>
             {
                 "Dark",
                 "Light"
