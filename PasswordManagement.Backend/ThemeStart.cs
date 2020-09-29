@@ -12,10 +12,7 @@ namespace PasswordManagement.Backend
         {
             theme = JsonHelper<ThemeData>.GetData(Globals.DefaultTheme);
 
-            if (theme.Theme != BaseTheme.Inherit || theme.PrimaryColor != null)
-            {
-                return app;
-            }
+            if (theme.Theme != BaseTheme.Inherit || theme.PrimaryColor != null) return app;
 
             theme = new ThemeData
             {

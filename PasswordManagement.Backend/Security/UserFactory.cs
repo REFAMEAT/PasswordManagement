@@ -5,7 +5,7 @@ using PasswordManagement.Database.Model;
 namespace PasswordManagement.Backend.Security
 {
     /// <summary>
-    /// Creates users and hashed passwords
+    ///     Creates users and hashed passwords
     /// </summary>
     public class UserFactory
     {
@@ -13,7 +13,7 @@ namespace PasswordManagement.Backend.Security
         {
             string pwSalt = Password.GetSalt();
 
-            USERDATA newUser = new USERDATA
+            var newUser = new USERDATA
             {
                 USID = Guid.NewGuid().ToString(),
                 USUSERNAME = Password.GetHash(userName + pwSalt),

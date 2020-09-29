@@ -30,8 +30,6 @@
             Background="{DynamicResource MaterialDesignPaper}"
             Foreground="{DynamicResource MaterialDesignBody}">
             <TabItem
-                Background="{DynamicResource MaterialDesignPaper}"
-                Foreground="{DynamicResource MaterialDesignBody}"
                 Header="Style"
                 Style="{StaticResource StyleTabControl}">
                 <StackPanel Margin="5">

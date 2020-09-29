@@ -6,14 +6,14 @@ namespace PasswordManagement.Settings.Tests
 {
     public class DatabaseSettingServiceMock : ISettingService<DatabaseData>
     {
-        public static DatabaseData mockData = new DatabaseData()
+        public static DatabaseData mockData = new DatabaseData
         {
             Username = Mocks.UserName,
             Password = Mocks.Password,
             DatabaseName = Mocks.DatabaseName,
             ServerName = Mocks.ServerName,
             IntegratedSecurity = Mocks.IntegratedSecurity,
-            UseDatabase = Mocks.UseDatabase,
+            UseDatabase = Mocks.UseDatabase
         };
 
         public DatabaseData Load()

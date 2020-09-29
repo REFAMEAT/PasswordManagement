@@ -10,11 +10,11 @@ namespace PasswordManagement.Database.Model
         [Required]
         [Column("USID", TypeName = "nvarchar(50)")]
         public string USID { get; set; }
-        
+
         [Required]
         [Column("USUSERNAME", TypeName = "nvarchar(MAX)")]
         public string USUSERNAME { get; set; }
-        
+
         [Required]
         [Column("USPASSWORD", TypeName = "nvarchar(MAX)")]
         public string USPASSWORD { get; set; }

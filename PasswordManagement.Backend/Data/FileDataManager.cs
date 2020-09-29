@@ -6,12 +6,12 @@ using PasswordManagement.Model.Interfaces;
 namespace PasswordManagement.Backend.Data
 {
     /// <summary>
-    /// A Data-Manager for managing entities in local binary Files
+    ///     A Data-Manager for managing entities in local binary Files
     /// </summary>
     internal class FileDataManager : IDataManager<PasswordData>
     {
-        private BinaryData binaryData;
         private readonly BinaryHelper binaryHelper;
+        private BinaryData binaryData;
 
         internal FileDataManager(string path = null)
         {
@@ -20,7 +20,7 @@ namespace PasswordManagement.Backend.Data
         }
 
         /// <summary>
-        /// Adds a entity to the binary file
+        ///     Adds a entity to the binary file
         /// </summary>
         /// <param name="item"></param>
         public void AddData(PasswordData item)
@@ -30,7 +30,7 @@ namespace PasswordManagement.Backend.Data
         }
 
         /// <summary>
-        /// Removes a entity from the binary file
+        ///     Removes a entity from the binary file
         /// </summary>
         /// <param name="item">The entity to delete</param>
         /// <returns></returns>
@@ -44,7 +44,7 @@ namespace PasswordManagement.Backend.Data
         }
 
         /// <summary>
-        /// Loads the data from the file
+        ///     Loads the data from the file
         /// </summary>
         /// <returns></returns>
         public List<PasswordData> LoadData()

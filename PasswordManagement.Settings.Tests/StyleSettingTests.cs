@@ -2,12 +2,9 @@
 
 namespace PasswordManagement.Settings.Tests
 {
-    [TestFixture()]
+    [TestFixture]
     public class StyleSettingTests
     {
-        private StyleSetting setting;
-        private bool savedCalled;
-
         [SetUp]
         public void Setup()
         {
@@ -17,7 +14,10 @@ namespace PasswordManagement.Settings.Tests
             setting = new StyleSetting(databaseSettingServiceMock);
         }
 
-        [Test()]
+        private StyleSetting setting;
+        private bool savedCalled;
+
+        [Test]
         public void LoadTest()
         {
             setting.Load();

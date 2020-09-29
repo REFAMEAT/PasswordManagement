@@ -4,7 +4,7 @@ using System.Windows.Input;
 namespace PasswordManagement.ViewModel.Base
 {
     /// <summary>
-    /// Delivers a <see cref="ICommand"/> implementation for Binding Commands to functions
+    ///     Delivers a <see cref="ICommand" /> implementation for Binding Commands to functions
     /// </summary>
     public class Command : ICommand
     {
@@ -23,7 +23,7 @@ namespace PasswordManagement.ViewModel.Base
         }
 
         /// <summary>
-        /// Validation, if the Command can be executed
+        ///     Validation, if the Command can be executed
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns></returns>
@@ -33,7 +33,7 @@ namespace PasswordManagement.ViewModel.Base
         }
 
         /// <summary>
-        /// Execute the command, if <see cref="CanExecute"/> is True
+        ///     Execute the command, if <see cref="CanExecute" /> is True
         /// </summary>
         /// <param name="parameter"></param>
         public void Execute(object parameter)

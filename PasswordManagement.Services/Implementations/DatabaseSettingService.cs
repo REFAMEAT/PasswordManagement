@@ -16,7 +16,7 @@ namespace PasswordManagement.Services.Implementations
                 Username = "",
                 Password = "",
                 ServerName = "",
-                UseDatabase = false,
+                UseDatabase = false
             });
         }
 

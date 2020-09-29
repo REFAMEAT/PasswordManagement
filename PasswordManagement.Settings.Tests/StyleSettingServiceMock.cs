@@ -8,7 +8,7 @@ namespace PasswordManagement.Settings.Tests
 {
     public class StyleSettingServiceMock : ISettingService<ThemeData>
     {
-        private ThemeData mockData = new ThemeData()
+        private ThemeData mockData = new ThemeData
         {
             Language = Language.English,
             PrimaryColor = "Blue",

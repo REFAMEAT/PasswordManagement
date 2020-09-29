@@ -13,12 +13,12 @@ namespace PasswordManagement.ViewModel
         private string description;
 
         /// <summary>
-        /// The created Item, already Hashed/Salted
+        ///     The created Item, already Hashed/Salted
         /// </summary>
         public PasswordData NewItem { get; set; }
 
         /// <summary>
-        /// The Description of the password
+        ///     The Description of the password
         /// </summary>
         public string Description
         {
@@ -27,7 +27,7 @@ namespace PasswordManagement.ViewModel
         }
 
         /// <summary>
-        /// Optional Comments for the password
+        ///     Optional Comments for the password
         /// </summary>
         public string Comment
         {
@@ -38,20 +38,20 @@ namespace PasswordManagement.ViewModel
         public ICommand ButtonCommandApply => buttonCommandAddPassword ??= new Command(DoApply);
 
         /// <summary>
-        /// Create the Data and Close Window
+        ///     Create the Data and Close Window
         /// </summary>
-        /// <param name="obj">The <see cref="AddPassword"/> to close</param>
+        /// <param name="obj">The <see cref="AddPassword" /> to close</param>
         private void DoApply(object obj)
         {
             if (!(obj is AddPassword window)) return;
 
-            PasswordData data = new PasswordData
+            var data = new PasswordData
             {
                 Comments = Comment,
                 Password = Encryption.EncryptString(window.password.Password, App.loginPw),
                 Description = Description
             };
-            
+
             window.Canceled = false;
             NewItem = data;
             window.Close();

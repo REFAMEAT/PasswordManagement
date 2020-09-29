@@ -26,10 +26,7 @@ namespace PasswordManagement.ViewModel
 
         private void DoCreateUser(object obj)
         {
-            if (!(obj is AddUser login) || !InputOk)
-            {
-                return;
-            }
+            if (!(obj is AddUser login) || !InputOk) return;
 
             login.DialogResult = true;
             login.Close();

@@ -4,10 +4,10 @@ namespace PasswordManagement.Model.Interfaces
 {
     internal interface ILogin : IDisposable
     {
-        #nullable enable
+#nullable enable
         string Validate(string userName, string password);
         bool NeedFirstUser();
-        bool InitSuccessful {get;set;}
+        bool InitSuccessful { get; set; }
         void Initialize();
     }
 }

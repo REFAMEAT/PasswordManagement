@@ -5,14 +5,14 @@ using System.Text;
 namespace PasswordManagement.Backend.Security
 {
     /// <summary>
-    /// Class for Hashing and Salting Passwords
+    ///     Class for Hashing and Salting Passwords
     /// </summary>
     public class Password
     {
         internal static string GetSalt()
         {
-            byte[] bytes = new byte[128 / 8];
-            using RandomNumberGenerator keyGenerator = RandomNumberGenerator.Create();
+            var bytes = new byte[128 / 8];
+            using var keyGenerator = RandomNumberGenerator.Create();
             keyGenerator.GetBytes(bytes);
             return BitConverter.ToString(bytes).Replace("-", "").ToLower();
         }
@@ -20,7 +20,7 @@ namespace PasswordManagement.Backend.Security
         internal static string GetHash(string text)
         {
             // SHA512 is disposable by inheritance.  
-            using SHA256 sha256 = SHA256.Create();
+            using var sha256 = SHA256.Create();
 
             // Send a sample text to hash.  
             byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(text));

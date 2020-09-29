@@ -1,16 +1,12 @@
-﻿using NUnit.Framework;
-using PasswordManagement.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
+﻿using System;
+using NUnit.Framework;
 
 namespace PasswordManagement.Model.Tests
 {
-    [TestFixture()]
+    [TestFixture]
     public class AppCoreTests
     {
-        [Test()]
+        [Test]
         public void StartCoreTest()
         {
             AppCore.StartCore();

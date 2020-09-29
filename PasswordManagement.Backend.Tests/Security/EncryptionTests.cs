@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using PasswordManagement.Backend.Security;
-using System;
 
 namespace PasswordManagement.Backend.Tests.Security
 {
@@ -9,8 +9,8 @@ namespace PasswordManagement.Backend.Tests.Security
         [Test]
         public void EnDecryptString()
         {
-            string key = Guid.NewGuid().ToString();
-            string text = Guid.NewGuid().ToString();
+            var key = Guid.NewGuid().ToString();
+            var text = Guid.NewGuid().ToString();
 
             string cryptText = Encryption.EncryptString(text, key);
 

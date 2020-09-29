@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Timers;
+using JetBrains.Annotations;
 using PasswordManagement.Backend.Security;
 
 namespace PasswordManagement.Model
 {
     public class PasswordDataDisplay : PasswordData, INotifyPropertyChanged
     {
-        private bool display;
         private readonly Timer displayTimer;
+        private bool display;
         private string passwordDisplay;
 
         public PasswordDataDisplay(PasswordData baseData)

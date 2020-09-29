@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using PasswordManagement.Backend.Login;
 using PasswordManagement.File.Config;
-using PasswordManagement.Logging;
 using PasswordManagement.Model;
 using PasswordManagement.Model.Setting;
 using PasswordManagement.View;
@@ -25,13 +24,9 @@ namespace PasswordManagement
             login.ShowDialog();
 
             if (login.DialogResult != true)
-            {
-                App.Current.Shutdown(1);
-            }
+                Application.Current.Shutdown(1);
             else
-            {
                 App.loginPw = login.passwordBox.Password;
-            }
 
             return app;
         }

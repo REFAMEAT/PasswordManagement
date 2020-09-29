@@ -11,7 +11,7 @@ namespace PasswordManagement.Services.Implementations
     {
         public ThemeData Load()
         {
-            return JsonHelper<ThemeData>.GetData(new ThemeData()
+            return JsonHelper<ThemeData>.GetData(new ThemeData
             {
                 Language = Language.English,
                 PrimaryColor = "Blue",

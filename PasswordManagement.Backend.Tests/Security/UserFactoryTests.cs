@@ -1,24 +1,23 @@
-﻿using NUnit.Framework;
+﻿using System.Diagnostics;
+using NUnit.Framework;
 using PasswordManagement.Backend.Security;
 using PasswordManagement.Database.Model;
-using System.Diagnostics;
 
 namespace PasswordManagement.Backend.Tests.Security
 {
     public class UserFactoryTests
     {
-        [TestCase(5), TestCase(4)]
-        [TestCase(3), TestCase(2)]
+        [TestCase(5)]
+        [TestCase(4)]
+        [TestCase(3)]
+        [TestCase(2)]
         public void UserFactoryDelayTest(int executeTimes)
         {
             int minimumTimeNeeded = executeTimes * 500;
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
 
             sw.Start();
-            for (int i = 0; i < executeTimes; i++)
-            {
-                UserFactory.CreateUser("test", "test");
-            }
+            for (var i = 0; i < executeTimes; i++) UserFactory.CreateUser("test", "test");
 
             sw.Stop();
 
@@ -28,8 +27,8 @@ namespace PasswordManagement.Backend.Tests.Security
         [Test]
         public void UserFactoryCreateTest()
         {
-            string userName = "Max Mustermann";
-            string password = "MusterPassword";
+            var userName = "Max Mustermann";
+            var password = "MusterPassword";
 
             USERDATA userData = UserFactory.CreateUser(userName, password);
 

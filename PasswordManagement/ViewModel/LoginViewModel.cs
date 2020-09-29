@@ -1,16 +1,12 @@
 ﻿using System.Windows.Input;
 using System.Windows.Media;
-using Microsoft.EntityFrameworkCore;
 using PasswordManagement.Backend;
 using PasswordManagement.Backend.Login;
 using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
 using PasswordManagement.File.Binary;
-using PasswordManagement.File.Config;
-using PasswordManagement.Logging;
 using PasswordManagement.Model;
 using PasswordManagement.Model.Interfaces;
-using PasswordManagement.Model.Setting;
 using PasswordManagement.View;
 using PasswordManagement.ViewModel.Base;
 
@@ -27,23 +23,17 @@ namespace PasswordManagement.ViewModel
             iLogin.Initialize();
 
             // Fallback, if logon Method doesn't work
-            if (!iLogin.InitSuccessful)
-            {
-                iLogin = new LocalLogin();
-            }
+            if (!iLogin.InitSuccessful) iLogin = new LocalLogin();
 
             bool needFirstUser = iLogin.NeedFirstUser();
 
-            if (!needFirstUser)
-            {
-                return;
-            }
+            if (!needFirstUser) return;
 
             USERDATA firstUser = AddUser.CreateUser(true);
 
             if (firstUser != null && Globals.UseDatabase)
             {
-                DataSet<USERDATA> data = new DataSet<USERDATA>();
+                var data = new DataSet<USERDATA>();
                 data.Entities.Add(firstUser);
                 data.SaveChanges();
             }

@@ -30,12 +30,11 @@ namespace PasswordManagement.Settings
             Username = data.Username;
             IntegratedSecurity = data.IntegratedSecurity;
             UseDatabase = data.UseDatabase;
-
         }
 
         public void Save()
         {
-            databaseSettingService.Save(new DatabaseData()
+            databaseSettingService.Save(new DatabaseData
             {
                 DatabaseName = DatabaseName ??= "",
                 Password = Password ??= "",

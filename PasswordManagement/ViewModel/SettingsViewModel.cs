@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
-using PasswordManagement.Model;
 using PasswordManagement.Model.Interfaces;
 using PasswordManagement.Services.Implementations;
 using PasswordManagement.Settings;
@@ -11,8 +10,8 @@ namespace PasswordManagement.ViewModel
 {
     public class SettingsViewModel : NotifyPropertyChanged
     {
-        private ICommand buttonCommandApplySettings;
         private readonly List<ISetting> settings;
+        private ICommand buttonCommandApplySettings;
 
         public SettingsViewModel()
         {

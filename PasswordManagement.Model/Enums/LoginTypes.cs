@@ -3,6 +3,6 @@
     public enum LoginTypes
     {
         Local,
-        Database,
+        Database
     }
 }

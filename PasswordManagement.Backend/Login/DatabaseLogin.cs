@@ -24,7 +24,7 @@ namespace PasswordManagement.Backend.Login
         }
 
         /// <summary>
-        /// Validate the users Credentials
+        ///     Validate the users Credentials
         /// </summary>
         /// <param name="userName">The clear text user name</param>
         /// <param name="password"></param>
@@ -32,19 +32,15 @@ namespace PasswordManagement.Backend.Login
         public string Validate(string userName, string password)
         {
             foreach (USERDATA user in userdatas.Entities)
-            {
-                if (Password.GetHash(userName + user.USSALT) == user.USUSERNAME 
+                if (Password.GetHash(userName + user.USSALT) == user.USUSERNAME
                     && Password.GetHash(password + user.USSALT) == user.USPASSWORD)
-                {
                     return user.USID;
-                }
-            }
 
             return null;
         }
 
         /// <summary>
-        /// Check if there is any user in the the Database
+        ///     Check if there is any user in the the Database
         /// </summary>
         /// <returns>true: if there is no user</returns>
         public bool NeedFirstUser()
@@ -58,13 +54,13 @@ namespace PasswordManagement.Backend.Login
         {
             try
             {
-                using DataSet<USERDATA> context = new DataSet<USERDATA>();
+                using var context = new DataSet<USERDATA>();
                 context.Database.OpenConnection();
                 context.Database.CloseConnection();
-                
+
                 InitSuccessful = true;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 InitSuccessful = false;
                 Logger.Current.Error(ex);

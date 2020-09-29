@@ -19,7 +19,7 @@ namespace PasswordManagement.View
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             bool validInput = passwordBox.Password == repeatPasswordBox.Password;
-            ((AddUserViewModel)DataContext).InputOk = validInput;
+            ((AddUserViewModel) DataContext).InputOk = validInput;
 
             passwordBox.Foreground = validInput ? Brushes.Green : Brushes.Red;
             repeatPasswordBox.Foreground = validInput ? Brushes.Green : Brushes.Red;
@@ -32,21 +32,18 @@ namespace PasswordManagement.View
 
         internal static USERDATA CreateUser(bool shutDownAppOnCancel = false)
         {
-            AddUser addUser = new AddUser();
+            var addUser = new AddUser();
             bool? result = addUser.ShowDialog();
 
             if (result == true)
             {
-                string userName = ((AddUserViewModel)addUser.DataContext).UserName;
+                string userName = ((AddUserViewModel) addUser.DataContext).UserName;
                 string password = addUser.passwordBox.Password;
-                
+
                 return UserFactory.CreateUser(userName, password);
             }
 
-            if (shutDownAppOnCancel)
-            {
-                Application.Current.Shutdown();
-            }
+            if (shutDownAppOnCancel) Application.Current.Shutdown();
             return null;
         }
     }
