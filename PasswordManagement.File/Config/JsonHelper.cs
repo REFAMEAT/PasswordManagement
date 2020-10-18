@@ -36,7 +36,7 @@ namespace PasswordManagement.File.Config
             {
                 if (defaultValue == null)
                 {
-                    Logger.Current.Error(ex);
+                    Logger.Current.Get().Error(ex);
                     throw;
                 }
 

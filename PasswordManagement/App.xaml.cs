@@ -16,7 +16,7 @@ namespace PasswordManagement
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Current.DispatcherUnhandledException += (o, args) => Logger.Current.Error(args.Exception);
+            Current.DispatcherUnhandledException += (o, args) => Logger.Current.Get().Error(args.Exception);
 
             AppCore.StartCore()
                 .SetupBinaries()

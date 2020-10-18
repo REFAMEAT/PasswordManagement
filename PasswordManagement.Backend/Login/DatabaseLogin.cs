@@ -68,7 +68,7 @@ namespace PasswordManagement.Backend.Login
             catch (Exception ex)
             {
                 InitSuccessful = false;
-                Logger.Current.Error(ex);
+                Logger.Current.Get().Error(ex);
                 Globals.UseDatabase = false;
             }
         }
