@@ -32,9 +32,13 @@ namespace PasswordManagement.Backend.Login
         public string Validate(string userName, string password)
         {
             foreach (USERDATA user in userdatas.Entities)
+            {
                 if (Password.GetHash(userName + user.USSALT) == user.USUSERNAME
                     && Password.GetHash(password + user.USSALT) == user.USPASSWORD)
+                {
                     return user.USID;
+                }
+            }
 
             return null;
         }
@@ -59,6 +63,7 @@ namespace PasswordManagement.Backend.Login
                 context.Database.CloseConnection();
 
                 InitSuccessful = true;
+                Globals.UseDatabase = true;
             }
             catch (Exception ex)
             {

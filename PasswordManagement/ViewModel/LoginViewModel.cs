@@ -18,16 +18,23 @@ namespace PasswordManagement.ViewModel
         private ICommand buttonCommandLogin;
         private string userName;
 
-        internal LoginViewModel(ILogin logonMethod)
+        public LoginViewModel(ILogin logonMethod)
         {
+            iLogin = logonMethod;
             iLogin.Initialize();
 
             // Fallback, if logon Method doesn't work
-            if (!iLogin.InitSuccessful) iLogin = new LocalLogin();
+            if (!iLogin.InitSuccessful)
+            {
+                iLogin = new LocalLogin();
+            }
 
             bool needFirstUser = iLogin.NeedFirstUser();
 
-            if (!needFirstUser) return;
+            if (!needFirstUser)
+            {
+                return;
+            }
 
             USERDATA firstUser = AddUser.CreateUser(true);
 
@@ -53,7 +60,10 @@ namespace PasswordManagement.ViewModel
 
         private void DoLogin(object obj)
         {
-            if (!(obj is Login login)) return;
+            if (!(obj is Login login))
+            {
+                return;
+            }
 
             string userId = iLogin.Validate(userName, login.passwordBox.Password);
 

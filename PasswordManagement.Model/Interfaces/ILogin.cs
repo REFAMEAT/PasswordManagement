@@ -2,7 +2,7 @@
 
 namespace PasswordManagement.Model.Interfaces
 {
-    internal interface ILogin : IDisposable
+    public interface ILogin : IDisposable
     {
 #nullable enable
         string Validate(string userName, string password);
