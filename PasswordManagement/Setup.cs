@@ -17,16 +17,20 @@ namespace PasswordManagement
 
         internal static AppCore Login(this AppCore app)
         {
-            bool useDatabase = JsonHelper<DatabaseData>.GetData().UseDatabase;
+            bool useDatabase = JsonHelper<DatabaseData>.GetData(new DatabaseData {UseDatabase = false}).UseDatabase;
 
             Login login = useDatabase ? new Login(new DatabaseLogin()) : new Login(new LocalLogin());
 
             login.ShowDialog();
 
             if (login.DialogResult != true)
+            {
                 Application.Current.Shutdown(1);
+            }
             else
+            {
                 App.loginPw = login.passwordBox.Password;
+            }
 
             return app;
         }
