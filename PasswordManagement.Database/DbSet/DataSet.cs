@@ -13,10 +13,7 @@ namespace PasswordManagement.Database.DbSet
 
         public DataSet(DatabaseData config = null)
         {
-            if (config == null)
-                this.config = JsonHelper<DatabaseData>.GetData();
-            else
-                this.config = config;
+            this.config = config ?? JsonHelper<DatabaseData>.GetData();
         }
 
         public DataSet(Action<DbContextOptionsBuilder> onConfiguringAction)

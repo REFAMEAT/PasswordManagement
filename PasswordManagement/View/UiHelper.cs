@@ -14,7 +14,7 @@ namespace PasswordManagement.View
         ///     Adjust the UI to the UI-Config
         /// </summary>
         /// <param name="data"></param>
-        internal static void AdjustApplicationStyle(ThemeData data)
+        public static void AdjustApplicationStyle(ThemeData data)
         {
             Application.Current.Resources.Clear();
 
@@ -41,9 +41,15 @@ namespace PasswordManagement.View
 
             Color color = Color.Black;
 
-            if (data.PrimaryColor != null) color = Color.FromName(data.PrimaryColor);
+            if (data.PrimaryColor != null)
+            {
+                color = Color.FromName(data.PrimaryColor);
+            }
 
-            if (data.Theme == BaseTheme.Inherit) data.Theme = BaseTheme.Light;
+            if (data.Theme == BaseTheme.Inherit)
+            {
+                data.Theme = BaseTheme.Light;
+            }
 
             var theme = new CustomColorTheme
             {
