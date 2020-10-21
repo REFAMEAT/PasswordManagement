@@ -9,7 +9,7 @@ trigger:
 
 pool: Default
 
-name: $(MajorVersion).$(MinorVersion)$(Rev:.r)
+name: $(MajorVersion).$(MinorVersion)$(Rev:.r) $(Build.Reason)
 
 variables:
   solution: '**/*.sln'
