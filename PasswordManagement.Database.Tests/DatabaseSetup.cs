@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
@@ -10,12 +11,30 @@ namespace PasswordManagement.Database.Tests
     [SetUpFixture]
     public class DatabaseSetup
     {
+        private static readonly string instanceName;
+
         protected Action<DbContextOptionsBuilder> options = x => x.UseSqlServer(new SqlConnectionStringBuilder
         {
-            DataSource = "localhost",
+            DataSource = instanceName,
             InitialCatalog = "TESTDATABASE",
             IntegratedSecurity = true
         }.ToString());
+
+        static DatabaseSetup()
+        {
+            string path = Path.Combine(Path.GetTempPath(), "PasswordManagementUnitTestDatabase.txt");
+
+            if (System.IO.File.Exists(path))
+            {
+                instanceName = System.IO.File.ReadAllText(path);
+            }
+            else
+            {
+                System.IO.File.Create(path);
+                System.IO.File.WriteAllText(path, "localhost");
+                instanceName = "localhost";
+            }
+        }
 
         [OneTimeSetUp]
         public void CreateDatabase()

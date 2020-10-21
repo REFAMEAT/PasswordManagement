@@ -10,16 +10,20 @@ namespace PasswordManagement.Backend.Data
     /// <summary>
     ///     A Data-Manager for the connection to the Database
     /// </summary>
-    internal class DatabaseDataManager : IDataManager<PasswordData>
+    public class DatabaseDataManager : IDataManager<PasswordData>
     {
         private readonly DataSet<PASSWORDDATA> passwordData;
 
         public DatabaseDataManager(DatabaseData config = null, DataSet<PASSWORDDATA> dataSet = null)
         {
             if (dataSet is null)
+            {
                 passwordData = new DataSet<PASSWORDDATA>(config);
+            }
             else
+            {
                 passwordData = dataSet;
+            }
         }
 
         /// <summary>
@@ -50,7 +54,9 @@ namespace PasswordManagement.Backend.Data
             var dataDisplay = new List<PasswordData>();
 
             foreach (PASSWORDDATA x in passwordData.Entities)
+            {
                 if (x.USERUSID == Globals.CurrentUserId)
+                {
                     dataDisplay.Add(new PasswordData
                     {
                         Identifier = x.PWID,
@@ -58,6 +64,8 @@ namespace PasswordManagement.Backend.Data
                         Comments = x.PWCOMMENT,
                         Description = x.PWDESCRIPTION
                     });
+                }
+            }
 
             return dataDisplay;
         }

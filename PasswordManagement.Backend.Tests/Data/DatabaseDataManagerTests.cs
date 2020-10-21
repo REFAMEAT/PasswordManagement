@@ -1,34 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using PasswordManagement.Backend.Data;
 using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
+using PasswordManagement.Database.Tests;
 using PasswordManagement.Model;
 
 namespace PasswordManagement.Backend.Tests.Data
 {
     [TestFixture]
-    public class DatabaseDataManagerTests
+    public class DatabaseDataManagerTests : DatabaseSetup
     {
         [SetUp]
         public async Task Setup()
         {
-            dataSet = new DataSet<PASSWORDDATA>(x => x.UseInMemoryDatabase("TestBackend"));
-            await dataSet.Database.EnsureCreatedAsync();
+            dataSet = new DataSet<PASSWORDDATA>(options);
             dataManager = new DatabaseDataManager(null, dataSet);
 
             await dataSet.Entities.AddRangeAsync(Data);
 
             await dataSet.SaveChangesAsync();
-        }
-
-        [TearDown]
-        public async Task TearDown()
-        {
-            await dataSet.Database.EnsureDeletedAsync();
         }
 
         private DataSet<PASSWORDDATA> dataSet;
@@ -64,6 +57,11 @@ namespace PasswordManagement.Backend.Tests.Data
 
             Assert.That(dataSet.Entities.Count(), Is.EqualTo(--countBeforeDelete));
             Assert.That(dataSet.Find<PASSWORDDATA>("Id1"), Is.Null);
+        }
+
+        public void TearDown()
+        {
+            dataSet.Entities.RemoveRange(Data);
         }
 
         private PASSWORDDATA[] Data => new[]
