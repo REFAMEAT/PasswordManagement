@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using PasswordManagement.Backend.Data;
 using PasswordManagement.Database.DbSet;
 using PasswordManagement.Database.Model;
+using PasswordManagement.Database.Tests;
 using PasswordManagement.Model;
 
 namespace PasswordManagement.Backend.Tests.Data
 {
     [TestFixture]
-    public class DatabaseDataManagerTests
+    public class DatabaseDataManagerTests : DatabaseSetup
     {
         [SetUp]
         public async Task Setup()
         {
-            dataSet = new DataSet<PASSWORDDATA>(x => x.UseInMemoryDatabase("TestBackend"));
-            await dataSet.Database.EnsureCreatedAsync();
+            dataSet = new DataSet<PASSWORDDATA>(options);
             dataManager = new DatabaseDataManager(null, dataSet);
 
             await dataSet.Entities.AddRangeAsync(Data);
@@ -26,16 +25,17 @@ namespace PasswordManagement.Backend.Tests.Data
         }
 
         [TearDown]
-        public async Task TearDown()
+        public void TearDown()
         {
-            await dataSet.Database.EnsureDeletedAsync();
+            dataSet.RemoveRange(dataSet.Entities);
+            dataSet.SaveChanges();
         }
 
         private DataSet<PASSWORDDATA> dataSet;
         private DatabaseDataManager dataManager;
 
         [Test]
-        public async Task TestLoadData()
+        public void TestLoadData()
         {
             List<PasswordData> data = dataManager.LoadData();
 
@@ -44,12 +44,12 @@ namespace PasswordManagement.Backend.Tests.Data
         }
 
         [Test]
-        public async Task TestAddData()
+        public void TestAddData()
         {
             int countBeforeAdd = Data.Length;
 
             dataManager.AddData(new PasswordData {Identifier = "NewId1"});
-            await dataSet.SaveChangesAsync();
+            dataSet.SaveChanges();
 
             Assert.That(dataSet.Entities.Count(), Is.EqualTo(++countBeforeAdd));
             Assert.That(dataSet.Find<PASSWORDDATA>("NewId1"), Is.Not.Null);
