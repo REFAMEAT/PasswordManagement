@@ -13,7 +13,7 @@ namespace PasswordManagement.Database.Tests
     {
         private static readonly string instanceName;
 
-        protected Action<DbContextOptionsBuilder> options = x => x.UseSqlServer(new SqlConnectionStringBuilder
+        protected Action<DbContextOptionsBuilder> options = x => x.UseInMemoryDatabase(new SqlConnectionStringBuilder
         {
             DataSource = instanceName,
             InitialCatalog = "TESTDATABASE",
@@ -30,7 +30,7 @@ namespace PasswordManagement.Database.Tests
             }
             else
             {
-                System.IO.File.Create(path);
+                System.IO.File.Create(path).Dispose();
                 System.IO.File.WriteAllText(path, "localhost");
                 instanceName = "localhost";
             }

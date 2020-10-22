@@ -24,11 +24,18 @@ namespace PasswordManagement.Backend.Tests.Data
             await dataSet.SaveChangesAsync();
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            dataSet.RemoveRange(dataSet.Entities);
+            dataSet.SaveChanges();
+        }
+
         private DataSet<PASSWORDDATA> dataSet;
         private DatabaseDataManager dataManager;
 
         [Test]
-        public async Task TestLoadData()
+        public void TestLoadData()
         {
             List<PasswordData> data = dataManager.LoadData();
 
@@ -37,12 +44,12 @@ namespace PasswordManagement.Backend.Tests.Data
         }
 
         [Test]
-        public async Task TestAddData()
+        public void TestAddData()
         {
             int countBeforeAdd = Data.Length;
 
             dataManager.AddData(new PasswordData {Identifier = "NewId1"});
-            await dataSet.SaveChangesAsync();
+            dataSet.SaveChanges();
 
             Assert.That(dataSet.Entities.Count(), Is.EqualTo(++countBeforeAdd));
             Assert.That(dataSet.Find<PASSWORDDATA>("NewId1"), Is.Not.Null);
@@ -57,11 +64,6 @@ namespace PasswordManagement.Backend.Tests.Data
 
             Assert.That(dataSet.Entities.Count(), Is.EqualTo(--countBeforeDelete));
             Assert.That(dataSet.Find<PASSWORDDATA>("Id1"), Is.Null);
-        }
-
-        public void TearDown()
-        {
-            dataSet.Entities.RemoveRange(Data);
         }
 
         private PASSWORDDATA[] Data => new[]
