@@ -51,7 +51,8 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: ResharperCli@2
+  displayName: 'Resharper check coding guidelines'
   inputs:
     solutionOrProjectPath: '$(solution)'
-    failBuildLevelSelector: 'Warning'
-    failBuildOnCodeIssues: false
+    failBuildLevelSelector: 'Error'
+    additionalArguments: '--exclude=*Tests*/**/*'
