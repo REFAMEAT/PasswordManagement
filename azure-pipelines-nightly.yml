@@ -12,7 +12,7 @@ pool:
 name: $(Year:yyyy).$(MinorVersion)$Rev:.r)-nightly
 
 variables:
-  solution: '**/*.sln'
+  solution: 'PasswordManagement.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
