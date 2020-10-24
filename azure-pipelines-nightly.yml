@@ -3,6 +3,9 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+pr: none
+trigger: none
+
 schedules:
   - cron: '0 0 * * *'
     displayName: midnight build
@@ -10,6 +13,7 @@ schedules:
       include:
         - master
         - develop
+    always: true
 
 pool:
   vmImage: 'windows-latest'
@@ -42,7 +46,7 @@ steps:
       **\*test*.dll
       !**\*TestAdapter.dll
       !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+    searchFolder: '$(Build.ArtifactStagingDirectory)/App'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
