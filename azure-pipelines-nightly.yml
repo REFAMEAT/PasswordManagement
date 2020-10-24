@@ -3,8 +3,13 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-trigger:
-- master
+schedules:
+  - cron: '0 0 * * *'
+    displayName: midnight build
+    branches:
+      include:
+        - master
+        - develop
 
 pool:
   vmImage: 'windows-latest'
