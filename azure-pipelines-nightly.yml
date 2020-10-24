@@ -15,8 +15,7 @@ schedules:
         - develop
     always: true
 
-pool:
-  vmImage: 'windows-latest'
+pool: Default
 
 name: $(Year:yyyy).$(MinorVersion)$(Rev:.r)-nightly
 
