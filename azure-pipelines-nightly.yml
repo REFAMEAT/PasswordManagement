@@ -39,7 +39,6 @@ steps:
    forceReinstallCredentialProvider: true
 
 - checkout: self
-  lfs: true
 
 - task: NuGetCommand@2
   inputs:
