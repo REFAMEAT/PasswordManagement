@@ -52,6 +52,7 @@ steps:
     configuration: '$(buildConfiguration)'
 - task: VSTest@2
   displayName: 'Run Unit Tests'
+  continueOnError: true
   inputs:
     testSelector: testAssemblies
     testAssemblyVer2: |
