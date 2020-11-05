@@ -28,31 +28,45 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+- task: VisualStudioTestPlatformInstaller@1
+  displayName: 'Install Microsoft Test platform'
+  inputs:
+    packageFeedSelector: nugetOrg
+    versionSelector: latestStable
+
+- task: NuGetAuthenticate@0
+  displayName: 'Authtification'
+  inputs:
+   forceReinstallCredentialProvider: true
+
+- checkout: self
+  lfs: true
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: 'Build Solution'
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/App'
-    platform: '$(buildPlatform)'
+    solution: '**Tests/*.csproj'
+    platform: 'AnyCPU'
     configuration: '$(buildConfiguration)'
-
 - task: VSTest@2
+  displayName: 'Run Unit Tests'
   inputs:
-    testSelector: 'testAssemblies'
+    testSelector: testAssemblies
     testAssemblyVer2: |
-      **\*test*.dll
+      **\*test.dll
       !**\*TestAdapter.dll
       !**\obj\**
-    searchFolder: '$(Build.ArtifactStagingDirectory)/App'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    codeCoverageEnabled: true
+    diagnosticsEnabled: true
+    vsTestVersion: toolsInstaller
 
 - task: ResharperCli@2
   displayName: 'Resharper check coding guidelines'
   inputs:
     solutionOrProjectPath: '$(solution)'
     failBuildLevelSelector: 'Error'
-    additionalArguments: '--exclude=*Tests*/**/*'
+    additionalArguments: '--exclude=**.Tests/**/*.cs;**Resources/**/*.*;**.Test/**/*.cs;**/**/*.xaml'
