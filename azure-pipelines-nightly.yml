@@ -55,6 +55,7 @@ steps:
   inputs:
     testSelector: testAssemblies
     testAssemblyVer2: |
+      **\*Tests.dll
       **\*test.dll
       !**\*TestAdapter.dll
       !**\obj\**
