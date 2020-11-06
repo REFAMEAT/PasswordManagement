@@ -18,7 +18,7 @@ schedules:
 pool: 
   vmImage: 'windows-latest'
 
-name: $(Year:yyyy).$(MinorVersion)$(Rev:.r)-nightly
+name: $(Year:yyyy).$(Date:mm)$(Rev:.r)-nightly
 
 variables:
   solution: 'PasswordManagement.sln'
