@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using NUnit.Framework;
 
 namespace PasswordManagement.File.Config.Tests
@@ -6,10 +7,28 @@ namespace PasswordManagement.File.Config.Tests
     [TestFixture]
     public class JsonHelperTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            DirectoryInfo directory = new FileInfo(JsonHelper<TestModel>.GetPath()).Directory;
+
+            if (!directory.Exists)
+            {
+                directory.Create();
+            }
+        }
+
         [TearDown]
         public void TearDown()
         {
-            System.IO.File.Delete(JsonHelper<TestModel>.GetPath());
+            try
+            {
+                System.IO.File.Delete(JsonHelper<TestModel>.GetPath());
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         [Test]
