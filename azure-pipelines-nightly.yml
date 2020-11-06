@@ -16,7 +16,7 @@ schedules:
     always: true
 
 pool: 
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 name: $(Year:yyyy).$(MinorVersion)$(Rev:.r)-nightly
 
