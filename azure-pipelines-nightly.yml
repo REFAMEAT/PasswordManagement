@@ -15,10 +15,9 @@ schedules:
         - develop
     always: true
 
-pool: 
-  vmImage: 'windows-latest'
+pool: Default
 
-name: $(Year:yyyy).$(Date:mm)$(Rev:.r)-nightly
+name: $(Year:yyyy).$(Date:MM)$(Rev:.r)-nightly
 
 variables:
   solution: 'PasswordManagement.sln'
