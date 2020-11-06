@@ -15,7 +15,8 @@ schedules:
         - develop
     always: true
 
-pool: Default
+pool: 
+  vmImage: 'ubuntu-latest'
 
 name: $(Year:yyyy).$(MinorVersion)$(Rev:.r)-nightly
 
