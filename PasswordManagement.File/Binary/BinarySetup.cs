@@ -1,17 +1,20 @@
 ﻿using System;
 using System.IO;
-using PasswordManagement.Model;
+using REFame.PasswordManagement.Model;
 
-namespace PasswordManagement.Backend.Binary
+namespace REFame.PasswordManagement.File.Binary
 {
-    internal static class BinarySetup
+    public static class BinarySetup
     {
-        internal static string fileRoot =
+        public static string fileRoot =
             @"C:\Users\{user}\AppData\Roaming\PWManagement".Replace("{user}", Environment.UserName);
 
-        internal static AppCore SetupBinaries(this AppCore app)
+        public static AppCore SetupBinaries(this AppCore app)
         {
-            if (!Directory.Exists(fileRoot)) Directory.CreateDirectory(fileRoot);
+            if (!Directory.Exists(fileRoot))
+            {
+                Directory.CreateDirectory(fileRoot);
+            }
 
             return app;
         }

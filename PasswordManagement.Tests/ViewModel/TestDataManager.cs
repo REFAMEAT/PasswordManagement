@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Interfaces;
 
-namespace PasswordManagement.Tests.ViewModel
+namespace REFame.PasswordManagement.Tests.ViewModel
 {
     internal class TestDataManager : IDataManager<PasswordData>
     {

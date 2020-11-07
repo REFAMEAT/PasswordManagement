@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using NUnit.Framework;
-using PasswordManagement.Backend.Security;
-using PasswordManagement.Database.Model;
+using REFame.PasswordManagement.Backend.Security;
+using REFame.PasswordManagement.Database.Model;
 
-namespace PasswordManagement.Backend.Tests.Security
+namespace REFame.PasswordManagement.Backend.Tests.Security
 {
     public class UserFactoryTests
     {
@@ -17,7 +17,10 @@ namespace PasswordManagement.Backend.Tests.Security
             var sw = new Stopwatch();
 
             sw.Start();
-            for (var i = 0; i < executeTimes; i++) UserFactory.CreateUser("test", "test");
+            for (var i = 0; i < executeTimes; i++)
+            {
+                UserFactory.CreateUser("test", "test");
+            }
 
             sw.Stop();
 

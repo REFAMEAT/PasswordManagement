@@ -2,11 +2,11 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using PasswordManagement.Database.DbSet;
-using PasswordManagement.Database.Model;
-using PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.Database.DbSet;
+using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.Model.Setting;
 
-namespace PasswordManagement.Database.Tests.DbSet
+namespace REFame.PasswordManagement.Database.Tests.DbSet
 {
     [TestFixture]
     public class DataSetTests : DatabaseSetup

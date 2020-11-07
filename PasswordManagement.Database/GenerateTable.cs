@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Database
+﻿namespace REFame.PasswordManagement.Database
 {
     public class GenerateTable
     {

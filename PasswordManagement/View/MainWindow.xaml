@@ -1,11 +1,11 @@
 ﻿<Window
-    x:Class="PasswordManagement.View.MainWindow"
+    x:Class="REFame.PasswordManagement.App.View.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="clr-namespace:PasswordManagement.ViewModel"
+    xmlns:viewModel="clr-namespace:REFame.PasswordManagement.App.ViewModel"
     Title="MainWindow"
     Width="800"
     Height="450"
@@ -44,8 +44,7 @@
                 <Button Command="{Binding ButtonCommandDeleteItem}" Foreground="{DynamicResource PrimaryHueLightBrush}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Delete" />
-                        <Label Content="{DynamicResource MainDelete}"
-                               Foreground="{DynamicResource PrimaryHueLightBrush}" />
+                        <Label Content="{DynamicResource MainDelete}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
                 <Button>
@@ -59,8 +58,7 @@
                 <Button Command="{Binding ButtonCommandOpenSettings}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueLightBrush}" Kind="Settings" />
-                        <Label Content="{DynamicResource MainSettings}"
-                               Foreground="{DynamicResource PrimaryHueLightBrush}" />
+                        <Label Content="{DynamicResource MainSettings}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
             </ToolBar>

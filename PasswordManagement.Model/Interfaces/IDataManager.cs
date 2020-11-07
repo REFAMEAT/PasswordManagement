@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PasswordManagement.Model.Interfaces
+namespace REFame.PasswordManagement.Model.Interfaces
 {
     public interface IDataManager<T> where T : class
     {

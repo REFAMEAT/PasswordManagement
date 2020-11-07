@@ -2,10 +2,10 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using NUnit.Framework;
-using PasswordManagement.File.Binary;
-using PasswordManagement.Model;
+using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.Model;
 
-namespace PasswordManagement.File.Test.Binary
+namespace REFame.PasswordManagement.File.Tests.Binary
 {
     [TestFixture]
     public class BinaryHelperTests

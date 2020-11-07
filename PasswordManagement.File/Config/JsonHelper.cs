@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
-using PasswordManagement.Logging;
+using REFame.PasswordManagement.Logging;
+using REFame.PasswordManagement.Model.Setting;
 
-namespace PasswordManagement.File.Config
+namespace REFame.PasswordManagement.File.Config
 {
     /// <summary>
     ///     Serialize and Deserialize JSON files

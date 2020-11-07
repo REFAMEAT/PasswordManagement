@@ -2,14 +2,14 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PasswordManagement.Backend.Security
+namespace REFame.PasswordManagement.Backend.Security
 {
     /// <summary>
     ///     Class for Hashing and Salting Passwords
     /// </summary>
     public class Password
     {
-        internal static string GetSalt()
+        public static string GetSalt()
         {
             var bytes = new byte[128 / 8];
             using var keyGenerator = RandomNumberGenerator.Create();
@@ -17,7 +17,7 @@ namespace PasswordManagement.Backend.Security
             return BitConverter.ToString(bytes).Replace("-", "").ToLower();
         }
 
-        internal static string GetHash(string text)
+        public static string GetHash(string text)
         {
             // SHA512 is disposable by inheritance.  
             using var sha256 = SHA256.Create();

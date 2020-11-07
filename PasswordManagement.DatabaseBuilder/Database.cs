@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Data.SqlClient;
 
-namespace PasswordManagement.DatabaseBuilder
+namespace REFame.PasswordManagement.DatabaseBuilder
 {
     public class Database
     {
@@ -10,17 +10,24 @@ namespace PasswordManagement.DatabaseBuilder
         {
             BuilderContext<T> context;
             if (!connectionStringBuilder.IntegratedSecurity)
+            {
                 context = new BuilderContext<T>(assemblies,
                     connectionStringBuilder.DataSource,
                     connectionStringBuilder.InitialCatalog,
                     connectionStringBuilder.UserID,
                     connectionStringBuilder.Password);
+            }
             else
+            {
                 context = new BuilderContext<T>(assemblies,
                     connectionStringBuilder.DataSource,
                     connectionStringBuilder.InitialCatalog);
+            }
 
-            if (deleteExisting) context.Database.EnsureDeleted();
+            if (deleteExisting)
+            {
+                context.Database.EnsureDeleted();
+            }
 
             context.Database.EnsureCreated();
             context.SaveChanges();

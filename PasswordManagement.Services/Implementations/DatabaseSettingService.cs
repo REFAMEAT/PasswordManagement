@@ -1,9 +1,9 @@
 ﻿using System;
-using PasswordManagement.File.Config;
-using PasswordManagement.Model.Setting;
-using PasswordManagement.Services.Interfaces;
+using REFame.PasswordManagement.File.Config;
+using REFame.PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.Services.Interfaces;
 
-namespace PasswordManagement.Services.Implementations
+namespace REFame.PasswordManagement.Services.Implementations
 {
     public class DatabaseSettingService : ISettingService<DatabaseData>
     {

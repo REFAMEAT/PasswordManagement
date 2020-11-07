@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 
-namespace PasswordManagement.Model.Setting
+namespace REFame.PasswordManagement.Model.Setting
 {
     /// <summary>
     ///     All available UI-Themes
     /// </summary>
-    internal static class ThemePatterns
+    public static class ThemePatterns
     {
         /// <summary>
         ///     All supported Colors
         /// </summary>
-        internal static List<string> SupportedColors = new List<string>
+        public static List<string> SupportedColors = new List<string>
         {
             "Blue",
             "LightBlue",

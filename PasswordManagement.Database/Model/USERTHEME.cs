@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PasswordManagement.Database.Model
+namespace REFame.PasswordManagement.Database.Model
 {
     public class USERTHEME : GenerateTable
     {
-        [Key] public string UTID { get; set; }
+        [Key]
+        public string UTID { get; set; }
 
         public USERDATA User { get; set; }
 

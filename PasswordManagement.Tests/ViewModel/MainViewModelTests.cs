@@ -1,9 +1,10 @@
 ﻿using NUnit.Framework;
-using PasswordManagement.Backend.Security;
-using PasswordManagement.Model;
-using PasswordManagement.ViewModel;
+using REFame.PasswordManagement.App.Model;
+using REFame.PasswordManagement.App.ViewModel;
+using REFame.PasswordManagement.Backend.Security;
+using REFame.PasswordManagement.Model;
 
-namespace PasswordManagement.Tests.ViewModel
+namespace REFame.PasswordManagement.Tests.ViewModel
 {
     [TestFixture]
     public class MainViewModelTests
@@ -20,7 +21,7 @@ namespace PasswordManagement.Tests.ViewModel
                 Identifier = "TEST",
                 Password = Encryption.EncryptString("SafePassword", "testPW")
             });
-            App.loginPw = "testPW";
+            App.App.loginPw = "testPW";
 
             viewModel = new MainViewModel(dataManager);
         }

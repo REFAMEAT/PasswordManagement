@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PasswordManagement.Logging
+namespace REFame.PasswordManagement.Logging
 {
     public class FileLogger : ILogger
     {

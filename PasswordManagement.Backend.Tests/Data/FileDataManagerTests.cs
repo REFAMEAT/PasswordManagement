@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using NUnit.Framework;
-using PasswordManagement.Backend.Data;
-using PasswordManagement.Model;
+using REFame.PasswordManagement.Backend.Data;
+using REFame.PasswordManagement.Model;
 
-namespace PasswordManagement.Backend.Tests.Data
+namespace REFame.PasswordManagement.Backend.Tests.Data
 {
     [TestFixture]
     public class FileDataManagerTests

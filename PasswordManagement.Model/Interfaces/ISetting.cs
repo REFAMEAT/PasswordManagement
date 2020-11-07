@@ -1,6 +1,6 @@
-﻿namespace PasswordManagement.Model.Interfaces
+﻿namespace REFame.PasswordManagement.Model.Interfaces
 {
-    internal interface ISetting
+    public interface ISetting
     {
         void Load();
         void Save();

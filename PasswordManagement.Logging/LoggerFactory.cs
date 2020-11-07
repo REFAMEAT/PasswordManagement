@@ -4,16 +4,16 @@ using Serilog;
 using Serilog.Exceptions;
 using Serilog.Formatting.Json;
 
-namespace PasswordManagement.Logging
+namespace REFame.PasswordManagement.Logging
 {
     public class LoggerFactory
     {
+        private readonly ILogger currentLogger;
+
         /// <summary>
         ///     Path to the JSON file
         /// </summary>
         private readonly string logPath = @$"C:\Users\{Environment.UserName}\AppData\Roaming\PWManagement";
-
-        private readonly ILogger currentLogger;
 
 
         public LoggerFactory()

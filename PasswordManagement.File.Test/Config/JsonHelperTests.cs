@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
+using REFame.PasswordManagement.File.Config;
 
-namespace PasswordManagement.File.Config.Tests
+namespace REFame.PasswordManagement.File.Tests.Config
 {
     [TestFixture]
     public class JsonHelperTests
@@ -12,7 +13,7 @@ namespace PasswordManagement.File.Config.Tests
         {
             DirectoryInfo directory = new FileInfo(JsonHelper<TestModel>.GetPath()).Directory;
 
-            if (!directory.Exists)
+            if (!directory?.Exists == true)
             {
                 directory.Create();
             }

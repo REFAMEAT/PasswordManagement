@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PasswordManagement.View
+namespace REFame.PasswordManagement.App.View
 {
     /// <summary>
     ///     Interaction logic for Messagebox.xaml

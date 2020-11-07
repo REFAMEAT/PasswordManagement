@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using PasswordManagement.Backend.Data;
-using PasswordManagement.Database.DbSet;
-using PasswordManagement.Database.Model;
-using PasswordManagement.Database.Tests;
-using PasswordManagement.Model;
+using REFame.PasswordManagement.Backend.Data;
+using REFame.PasswordManagement.Database.DbSet;
+using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.Database.Tests;
+using REFame.PasswordManagement.Model;
 
-namespace PasswordManagement.Backend.Tests.Data
+namespace REFame.PasswordManagement.Backend.Tests.Data
 {
     [TestFixture]
     public class DatabaseDataManagerTests : DatabaseSetup

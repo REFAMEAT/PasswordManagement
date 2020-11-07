@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Media;
-using PasswordManagement.Backend.Security;
-using PasswordManagement.Database.Model;
-using PasswordManagement.ViewModel;
+using REFame.PasswordManagement.App.ViewModel;
+using REFame.PasswordManagement.Backend.Security;
+using REFame.PasswordManagement.Database.Model;
 
-namespace PasswordManagement.View
+namespace REFame.PasswordManagement.App.View
 {
     /// <summary>
     ///     Interaction logic for AddUser.xaml
@@ -43,7 +43,11 @@ namespace PasswordManagement.View
                 return UserFactory.CreateUser(userName, password);
             }
 
-            if (shutDownAppOnCancel) Application.Current.Shutdown();
+            if (shutDownAppOnCancel)
+            {
+                Application.Current.Shutdown();
+            }
+
             return null;
         }
     }

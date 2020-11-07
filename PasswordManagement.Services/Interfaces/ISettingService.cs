@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PasswordManagement.Services.Interfaces
+namespace REFame.PasswordManagement.Services.Interfaces
 {
     public interface ISettingService<T>
     {

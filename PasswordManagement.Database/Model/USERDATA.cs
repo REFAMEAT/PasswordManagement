@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PasswordManagement.Database.Model
+namespace REFame.PasswordManagement.Database.Model
 {
     [Table("USERDATA")]
     public class USERDATA : GenerateTable

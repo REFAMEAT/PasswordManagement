@@ -1,10 +1,10 @@
 ﻿using System;
 using MaterialDesignThemes.Wpf;
-using PasswordManagement.Model.Enums;
-using PasswordManagement.Model.Setting;
-using PasswordManagement.Services.Interfaces;
+using REFame.PasswordManagement.Model.Enums;
+using REFame.PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.Services.Interfaces;
 
-namespace PasswordManagement.Settings.Tests
+namespace REFame.PasswordManagement.Settings.Tests
 {
     public class StyleSettingServiceMock : ISettingService<ThemeData>
     {

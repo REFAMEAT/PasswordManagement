@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace PasswordManagement.View
+namespace REFame.PasswordManagement.App.View
 {
     /// <summary>
     ///     Interaction logic for Add.xaml

@@ -1,9 +1,9 @@
 ﻿using System.Windows;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Interfaces;
-using PasswordManagement.ViewModel;
+using REFame.PasswordManagement.App.ViewModel;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Interfaces;
 
-namespace PasswordManagement.View
+namespace REFame.PasswordManagement.App.View
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
@@ -14,7 +14,10 @@ namespace PasswordManagement.View
         {
             InitializeComponent();
 
-            if (!(dataManager is null)) DataContext = new MainViewModel(dataManager);
+            if (!(dataManager is null))
+            {
+                DataContext = new MainViewModel(dataManager);
+            }
         }
     }
 }

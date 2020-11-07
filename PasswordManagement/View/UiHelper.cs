@@ -2,11 +2,11 @@
 using System.Drawing;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
-using PasswordManagement.Model.Enums;
-using PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.Model.Enums;
+using REFame.PasswordManagement.Model.Setting;
 using MColor = System.Windows.Media.Color;
 
-namespace PasswordManagement.View
+namespace REFame.PasswordManagement.App.View
 {
     public class UiHelper
     {

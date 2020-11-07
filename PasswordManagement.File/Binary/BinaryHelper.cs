@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using PasswordManagement.Model;
+using REFame.PasswordManagement.Model;
 
-namespace PasswordManagement.File.Binary
+namespace REFame.PasswordManagement.File.Binary
 {
     /// <summary>
     ///     Helper class for Binaries
@@ -23,7 +23,10 @@ namespace PasswordManagement.File.Binary
         {
             if (path != null)
             {
-                if (!System.IO.File.Exists(path)) throw new FileNotFoundException("cannot find file", path);
+                if (!System.IO.File.Exists(path))
+                {
+                    throw new FileNotFoundException("cannot find file", path);
+                }
 
                 xmlConfigPath = path;
             }
@@ -37,7 +40,7 @@ namespace PasswordManagement.File.Binary
         ///     Read a <see cref="BinaryData" /> from the .bin file
         /// </summary>
         /// <returns></returns>
-        internal BinaryData GetData()
+        public BinaryData GetData()
         {
             IFormatter formatter = new BinaryFormatter();
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
@@ -54,7 +57,7 @@ namespace PasswordManagement.File.Binary
         ///     Write a <see cref="BinaryData" /> to the .bin File
         /// </summary>
         /// <param name="content"></param>
-        internal void Write(BinaryData content)
+        public void Write(BinaryData content)
         {
             IFormatter formatter = new BinaryFormatter();
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),

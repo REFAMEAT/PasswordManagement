@@ -1,10 +1,10 @@
 ﻿using System.Windows.Input;
-using PasswordManagement.Backend.Security;
-using PasswordManagement.Model;
-using PasswordManagement.View;
-using PasswordManagement.ViewModel.Base;
+using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.App.ViewModel.Base;
+using REFame.PasswordManagement.Backend.Security;
+using REFame.PasswordManagement.Model;
 
-namespace PasswordManagement.ViewModel
+namespace REFame.PasswordManagement.App.ViewModel
 {
     public class AddPasswordViewModel : NotifyPropertyChanged
     {
@@ -43,7 +43,10 @@ namespace PasswordManagement.ViewModel
         /// <param name="obj">The <see cref="AddPassword" /> to close</param>
         private void DoApply(object obj)
         {
-            if (!(obj is AddPassword window)) return;
+            if (!(obj is AddPassword window))
+            {
+                return;
+            }
 
             var data = new PasswordData
             {

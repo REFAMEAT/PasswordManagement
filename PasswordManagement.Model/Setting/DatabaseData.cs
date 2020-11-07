@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Model.Setting
+﻿namespace REFame.PasswordManagement.Model.Setting
 {
     public class DatabaseData
     {

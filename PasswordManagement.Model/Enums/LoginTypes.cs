@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Model.Enums
+﻿namespace REFame.PasswordManagement.Model.Enums
 {
     public enum LoginTypes
     {

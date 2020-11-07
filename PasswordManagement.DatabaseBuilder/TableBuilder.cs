@@ -6,7 +6,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PasswordManagement.DatabaseBuilder
+namespace REFame.PasswordManagement.DatabaseBuilder
 {
     public class TableBuilder
     {
@@ -16,16 +16,23 @@ namespace PasswordManagement.DatabaseBuilder
 
             foreach (Assembly assembly in sourceAssemblies)
             foreach (Type type in assembly.GetTypes())
+            {
                 if (!types.Contains(type)
                     && type.BaseType == typeof(T))
+                {
                     types.Add(type);
+                }
+            }
 
             return types;
         }
 
         internal ModelBuilder BuildTables(List<Type> models, ModelBuilder builder)
         {
-            foreach (Type type in models) BuildTable(type, builder);
+            foreach (Type type in models)
+            {
+                BuildTable(type, builder);
+            }
 
             return builder;
         }
@@ -36,9 +43,14 @@ namespace PasswordManagement.DatabaseBuilder
             string[] entityKey = GetEntityKeys(model);
 
             if (entityKey.Length > 0)
+            {
                 entityBuilder.HasKey(entityKey);
+            }
             else
+            {
                 entityBuilder.HasNoKey();
+            }
+
             return builder;
         }
 
@@ -50,7 +62,10 @@ namespace PasswordManagement.DatabaseBuilder
             foreach (PropertyInfo info in allProperties)
             {
                 IEnumerable<Attribute> attributes = info.GetCustomAttributes();
-                if (attributes.Contains(new KeyAttribute())) keys.Add(info.Name);
+                if (attributes.Contains(new KeyAttribute()))
+                {
+                    keys.Add(info.Name);
+                }
             }
 
             return keys.ToArray();
