@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using PasswordManagement.File.Config;
-using PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.File.Config;
+using REFame.PasswordManagement.Model.Setting;
 
-namespace PasswordManagement.Database.DbSet
+namespace REFame.PasswordManagement.Database.DbSet
 {
     public class DataSet<TEntity> : DbContext where TEntity : class
     {

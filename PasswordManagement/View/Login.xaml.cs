@@ -1,8 +1,8 @@
 ﻿using System.Windows;
-using PasswordManagement.Model.Interfaces;
-using PasswordManagement.ViewModel;
+using REFame.PasswordManagement.App.ViewModel;
+using REFame.PasswordManagement.Model.Interfaces;
 
-namespace PasswordManagement.View
+namespace REFame.PasswordManagement.App.View
 {
     /// <summary>
     ///     Interaktionslogik für Login.xaml

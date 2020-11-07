@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace PasswordManagement.DatabaseBuilder.BuilderUI
+namespace REFame.PasswordManagement.DatabaseBuilder.BuilderUI
 {
     /// <summary>
     ///     Interaction logic for App.xaml

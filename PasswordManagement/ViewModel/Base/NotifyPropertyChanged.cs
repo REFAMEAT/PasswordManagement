@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
-namespace PasswordManagement.ViewModel.Base
+namespace REFame.PasswordManagement.App.ViewModel.Base
 {
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {

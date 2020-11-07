@@ -1,7 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
-using PasswordManagement.Model.Enums;
+using REFame.PasswordManagement.Model.Enums;
 
-namespace PasswordManagement.Model.Setting
+namespace REFame.PasswordManagement.Model.Setting
 {
     /// <summary>
     ///     Model for the UI-Theme Data

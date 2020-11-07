@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
-using PasswordManagement.File.Binary;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Interfaces;
 
-namespace PasswordManagement.Backend.Data
+namespace REFame.PasswordManagement.Backend.Data
 {
     /// <summary>
     ///     A Data-Manager for managing entities in local binary Files
     /// </summary>
-    internal class FileDataManager : IDataManager<PasswordData>
+    public class FileDataManager : IDataManager<PasswordData>
     {
         private readonly BinaryHelper binaryHelper;
         private BinaryData binaryData;
 
-        internal FileDataManager(string path = null)
+        public FileDataManager(string path = null)
         {
             binaryHelper = new BinaryHelper(path);
             binaryData = binaryHelper.GetData();

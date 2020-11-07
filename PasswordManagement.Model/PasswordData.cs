@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PasswordManagement.Model
+namespace REFame.PasswordManagement.Model
 {
     /// <summary>
     ///     The password-storaging model

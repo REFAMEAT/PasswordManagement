@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace PasswordManagement.Model.Tests
+namespace REFame.PasswordManagement.Model.Tests
 {
     [TestFixture]
     public class AppCoreTests

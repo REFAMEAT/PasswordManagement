@@ -1,16 +1,16 @@
 ﻿using System;
-using PasswordManagement.Backend.Security;
-using PasswordManagement.File.Binary;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Backend.Security;
+using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Interfaces;
 
-namespace PasswordManagement.Backend.Login
+namespace REFame.PasswordManagement.Backend.Login
 {
-    internal class LocalLogin : ILogin
+    public class LocalLogin : ILogin
     {
         private BinaryHelper helper;
 
-        internal LocalLogin()
+        public LocalLogin()
         {
             helper = new BinaryHelper();
         }
@@ -26,7 +26,9 @@ namespace PasswordManagement.Backend.Login
 
             if (Password.GetHash(userName + data.Salt) == data.UserNameHash
                 && Password.GetHash(password + data.Salt) == data.PasswordHash)
+            {
                 return data.UserNameHash;
+            }
 
             return null;
         }

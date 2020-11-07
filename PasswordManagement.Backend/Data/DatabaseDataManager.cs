@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using PasswordManagement.Database.DbSet;
-using PasswordManagement.Database.Model;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Interfaces;
-using PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.Database.DbSet;
+using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Model.Setting;
 
-namespace PasswordManagement.Backend.Data
+namespace REFame.PasswordManagement.Backend.Data
 {
     /// <summary>
     ///     A Data-Manager for the connection to the Database

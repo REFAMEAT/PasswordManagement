@@ -1,8 +1,8 @@
 ﻿using System;
-using PasswordManagement.Model.Setting;
-using PasswordManagement.Services.Interfaces;
+using REFame.PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.Services.Interfaces;
 
-namespace PasswordManagement.Settings.Tests
+namespace REFame.PasswordManagement.Settings.Tests
 {
     public class DatabaseSettingServiceMock : ISettingService<DatabaseData>
     {

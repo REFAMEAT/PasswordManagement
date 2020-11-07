@@ -3,9 +3,9 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Data.SqlClient;
-using PasswordManagement.Database;
+using REFame.PasswordManagement.Database;
 
-namespace PasswordManagement.DatabaseBuilder.BuilderUI
+namespace REFame.PasswordManagement.DatabaseBuilder.BuilderUI
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
@@ -23,6 +23,7 @@ namespace PasswordManagement.DatabaseBuilder.BuilderUI
 
             SqlConnectionStringBuilder stringBuilder;
             if (UserName.Text != string.Empty)
+            {
                 stringBuilder = new SqlConnectionStringBuilder
                 {
                     InitialCatalog = DatabaseName.Text,
@@ -30,13 +31,16 @@ namespace PasswordManagement.DatabaseBuilder.BuilderUI
                     UserID = UserName.Text,
                     Password = PasswordBox.Password
                 };
+            }
             else
+            {
                 stringBuilder = new SqlConnectionStringBuilder
                 {
                     InitialCatalog = DatabaseName.Text,
                     DataSource = ServerName.Text,
                     IntegratedSecurity = true
                 };
+            }
 
             try
             {

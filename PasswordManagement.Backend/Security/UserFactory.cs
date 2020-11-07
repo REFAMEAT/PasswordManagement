@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
-using PasswordManagement.Database.Model;
+using REFame.PasswordManagement.Database.Model;
 
-namespace PasswordManagement.Backend.Security
+namespace REFame.PasswordManagement.Backend.Security
 {
     /// <summary>
     ///     Creates users and hashed passwords

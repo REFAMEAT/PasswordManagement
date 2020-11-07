@@ -1,18 +1,21 @@
 ﻿using MaterialDesignThemes.Wpf;
-using PasswordManagement.File.Config;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Enums;
-using PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.File.Config;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Enums;
+using REFame.PasswordManagement.Model.Setting;
 
-namespace PasswordManagement.Backend
+namespace REFame.PasswordManagement.Backend
 {
     public static class ThemeStart
     {
-        internal static AppCore StartThemes(this AppCore app, out ThemeData theme)
+        public static AppCore StartThemes(this AppCore app, out ThemeData theme)
         {
             theme = JsonHelper<ThemeData>.GetData(Globals.DefaultTheme);
 
-            if (theme.Theme != BaseTheme.Inherit || theme.PrimaryColor != null) return app;
+            if (theme.Theme != BaseTheme.Inherit || theme.PrimaryColor != null)
+            {
+                return app;
+            }
 
             theme = new ThemeData
             {

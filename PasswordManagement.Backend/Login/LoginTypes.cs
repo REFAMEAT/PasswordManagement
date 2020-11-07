@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Backend.Login
+﻿namespace REFame.PasswordManagement.Backend.Login
 {
     public enum LoginTypes
     {

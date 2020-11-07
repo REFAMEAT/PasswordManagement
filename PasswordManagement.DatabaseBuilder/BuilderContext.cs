@@ -4,12 +4,12 @@ using System.Reflection;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
-namespace PasswordManagement.DatabaseBuilder
+namespace REFame.PasswordManagement.DatabaseBuilder
 {
     public class BuilderContext<T> : DbContext where T : class
     {
-        private readonly SqlConnectionStringBuilder builder;
         private readonly Assembly[] assemblies;
+        private readonly SqlConnectionStringBuilder builder;
 
         public BuilderContext(Assembly[] assemblies, string serverName, string databaseName, string userName,
             string password)

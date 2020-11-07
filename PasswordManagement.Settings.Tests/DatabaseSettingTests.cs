@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace PasswordManagement.Settings.Tests
+namespace REFame.PasswordManagement.Settings.Tests
 {
     [TestFixture]
     public class DatabaseSettingTests

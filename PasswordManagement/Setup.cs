@@ -1,11 +1,11 @@
 ﻿using System.Windows;
-using PasswordManagement.Backend.Login;
-using PasswordManagement.File.Config;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Setting;
-using PasswordManagement.View;
+using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.Backend.Login;
+using REFame.PasswordManagement.File.Config;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Setting;
 
-namespace PasswordManagement
+namespace REFame.PasswordManagement.App
 {
     internal static class Setup
     {

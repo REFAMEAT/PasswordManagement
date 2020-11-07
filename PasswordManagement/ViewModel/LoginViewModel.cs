@@ -1,16 +1,16 @@
 ﻿using System.Windows.Input;
 using System.Windows.Media;
-using PasswordManagement.Backend;
-using PasswordManagement.Backend.Login;
-using PasswordManagement.Database.DbSet;
-using PasswordManagement.Database.Model;
-using PasswordManagement.File.Binary;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Interfaces;
-using PasswordManagement.View;
-using PasswordManagement.ViewModel.Base;
+using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.App.ViewModel.Base;
+using REFame.PasswordManagement.Backend;
+using REFame.PasswordManagement.Backend.Login;
+using REFame.PasswordManagement.Database.DbSet;
+using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Interfaces;
 
-namespace PasswordManagement.ViewModel
+namespace REFame.PasswordManagement.App.ViewModel
 {
     public class LoginViewModel : NotifyPropertyChanged
     {

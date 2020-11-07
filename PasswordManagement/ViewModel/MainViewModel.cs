@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using PasswordManagement.Backend;
-using PasswordManagement.Backend.Data;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Interfaces;
-using PasswordManagement.View;
-using PasswordManagement.ViewModel.Base;
+using REFame.PasswordManagement.App.Model;
+using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.App.ViewModel.Base;
+using REFame.PasswordManagement.Backend;
+using REFame.PasswordManagement.Backend.Data;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Interfaces;
 
-namespace PasswordManagement.ViewModel
+namespace REFame.PasswordManagement.App.ViewModel
 {
     public class MainViewModel : NotifyPropertyChanged
     {
@@ -20,7 +21,7 @@ namespace PasswordManagement.ViewModel
         private ObservableCollection<PasswordDataDisplay> items;
         private PasswordDataDisplay selectedItem;
 
-        internal MainViewModel(IDataManager<PasswordData> dataManager)
+        public MainViewModel(IDataManager<PasswordData> dataManager)
         {
             this.dataManager = dataManager;
             Items = ToDisplayData(dataManager.LoadData());
@@ -51,7 +52,10 @@ namespace PasswordManagement.ViewModel
 
         private void DoDeleteItem(object obj)
         {
-            if (SelectedItem == null) return;
+            if (SelectedItem == null)
+            {
+                return;
+            }
 
             PasswordData itemToDelete = dataManager.LoadData()
                 .Find(x => x.Password == SelectedItem.Password
@@ -59,7 +63,10 @@ namespace PasswordManagement.ViewModel
                            && x.Comments == SelectedItem.Comments);
 
             bool deleted = dataManager.Remove(itemToDelete);
-            if (deleted) Items.Remove(SelectedItem);
+            if (deleted)
+            {
+                Items.Remove(SelectedItem);
+            }
         }
 
         private void DoOpenSettings(object obj)
@@ -74,7 +81,10 @@ namespace PasswordManagement.ViewModel
             addPassword.Show();
             addPassword.Closed += (sender, e) =>
             {
-                if (addPassword.Canceled) return;
+                if (addPassword.Canceled)
+                {
+                    return;
+                }
 
                 PasswordData newItem = ((AddPasswordViewModel) addPassword.DataContext).NewItem;
 

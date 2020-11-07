@@ -1,10 +1,10 @@
 ﻿using MaterialDesignThemes.Wpf;
-using PasswordManagement.Model.Enums;
-using PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.Model.Enums;
+using REFame.PasswordManagement.Model.Setting;
 
-namespace PasswordManagement.Backend
+namespace REFame.PasswordManagement.Backend
 {
-    internal static class Globals
+    public static class Globals
     {
         static Globals()
         {
@@ -27,10 +27,10 @@ namespace PasswordManagement.Backend
             };
         }
 
-        internal static bool UseDatabase { get; set; }
-        internal static string CurrentUserId { get; set; }
-        internal static string UserHash { get; set; }
-        internal static ThemeData DefaultTheme { get; }
-        internal static DatabaseData DefaultDb { get; }
+        public static bool UseDatabase { get; set; }
+        public static string CurrentUserId { get; set; }
+        public static string UserHash { get; set; }
+        public static ThemeData DefaultTheme { get; }
+        public static DatabaseData DefaultDb { get; }
     }
 }

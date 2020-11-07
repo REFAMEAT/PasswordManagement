@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PasswordManagement.Backend.Security
+namespace REFame.PasswordManagement.Backend.Security
 {
     /// <summary>
     ///     encrypt and decrypt strings

@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Logging
+﻿namespace REFame.PasswordManagement.Logging
 {
     public class Logger
     {

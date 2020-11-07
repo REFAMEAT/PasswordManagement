@@ -1,4 +1,4 @@
-﻿namespace PasswordManagement.Model.Enums
+﻿namespace REFame.PasswordManagement.Model.Enums
 {
     /// <summary>
     ///     All available UI-Languages

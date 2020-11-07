@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using PasswordManagement.Backend.Security;
-using PasswordManagement.Database.DbSet;
-using PasswordManagement.Database.Model;
-using PasswordManagement.Logging;
-using PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Backend.Security;
+using REFame.PasswordManagement.Database.DbSet;
+using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.Logging;
+using REFame.PasswordManagement.Model.Interfaces;
 
-namespace PasswordManagement.Backend.Login
+namespace REFame.PasswordManagement.Backend.Login
 {
     public class DatabaseLogin : ILogin
     {
         private readonly DataSet<USERDATA> userdatas;
 
-        internal DatabaseLogin()
+        public DatabaseLogin()
         {
             userdatas = new DataSet<USERDATA>();
         }

@@ -1,18 +1,18 @@
 ﻿using System.Windows;
-using PasswordManagement.Backend;
-using PasswordManagement.Backend.Binary;
-using PasswordManagement.Logging;
-using PasswordManagement.Model;
-using PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.Backend;
+using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.Logging;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Setting;
 
-namespace PasswordManagement
+namespace REFame.PasswordManagement.App
 {
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App
     {
-        internal static string loginPw;
+        public static string loginPw;
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {

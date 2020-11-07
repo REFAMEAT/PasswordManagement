@@ -1,8 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
-using PasswordManagement.Backend.Security;
+using REFame.PasswordManagement.Backend.Security;
 
-namespace PasswordManagement.Backend.Tests.Security
+namespace REFame.PasswordManagement.Backend.Tests.Security
 {
     public class EncryptionTests
     {

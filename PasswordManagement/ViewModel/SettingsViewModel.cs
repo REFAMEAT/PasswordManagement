@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
-using PasswordManagement.Model.Interfaces;
-using PasswordManagement.Services.Implementations;
-using PasswordManagement.Settings;
-using PasswordManagement.View;
-using PasswordManagement.ViewModel.Base;
+using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.App.ViewModel.Base;
+using REFame.PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Services.Implementations;
+using REFame.PasswordManagement.Settings;
 
-namespace PasswordManagement.ViewModel
+namespace REFame.PasswordManagement.App.ViewModel
 {
     public class SettingsViewModel : NotifyPropertyChanged
     {

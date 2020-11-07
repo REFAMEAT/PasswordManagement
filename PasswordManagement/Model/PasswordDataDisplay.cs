@@ -2,9 +2,10 @@
 using System.Runtime.CompilerServices;
 using System.Timers;
 using JetBrains.Annotations;
-using PasswordManagement.Backend.Security;
+using REFame.PasswordManagement.Backend.Security;
+using REFame.PasswordManagement.Model;
 
-namespace PasswordManagement.Model
+namespace REFame.PasswordManagement.App.Model
 {
     public class PasswordDataDisplay : PasswordData, INotifyPropertyChanged
     {
@@ -42,7 +43,9 @@ namespace PasswordManagement.Model
                 {
                     PasswordDisplay = string.Empty;
                     for (int i = Encryption.DecryptString(Password, App.loginPw).Length - 1; i >= 0; i--)
+                    {
                         PasswordDisplay += '•';
+                    }
                 }
 
                 SetProperty(ref display, value);

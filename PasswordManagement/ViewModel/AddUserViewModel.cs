@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
-using PasswordManagement.View;
-using PasswordManagement.ViewModel.Base;
+using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.App.ViewModel.Base;
 
-namespace PasswordManagement.ViewModel
+namespace REFame.PasswordManagement.App.ViewModel
 {
     public class AddUserViewModel : NotifyPropertyChanged
     {
@@ -26,7 +26,10 @@ namespace PasswordManagement.ViewModel
 
         private void DoCreateUser(object obj)
         {
-            if (!(obj is AddUser login) || !InputOk) return;
+            if (!(obj is AddUser login) || !InputOk)
+            {
+                return;
+            }
 
             login.DialogResult = true;
             login.Close();

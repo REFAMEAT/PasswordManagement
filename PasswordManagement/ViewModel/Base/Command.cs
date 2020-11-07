@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace PasswordManagement.ViewModel.Base
+namespace REFame.PasswordManagement.App.ViewModel.Base
 {
     /// <summary>
     ///     Delivers a <see cref="ICommand" /> implementation for Binding Commands to functions
@@ -38,7 +38,10 @@ namespace PasswordManagement.ViewModel.Base
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            if (CanExecute(parameter)) target(parameter);
+            if (CanExecute(parameter))
+            {
+                target(parameter);
+            }
         }
 
         public event EventHandler CanExecuteChanged;

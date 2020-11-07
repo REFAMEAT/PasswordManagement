@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PasswordManagement.Model.Interfaces
+namespace REFame.PasswordManagement.Model.Interfaces
 {
     public interface ILogin : IDisposable
     {

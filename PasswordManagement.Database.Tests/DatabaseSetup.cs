@@ -3,10 +3,10 @@ using System.IO;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using PasswordManagement.Database.DbSet;
-using PasswordManagement.Database.Model;
+using REFame.PasswordManagement.Database.DbSet;
+using REFame.PasswordManagement.Database.Model;
 
-namespace PasswordManagement.Database.Tests
+namespace REFame.PasswordManagement.Database.Tests
 {
     [SetUpFixture]
     public class DatabaseSetup
