@@ -35,7 +35,7 @@ namespace REFame.PasswordManagement.App.View
 
             var customStyleDictionary = new ResourceDictionary
             {
-                Source = new Uri("pack://application:,,,/PasswordManagement.Styles;component/TabControlStyles.xaml",
+                Source = new Uri("pack://application:,,,/REFame.PasswordManagement.Styles;component/TabControlStyles.xaml",
                     UriKind.Absolute)
             };
 

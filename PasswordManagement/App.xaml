@@ -15,7 +15,7 @@
                     SecondaryColor="Blue" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="..\Resources\StringResources.EN.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/PasswordManagement.Styles;component/TabControlStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/REFame.PasswordManagement.Styles;component/TabControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
