@@ -20,9 +20,13 @@ pool: Default
 name: $(Year:yyyy).$(Date:MM)$(Rev:.r)-nightly
 
 variables:
-  solution: 'PasswordManagement.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+- group: versioning
+- name: solution 
+  value: 'PasswordManagement.sln'
+- name: buildPlatform 
+  value: 'Any CPU'
+- name: buildConfiguration
+  value: 'Release'
 
 steps:
 - task: NuGetToolInstaller@1
