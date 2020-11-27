@@ -17,7 +17,7 @@ schedules:
 
 pool: Default
 
-name: $(Year:yyyy).$(Date:MM)$(Rev:.r)-nightly
+name: $(Year:yyyy).$(Minor)$(Rev:.r)-nightly
 
 variables:
 - group: versioning
