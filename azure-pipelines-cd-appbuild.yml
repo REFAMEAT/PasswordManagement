@@ -15,8 +15,7 @@ pr: none
 
 name: $(Year:yyyy).$(Minor)$(Rev:.r)
 
-pool: 
-  vmImage: windows-latest
+pool: Default
 
 stages: 
 - stage: Build_Unit_Test
