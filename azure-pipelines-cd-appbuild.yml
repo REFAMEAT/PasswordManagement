@@ -1,0 +1,87 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+variables:
+  - group: versioning
+  - name: project
+    value: PasswordManagement/REFame.PasswordManagement.App.csproj
+  - name : testProjects
+    value: '**/*.csproj'
+
+trigger: none
+pr: none
+
+name: $(Year:yyyy).$(Minor)$(Rev:.r)
+
+pool: Default
+
+stages: 
+- stage: Build_Unit_Test
+  jobs:
+  - job: 
+    steps:
+      - task: NuGetAuthenticate@0
+        inputs:
+          forceReinstallCredentialProvider: true
+      - task: VSBuild@1
+        displayName: Restore
+        inputs:
+          solution: '$(testProjects)'
+          msbuildArgs: '-t:restore'
+      
+      - task: VSBuild@1
+        displayName: Build
+        inputs:
+          solution: '$(testProjects)'
+          msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/UnitTests'
+          clean: true
+          maximumCpuCount: true
+          
+      - task: ArchiveFiles@2
+        inputs:
+          rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/UnitTests'
+          includeRootFolder: false
+          archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber)_UnitTests.zip'
+          replaceExistingArchive: true
+          archiveType: zip
+        
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber)_UnitTests.zip'
+          ArtifactName: 'UnitTest_drop'
+          publishLocation: Container
+
+- stage: Build_App
+  jobs:
+  - job:
+    steps:
+      - task: NuGetAuthenticate@0
+        inputs:
+          forceReinstallCredentialProvider: true
+      - task: VSBuild@1
+        inputs:
+          solution: '$(project)'
+          msbuildArgs: '-t:restore'
+          maximumCpuCount: true
+
+      - task: VSBuild@1
+        inputs:
+          solution: '$(project)'
+          msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/App'
+          clean: true
+          maximumCpuCount: true
+
+      - task: ArchiveFiles@2
+        inputs:
+          rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/App'
+          includeRootFolder: false
+          archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber)_App.zip'
+          replaceExistingArchive: true
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber)_App.zip'
+          ArtifactName: 'app_drop'
+          publishLocation: Container

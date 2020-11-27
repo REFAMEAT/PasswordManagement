@@ -1,0 +1,2 @@
+# Continious Deployment Status
+[![Build Status](https://dev.azure.com/REFAME/PasswordManagement/_apis/build/status/Desktop/CD%20PasswordManagement.App?branchName=develop)](https://dev.azure.com/REFAME/PasswordManagement/_build/latest?definitionId=31&branchName=develop)
