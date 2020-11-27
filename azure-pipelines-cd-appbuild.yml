@@ -4,6 +4,7 @@
 # https://aka.ms/yaml
 
 variables:
+  - group: versioning
   - name: project
     value: PasswordManagement/REFame.PasswordManagement.App.csproj
   - name : testProjects
@@ -11,6 +12,8 @@ variables:
 
 trigger: none
 pr: none
+
+name: $(Year:yyyy).$(Minor)$(Rev:.r)
 
 pool: 
   vmImage: windows-latest
