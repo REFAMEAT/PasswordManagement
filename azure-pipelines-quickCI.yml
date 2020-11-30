@@ -27,10 +27,15 @@ steps:
   inputs:
    forceReinstallCredentialProvider: true
 
-- task: VSBuild@1
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+    feedsToUse: 'select'
+    vstsFeed: 'a4524e36-84b7-4bc9-945a-1d40199dd038'
+
 - task: VSBuild@1
   displayName: 'Restore and Build'
   inputs:
     solution: '$(solution)'
     maximumCpuCount: true
-    restoreNugetPackages: true
