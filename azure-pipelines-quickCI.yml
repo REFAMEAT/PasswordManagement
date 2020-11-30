@@ -1,0 +1,44 @@
+trigger: 
+- '*'
+
+pool: Default
+
+name: $(Year:yyyy).$(Minor)$(Rev:.r)-quickCI
+
+variables:
+- group: versioning
+- name: 'solution' 
+  value: '**/*.csproj'
+- name: 'buildPlatform' 
+  value: 'Any CPU'
+- name: 'buildConfiguration'
+  value: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetAuthenticate@0
+  displayName: 'Authtification'
+  inputs:
+   forceReinstallCredentialProvider: true
+
+- checkout: self
+  displayName: 'Checkout source-code'
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '3.1.x'
+
+- task: VSBuild@1
+  displayName: Restore
+  inputs:
+    solution: '$(testProjects)'
+    msbuildArgs: '-t:restore'
+    maximumCpuCount: true
+
+- task: VSBuild@1
+  displayName: Build Solution
+  inputs:
+    solution: '$(solution)'
+    maximumCpuCount: true
