@@ -22,18 +22,12 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
-- task: NuGetAuthenticate@0
-  displayName: 'Authtification'
+- task: VSBuild@1
   inputs:
-   forceReinstallCredentialProvider: true
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '$(solution)'
-    feedsToUse: 'select'
-    vstsFeed: 'a4524e36-84b7-4bc9-945a-1d40199dd038'
-
+    solution: 'PasswordManagement.sln'
+    msbuildArgs: '-t:restore'
+    maximumCpuCount: true
+    
 - task: VSBuild@1
   displayName: 'Restore and Build'
   inputs:
