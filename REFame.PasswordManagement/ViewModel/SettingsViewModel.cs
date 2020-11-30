@@ -4,6 +4,7 @@ using REFame.PasswordManagement.App.View;
 using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Services.Implementations;
 using REFame.PasswordManagement.Settings;
+using REFame.PasswordManagement.Settings.Contracts;
 using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel

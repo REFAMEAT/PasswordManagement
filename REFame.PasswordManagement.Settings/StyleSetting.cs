@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using MaterialDesignThemes.Wpf;
 using REFame.PasswordManagement.Model.Enums;
-using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Interfaces;
+using REFame.PasswordManagement.Settings.Contracts;
 
 namespace REFame.PasswordManagement.Settings
 {
