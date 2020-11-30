@@ -6,9 +6,9 @@
 variables:
   - group: versioning
   - name: project
-    value: PasswordManagement/REFame.PasswordManagement.App.csproj
+    value: REFame.PasswordManagement/REFame.PasswordManagement.App.csproj
   - name : testProjects
-    value: '**/*.csproj'
+    value: '**/*.Tests.csproj'
 
 trigger: none
 pr: none
