@@ -27,21 +27,10 @@ steps:
   inputs:
    forceReinstallCredentialProvider: true
 
-- checkout: self
-  displayName: 'Checkout source-code'
-
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '3.1.x'
-
-- task: NuGetCommand@2
-  displayName: 'Restore Solution'
-  inputs:
-    restoreSolution: '$(solution)'
-
 - task: VSBuild@1
-  displayName: Build Solution
+- task: VSBuild@1
+  displayName: 'Restore and Build'
   inputs:
     solution: '$(solution)'
     maximumCpuCount: true
+    restoreNugetPackages: true
