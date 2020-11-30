@@ -59,5 +59,6 @@ steps:
   displayName: 'Resharper check coding guidelines'
   inputs:
     solutionOrProjectPath: '$(solution)'
-    failBuildLevelSelector: 'Error'
+    failBuildLevelSelector: 'Warning'
+    failBuildOnCodeIssues: false
     additionalArguments: '--exclude=**.Tests/**/*.cs;**Resources/**/*.*;**.Test/**/*.cs;**/**/*.xaml'
