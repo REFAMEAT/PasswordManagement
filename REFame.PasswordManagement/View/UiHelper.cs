@@ -22,8 +22,8 @@ namespace REFame.PasswordManagement.App.View
             var languageDictionary = new ResourceDictionary();
             languageDictionary.Source = data.Language switch
             {
-                Language.English => new Uri(LocFilePath.EN, UriKind.Relative),
-                Language.German => new Uri(LocFilePath.DE, UriKind.Relative),
+                Language.English => new Uri(LocFilePath.EN, UriKind.Absolute),
+                Language.German => new Uri(LocFilePath.DE, UriKind.Absolute),
                 _ => languageDictionary.Source
             };
 
