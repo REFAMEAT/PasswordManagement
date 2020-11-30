@@ -3,15 +3,15 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using REFame.PasswordManagement.App.Model;
 using REFame.PasswordManagement.App.View;
-using REFame.PasswordManagement.App.ViewModel.Base;
 using REFame.PasswordManagement.Backend;
 using REFame.PasswordManagement.Backend.Data;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class MainViewModel : NotifyPropertyChanged
+    public class MainViewModel : WpfBase.BindableBase
     {
         private readonly IDataManager<PasswordData> dataManager;
         private ICommand buttonCommandAddItem;

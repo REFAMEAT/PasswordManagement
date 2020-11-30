@@ -1,10 +1,10 @@
 ﻿using System.Windows.Input;
 using REFame.PasswordManagement.App.View;
-using REFame.PasswordManagement.App.ViewModel.Base;
+using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class AddUserViewModel : NotifyPropertyChanged
+    public class AddUserViewModel : WpfBase.BindableBase
     {
         private ICommand buttonCommandCreateUser;
         private bool inputOk;
