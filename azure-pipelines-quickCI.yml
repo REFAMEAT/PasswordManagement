@@ -35,12 +35,10 @@ steps:
     packageType: 'sdk'
     version: '3.1.x'
 
-- task: VSBuild@1
-  displayName: Restore
+- task: NuGetCommand@2
+  displayName: 'Restore Solution'
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '-t:restore'
-    maximumCpuCount: true
+    restoreSolution: '$(solution)'
 
 - task: VSBuild@1
   displayName: Build Solution
