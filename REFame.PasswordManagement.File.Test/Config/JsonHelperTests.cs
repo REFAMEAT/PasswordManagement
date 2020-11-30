@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Microsoft.VisualBasic.FileIO;
 using NUnit.Framework;
 using REFame.PasswordManagement.File.Config;
 
@@ -18,13 +19,14 @@ namespace REFame.PasswordManagement.File.Tests.Config
                 directory.Create();
             }
         }
-
+        
         [TearDown]
         public void TearDown()
         {
             try
             {
-                System.IO.File.Delete(JsonHelper<TestModel>.GetPath());
+                FileInfo file = new FileInfo(JsonHelper<TestModel>.GetPath());
+                FileSystem.DeleteDirectory(file.DirectoryName, DeleteDirectoryOption.DeleteAllContents);
             }
             catch (Exception)
             {

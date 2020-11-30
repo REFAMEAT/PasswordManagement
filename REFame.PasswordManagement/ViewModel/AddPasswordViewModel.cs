@@ -1,12 +1,12 @@
 ﻿using System.Windows.Input;
 using REFame.PasswordManagement.App.View;
-using REFame.PasswordManagement.App.ViewModel.Base;
 using REFame.PasswordManagement.Backend.Security;
 using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class AddPasswordViewModel : NotifyPropertyChanged
+    public class AddPasswordViewModel : WpfBase.BindableBase
     {
         private ICommand buttonCommandAddPassword;
         private string comment;
