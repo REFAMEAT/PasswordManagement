@@ -4,6 +4,7 @@ using System.Windows;
 using MaterialDesignThemes.Wpf;
 using REFame.PasswordManagement.Model.Enums;
 using REFame.PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.WpfBase.Localization;
 using MColor = System.Windows.Media.Color;
 
 namespace REFame.PasswordManagement.App.View
@@ -18,12 +19,9 @@ namespace REFame.PasswordManagement.App.View
         {
             Application.Current.Resources.Clear();
 
-            var languageDictionary = new ResourceDictionary();
-            languageDictionary.Source = data.Language switch
+            var languageDictionary = new ResourceDictionary
             {
-                Language.English => new Uri("..\\Resources\\StringResources.EN.xaml", UriKind.Relative),
-                Language.German => new Uri("..\\Resources\\StringResources.DE.xaml", UriKind.Relative),
-                _ => languageDictionary.Source
+                Source = Localizations.Current.GetRegisteredLanguageUri(data.Language)
             };
 
             var styleDictionary = new ResourceDictionary

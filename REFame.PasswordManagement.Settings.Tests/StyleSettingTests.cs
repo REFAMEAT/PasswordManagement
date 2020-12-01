@@ -1,10 +1,21 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Enums;
+using REFame.PasswordManagement.WpfBase.Localization;
 
 namespace REFame.PasswordManagement.Settings.Tests
 {
     [TestFixture]
     public class StyleSettingTests
     {
+        [OneTimeSetUp]
+        public void RegisterLanguage()
+        {
+            // Need to setup Localization to run tests
+            Localizations.Current.RegisterLanguage(Language.Dummy, "https://microsoft.com/thisisnotvalid");
+        }
+
         [SetUp]
         public void Setup()
         {

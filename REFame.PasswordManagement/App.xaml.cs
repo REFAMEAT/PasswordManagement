@@ -4,6 +4,7 @@ using REFame.PasswordManagement.File.Binary;
 using REFame.PasswordManagement.Logging;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.WpfBase.Localization;
 
 namespace REFame.PasswordManagement.App
 {
@@ -19,6 +20,7 @@ namespace REFame.PasswordManagement.App
             Current.DispatcherUnhandledException += (o, args) => Logger.Current.Get().Error(args.Exception);
 
             AppCore.StartCore()
+                .SetupLocalization()
                 .SetupBinaries()
                 .StartThemes(out ThemeData data)
                 .StartUpUi(data)

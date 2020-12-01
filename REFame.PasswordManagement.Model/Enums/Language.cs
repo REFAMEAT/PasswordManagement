@@ -6,6 +6,7 @@
     public enum Language
     {
         English,
-        German
+        German,
+        Dummy,
     }
 }

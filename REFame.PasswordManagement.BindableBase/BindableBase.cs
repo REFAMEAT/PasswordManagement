@@ -2,9 +2,9 @@
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
-namespace REFame.PasswordManagement.App.ViewModel.Base
+namespace REFame.PasswordManagement.WpfBase
 {
-    public class NotifyPropertyChanged : INotifyPropertyChanged
+    public class BindableBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

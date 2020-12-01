@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using REFame.PasswordManagement.App.View;
-using REFame.PasswordManagement.App.ViewModel.Base;
 using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Services.Implementations;
 using REFame.PasswordManagement.Settings;
+using REFame.PasswordManagement.Settings.Contracts;
+using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class SettingsViewModel : NotifyPropertyChanged
+    public class SettingsViewModel : BindableBase
     {
         private readonly List<ISetting> settings;
         private ICommand buttonCommandApplySettings;

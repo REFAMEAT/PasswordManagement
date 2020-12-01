@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace REFame.PasswordManagement.App.ViewModel.Base
+namespace REFame.PasswordManagement.WpfBase
 {
     /// <summary>
     ///     Delivers a <see cref="ICommand" /> implementation for Binding Commands to functions

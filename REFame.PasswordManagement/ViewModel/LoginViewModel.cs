@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
 using System.Windows.Media;
 using REFame.PasswordManagement.App.View;
-using REFame.PasswordManagement.App.ViewModel.Base;
 using REFame.PasswordManagement.Backend;
 using REFame.PasswordManagement.Backend.Login;
 using REFame.PasswordManagement.Database.DbSet;
@@ -9,10 +8,11 @@ using REFame.PasswordManagement.Database.Model;
 using REFame.PasswordManagement.File.Binary;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class LoginViewModel : NotifyPropertyChanged
+    public class LoginViewModel : BindableBase
     {
         private readonly ILogin iLogin;
         private ICommand buttonCommandLogin;

@@ -1,4 +1,4 @@
-﻿namespace REFame.PasswordManagement.Model.Interfaces
+﻿namespace REFame.PasswordManagement.Settings.Contracts
 {
     public interface ISetting
     {
