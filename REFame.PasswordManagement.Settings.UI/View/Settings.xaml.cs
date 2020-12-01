@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using REFame.PasswordManagement.Settings.UI.View.Tabs;
 
 namespace REFame.PasswordManagement.Settings.UI.View
 {
@@ -20,6 +21,12 @@ namespace REFame.PasswordManagement.Settings.UI.View
         public Settings()
         {
             InitializeComponent();
+
+            TabControl.Items.Add(new TabItem()
+            {
+                Content = new DatabaseSettings(),
+                Header = "FFF",
+            });
         }
     }
 }

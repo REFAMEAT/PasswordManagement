@@ -16,7 +16,7 @@ namespace REFame.PasswordManagement.Settings.UI.View.Tabs
     /// <summary>
     /// Interaction logic for DatabaseSettings.xaml
     /// </summary>
-    public partial class DatabaseSettings : Page
+    public partial class DatabaseSettings : UserControl
     {
         public DatabaseSettings()
         {

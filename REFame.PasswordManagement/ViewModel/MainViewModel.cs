@@ -71,7 +71,7 @@ namespace REFame.PasswordManagement.App.ViewModel
 
         private void DoOpenSettings(object obj)
         {
-            var settings = new View.Settings();
+            var settings = new REFame.PasswordManagement.Settings.UI.View.Settings();
             settings.ShowDialog();
         }
 
