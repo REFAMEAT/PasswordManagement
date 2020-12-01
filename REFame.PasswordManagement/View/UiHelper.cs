@@ -20,12 +20,7 @@ namespace REFame.PasswordManagement.App.View
             Application.Current.Resources.Clear();
 
             var languageDictionary = new ResourceDictionary();
-            languageDictionary.Source = data.Language switch
-            {
-                Language.English => new Uri(LocFilePath.EN, UriKind.Absolute),
-                Language.German => new Uri(LocFilePath.DE, UriKind.Absolute),
-                _ => languageDictionary.Source
-            };
+            languageDictionary.Source = Localizations.Current.GetRegisteredLanguageUri(data.Language);
 
             var styleDictionary = new ResourceDictionary
             {
