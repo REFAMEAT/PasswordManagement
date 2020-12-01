@@ -9,7 +9,7 @@ using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class SettingsViewModel : WpfBase.BindableBase
+    public class SettingsViewModel : BindableBase
     {
         private readonly List<ISetting> settings;
         private ICommand buttonCommandApplySettings;

@@ -12,7 +12,7 @@ using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class LoginViewModel : WpfBase.BindableBase
+    public class LoginViewModel : BindableBase
     {
         private readonly ILogin iLogin;
         private ICommand buttonCommandLogin;

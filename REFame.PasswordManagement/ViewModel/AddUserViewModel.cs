@@ -4,7 +4,7 @@ using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class AddUserViewModel : WpfBase.BindableBase
+    public class AddUserViewModel : BindableBase
     {
         private ICommand buttonCommandCreateUser;
         private bool inputOk;

@@ -11,7 +11,7 @@ using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class MainViewModel : WpfBase.BindableBase
+    public class MainViewModel : BindableBase
     {
         private readonly IDataManager<PasswordData> dataManager;
         private ICommand buttonCommandAddItem;

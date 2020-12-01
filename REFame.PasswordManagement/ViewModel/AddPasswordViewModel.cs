@@ -6,7 +6,7 @@ using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
 {
-    public class AddPasswordViewModel : WpfBase.BindableBase
+    public class AddPasswordViewModel : BindableBase
     {
         private ICommand buttonCommandAddPassword;
         private string comment;
