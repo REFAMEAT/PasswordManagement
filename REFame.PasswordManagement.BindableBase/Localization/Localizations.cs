@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Linq;
 using REFame.PasswordManagement.Model.Enums;
 
 namespace REFame.PasswordManagement.WpfBase.Localization
@@ -30,6 +31,11 @@ namespace REFame.PasswordManagement.WpfBase.Localization
         public Uri GetRegisteredLanguageUri(Language language)
         {
             return registeredLanguages[language];
+        }
+
+        public List<Language> GetAllLanguages()
+        {
+            return registeredLanguages.Keys.ToList();
         }
     }
 }

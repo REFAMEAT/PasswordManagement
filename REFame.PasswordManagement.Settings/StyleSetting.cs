@@ -6,6 +6,7 @@ using REFame.PasswordManagement.Model.Enums;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.Settings.Contracts;
+using REFame.PasswordManagement.WpfBase.Localization;
 
 namespace REFame.PasswordManagement.Settings
 {
@@ -25,9 +26,12 @@ namespace REFame.PasswordManagement.Settings
 
             ThemeItems = themeItems;
 
-            List<Language> languageItems = Enum.GetValues(typeof(Language)).Cast<Language>().ToList();
+            // Get all registered Languages
+            LanguageItems = Localizations
+                .Current
+                .GetAllLanguages()
+                .ConvertAll(x => x.ToString());
 
-            LanguageItems = languageItems.ConvertAll(x => x.ToString());
             AllowedColors = ThemePatterns.SupportedColors;
         }
 

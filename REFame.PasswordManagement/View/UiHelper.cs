@@ -19,8 +19,10 @@ namespace REFame.PasswordManagement.App.View
         {
             Application.Current.Resources.Clear();
 
-            var languageDictionary = new ResourceDictionary();
-            languageDictionary.Source = Localizations.Current.GetRegisteredLanguageUri(data.Language);
+            var languageDictionary = new ResourceDictionary
+            {
+                Source = Localizations.Current.GetRegisteredLanguageUri(data.Language)
+            };
 
             var styleDictionary = new ResourceDictionary
             {
