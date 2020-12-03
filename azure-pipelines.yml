@@ -41,32 +41,12 @@ steps:
     solution: PasswordManagement.sln
     msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/App'
 
-- task: VSBuild@1
-  displayName: 'Build Test-Projects'
+- task: DotNetCoreCLI@2
+  displayName: Run Unit Tests
   inputs:
-    solution: '**Tests/*.csproj'
-    platform: 'AnyCPU'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  displayName: 'Run Unit Tests'
-  continueOnError: True
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\** 
-    codeCoverageEnabled: True
-    diagnosticsEnabled: True
-    vsTestVersion: 'toolsInstaller'
-
-# - task: DotNetCoreCLI@2
-#   displayName: Run Unit Tests
-#   inputs:
-#     command: 'test'
-#     projects:  |
-#       **/*.csproj
+    command: 'test'
+    projects:  |
+      **Tests/*.csproj
 
 - task: ArchiveFiles@2
   inputs:
