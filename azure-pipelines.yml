@@ -7,7 +7,7 @@ trigger:
 - master
 - develop
 
-pool: Default
+pool: Azure Pipelines
 
 name: $(Year:yyyy).$(MinorVersion)$(Rev:.r)
 
