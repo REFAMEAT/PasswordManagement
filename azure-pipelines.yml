@@ -41,7 +41,7 @@ steps:
   displayName: Run Unit Tests
   inputs:
     command: 'test'
-    arguments: '-s $(Build.DefaultWorkingDirectory)/.runsetting'
+    arguments: '-s .runsetting'
     projects: '$(solution)'
 
 - task: ArchiveFiles@2
