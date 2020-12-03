@@ -12,9 +12,10 @@ pool: Default
 name: $(Year:yyyy).$(Minor)$(Rev:.r)-quickCI
 
 variables:
+- group: passwordmanagement
 - group: versioning
 - name: 'solution' 
-  value: 'PasswordManagement.sln'
+  value: $(pwmSolution)
 - name: 'buildPlatform' 
   value: 'Any CPU'
 - name: 'buildConfiguration'
