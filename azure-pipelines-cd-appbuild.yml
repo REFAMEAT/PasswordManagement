@@ -15,12 +15,11 @@ pr: none
 
 name: $(Year:yyyy).$(Minor)$(Rev:.r)
 
-pool: Default
-
 stages: 
 - stage: Build_Unit_Test
   jobs:
   - job: 
+    pool: Default
     steps:
       - task: NuGetAuthenticate@0
         inputs:
@@ -54,8 +53,10 @@ stages:
           publishLocation: Container
 
 - stage: Build_App
+  dependsOn: []
   jobs:
   - job:
+    pool: Default
     steps:
       - task: NuGetAuthenticate@0
         inputs:

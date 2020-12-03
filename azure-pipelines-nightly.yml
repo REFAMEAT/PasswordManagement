@@ -20,9 +20,10 @@ pool: Default
 name: $(Year:yyyy).$(Minor)$(Rev:.r)-nightly
 
 variables:
+- group: passwordmanagement
 - group: versioning
 - name: solution 
-  value: 'PasswordManagement.sln'
+  value: $(pwmSolution)
 - name: buildPlatform 
   value: 'Any CPU'
 - name: buildConfiguration

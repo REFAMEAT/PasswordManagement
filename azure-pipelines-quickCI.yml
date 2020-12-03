@@ -5,15 +5,17 @@ trigger:
     exclude:
       - develop
       - master
+      - azure-pipelines
 
 pool: Default
 
 name: $(Year:yyyy).$(Minor)$(Rev:.r)-quickCI
 
 variables:
+- group: passwordmanagement
 - group: versioning
 - name: 'solution' 
-  value: '**/*.csproj'
+  value: $(pwmSolution)
 - name: 'buildPlatform' 
   value: 'Any CPU'
 - name: 'buildConfiguration'
@@ -22,28 +24,15 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
-- task: NuGetAuthenticate@0
-  displayName: 'Authtification'
-  inputs:
-   forceReinstallCredentialProvider: true
-
-- checkout: self
-  displayName: 'Checkout source-code'
-
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '3.1.x'
-
 - task: VSBuild@1
-  displayName: Restore
+  displayName: 'Restore Solution'
   inputs:
     solution: '$(solution)'
     msbuildArgs: '-t:restore'
     maximumCpuCount: true
-
+    
 - task: VSBuild@1
-  displayName: Build Solution
+  displayName: 'Restore and Build'
   inputs:
     solution: '$(solution)'
     maximumCpuCount: true

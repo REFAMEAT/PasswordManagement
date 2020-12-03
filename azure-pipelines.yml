@@ -9,12 +9,17 @@ trigger:
 
 pool: Default
 
-name: $(Year:yyyy).$(MinorVersion)$(Rev:.r)
+name: $(Year:yyyy).$(Minor)$(Rev:.r)
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+- group: passwordmanagement
+- group: versioning
+- name: solution
+  value: $(pwmSolution)
+- name: buildPlatform
+  value: 'Any CPU'
+- name: buildConfiguration
+  value: 'Release'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -24,22 +29,29 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: 'Restore Solution'
   inputs:
-    solution: 'PasswordManagement.sln'
+    solution: '$(solution)'
     msbuildArgs: '-t:restore'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
     maximumCpuCount: true
 
 - task: VSBuild@1
+  displayName: 'Build Solution to ArtifactStagingDirectory'
   inputs:
-    solution: PasswordManagement.sln
+    solution: $(solution)
     msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/App'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    maximumCpuCount: true
 
 - task: DotNetCoreCLI@2
   displayName: Run Unit Tests
   inputs:
     command: 'test'
-    projects:  |
-      **/*.csproj
+    arguments: '-s .runsetting'
+    projects: '$(solution)'
 
 - task: ArchiveFiles@2
   inputs:
