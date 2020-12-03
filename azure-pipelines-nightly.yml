@@ -62,10 +62,3 @@ steps:
     failBuildLevelSelector: 'Warning'
     failBuildOnCodeIssues: false
     additionalArguments: '--exclude=**.Tests/**/*.cs;**Resources/**/*.*;**.Test/**/*.cs;**/**/*.xaml'
-
-- task: DotCover Analyse@0
-  inputs:
-    TargetExecutable: '**/*.Tests.csproj'
-    TargetWorkingDir: '$(Agent.WorkFolder)'
-    ReportType: 'XML'
-    Output: '$(Build.ArtifactStagingDirectory)/Coverage'
