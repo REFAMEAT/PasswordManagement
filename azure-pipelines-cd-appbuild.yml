@@ -15,12 +15,11 @@ pr: none
 
 name: $(Year:yyyy).$(Minor)$(Rev:.r)
 
-pool: Default
-
 stages: 
 - stage: Build_Unit_Test
   jobs:
   - job: 
+    pool: Default
     steps:
       - task: NuGetAuthenticate@0
         inputs:
@@ -56,6 +55,8 @@ stages:
 - stage: Build_App
   jobs:
   - job:
+    pool:
+      vmImage: windows-latest
     steps:
       - task: NuGetAuthenticate@0
         inputs:
