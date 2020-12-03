@@ -5,6 +5,7 @@ trigger:
     exclude:
       - develop
       - master
+      - azure-pipelines
 
 pool: Default
 
