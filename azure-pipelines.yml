@@ -24,22 +24,44 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: 'Restore Solution'
   inputs:
     solution: 'PasswordManagement.sln'
     msbuildArgs: '-t:restore'
     maximumCpuCount: true
 
 - task: VSBuild@1
+  displayName: 'Build Solution to ArtifactStagingDirectory'
   inputs:
     solution: PasswordManagement.sln
     msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/App'
 
-- task: DotNetCoreCLI@2
-  displayName: Run Unit Tests
+- task: VSBuild@1
+  displayName: 'Build Test-Projects'
   inputs:
-    command: 'test'
-    projects:  |
-      **/*.csproj
+    solution: '**Tests/*.csproj'
+    platform: 'AnyCPU'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  displayName: 'Run Unit Tests'
+  continueOnError: True
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\** 
+    codeCoverageEnabled: True
+    diagnosticsEnabled: True
+    vsTestVersion: 'toolsInstaller'
+
+# - task: DotNetCoreCLI@2
+#   displayName: Run Unit Tests
+#   inputs:
+#     command: 'test'
+#     projects:  |
+#       **/*.csproj
 
 - task: ArchiveFiles@2
   inputs:
