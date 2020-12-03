@@ -12,7 +12,7 @@ pool: Default
 name: $(Year:yyyy).$(MinorVersion)$(Rev:.r)
 
 variables:
-  solution: '**/*.sln'
+  solution: 'PasswordManagement.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -26,14 +26,14 @@ steps:
 - task: VSBuild@1
   displayName: 'Restore Solution'
   inputs:
-    solution: 'PasswordManagement.sln'
+    solution: '$(solution)'
     msbuildArgs: '-t:restore'
     maximumCpuCount: true
 
 - task: VSBuild@1
   displayName: 'Build Solution to ArtifactStagingDirectory'
   inputs:
-    solution: PasswordManagement.sln
+    solution: $(solution)
     msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/App'
     maximumCpuCount: true
 
@@ -42,7 +42,7 @@ steps:
   inputs:
     command: 'test'
     arguments: '-s $(Build.DefaultWorkingDirectory)/.runsetting'
-    projects: '**Tests/*.csproj'
+    projects: '$(solution)'
 
 - task: ArchiveFiles@2
   inputs:
