@@ -35,6 +35,7 @@ steps:
   inputs:
     solution: PasswordManagement.sln
     msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/App'
+    maximumCpuCount: true
 
 - task: DotNetCoreCLI@2
   displayName: Run Unit Tests
