@@ -53,6 +53,7 @@ stages:
           publishLocation: Container
 
 - stage: Build_App
+  dependsOn: []
   jobs:
   - job:
     pool:
