@@ -45,8 +45,7 @@ steps:
   displayName: Run Unit Tests
   inputs:
     command: 'test'
-    projects:  |
-      **Tests/*.csproj
+    projects: '**Tests/*.csproj'
 
 - task: ArchiveFiles@2
   inputs:
