@@ -56,8 +56,7 @@ stages:
   dependsOn: []
   jobs:
   - job:
-    pool:
-      vmImage: windows-latest
+    pool: Default
     steps:
       - task: NuGetAuthenticate@0
         inputs:
