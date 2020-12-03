@@ -13,7 +13,7 @@ name: $(Year:yyyy).$(Minor)$(Rev:.r)-quickCI
 variables:
 - group: versioning
 - name: 'solution' 
-  value: '**/*.csproj'
+  value: 'PasswordManagement.sln'
 - name: 'buildPlatform' 
   value: 'Any CPU'
 - name: 'buildConfiguration'
@@ -23,8 +23,9 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: VSBuild@1
+  displayName: 'Restore Solution'
   inputs:
-    solution: 'PasswordManagement.sln'
+    solution: '$(solution)'
     msbuildArgs: '-t:restore'
     maximumCpuCount: true
     
