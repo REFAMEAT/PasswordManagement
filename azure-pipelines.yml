@@ -45,6 +45,7 @@ steps:
   displayName: Run Unit Tests
   inputs:
     command: 'test'
+    arguments: '-s ''$(Build.DefaultWorkingDirectory)/.runsetting'''
     projects: '**Tests/*.csproj'
 
 - task: ArchiveFiles@2
