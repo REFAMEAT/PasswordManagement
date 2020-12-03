@@ -7,14 +7,18 @@ trigger:
 - master
 - develop
 
-pool: Azure Pipelines
+pool: Default
 
-name: $(Year:yyyy).$(MinorVersion)$(Rev:.r)
+name: $(Year:yyyy).$(Minor)$(Rev:.r)
 
 variables:
-  solution: 'PasswordManagement.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+- group: versioning
+- name: solution
+  value: 'PasswordManagement.sln'
+- name: buildPlatform
+  value: 'Any CPU'
+- name: buildConfiguration
+  value: 'Release'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -28,6 +32,8 @@ steps:
   inputs:
     solution: '$(solution)'
     msbuildArgs: '-t:restore'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
     maximumCpuCount: true
 
 - task: VSBuild@1
@@ -35,6 +41,8 @@ steps:
   inputs:
     solution: $(solution)
     msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/App'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
     maximumCpuCount: true
 
 - task: DotNetCoreCLI@2
