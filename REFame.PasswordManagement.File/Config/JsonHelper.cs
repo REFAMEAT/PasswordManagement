@@ -3,14 +3,13 @@ using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using REFame.PasswordManagement.Logging;
-using REFame.PasswordManagement.Model.Setting;
 
 namespace REFame.PasswordManagement.File.Config
 {
     /// <summary>
     ///     Serialize and Deserialize JSON files
     /// </summary>
-    public class JsonHelper<T> where T : class
+    public static class JsonHelper<T> where T : class
     {
         /// <summary>
         ///     Path to the JSON file
@@ -93,7 +92,7 @@ namespace REFame.PasswordManagement.File.Config
             using var sw = new StreamWriter(GetPath());
             using JsonWriter jsonWriter = new JsonTextWriter(sw);
 
-            string x = JsonConvert.SerializeObject(value);
+            JsonConvert.SerializeObject(value);
 
             serializer.Serialize(jsonWriter, value);
         }
@@ -109,7 +108,7 @@ namespace REFame.PasswordManagement.File.Config
             await using var sw = new StreamWriter(GetPath());
             using JsonWriter jsonWriter = new JsonTextWriter(sw);
 
-            var x = JsonConvert.SerializeObject(value);
+            JsonConvert.SerializeObject(value);
 
             serializer.Serialize(jsonWriter, value);
         }

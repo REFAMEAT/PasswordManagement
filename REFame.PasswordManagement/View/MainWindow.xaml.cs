@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using REFame.PasswordManagement.App.ViewModel;
+using REFame.PasswordManagement.Data;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
 

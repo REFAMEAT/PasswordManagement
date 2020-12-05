@@ -1,7 +1,7 @@
 ﻿using System;
 using REFame.PasswordManagement.Model.Setting;
 
-namespace REFame.PasswordManagement.WpfBase
+namespace REFame.PasswordManagement.WpfBase.Mediator
 {
     public static class ThemeMediator
     {

@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using REFame.PasswordManagement.WpfBase;
+using REFame.PasswordManagement.WpfBase.Mediator;
 
 namespace REFame.PasswordManagement.Settings.ViewModel.Tests
 {

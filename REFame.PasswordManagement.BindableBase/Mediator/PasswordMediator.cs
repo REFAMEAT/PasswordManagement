@@ -1,4 +1,4 @@
-﻿namespace REFame.PasswordManagement.WpfBase
+﻿namespace REFame.PasswordManagement.WpfBase.Mediator
 {
     public class PasswordMediator
     {

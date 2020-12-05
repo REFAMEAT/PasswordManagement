@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using REFame.PasswordManagement.Settings.ViewModel;
 using REFame.PasswordManagement.WpfBase;
+using REFame.PasswordManagement.WpfBase.Mediator;
 
 namespace REFame.PasswordManagement.Settings
 {

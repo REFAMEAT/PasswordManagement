@@ -8,14 +8,16 @@ using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.Settings.SettingFactories;
 using REFame.PasswordManagement.Settings.ViewModel.Tabs;
 using REFame.PasswordManagement.WpfBase;
+using REFame.PasswordManagement.WpfBase.Mediator;
+using ITheme = REFame.PasswordManagement.Model.Interfaces.ITheme;
 
 namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
 {
     [TestFixture(TestOf = typeof(ThemeSettingsFactory))]
     public class ThemeSettingsFactoryTests
     {
-        public static ThemeData mockData;
-        Mock<ISettingService<ThemeData>> mock = new Mock<ISettingService<ThemeData>>();
+        public static ITheme mockData;
+        Mock<ISettingService<ITheme>> mock = new Mock<ISettingService<ITheme>>();
 
         [SetUp]
         public void Setup()
@@ -33,8 +35,8 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
                 .Returns(async () => mockData);
 
             mock
-                .Setup(x => x.Save(It.IsAny<ThemeData>()))
-                .Callback<ThemeData>(x => mockData = x);
+                .Setup(x => x.Save(It.IsAny<ITheme>()))
+                .Callback<ITheme>(x => mockData = x);
         }
 
         [Test]

@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using REFame.PasswordManagement.App.Model;
 using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.Backend;
-using REFame.PasswordManagement.Backend.Data;
+using REFame.PasswordManagement.Data;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Settings.Call;
@@ -32,7 +34,7 @@ namespace REFame.PasswordManagement.App.ViewModel
         public MainViewModel()
         {
             bool useDatabase = Globals.UseDatabase;
-            dataManager = useDatabase ? (IDataManager<PasswordData>) new DatabaseDataManager() : new FileDataManager();
+            dataManager = PWCore.CurrentCore.GetRegisteredType<IDataManager<PasswordData>>();
             Items = ToDisplayData(dataManager.LoadData());
         }
 
@@ -88,7 +90,7 @@ namespace REFame.PasswordManagement.App.ViewModel
                 }
 
                 PasswordData newItem = ((AddPasswordViewModel) addPassword.DataContext).NewItem;
-
+                newItem.Identifier = Guid.NewGuid().ToString();
                 await dataManager.AddDataAsync(newItem);
                 Items.Add(new PasswordDataDisplay(newItem));
             };

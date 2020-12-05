@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Net.Mime;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows;
 using REFame.PasswordManagement.Settings.SettingFactories;
 using REFame.PasswordManagement.Settings.UI.Tabs;
 

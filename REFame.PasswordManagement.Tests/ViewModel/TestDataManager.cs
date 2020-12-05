@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using REFame.PasswordManagement.Data;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
 

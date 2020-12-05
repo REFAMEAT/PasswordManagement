@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 using REFame.PasswordManagement.Model.Setting;
@@ -7,14 +6,15 @@ using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.Settings.SettingFactories;
 using REFame.PasswordManagement.Settings.ViewModel.Tabs;
 using REFame.PasswordManagement.WpfBase;
+using REFame.PasswordManagement.WpfBase.Mediator;
 
 namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
 {
     [TestFixture]
     public class DatabaseSettingsFactoryTests
     {
-        public static DatabaseData mockData;
-        Mock<ISettingService<DatabaseData>> mock = new Mock<ISettingService<DatabaseData>>();
+        private static DatabaseData mockData;
+        private Mock<ISettingService<DatabaseData>> mock = new Mock<ISettingService<DatabaseData>>();
 
         [SetUp]
         public void Setup()

@@ -3,6 +3,7 @@ using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Implementations;
 using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.WpfBase;
+using REFame.PasswordManagement.WpfBase.Mediator;
 
 namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
 {

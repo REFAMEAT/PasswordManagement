@@ -1,9 +1,9 @@
 ﻿using System.Windows;
-using REFame.PasswordManagement.Backend;
-using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.Logging;
-using REFame.PasswordManagement.Model;
-using REFame.PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.Login;
+using REFame.PasswordManagement.Services;
 using REFame.PasswordManagement.WpfBase.Localization;
 
 namespace REFame.PasswordManagement.App
@@ -19,12 +19,17 @@ namespace REFame.PasswordManagement.App
         {
             Current.DispatcherUnhandledException += (o, args) => Logger.Current.Get().Error(args.Exception);
 
-            AppCore.StartCore()
-                .SetupLocalization()
-                .SetupBinaries()
-                .StartUpUi()
-                .Login()
-                .StartMain();
+            PWCore.Create();
+            PWCore.CurrentCore
+                .RegisterModule<ServiceModule>()
+                .RegisterModule<LocalizationModule>()
+                .RegisterModule<UISetup>()
+                .RegisterModule<LoginModule>();
+
+            PWCore.CurrentCore.Run();
+            WpfCore.Current.Login(PWCore.CurrentCore);
+
+            WpfCore.Current.RegisterMainWindow<MainWindow>();
         }
     }
 }

@@ -2,8 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Timers;
 using JetBrains.Annotations;
-using REFame.PasswordManagement.Backend.Security;
 using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Security;
 
 namespace REFame.PasswordManagement.App.Model
 {

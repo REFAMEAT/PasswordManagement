@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using REFame.PasswordManagement.Settings.Contracts;
 using REFame.PasswordManagement.WpfBase;
+using REFame.PasswordManagement.WpfBase.Mediator;
 
 namespace REFame.PasswordManagement.Settings.UI
 {
@@ -22,12 +23,12 @@ namespace REFame.PasswordManagement.Settings.UI
             where TFactory : ISettingFactory, new()
             where TTabItem : TabItem, new()
         {
-            TFactory factory = new TFactory();
+            var factory = new TFactory();
             string header = factory.GetHeader();
             BindableBase viewModel = factory.GetViewModel();
             SettingMediator mediator = factory.GetMediator();
 
-            TTabItem tabItem = new TTabItem
+            var tabItem = new TTabItem
             {
                 DataContext = viewModel,
                 Header = header,

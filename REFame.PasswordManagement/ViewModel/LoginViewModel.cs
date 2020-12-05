@@ -2,7 +2,6 @@
 using System.Windows.Media;
 using REFame.PasswordManagement.App.View;
 using REFame.PasswordManagement.Backend;
-using REFame.PasswordManagement.Backend.Login;
 using REFame.PasswordManagement.Database.DbSet;
 using REFame.PasswordManagement.Database.Model;
 using REFame.PasswordManagement.File.Binary;
@@ -22,12 +21,6 @@ namespace REFame.PasswordManagement.App.ViewModel
         {
             iLogin = logonMethod;
             iLogin.Initialize();
-
-            // Fallback, if logon Method doesn't work
-            if (!iLogin.InitSuccessful)
-            {
-                iLogin = new LocalLogin();
-            }
 
             bool needFirstUser = iLogin.NeedFirstUser();
 
@@ -60,7 +53,7 @@ namespace REFame.PasswordManagement.App.ViewModel
 
         private void DoLogin(object obj)
         {
-            if (!(obj is Login login))
+            if (!(obj is View.Login login))
             {
                 return;
             }

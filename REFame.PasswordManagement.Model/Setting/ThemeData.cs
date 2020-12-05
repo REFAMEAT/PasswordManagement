@@ -1,12 +1,13 @@
 ﻿using MaterialDesignThemes.Wpf;
 using REFame.PasswordManagement.Model.Enums;
+using ITheme = REFame.PasswordManagement.Model.Interfaces.ITheme;
 
 namespace REFame.PasswordManagement.Model.Setting
 {
     /// <summary>
     ///     Model for the UI-Theme Data
     /// </summary>
-    public class ThemeData
+    public class ThemeData : ITheme
     {
         /// <summary>
         ///     UI-Language

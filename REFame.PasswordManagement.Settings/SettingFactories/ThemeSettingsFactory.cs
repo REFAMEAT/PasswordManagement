@@ -1,8 +1,9 @@
-﻿using REFame.PasswordManagement.Model.Setting;
+﻿using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.Settings.Contracts;
 using REFame.PasswordManagement.Settings.ViewModel.Tabs;
 using REFame.PasswordManagement.WpfBase;
+using REFame.PasswordManagement.WpfBase.Mediator;
 
 namespace REFame.PasswordManagement.Settings.SettingFactories
 {
@@ -10,7 +11,7 @@ namespace REFame.PasswordManagement.Settings.SettingFactories
     {
         private ThemeSettingsViewModel viewModel;
         private SettingMediator mediator;
-        public ISettingService<ThemeData> OverrideSettingService { get; set; }
+        public ISettingService<ITheme> OverrideSettingService { get; set; }
 
         public BindableBase GetViewModel()
         {

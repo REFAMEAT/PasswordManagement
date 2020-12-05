@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
-using REFame.PasswordManagement.Model.Setting;
+using REFame.PasswordManagement.AppCore;
+using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.WpfBase.Localization;
+using ITheme = REFame.PasswordManagement.Model.Interfaces.ITheme;
 using MColor = System.Windows.Media.Color;
 
 namespace REFame.PasswordManagement.App.View
@@ -14,8 +17,10 @@ namespace REFame.PasswordManagement.App.View
         ///     Adjust the UI to the UI-Config
         /// </summary>
         /// <param name="data"></param>
-        public static void AdjustApplicationStyle(ThemeData data)
+        public static async Task AdjustApplicationStyle()
         {
+            ITheme data = await PWCore.CurrentCore.GetRegisteredType<ISettingService<ITheme>>().Load();
+
             Application.Current.Resources.Clear();
 
             var languageDictionary = new ResourceDictionary

@@ -6,14 +6,15 @@ using REFame.PasswordManagement.Model.Enums;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.Settings.ViewModel.Tabs;
+using ITheme = REFame.PasswordManagement.Model.Interfaces.ITheme;
 
 namespace REFame.PasswordManagement.Settings.ViewModel.Tests.Tabs
 {
     [TestFixture(TestOf = typeof(ThemeSettingsViewModel))]
     public class ThemeSettingsViewModelTests
     {
-        public static ThemeData mockData;
-        Mock<ISettingService<ThemeData>> mock = new Mock<ISettingService<ThemeData>>();
+        public static ITheme mockData;
+        Mock<ISettingService<ITheme>> mock = new Mock<ISettingService<ITheme>>();
 
         [SetUp]
         public void Setup()
@@ -31,8 +32,8 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tests.Tabs
                 .Returns(async() => mockData);
 
             mock
-                .Setup(x => x.Save(It.IsAny<ThemeData>()))
-                .Callback<ThemeData>(x => mockData = x);
+                .Setup(x => x.Save(It.IsAny<ITheme>()))
+                .Callback<ITheme>(x => mockData = x);
         }
 
         [Test]

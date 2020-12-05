@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using REFame.PasswordManagement.App.Model;
 using REFame.PasswordManagement.App.ViewModel;
-using REFame.PasswordManagement.Backend.Security;
 using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Security;
 
 namespace REFame.PasswordManagement.Tests.ViewModel
 {
