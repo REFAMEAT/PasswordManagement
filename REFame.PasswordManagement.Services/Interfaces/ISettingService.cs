@@ -1,13 +1,10 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 
 namespace REFame.PasswordManagement.Services.Interfaces
 {
     public interface ISettingService<T>
     {
-        T Load();
-        void Save(T data);
-        void OnSaved(EventArgs args);
-
-        event EventHandler Saved;
+        Task<T> Load();
+        Task Save(T data);
     }
 }

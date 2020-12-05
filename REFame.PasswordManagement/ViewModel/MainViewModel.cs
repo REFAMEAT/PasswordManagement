@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using REFame.PasswordManagement.App.Model;
 using REFame.PasswordManagement.App.View;
@@ -7,6 +8,7 @@ using REFame.PasswordManagement.Backend;
 using REFame.PasswordManagement.Backend.Data;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Settings.Call;
 using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
@@ -34,9 +36,9 @@ namespace REFame.PasswordManagement.App.ViewModel
             Items = ToDisplayData(dataManager.LoadData());
         }
 
-        public ICommand ButtonCommandOpenSettings => buttonCommandOpenSettings ??= new Command(DoOpenSettings);
-        public ICommand ButtonCommandAddItem => buttonCommandAddItem ??= new Command(DoAddItem);
-        public ICommand ButtonCommandDeleteItem => buttonCommandDeleteItem ??= new Command(DoDeleteItem);
+        public ICommand ButtonCommandOpenSettings => buttonCommandOpenSettings ??= new AsyncCommand(DoOpenSettings);
+        public ICommand ButtonCommandAddItem => buttonCommandAddItem ??= new AsyncCommand(DoAddItem);
+        public ICommand ButtonCommandDeleteItem => buttonCommandDeleteItem ??= new AsyncCommand(DoDeleteItem);
 
         public ObservableCollection<PasswordDataDisplay> Items
         {
@@ -50,36 +52,35 @@ namespace REFame.PasswordManagement.App.ViewModel
             set => SetProperty(ref selectedItem, value);
         }
 
-        private void DoDeleteItem(object obj)
+        private async Task DoDeleteItem(object obj)
         {
             if (SelectedItem == null)
             {
                 return;
             }
 
-            PasswordData itemToDelete = dataManager.LoadData()
+            PasswordData itemToDelete = (await dataManager.LoadDataAsync())
                 .Find(x => x.Password == SelectedItem.Password
                            && x.Description == SelectedItem.Description
                            && x.Comments == SelectedItem.Comments);
 
-            bool deleted = dataManager.Remove(itemToDelete);
+            bool deleted = await dataManager.RemoveAsync(itemToDelete);
             if (deleted)
             {
                 Items.Remove(SelectedItem);
             }
         }
 
-        private void DoOpenSettings(object obj)
+        private async Task DoOpenSettings(object obj)
         {
-            var settings = new REFame.PasswordManagement.Settings.UI.View.Settings();
-            settings.ShowDialog();
+            SettingCall.Open();
         }
 
-        private void DoAddItem(object obj)
+        private async Task DoAddItem(object obj)
         {
             var addPassword = new AddPassword();
             addPassword.Show();
-            addPassword.Closed += (sender, e) =>
+            addPassword.Closed += async (sender, e) =>
             {
                 if (addPassword.Canceled)
                 {
@@ -88,7 +89,7 @@ namespace REFame.PasswordManagement.App.ViewModel
 
                 PasswordData newItem = ((AddPasswordViewModel) addPassword.DataContext).NewItem;
 
-                dataManager.AddData(newItem);
+                await dataManager.AddDataAsync(newItem);
                 Items.Add(new PasswordDataDisplay(newItem));
             };
         }

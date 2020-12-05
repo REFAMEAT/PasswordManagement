@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using REFame.PasswordManagement.File.Binary;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
@@ -39,6 +40,27 @@ namespace REFame.PasswordManagement.Backend.Data
             PasswordData itemToDelete = binaryData.Passwords.Find(x => x.Identifier == item.Identifier);
             bool success = binaryData.Passwords.Remove(itemToDelete);
             binaryHelper.Write(binaryData);
+
+            return success;
+        }
+
+        public async Task AddDataAsync(PasswordData value)
+        {
+            binaryData.Passwords.Add(value);
+            await binaryHelper.WriteAsync(binaryData);
+        }
+
+        public async Task<List<PasswordData>> LoadDataAsync()
+        {
+            binaryData = await binaryHelper.GetDataAsync();
+            return binaryData.Passwords;
+        }
+
+        public async Task<bool> RemoveAsync(PasswordData item)
+        {
+            PasswordData itemToDelete = binaryData.Passwords.Find(x => x.Identifier == item.Identifier);
+            bool success = binaryData.Passwords.Remove(itemToDelete);
+            await binaryHelper.WriteAsync(binaryData);
 
             return success;
         }

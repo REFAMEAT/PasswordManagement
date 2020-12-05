@@ -10,9 +10,9 @@ namespace REFame.PasswordManagement.Backend.Login
     {
         private BinaryHelper helper;
 
-        public LocalLogin()
+        public LocalLogin(BinaryHelper helper = null)
         {
-            helper = new BinaryHelper();
+            this.helper = helper ?? new BinaryHelper();
         }
 
         public void Dispose()

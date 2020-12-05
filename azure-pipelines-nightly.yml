@@ -55,6 +55,7 @@ steps:
   inputs:
     command: 'test'
     projects: '$(solution)'
+    arguments: '-v diag'
 
 - task: ResharperCli@2
   displayName: 'Resharper check coding guidelines'

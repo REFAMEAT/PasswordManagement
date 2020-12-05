@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using REFame.PasswordManagement.File.Config;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Interfaces;
@@ -7,9 +7,9 @@ namespace REFame.PasswordManagement.Services.Implementations
 {
     public class DatabaseSettingService : ISettingService<DatabaseData>
     {
-        public DatabaseData Load()
+        public async Task<DatabaseData> Load()
         {
-            return JsonHelper<DatabaseData>.GetData(new DatabaseData
+            return await JsonHelper<DatabaseData>.GetDataAsync(new DatabaseData
             {
                 DatabaseName = "localhost",
                 IntegratedSecurity = true,
@@ -20,16 +20,9 @@ namespace REFame.PasswordManagement.Services.Implementations
             });
         }
 
-        public void Save(DatabaseData data)
+        public async Task Save(DatabaseData data)
         {
-            JsonHelper<DatabaseData>.WriteData(data);
+            await JsonHelper<DatabaseData>.WriteDataAsync(data);
         }
-
-        public void OnSaved(EventArgs args)
-        {
-            Saved?.Invoke(this, args);
-        }
-
-        public event EventHandler Saved;
     }
 }

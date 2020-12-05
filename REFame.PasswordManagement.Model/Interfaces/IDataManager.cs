@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace REFame.PasswordManagement.Model.Interfaces
 {
@@ -7,5 +8,9 @@ namespace REFame.PasswordManagement.Model.Interfaces
         void AddData(T value);
         List<T> LoadData();
         bool Remove(T item);
+
+        Task AddDataAsync(T value);
+        Task<List<T>> LoadDataAsync();
+        Task<bool> RemoveAsync(T item);
     }
 }

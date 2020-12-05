@@ -1,11 +1,13 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using REFame.PasswordManagement.Model.Enums;
 
 namespace REFame.PasswordManagement.WpfBase.Localization
 {
+    /// <summary>
+    /// Provide information about supported languages or register supported languages
+    /// </summary>
     public class Localizations
     {
         private static Localizations current;

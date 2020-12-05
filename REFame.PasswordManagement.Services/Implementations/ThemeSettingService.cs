@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MaterialDesignThemes.Wpf;
 using REFame.PasswordManagement.File.Config;
 using REFame.PasswordManagement.Model.Enums;
@@ -9,9 +10,9 @@ namespace REFame.PasswordManagement.Services.Implementations
 {
     public class ThemeSettingService : ISettingService<ThemeData>
     {
-        public ThemeData Load()
+        public async Task<ThemeData> Load()
         {
-            return JsonHelper<ThemeData>.GetData(new ThemeData
+            return await JsonHelper<ThemeData>.GetDataAsync(new ThemeData
             {
                 Language = Language.English,
                 PrimaryColor = "Blue",
@@ -20,9 +21,9 @@ namespace REFame.PasswordManagement.Services.Implementations
             });
         }
 
-        public void Save(ThemeData data)
+        public async Task Save(ThemeData data)
         {
-            JsonHelper<ThemeData>.WriteData(data);
+            await JsonHelper<ThemeData>.WriteDataAsync(data);
         }
 
         public void OnSaved(EventArgs args)

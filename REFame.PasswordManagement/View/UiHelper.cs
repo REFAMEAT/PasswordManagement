@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
-using REFame.PasswordManagement.Model.Enums;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.WpfBase.Localization;
 using MColor = System.Windows.Media.Color;

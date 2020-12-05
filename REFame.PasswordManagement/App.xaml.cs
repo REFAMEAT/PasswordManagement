@@ -22,8 +22,7 @@ namespace REFame.PasswordManagement.App
             AppCore.StartCore()
                 .SetupLocalization()
                 .SetupBinaries()
-                .StartThemes(out ThemeData data)
-                .StartUpUi(data)
+                .StartUpUi()
                 .Login()
                 .StartMain();
         }

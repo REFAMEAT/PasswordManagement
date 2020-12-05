@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 using REFame.PasswordManagement.Model;
 
 namespace REFame.PasswordManagement.File.Binary
@@ -62,6 +63,32 @@ namespace REFame.PasswordManagement.File.Binary
             IFormatter formatter = new BinaryFormatter();
             using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
                 FileMode.OpenOrCreate);
+            formatter.Serialize(s, content);
+        }
+
+        /// <summary>
+        ///     Read a <see cref="BinaryData" /> from the .bin file
+        /// </summary>
+        /// <returns></returns>
+        public async Task<BinaryData> GetDataAsync()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            await using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
+                FileMode.OpenOrCreate);
+
+            var data = (BinaryData)formatter.Deserialize(s);
+
+            data.Passwords ??= new List<PasswordData>();
+
+            return data;
+        }
+
+        public async Task WriteAsync(BinaryData content)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            await using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName), 
+                FileMode.OpenOrCreate);
+
             formatter.Serialize(s, content);
         }
     }

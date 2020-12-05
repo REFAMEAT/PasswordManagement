@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using REFame.PasswordManagement.Logging;
 using REFame.PasswordManagement.Model.Setting;
@@ -22,9 +23,9 @@ namespace REFame.PasswordManagement.File.Config
         }
 
         /// <summary>
-        ///     Read a <see cref="ThemeData" /> from the JSON file
+        ///     Read a generic type from a JSON file
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The deserialized object</returns>
         public static T GetData(T defaultValue = null)
         {
             string content;
@@ -53,9 +54,38 @@ namespace REFame.PasswordManagement.File.Config
         }
 
         /// <summary>
-        ///     Write a <see cref="ThemeData" /> to a JSON file
+        ///     Read a generic type from a JSON file
         /// </summary>
-        /// <param name="value"></param>
+        /// <returns>The deserialized object</returns>
+        public static async Task<T> GetDataAsync(T defaultValue = null)
+        {
+            string content;
+
+            try
+            {
+                content = await System.IO.File.ReadAllTextAsync(GetPath());
+            }
+            catch (FileNotFoundException ex)
+            {
+                if (defaultValue == null)
+                {
+                    Logger.Current.Get().Error(ex);
+                    throw;
+                }
+
+                await WriteDataAsync(defaultValue);
+                return await GetDataAsync();
+            }
+
+            content = content.Replace("\r\n", null);
+            var data = JsonConvert.DeserializeObject<T>(content);
+            return data;
+        }
+
+        /// <summary>
+        ///     Write a generic type to a JSON file
+        /// </summary>
+        /// <param name="value">The value to serialize</param>
         public static void WriteData(T value)
         {
             var serializer = new JsonSerializer();
@@ -64,6 +94,22 @@ namespace REFame.PasswordManagement.File.Config
             using JsonWriter jsonWriter = new JsonTextWriter(sw);
 
             string x = JsonConvert.SerializeObject(value);
+
+            serializer.Serialize(jsonWriter, value);
+        }
+
+        /// <summary>
+        ///     Write a generic type to a JSON file
+        /// </summary>
+        /// <param name="value">The value to serialize</param>
+        public static async Task WriteDataAsync(T value)
+        {
+            var serializer = new JsonSerializer();
+
+            await using var sw = new StreamWriter(GetPath());
+            using JsonWriter jsonWriter = new JsonTextWriter(sw);
+
+            var x = JsonConvert.SerializeObject(value);
 
             serializer.Serialize(jsonWriter, value);
         }

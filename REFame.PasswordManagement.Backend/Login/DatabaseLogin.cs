@@ -13,9 +13,9 @@ namespace REFame.PasswordManagement.Backend.Login
     {
         private readonly DataSet<USERDATA> userdatas;
 
-        public DatabaseLogin()
+        public DatabaseLogin(DataSet<USERDATA> dataSet = null)
         {
-            userdatas = new DataSet<USERDATA>();
+            userdatas = dataSet ?? new DataSet<USERDATA>();
         }
 
         public void Dispose()
@@ -58,9 +58,8 @@ namespace REFame.PasswordManagement.Backend.Login
         {
             try
             {
-                using var context = new DataSet<USERDATA>();
-                context.Database.OpenConnection();
-                context.Database.CloseConnection();
+                userdatas.Database.OpenConnection();
+                userdatas.Database.CloseConnection();
 
                 InitSuccessful = true;
                 Globals.UseDatabase = true;

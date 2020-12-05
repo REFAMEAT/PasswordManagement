@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using REFame.PasswordManagement.App.View;
 using REFame.PasswordManagement.WpfBase;
 
@@ -22,9 +23,9 @@ namespace REFame.PasswordManagement.App.ViewModel
             set => SetProperty(ref userName, value);
         }
 
-        public ICommand ButtonCommandCreateUser => buttonCommandCreateUser ??= new Command(DoCreateUser);
+        public ICommand ButtonCommandCreateUser => buttonCommandCreateUser ??= new AsyncCommand(DoCreateUser);
 
-        private void DoCreateUser(object obj)
+        private async Task DoCreateUser(object obj)
         {
             if (!(obj is AddUser login) || !InputOk)
             {
