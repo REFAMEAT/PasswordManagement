@@ -13,7 +13,6 @@ schedules:
       include:
         - master
         - develop
-    always: false
 
 pool: Default
 
