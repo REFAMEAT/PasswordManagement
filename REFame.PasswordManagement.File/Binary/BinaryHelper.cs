@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.Model;
 
 namespace REFame.PasswordManagement.File.Binary
@@ -11,31 +11,9 @@ namespace REFame.PasswordManagement.File.Binary
     /// <summary>
     ///     Helper class for Binaries
     /// </summary>
-    public class BinaryHelper
+    public class BinaryHelper : IBinaryHelper
     {
-        /// <summary>
-        ///     The path to the bin-file
-        /// </summary>
-        private const string xmlConfigPathDefault = @"C:\Users\{user}\AppData\Roaming\PWManagement\data.bin";
-
-        private readonly string xmlConfigPath;
-
-        public BinaryHelper(string path = null)
-        {
-            if (path != null)
-            {
-                if (!System.IO.File.Exists(path))
-                {
-                    throw new FileNotFoundException("cannot find file", path);
-                }
-
-                xmlConfigPath = path;
-            }
-            else
-            {
-                xmlConfigPath = xmlConfigPathDefault;
-            }
-        }
+        private string xmlConfigPath;
 
         /// <summary>
         ///     Read a <see cref="BinaryData" /> from the .bin file
@@ -44,10 +22,9 @@ namespace REFame.PasswordManagement.File.Binary
         public BinaryData GetData()
         {
             IFormatter formatter = new BinaryFormatter();
-            using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
-                FileMode.OpenOrCreate);
+            using Stream s = new FileStream(xmlConfigPath, FileMode.OpenOrCreate);
 
-            var data = (BinaryData) formatter.Deserialize(s);
+            var data = (BinaryData)formatter.Deserialize(s);
 
             data.Passwords ??= new List<PasswordData>();
 
@@ -61,8 +38,7 @@ namespace REFame.PasswordManagement.File.Binary
         public void Write(BinaryData content)
         {
             IFormatter formatter = new BinaryFormatter();
-            using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
-                FileMode.OpenOrCreate);
+            using Stream s = new FileStream(xmlConfigPath, FileMode.OpenOrCreate);
             formatter.Serialize(s, content);
         }
 
@@ -73,8 +49,7 @@ namespace REFame.PasswordManagement.File.Binary
         public async Task<BinaryData> GetDataAsync()
         {
             IFormatter formatter = new BinaryFormatter();
-            await using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName),
-                FileMode.OpenOrCreate);
+            await using Stream s = new FileStream(xmlConfigPath, FileMode.OpenOrCreate);
 
             var data = (BinaryData)formatter.Deserialize(s);
 
@@ -86,10 +61,20 @@ namespace REFame.PasswordManagement.File.Binary
         public async Task WriteAsync(BinaryData content)
         {
             IFormatter formatter = new BinaryFormatter();
-            await using Stream s = new FileStream(xmlConfigPath.Replace("{user}", Environment.UserName), 
-                FileMode.OpenOrCreate);
+            await using Stream s = new FileStream(xmlConfigPath, FileMode.OpenOrCreate);
 
             formatter.Serialize(s, content);
+        }
+
+        public void OverwriteDefaultPath(string newPath)
+        {
+            if (!System.IO.File.Exists(newPath))
+            {
+                System.IO.File.Create(newPath);
+                //throw new FileNotFoundException("cannot find file", newPath);
+            }
+
+            xmlConfigPath = newPath;
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System.Windows;
 using REFame.PasswordManagement.App.View;
 using REFame.PasswordManagement.AppCore;
+using REFame.PasswordManagement.Data;
+using REFame.PasswordManagement.Database;
+using REFame.PasswordManagement.File.Module;
 using REFame.PasswordManagement.Logging;
 using REFame.PasswordManagement.Login;
 using REFame.PasswordManagement.Services;
@@ -24,7 +27,10 @@ namespace REFame.PasswordManagement.App
                 .RegisterModule<ServiceModule>()
                 .RegisterModule<LocalizationModule>()
                 .RegisterModule<UISetup>()
-                .RegisterModule<LoginModule>();
+                .RegisterModule<FileModule>()
+                .RegisterModule<DatbaseModule>()
+                .RegisterModule<LoginModule>()
+                .RegisterModule<DataModule>();
 
             PWCore.CurrentCore.Run();
             WpfCore.Current.Login(PWCore.CurrentCore);

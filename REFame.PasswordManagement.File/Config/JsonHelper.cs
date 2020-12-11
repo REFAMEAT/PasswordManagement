@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -6,19 +7,31 @@ using REFame.PasswordManagement.Logging;
 
 namespace REFame.PasswordManagement.File.Config
 {
+    public static class JsonPathInfo
+    {
+        public static bool InTest { get; set; } = Debugger.IsAttached;
+    }
+
     /// <summary>
     ///     Serialize and Deserialize JSON files
     /// </summary>
-    public static class JsonHelper<T> where T : class
+    public static class JsonHelper<T> where T : class, new()
     {
-        /// <summary>
-        ///     Path to the JSON file
-        /// </summary>
-        private const string jsonConfigPath = @"C:\Users\{user}\AppData\Roaming\PWManagement\{type}.json";
-
         public static string GetPath()
         {
-            return jsonConfigPath.Replace("{user}", Environment.UserName).Replace("{type}", typeof(T).Name);
+            string savePath = Path.Combine
+            (
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "REFAME",
+                "PasswordManagement"
+            );
+            if (JsonPathInfo.InTest)
+            {
+                savePath = Path.Combine(savePath, "_dev");
+                Directory.CreateDirectory(savePath);
+            }
+
+            return Path.Combine(savePath, $"{typeof(T).Name}.json");
         }
 
         /// <summary>

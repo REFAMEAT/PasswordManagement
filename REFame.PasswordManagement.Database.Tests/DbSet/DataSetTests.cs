@@ -31,24 +31,5 @@ namespace REFame.PasswordManagement.Database.Tests.DbSet
 
             Assert.That(countAfterAdd, Is.GreaterThan(countBeforeAdd));
         }
-
-        [Test]
-        public void DataSetTestConfig()
-        {
-            var testDataSet = new DataSet<PASSWORDDATA>(new DatabaseData
-            {
-                DatabaseName = "TESTDATABASE",
-                IntegratedSecurity = false,
-                Password = "TESTPW",
-                ServerName = "TESTSERVER",
-                UseDatabase = true,
-                Username = "TESTUSERNAME"
-            });
-
-            DbConnection connection = testDataSet.Database.GetDbConnection();
-
-            Assert.That(connection.Database, Is.EqualTo("TESTDATABASE"));
-            Assert.That(connection.DataSource, Is.EqualTo("TESTSERVER"));
-        }
     }
 }

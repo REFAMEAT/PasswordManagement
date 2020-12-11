@@ -2,13 +2,12 @@
 using System.Threading.Tasks;
 using REFame.PasswordManagement.Data;
 using REFame.PasswordManagement.Model;
-using REFame.PasswordManagement.Model.Interfaces;
 
 namespace REFame.PasswordManagement.Tests.ViewModel
 {
     internal class TestDataManager : IDataManager<PasswordData>
     {
-        public List<PasswordData> passwordDatas = new List<PasswordData>();
+        public readonly List<PasswordData> passwordDatas = new List<PasswordData>();
 
         public void AddData(PasswordData value)
         {
@@ -25,9 +24,10 @@ namespace REFame.PasswordManagement.Tests.ViewModel
             return passwordDatas.Remove(item);
         }
 
-        public async Task AddDataAsync(PasswordData value)
+        public Task AddDataAsync(PasswordData value)
         {
             passwordDatas.Add(value);
+            return Task.CompletedTask;
         }
 
         public async Task<List<PasswordData>> LoadDataAsync()

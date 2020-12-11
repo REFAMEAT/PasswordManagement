@@ -2,18 +2,22 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using REFame.PasswordManagement.File.Config;
+using REFame.PasswordManagement.File.Contracts.Config;
 using REFame.PasswordManagement.Model.Setting;
 
 namespace REFame.PasswordManagement.Database.DbSet
 {
-    public class DataSet<TEntity> : DbContext where TEntity : class
+    public class DataSet<TEntity> : DbContext, IDataSet<TEntity> where TEntity : class
     {
         private readonly DatabaseData config;
         private readonly Action<DbContextOptionsBuilder> onConfiguringAction;
 
-        public DataSet(DatabaseData config = null)
+        public DataSet(IConfigurationFactory<DatabaseData> factory)
         {
-            this.config = config ?? JsonHelper<DatabaseData>.GetData();
+            config = factory
+                .SetPath()
+                .Create()
+                .Load();
         }
 
         public DataSet(Action<DbContextOptionsBuilder> onConfiguringAction)
@@ -37,6 +41,7 @@ namespace REFame.PasswordManagement.Database.DbSet
                 }.ToString();
 
                 optionsBuilder.UseSqlServer(connectionString);
+
             }
             else
             {

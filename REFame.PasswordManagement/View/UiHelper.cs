@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
 using REFame.PasswordManagement.AppCore;
+using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.WpfBase.Localization;
-using ITheme = REFame.PasswordManagement.Model.Interfaces.ITheme;
 using MColor = System.Windows.Media.Color;
 
 namespace REFame.PasswordManagement.App.View
@@ -19,7 +19,7 @@ namespace REFame.PasswordManagement.App.View
         /// <param name="data"></param>
         public static async Task AdjustApplicationStyle()
         {
-            ITheme data = await PWCore.CurrentCore.GetRegisteredType<ISettingService<ITheme>>().Load();
+            ThemeData data = await PWCore.CurrentCore.GetRegisteredType<ISettingService<ThemeData>>().Load();
 
             Application.Current.Resources.Clear();
 

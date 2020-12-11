@@ -1,10 +1,10 @@
 ﻿using System.Windows.Input;
-using System.Windows.Media;
 using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.Backend;
 using REFame.PasswordManagement.Database.DbSet;
 using REFame.PasswordManagement.Database.Model;
-using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.WpfBase;
@@ -33,13 +33,23 @@ namespace REFame.PasswordManagement.App.ViewModel
 
             if (firstUser != null && Globals.UseDatabase)
             {
-                var data = new DataSet<USERDATA>();
+                var data = PWCore
+                    .CurrentCore
+                    .GetRegisteredType<IDataSet<USERDATA>>();
                 data.Entities.Add(firstUser);
                 data.SaveChanges();
             }
             else if (firstUser != null)
             {
-                new BinaryHelper().Write(new BinaryData(firstUser.USUSERNAME, firstUser.USPASSWORD, firstUser.USSALT));
+                PWCore.CurrentCore
+                    .GetRegisteredType<IBinaryHelperFactory>()
+                    .SetPath()
+                    .Create()
+                    .Write(
+                        new BinaryData(
+                            firstUser.USUSERNAME,
+                            firstUser.USPASSWORD,
+                            firstUser.USSALT));
             }
         }
 
@@ -60,17 +70,9 @@ namespace REFame.PasswordManagement.App.ViewModel
 
             string userId = iLogin.Validate(userName, login.passwordBox.Password);
 
-            if (userId != null)
-            {
-                login.DialogResult = true;
-                Globals.CurrentUserId = userId;
-                login.Close();
-            }
-            else
-            {
-                login.userNameTextBox.Foreground = Brushes.Red;
-                login.passwordBox.Foreground = Brushes.Red;
-            }
+            login.DialogResult = true;
+            Globals.CurrentUserId = userId;
+            login.Close();
         }
     }
 }

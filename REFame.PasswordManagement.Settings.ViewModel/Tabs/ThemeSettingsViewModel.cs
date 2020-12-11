@@ -8,20 +8,19 @@ using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.WpfBase;
 using REFame.PasswordManagement.WpfBase.Localization;
 using REFame.PasswordManagement.WpfBase.Mediator;
-using ITheme = REFame.PasswordManagement.Model.Interfaces.ITheme;
 
 namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
 {
     public class ThemeSettingsViewModel : BindableBase
     {
         private SettingMediator settingMediator;
-        readonly ISettingService<ITheme> themeSetting;
+        readonly ISettingService<ThemeData> themeSetting;
 
-        public ThemeSettingsViewModel(ISettingService<ITheme> themeSetting = null)
+        public ThemeSettingsViewModel(ISettingService<ThemeData> themeSetting)
         {
             this.themeSetting = themeSetting ??= new ThemeSettingService();
 
-            ITheme data = themeSetting.Load().Result;
+            ThemeData data = themeSetting.Load().Result;
 
             SelectedColor = data.PrimaryColor;
             SelectedLanguage = data.Language.ToString();

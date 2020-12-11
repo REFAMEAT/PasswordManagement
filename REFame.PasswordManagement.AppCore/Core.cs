@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using REFame.PasswordManagement.AppCore.Contracts;
+using REFame.PasswordManagement.Logging;
+
+[assembly: InternalsVisibleTo("REFame.PasswordManagement.AppCore.Tests")]
 
 namespace REFame.PasswordManagement.AppCore
 {
@@ -24,14 +30,32 @@ namespace REFame.PasswordManagement.AppCore
 
         public TInterface GetRegisteredType<TInterface>()
         {
-            object value = Resolve(typeof(TInterface));
-
-            return value is TInterface o ? o : default;
+            if (GetRegisteredType(typeof(TInterface)) is TInterface result)
+            {
+                return result;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
 
-        public void RegisterType<TInterface, TImplementation>() where TImplementation : TInterface, new()
+        private object GetRegisteredType(Type type)
         {
-            mapping.TryAdd(typeof(TInterface), () => new TImplementation());
+            if (mapping.TryGetValue(type, out var func))
+            {
+                var value = func();
+                return value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void RegisterType<TInterface, TImplementation>() where TImplementation : TInterface
+        {
+            mapping.TryAdd(typeof(TInterface), () => Resolve(typeof(TImplementation)));
         }
 
         public async Task Run()
@@ -44,9 +68,69 @@ namespace REFame.PasswordManagement.AppCore
 
         private object Resolve(Type type)
         {
-            mapping.TryGetValue(type, out var func);
+            var constructors = type
+                .GetConstructors()
+                .OrderByDescending(x => x.GetParameters().Length)
+                .FirstOrDefault();
 
-            return func?.Invoke();
+            if (constructors == null)
+            {
+                throw new ApplicationException("ctor not found");
+            }
+            else if (constructors.GetParameters().Length == 0)
+            {
+                return Activator.CreateInstance(type);
+            }
+            else
+            {
+                List<object> parameters = new List<object>();
+                foreach (var parameterInfo in constructors.GetParameters())
+                {
+                    object parameter = GetRegisteredType(parameterInfo.ParameterType);
+
+                    if (parameter is null)
+                    {
+                        parameter = TryResolveType(parameterInfo.ParameterType);
+
+                        if (parameter is null)
+                        {
+                            throw new ApplicationException("cannot resolve type");
+                        }
+
+                    }
+
+                    parameters.Add(parameter);
+                }
+
+                return Activator.CreateInstance(type, parameters.ToArray());
+            }
+        }
+
+        private object TryResolveType(Type type)
+        {
+            try
+            {
+                return Activator.CreateInstance(type);
+            }
+            catch (MissingMethodException missingMethodException)
+            {
+                Logger.Current?.Get()?.Error(missingMethodException);
+            }
+
+            foreach (ConstructorInfo constructorInfo in type.GetConstructors())
+            {
+                object[] nullParameters = new object[constructorInfo.GetParameters().Length];
+
+                try
+                {
+                    return Activator.CreateInstance(type, nullParameters);
+                }
+                catch (Exception)
+                {
+                    Logger.Current?.Get()?.Information("Tried to create instance");
+                }
+            }
+            return null;
         }
     }
 }

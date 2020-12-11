@@ -3,14 +3,25 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.Data.DataManager;
+using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.File.Binary.Factory;
+using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.Model;
 
-namespace REFame.PasswordManagement.Backend.Tests.Data
+namespace REFame.PasswordManagement.Data.Tests.DataManager
 {
     [TestFixture]
     public class FileDataManagerTests
     {
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            PWCore.Create();
+            PWCore.CurrentCore.RegisterType<IBinaryHelperFactory, BinaryHelperFactory>();
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -30,12 +41,6 @@ namespace REFame.PasswordManagement.Backend.Tests.Data
         }
 
         [Test]
-        public void TestConstructorInvalidPath()
-        {
-            Assert.Throws<FileNotFoundException>(() => new FileDataManager("foo.foo"));
-        }
-
-        [Test]
         public void TestConstructorValidPath()
         {
             Assert.That(new FileDataManager("data.bin"), Is.TypeOf<FileDataManager>().And.Not.Null);
@@ -47,7 +52,7 @@ namespace REFame.PasswordManagement.Backend.Tests.Data
             int countBeforeAdd = pwData.Length;
             var dataManager = new FileDataManager("data.bin");
 
-            dataManager.AddData(new PasswordData {Identifier = "NewId1"});
+            dataManager.AddData(new PasswordData { Identifier = "NewId1" });
 
             Assert.That(dataManager.LoadData().Count, Is.EqualTo(++countBeforeAdd));
         }
@@ -58,7 +63,7 @@ namespace REFame.PasswordManagement.Backend.Tests.Data
             int countBeforeDelete = pwData.Length;
             var dataManager = new FileDataManager("data.bin");
 
-            bool deleted = dataManager.Remove(new PasswordData {Identifier = "Id1"});
+            bool deleted = dataManager.Remove(new PasswordData { Identifier = "Id1" });
 
             Assert.That(dataManager.LoadData().Count, Is.EqualTo(--countBeforeDelete));
             Assert.That(deleted, Is.True);
@@ -70,7 +75,7 @@ namespace REFame.PasswordManagement.Backend.Tests.Data
             int countBeforeDelete = pwData.Length;
             var dataManager = new FileDataManager("data.bin");
 
-            bool deleted = dataManager.Remove(new PasswordData {Identifier = "WrongId"});
+            bool deleted = dataManager.Remove(new PasswordData { Identifier = "WrongId" });
 
             Assert.That(deleted, Is.False);
             Assert.That(dataManager.LoadData().Count, Is.EqualTo(countBeforeDelete));

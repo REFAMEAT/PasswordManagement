@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using NUnit.Framework;
 using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.Model;
 
 namespace REFame.PasswordManagement.File.Tests.Binary
@@ -55,7 +56,8 @@ namespace REFame.PasswordManagement.File.Tests.Binary
         [Test]
         public void TestReadDataFromFile()
         {
-            var helper = new BinaryHelper("data.bin");
+            IBinaryHelper helper = new BinaryHelper();
+            helper.OverwriteDefaultPath("data.bin");
 
             BinaryData data = helper.GetData();
 
@@ -67,7 +69,9 @@ namespace REFame.PasswordManagement.File.Tests.Binary
         [Test]
         public void TestWriteDataToFile()
         {
-            var helper = new BinaryHelper("data.bin");
+            var helper = new BinaryHelper();
+            helper.OverwriteDefaultPath("data.bin");
+
             var dataToAdd = new PasswordData
             {
                 Comments = "NewComment", Description = "NewDescription", Password = "NewPassword", Identifier = "NewID"

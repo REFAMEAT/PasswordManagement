@@ -1,5 +1,8 @@
 ﻿using System;
+using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.File.Binary.Factory;
+using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Security;
@@ -8,16 +11,20 @@ namespace REFame.PasswordManagement.Login
 {
     public class LocalLogin : ILogin
     {
-        private BinaryHelper helper;
-
-        public LocalLogin() : this(null)
+        private IBinaryHelper helper;
+        
+        public LocalLogin(IBinaryHelperFactory helper)
         {
-            
-        }
-
-        public LocalLogin(BinaryHelper helper)
-        {
-            this.helper = helper ?? new BinaryHelper();
+            if (string.IsNullOrWhiteSpace(helper.CurrentPath))
+            {
+                this.helper = helper
+                       .SetPath()
+                       .Create(); 
+            }
+            else
+            {
+                this.helper = helper.Create();
+            }
         }
 
         public void Dispose()

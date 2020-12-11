@@ -12,16 +12,11 @@ namespace REFame.PasswordManagement.Login
 {
     public class DatabaseLogin : ILogin
     {
-        private readonly DataSet<USERDATA> userdatas;
-
-        public DatabaseLogin() : this(null)
+        private readonly IDataSet<USERDATA> userdatas;
+        
+        public DatabaseLogin(IDataSet<USERDATA> dataSet)
         {
-            
-        }
-
-        public DatabaseLogin(DataSet<USERDATA> dataSet)
-        {
-            userdatas = dataSet ?? new DataSet<USERDATA>();
+            userdatas = dataSet;
         }
 
         public void Dispose()
@@ -62,20 +57,19 @@ namespace REFame.PasswordManagement.Login
 
         public void Initialize()
         {
+            bool canConnect;
+
             try
             {
-                userdatas.Database.OpenConnection();
-                userdatas.Database.CloseConnection();
-
-                InitSuccessful = true;
-                Globals.UseDatabase = true;
+                canConnect = userdatas.Database.CanConnect();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                InitSuccessful = false;
-                Logger.Current.Get().Error(ex);
-                Globals.UseDatabase = false;
+                canConnect = false;
+                Logger.Current.Get().Warning(e);
             }
+
+            InitSuccessful = Globals.UseDatabase = canConnect;
         }
     }
 }

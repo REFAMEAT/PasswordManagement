@@ -9,6 +9,12 @@ namespace REFame.PasswordManagement.File.Tests.Config
     [TestFixture]
     public class JsonHelperTests
     {
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            JsonPathInfo.InTest = true;
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -82,6 +88,21 @@ namespace REFame.PasswordManagement.File.Tests.Config
             Assert.That(model.IntValue, Is.EqualTo(44));
             Assert.That(model.CharValue, Is.EqualTo('y'));
             Assert.That(model.StringValue, Is.EqualTo("HalloTest"));
+        }
+
+        [Test]
+        public void GetPathIsValid()
+        {
+            string path = JsonHelper<TestModel>.GetPath();
+
+            if (path.Contains("_dev"))
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail("Path is invalid");
+            }
         }
     }
 

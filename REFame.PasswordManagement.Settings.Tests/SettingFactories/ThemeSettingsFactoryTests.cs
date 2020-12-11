@@ -16,8 +16,8 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
     [TestFixture(TestOf = typeof(ThemeSettingsFactory))]
     public class ThemeSettingsFactoryTests
     {
-        public static ITheme mockData;
-        Mock<ISettingService<ITheme>> mock = new Mock<ISettingService<ITheme>>();
+        public static ThemeData mockData;
+        Mock<ISettingService<ThemeData>> mock = new Mock<ISettingService<ThemeData>>();
 
         [SetUp]
         public void Setup()
@@ -35,8 +35,8 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
                 .Returns(async () => mockData);
 
             mock
-                .Setup(x => x.Save(It.IsAny<ITheme>()))
-                .Callback<ITheme>(x => mockData = x);
+                .Setup(x => x.Save(It.IsAny<ThemeData>()))
+                .Callback<ThemeData>(x => mockData = x);
         }
 
         [Test]

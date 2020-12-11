@@ -12,7 +12,7 @@ namespace REFame.PasswordManagement.Services
         public Task Initialize(ICore appCore)
         {
             appCore.RegisterType<ISettingService<DatabaseData>, DatabaseSettingService>();
-            appCore.RegisterType<ISettingService<ITheme>, ThemeSettingService>();
+            appCore.RegisterType<ISettingService<ThemeData>, ThemeSettingService>();
 
             return Task.CompletedTask;
         }

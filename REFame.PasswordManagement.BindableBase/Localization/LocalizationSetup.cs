@@ -6,10 +6,11 @@ namespace REFame.PasswordManagement.WpfBase.Localization
 {
     public class LocalizationModule : IModule
     {
-        public async Task Initialize(ICore core)
+        public Task Initialize(ICore core)
         {
             Localizations.Current.RegisterLanguage(Language.English, LocalizationResources.EN);
             Localizations.Current.RegisterLanguage(Language.German, LocalizationResources.DE);
+            return Task.CompletedTask;
         }
     }
 }

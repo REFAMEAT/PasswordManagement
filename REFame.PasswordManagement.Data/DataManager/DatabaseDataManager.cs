@@ -12,11 +12,11 @@ namespace REFame.PasswordManagement.Data.DataManager
     /// </summary>
     public class DatabaseDataManager : IDataManager<PasswordData>
     {
-        private readonly DataSet<PASSWORDDATA> passwordData;
+        private readonly IDataSet<PASSWORDDATA> passwordData;
 
-        public DatabaseDataManager(DataSet<PASSWORDDATA> dataSet = null)
+        public DatabaseDataManager(IDataSet<PASSWORDDATA> dataSet = null)
         {
-            passwordData = dataSet ?? new DataSet<PASSWORDDATA>();
+            passwordData = dataSet;
         }
 
         /// <summary>

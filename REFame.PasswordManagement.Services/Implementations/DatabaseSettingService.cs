@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
+using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.File.Config;
+using REFame.PasswordManagement.File.Contracts.Config;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Interfaces;
 
@@ -9,20 +11,20 @@ namespace REFame.PasswordManagement.Services.Implementations
     {
         public async Task<DatabaseData> Load()
         {
-            return await JsonHelper<DatabaseData>.GetDataAsync(new DatabaseData
-            {
-                DatabaseName = "localhost",
-                IntegratedSecurity = true,
-                Username = "",
-                Password = "",
-                ServerName = "",
-                UseDatabase = false
-            });
+            return await PWCore.CurrentCore
+                .GetRegisteredType<IConfigurationFactory<DatabaseData>>()
+                .SetPath()
+                .Create()
+                .LoadAsync();
         }
 
         public async Task Save(DatabaseData data)
         {
-            await JsonHelper<DatabaseData>.WriteDataAsync(data);
+            await PWCore.CurrentCore
+                .GetRegisteredType<IConfigurationFactory<DatabaseData>>()
+                .SetPath()
+                .Create()
+                .WriteAsync(data);
         }
     }
 }

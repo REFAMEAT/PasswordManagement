@@ -8,7 +8,7 @@ using REFame.PasswordManagement.Database.Model;
 using REFame.PasswordManagement.Database.Tests;
 using REFame.PasswordManagement.Model;
 
-namespace REFame.PasswordManagement.Backend.Tests.Data
+namespace REFame.PasswordManagement.Data.Tests.DataManager
 {
     [TestFixture]
     public class DatabaseDataManagerTests : DatabaseSetup

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using REFame.PasswordManagement.File.Binary;
+using REFame.PasswordManagement.AppCore;
+using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.Model;
 
 namespace REFame.PasswordManagement.Data.DataManager
@@ -10,12 +11,16 @@ namespace REFame.PasswordManagement.Data.DataManager
     /// </summary>
     public class FileDataManager : IDataManager<PasswordData>
     {
-        private readonly BinaryHelper binaryHelper;
+        private readonly IBinaryHelper binaryHelper;
         private BinaryData binaryData;
 
         public FileDataManager(string path = null)
         {
-            binaryHelper = new BinaryHelper(path);
+            binaryHelper = PWCore.CurrentCore
+                .GetRegisteredType<IBinaryHelperFactory>()
+                .SetPath(path)
+                .Create();
+
             binaryData = binaryHelper.GetData();
         }
 
