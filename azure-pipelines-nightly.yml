@@ -65,4 +65,10 @@ jobs:
     inputs:
       command: 'custom'
       custom: 'jb'
-      arguments: 'inspectcode -o="report.md" $(solution) -s="INFO" --exclude=**/*.dll;**/**/*.xaml'
+      arguments: 'inspectcode -o="$(Build.ArtifactStagingDirectory)\report.xml" $(solution) -s="INFO" --exclude=**/*.dll;**/**/*.xaml'
+
+  - task: PublishBuildArtifacts@1 
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)\report.xml'
+      ArtifactName: 'Resharper'
+      publishLocation: 'Container'
