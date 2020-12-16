@@ -1,20 +1,16 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 pr: none
 trigger: none
 
 schedules:
-  - cron: '0 0 * * *'
+  - cron: '0 12 * * *'
     displayName: midnight build
     branches:
       include:
         - master
         - develop
 
-pool: Default
+pool: 
+  vmImage: windows-latest
 
 name: $(Year:yyyy).$(Minor)$(Rev:.r)-nightly
 
@@ -28,38 +24,45 @@ variables:
 - name: buildConfiguration
   value: 'Release'
 
-steps:
-- task: NuGetToolInstaller@1
+jobs:
+- job: 
+  displayName: Run Unit Tests
+  steps:
+  - task: DotNetCoreCLI@2 
+    displayName: 'Run Unit Tests and collect coverage'
+    inputs:
+      arguments: -c $(BuildConfiguration) --collect:"XPlat Code Coverage" -- RunConfiguration.DisableAppDomain=true
+      command: 'test'
+      projects: '$(solution)'
 
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '3.1.x'
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish coverage results'
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+      pathToSources: '$(Build.SourcesDirectory)'
 
-- task: NuGetAuthenticate@0
-  displayName: 'Authtification'
-  inputs:
-   forceReinstallCredentialProvider: true
+- job:
+  displayName: Run Resharper
+  steps:
 
-- checkout: self
-  displayName: 'Checkout source-code'
+  - task: DotNetCoreCLI@2
+    displayName: Create new tool manifest
+    inputs:
+      command: 'custom'
+      custom: 'new'
+      arguments: 'tool-manifest'
 
-- task: NuGetCommand@2
-  displayName: 'Restore Solution'
-  inputs:
-    restoreSolution: '$(solution)'
+  - task: DotNetCoreCLI@2
+    displayName: 'Install Resharper global tool'
+    inputs:
+      command: 'custom'
+      custom: 'tool'
+      arguments: 'install JetBrains.ReSharper.GlobalTools'
 
-- task: DotNetCoreCLI@2 
-  displayName: 'Run Unit Tests'
-  inputs:
-    command: 'test'
-    projects: '$(solution)'
-    arguments: '-v diag'
-
-- task: ResharperCli@2
-  displayName: 'Resharper check coding guidelines'
-  inputs:
-    solutionOrProjectPath: '$(solution)'
-    failBuildLevelSelector: 'Warning'
-    failBuildOnCodeIssues: false
-    additionalArguments: '--exclude=**.Tests/**/*.cs;**Resources/**/*.*;**.Test/**/*.cs;**/**/*.xaml'
+  - task: DotNetCoreCLI@2
+    displayName: 'Resharper check coding guidelines'
+    inputs:
+      command: 'custom'
+      custom: 'jb'
+      arguments: 'inspectcode -o="report.md" $(solution) -s="INFO" --exclude=**/*.dll;**/**/*.xaml'
