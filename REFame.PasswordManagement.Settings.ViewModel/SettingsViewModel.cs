@@ -8,7 +8,7 @@ namespace REFame.PasswordManagement.Settings.ViewModel
 {
     public class SettingsViewModel : BindableBase
     {
-        public List<SettingMediator> SettingMediators { get; set; } = new List<SettingMediator>();
+        public List<SettingMediator> SettingMediators { get; private set; }
 
         public SettingsViewModel()
         {
