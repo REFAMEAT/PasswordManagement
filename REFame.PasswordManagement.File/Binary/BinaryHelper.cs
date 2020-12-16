@@ -13,7 +13,17 @@ namespace REFame.PasswordManagement.File.Binary
     /// </summary>
     public class BinaryHelper : IBinaryHelper
     {
+        /// <summary>
+        ///     The path to the bin-file
+        /// </summary>
+        private const string xmlConfigPathDefault = @"C:\Users\{user}\AppData\Roaming\PWManagement\data.bin";
+
         private string xmlConfigPath;
+
+        public BinaryHelper()
+        {
+            xmlConfigPath = xmlConfigPathDefault;
+        }
 
         /// <summary>
         ///     Read a <see cref="BinaryData" /> from the .bin file

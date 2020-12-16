@@ -11,6 +11,8 @@ namespace REFame.PasswordManagement.Data
     {
         public Task Initialize(ICore appCore)
         {
+            appCore.RegisterType<IDataManager<PasswordData>, FileDataManager>();
+
             if (Globals.UseDatabase)
             {
                 appCore.RegisterType<IDataManager<PasswordData>, DatabaseDataManager>();
@@ -19,7 +21,7 @@ namespace REFame.PasswordManagement.Data
             {
                 appCore.RegisterType<IDataManager<PasswordData>, FileDataManager>();
             }
-
+                
             return Task.CompletedTask;
         }
     }

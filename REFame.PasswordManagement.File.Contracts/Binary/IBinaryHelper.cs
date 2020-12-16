@@ -12,19 +12,19 @@ namespace REFame.PasswordManagement.File.Contracts.Binary
         public BinaryData GetData();
 
         /// <summary>
-        ///     Write a <see cref="!:BinaryData" /> to the .bin File
+        ///     Write a <see cref="BinaryData" /> to the .bin File
         /// </summary>
         /// <param name="content"></param>
         public void Write(BinaryData content);
 
         /// <summary>
-        ///     Read a <see cref="!:BinaryData" /> from the .bin file
+        ///     Read a <see cref="BinaryData" /> from the .bin file
         /// </summary>
         /// <returns></returns>
         public Task<BinaryData> GetDataAsync();
 
         /// <summary>
-        ///    Write a <see cref="!:BinaryData" /> to the .bin file
+        ///    Write a <see cref="BinaryData" /> to the .bin file
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>

@@ -56,7 +56,7 @@ namespace REFame.PasswordManagement.File.Tests.Binary
         [Test]
         public void TestReadDataFromFile()
         {
-            IBinaryHelper helper = new BinaryHelper();
+            var helper = new BinaryHelper();
             helper.OverwriteDefaultPath("data.bin");
 
             BinaryData data = helper.GetData();

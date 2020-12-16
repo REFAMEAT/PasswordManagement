@@ -14,7 +14,7 @@ namespace REFame.PasswordManagement.App
 
         }
 
-        internal void Login(ICore appCore)
+        internal bool Login(ICore appCore)
         {
             ILogin loginMethod = appCore.GetRegisteredType<ILogin>();
             View.Login login = new View.Login(loginMethod);
@@ -22,11 +22,12 @@ namespace REFame.PasswordManagement.App
 
             if (login.DialogResult != true)
             {
-                Application.Current.Shutdown(1);
+                return false;
             }
             else
             {
                 App.loginPw = login.passwordBox.Password;
+                return true;
             }
         }
 
