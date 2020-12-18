@@ -7,7 +7,8 @@ trigger:
 - master
 - develop
 
-pool: Default
+pool: 
+  vmImage: windows-latest
 
 name: $(Year:yyyy).$(Minor)$(Rev:.r)
 
@@ -24,27 +25,23 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
+- task: DownloadSecureFile@1
+  name: deploy
   inputs:
-    restoreSolution: '$(solution)'
+    secureFile: 'Deploy.zip'
 
-- task: VSBuild@1
-  displayName: 'Restore Solution'
+- task: ExtractFiles@1
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '-t:restore'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    maximumCpuCount: true
+    archiveFilePatterns: '$(deploy.secureFilePath)'
+    destinationFolder: '$(Agent.TempDirectory)\Deploy'
+    cleanDestinationFolder: true
+    overwriteExistingFiles: false
 
-- task: VSBuild@1
-  displayName: 'Build Solution to ArtifactStagingDirectory'
+- task: DotNetCoreCLI@2
   inputs:
-    solution: $(solution)
-    msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)/App'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    maximumCpuCount: true
+    command: 'build'
+    projects: '$(Build.SourcesDirectory)\REFame.PasswordManagement\REFame.PasswordManagement.App.csproj'
+    arguments: '-c Release -r win-x64 -o $(Build.ArtifactStagingDirectory)\App -p:Version=$(Build.BuildNumber)'
 
 - task: DotNetCoreCLI@2
   displayName: Run Unit Tests
@@ -53,17 +50,14 @@ steps:
     arguments: '-s .runsetting'
     projects: '$(solution)'
 
-- task: ArchiveFiles@2
+- task: CmdLine@1
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber).zip'
-    replaceExistingArchive: true
+    filename: '$(Agent.TempDirectory)\Deploy\Deploy.exe'
+    arguments: '-l $(Build.ArtifactStagingDirectory)\App -v $(Build.BuildNumber) -t $(Agent.TempDirectory)\DeployTemp -w  $(Build.SourcesDirectory)\REFame.PasswordManagement -o $(Build.ArtifactStagingDirectory)\Setup'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber).zip'
-    ArtifactName: 'drop'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\Setup\Setup.exe'
+    ArtifactName: 'setup'
     publishLocation: 'Container'
 
