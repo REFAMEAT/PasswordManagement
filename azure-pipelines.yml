@@ -31,6 +31,7 @@ steps:
     secureFile: 'Deploy.zip'
 
 - task: ExtractFiles@1
+  displayName: Extract Deploy tool
   inputs:
     archiveFilePatterns: '$(deploy.secureFilePath)'
     destinationFolder: '$(Agent.TempDirectory)\Deploy'
@@ -38,10 +39,17 @@ steps:
     overwriteExistingFiles: false
 
 - task: DotNetCoreCLI@2
+  displayName: Restore solution
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: '$(Build.SourcesDirectory)\REFame.PasswordManagement\REFame.PasswordManagement.App.csproj'
     arguments: '-c Release -r win-x64 -o $(Build.ArtifactStagingDirectory)\App -p:Version=$(Build.BuildNumber)'
+    includeNuGetOrg: true
 
 - task: DotNetCoreCLI@2
   displayName: Run Unit Tests
@@ -49,15 +57,25 @@ steps:
     command: 'test'
     arguments: '-s .runsetting'
     projects: '$(solution)'
+    includeNuGetOrg: true
 
 - task: CmdLine@1
+  displayName: Run Deploy.exe
   inputs:
     filename: '$(Agent.TempDirectory)\Deploy\Deploy.exe'
     arguments: '-l $(Build.ArtifactStagingDirectory)\App -v $(Build.BuildNumber) -t $(Agent.TempDirectory)\DeployTemp -w  $(Build.SourcesDirectory)\REFame.PasswordManagement -o $(Build.ArtifactStagingDirectory)\Setup'
 
+- task: PowerShell@2
+  displayName: Rename Setup.exe
+  inputs:
+    targetType: 'inline'
+    script: 'Rename-Item -Path "$(Build.ArtifactStagingDirectory)\Setup\Setup.exe" -NewName "Setup-$(Build.BuildNumber).exe"'
+    failOnStderr: true
+    showWarnings: true
+
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\Setup\Setup.exe'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\Setup\Setup-$(Build.BuildNumber).exe'
     ArtifactName: 'setup'
     publishLocation: 'Container'
 
