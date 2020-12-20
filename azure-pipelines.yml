@@ -75,12 +75,18 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\Setup\RELEASES'
+    ArtifactName: 'setup-package'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)\Setup\Setup-$(Build.BuildNumber).exe'
     ArtifactName: 'setup'
     publishLocation: 'Container'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Agent.TempDirectory)\DeployTemp\nuget-packages\PASSWORDMANAGEMENT.$(Build.BuildNumber).nupkg'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\Setup\PASSWORDMANAGEMENT-$(Build.BuildNumber)-full.nupkg'
     ArtifactName: 'setup-package'
     publishLocation: 'Container'
