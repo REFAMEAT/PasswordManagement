@@ -2,7 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using REFame.PasswordManagement.AppCore.Contracts;
+using REFame.PasswordManagement.Logging;
+using REFame.PasswordManagement.ProgressBar.Contracts;
 using Squirrel;
 
 namespace REFame.PasswordManagement.Update
@@ -11,12 +14,40 @@ namespace REFame.PasswordManagement.Update
     {
         public async Task Initialize(ICore appCore)
         {
-            string appPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "PASSWORDMANAGEMENT");
+            var result = MessageBox.Show
+            ("Do you want to update a new version, if available?", 
+                "Update routine",
+                MessageBoxButton.YesNo);
 
-            using var manager = new UpdateManager(appPath);
-            await manager.UpdateApp();
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            var progressBar = appCore.GetRegisteredType<IProgressBar>();
+            progressBar.Show();
+            await Task.Delay(100);
+           
+            try
+            {
+                var manager =
+                    await UpdateManager.GitHubUpdateManager("https://github.com/REFAMEAT/PasswordManagement",
+                        "PASSWORDMANAGEMENT");
+
+                await manager.UpdateApp(i =>
+                {
+                    progressBar.SetProgress(i); 
+                    
+                });
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.Get().Error(ex);
+            }
+            finally
+            {
+                progressBar.Close();
+            }
         }
     }
 }

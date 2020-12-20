@@ -1,0 +1,56 @@
+﻿<Window x:Class="REFame.PasswordManagement.ProgressBar.View.ProgressView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:REFame.PasswordManagement.ProgressBar.View"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Title="Progress" Height="150" Width="300"
+        MouseDown="ProgressView_OnMouseDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label FontSize="10" 
+               Background="{DynamicResource MaterialDesignPaper}"
+               Content="PasswordManagement"></Label>
+
+        <Label 
+            Grid.Row="1"
+            Content="Updating application"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            FontSize="30"/>
+
+        <Grid
+            Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ProgressBar 
+            Value="{Binding Progress}" 
+            Width="250"
+            Height="20"/>
+            <Label Content="{Binding Progress}" Grid.Column="1" VerticalAlignment="Center"></Label>
+        </Grid>
+
+    </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/REFame.PasswordManagement.WpfBase;component/Localization/StringResources.EN.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/REFame.PasswordManagement.Styles;component/TabControlStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+</Window>

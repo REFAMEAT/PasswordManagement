@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 using REFame.PasswordManagement.App.ViewModel;
 using REFame.PasswordManagement.Data;
 using REFame.PasswordManagement.Model;
@@ -14,6 +15,8 @@ namespace REFame.PasswordManagement.App.View
         internal MainWindow(IDataManager<PasswordData> dataManager = null)
         {
             InitializeComponent();
+
+            Title = $"PasswordManagement {typeof(MainWindow).Assembly.GetName().Version}";
 
             if (!(dataManager is null))
             {
