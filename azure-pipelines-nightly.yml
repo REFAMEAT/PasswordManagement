@@ -28,6 +28,12 @@ jobs:
 - job: 
   displayName: Run Unit Tests
   steps:
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      feedsToUse: 'select'
+
   - task: DotNetCoreCLI@2 
     displayName: 'Run Unit Tests and collect coverage'
     inputs:

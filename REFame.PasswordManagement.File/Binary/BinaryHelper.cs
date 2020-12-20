@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -13,16 +14,15 @@ namespace REFame.PasswordManagement.File.Binary
     /// </summary>
     public class BinaryHelper : IBinaryHelper
     {
-        /// <summary>
-        ///     The path to the bin-file
-        /// </summary>
-        private const string xmlConfigPathDefault = @"C:\Users\{user}\AppData\Roaming\PWManagement\data.bin";
-
         private string xmlConfigPath;
 
         public BinaryHelper()
         {
-            xmlConfigPath = xmlConfigPathDefault;
+            xmlConfigPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                "REFame",
+                "PasswordManagement",
+                "data.bin");
         }
 
         /// <summary>

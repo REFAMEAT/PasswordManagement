@@ -44,7 +44,7 @@ namespace REFame.PasswordManagement.Logging
                 .CreateLogger();
 
             currentLogger = new FileLogger(Log.Logger);
-            Log.Logger.Information("Initialized IbfLogger");
+            Log.Logger.Information("Initialized Logger");
         }
 
         public ILogger Create()
