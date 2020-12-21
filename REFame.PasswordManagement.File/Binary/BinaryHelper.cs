@@ -80,6 +80,13 @@ namespace REFame.PasswordManagement.File.Binary
         {
             if (!System.IO.File.Exists(newPath))
             {
+                FileInfo fileInfo = new FileInfo(newPath);
+
+                if (!fileInfo.Directory.Exists)
+                {
+                    fileInfo.Directory.Create();
+                }
+                
                 System.IO.File.Create(newPath);
                 //throw new FileNotFoundException("cannot find file", newPath);
             }

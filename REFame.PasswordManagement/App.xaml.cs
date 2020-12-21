@@ -27,7 +27,6 @@ namespace REFame.PasswordManagement.App
 
             PWCore.Create();
             PWCore.CurrentCore
-                .RegisterModule<UpdateModule>()
                 .RegisterModule<ServiceModule>()
                 .RegisterModule<FileModule>()
                 .RegisterModule<LocalizationModule>()
