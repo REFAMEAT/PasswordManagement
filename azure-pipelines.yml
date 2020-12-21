@@ -10,7 +10,7 @@ trigger:
 pool: 
   vmImage: windows-latest
 
-name: $(Year:yyyy).$(Minor)$(Rev:.r)
+name: $(Major).$(Minor)$(Rev:.r)
 
 variables:
 - group: passwordmanagement

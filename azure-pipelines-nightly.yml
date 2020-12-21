@@ -12,7 +12,7 @@ schedules:
 pool: 
   vmImage: windows-latest
 
-name: $(Year:yyyy).$(Minor)$(Rev:.r)-nightly
+name: $(Major).$(Minor)$(Rev:.r)-nightly
 
 variables:
 - group: passwordmanagement
