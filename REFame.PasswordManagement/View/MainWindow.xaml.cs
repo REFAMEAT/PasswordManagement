@@ -12,16 +12,22 @@ namespace REFame.PasswordManagement.App.View
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IInitializable
     {
+        private readonly IDataManager<PasswordData> dataManager;
+
         public MainWindow(IDataManager<PasswordData> dataManager = null)
         {
+            this.dataManager = dataManager;
             InitializeComponent();
 
             Title = string.Format(Loc.MainWindow_ctor_Title, typeof(MainWindow).Assembly.GetName().Version);
 
-            DataContext = new MainViewModel(dataManager);
+        }
 
+        public void Initialize()
+        {
+            DataContext = new MainViewModel(dataManager);
         }
     }
 }

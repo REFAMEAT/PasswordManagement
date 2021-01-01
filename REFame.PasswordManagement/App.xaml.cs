@@ -47,11 +47,12 @@ namespace REFame.PasswordManagement.App
             Task.WaitAll(runTask);
 
             InitCulture();
+            WpfCore.Current.RegisterMainWindow<MainWindow>();
             bool success = WpfCore.Current.Login(PWCore.CurrentCore);
 
             if (success)
             {
-                WpfCore.Current.RegisterMainWindow<MainWindow>();
+                WpfCore.Current.ShowMainWindow();
             }
             else
             {
@@ -68,7 +69,7 @@ namespace REFame.PasswordManagement.App
                 .Load()
                 .Language;
 
-            CultureInfo cultureInfo = new CultureInfo(language);
+            CultureInfo cultureInfo = new CultureInfo(language ?? "en-001");
 
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;

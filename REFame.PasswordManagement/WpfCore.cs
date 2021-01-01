@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.AppCore.Contracts;
+using REFame.PasswordManagement.Model.Interfaces;
 
 namespace REFame.PasswordManagement.App
 {
@@ -13,7 +15,6 @@ namespace REFame.PasswordManagement.App
         internal bool Login(ICore appCore)
         {
             var login = appCore.GetRegisteredType<View.Login>();
-            Application.Current.MainWindow = login;
             login.ShowDialog();
 
             if (login.DialogResult != true)
@@ -30,8 +31,13 @@ namespace REFame.PasswordManagement.App
         internal void RegisterMainWindow<T>() where T : Window
         {
             Application.Current.MainWindow = PWCore.CurrentCore.GetRegisteredType<T>();
-            Application.Current.MainWindow.Closed += (o, args) => Application.Current.Shutdown(0);
-            Application.Current.MainWindow?.Show();
+
+        }
+
+        internal void ShowMainWindow()
+        {
+            Application.Current.MainWindow.Show();
+            (Application.Current.MainWindow as IInitializable)?.Initialize();
         }
     }
 }
