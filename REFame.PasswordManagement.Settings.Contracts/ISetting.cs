@@ -2,7 +2,6 @@
 {
     public interface ISetting
     {
-        void Load();
-        void Save();
+        void Open();
     }
 }

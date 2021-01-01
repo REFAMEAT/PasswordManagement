@@ -13,10 +13,9 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <materialDesign:PackIcon
-                                x:Name="icon"
-                                VerticalAlignment="Center"
+                    VerticalAlignment="Center"
                                 Kind="Server" />
-                <Label x:Name="label" Content="Server" />
+                <Label Content="Server" />
             </StackPanel>
             <TextBox FontSize="17" Text="{Binding ServerName}" />
         </DockPanel>
@@ -29,7 +28,7 @@
         </DockPanel>
         <GroupBox Margin="0,10,0,0" Header="Authentication">
             <StackPanel>
-                <CheckBox x:Name="UseWinAuth" IsChecked="{Binding IntegratedSecurity}">Use Windows Authentication</CheckBox>
+                <CheckBox IsChecked="{Binding IntegratedSecurity}">Use Windows Authentication</CheckBox>
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                         <materialDesign:PackIcon VerticalAlignment="Center" Kind="User" />

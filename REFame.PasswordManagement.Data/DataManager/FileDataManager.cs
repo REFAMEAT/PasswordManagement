@@ -14,13 +14,9 @@ namespace REFame.PasswordManagement.Data.DataManager
         private readonly IBinaryHelper binaryHelper;
         private BinaryData binaryData;
 
-        public FileDataManager(string path = null)
+        public FileDataManager(IBinaryHelperFactory helperFactory)
         {
-            binaryHelper = PWCore.CurrentCore
-                .GetRegisteredType<IBinaryHelperFactory>()
-                .SetPath(path)
-                .Create();
-
+            binaryHelper = helperFactory.Create();
             binaryData = binaryHelper.GetData();
         }
 

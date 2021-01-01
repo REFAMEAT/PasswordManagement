@@ -1,7 +1,9 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Windows;
 using REFame.PasswordManagement.App.ViewModel;
 using REFame.PasswordManagement.Data;
+using REFame.PasswordManagement.Localization;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
 
@@ -12,16 +14,14 @@ namespace REFame.PasswordManagement.App.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal MainWindow(IDataManager<PasswordData> dataManager = null)
+        public MainWindow(IDataManager<PasswordData> dataManager = null)
         {
             InitializeComponent();
 
-            Title = $"PasswordManagement {typeof(MainWindow).Assembly.GetName().Version}";
+            Title = string.Format(Loc.MainWindow_ctor_Title, typeof(MainWindow).Assembly.GetName().Version);
 
-            if (!(dataManager is null))
-            {
-                DataContext = new MainViewModel(dataManager);
-            }
+            DataContext = new MainViewModel(dataManager);
+
         }
     }
 }

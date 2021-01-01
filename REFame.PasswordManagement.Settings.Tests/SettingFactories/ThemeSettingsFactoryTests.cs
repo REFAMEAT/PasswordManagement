@@ -24,7 +24,7 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
         {
             mockData = new ThemeData()
             {
-                Language = Language.Dummy,
+                Language = "de-de",
                 PrimaryColor = "Blue",
                 SecondaryColor = "Blue",
                 Theme = BaseTheme.Dark

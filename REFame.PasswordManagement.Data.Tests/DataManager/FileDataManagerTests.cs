@@ -45,14 +45,14 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         [Test]
         public void TestConstructorValidPath()
         {
-            Assert.That(new FileDataManager("data.bin"), Is.TypeOf<FileDataManager>().And.Not.Null);
+            Assert.That(new FileDataManager(new BinaryHelperFactory(new FolderProvider()).SetPath("data.bin")), Is.TypeOf<FileDataManager>().And.Not.Null);
         }
 
         [Test]
         public void AddDataTest()
         {
             int countBeforeAdd = pwData.Length;
-            var dataManager = new FileDataManager("data.bin");
+            var dataManager = new FileDataManager(new BinaryHelperFactory(new FolderProvider()).SetPath("data.bin"));
 
             dataManager.AddData(new PasswordData { Identifier = "NewId1" });
 
@@ -63,7 +63,7 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         public void DeleteDataTest()
         {
             int countBeforeDelete = pwData.Length;
-            var dataManager = new FileDataManager("data.bin");
+            var dataManager = new FileDataManager(new BinaryHelperFactory(new FolderProvider()).SetPath("data.bin"));
 
             bool deleted = dataManager.Remove(new PasswordData { Identifier = "Id1" });
 
@@ -75,7 +75,7 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         public void DeleteWrongFile()
         {
             int countBeforeDelete = pwData.Length;
-            var dataManager = new FileDataManager("data.bin");
+            var dataManager = new FileDataManager(new BinaryHelperFactory(new FolderProvider()).SetPath("data.bin"));
 
             bool deleted = dataManager.Remove(new PasswordData { Identifier = "WrongId" });
 
@@ -87,7 +87,7 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         public async Task AddDataTestAsync()
         {
             int countBeforeAdd = pwData.Length;
-            var dataManager = new FileDataManager("data.bin");
+            var dataManager = new FileDataManager(new BinaryHelperFactory(new FolderProvider()).SetPath("data.bin"));
 
             await dataManager.AddDataAsync(new PasswordData { Identifier = "NewId1" });
 
@@ -98,7 +98,7 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         public async Task DeleteDataTestAsync()
         {
             int countBeforeDelete = pwData.Length;
-            var dataManager = new FileDataManager("data.bin");
+            var dataManager = new FileDataManager(new BinaryHelperFactory(new FolderProvider()).SetPath("data.bin"));
 
             bool deleted = await dataManager.RemoveAsync(new PasswordData { Identifier = "Id1" });
 
@@ -110,7 +110,7 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         public async Task DeleteWrongFileAsync()
         {
             int countBeforeDelete = pwData.Length;
-            var dataManager = new FileDataManager("data.bin");
+            var dataManager = new FileDataManager(new BinaryHelperFactory(new FolderProvider()).SetPath("data.bin"));
 
             bool deleted = await dataManager.RemoveAsync(new PasswordData { Identifier = "WrongId" });
 

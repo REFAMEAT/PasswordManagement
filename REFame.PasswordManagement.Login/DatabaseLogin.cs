@@ -69,7 +69,7 @@ namespace REFame.PasswordManagement.Login
                 Logger.Current.Get().Warning(e);
             }
 
-            InitSuccessful = Globals.UseDatabase = canConnect;
+            InitSuccessful = canConnect;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace REFame.PasswordManagement.WpfBase.Localization
     /// <summary>
     /// Provide information about supported languages or register supported languages
     /// </summary>
+    [Obsolete]
     public class Localizations
     {
         private static Localizations current;
@@ -16,6 +17,7 @@ namespace REFame.PasswordManagement.WpfBase.Localization
         private Localizations()
         {
             registeredLanguages = new Dictionary<Language, Uri>();
+            registeredLanguages.Add(Language.English, new Uri("pack://application:,,,/REFame.PasswordManagement.WpfBase;component/Localization/StringResources.EN.xaml"));
         }
 
         public static Localizations Current => current ??= new Localizations();

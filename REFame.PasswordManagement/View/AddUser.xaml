@@ -41,14 +41,14 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
-            Content="{DynamicResource AddUserHeaderText}"
+            Content="{x:Static Loc.AddUser_LabelAddUser_Content}"
             FontSize="20" />
 
         <Label
             Grid.Row="1"
             Grid.Column="0"
             VerticalAlignment="Top"
-            Content="{DynamicResource LoginUserName}"
+            Content="{x:Static Loc.AddUser_LabelUsername_Content}"
             FontSize="15" />
         <TextBox
             x:Name="userNameTextBox"
@@ -65,7 +65,7 @@
             Grid.Row="2"
             Grid.Column="0"
             VerticalAlignment="Top"
-            Content="{DynamicResource LoginPassword}"
+            Content="{x:Static Loc.AddUser_LabelPassword_Content}"
             FontSize="15" />
         <PasswordBox
             x:Name="passwordBox"
@@ -82,7 +82,7 @@
             Grid.Row="3"
             Grid.Column="0"
             VerticalAlignment="Top"
-            Content="{DynamicResource AddUserRepeat}"
+            Content="{x:Static Loc.AddUser_LabelRepeatPassword_Content}"
             FontSize="15" />
         <PasswordBox
             x:Name="repeatPasswordBox"
@@ -100,7 +100,7 @@
                 Width="150"
                 Margin="2"
                 Click="ButtonClose_Click"
-                Content="{DynamicResource LoginCancel}"
+                Content="{x:Static Loc.Window_LabelCancel_Content}"
                 FontSize="15"
                 IsCancel="True"
                 Style="{DynamicResource MaterialDesignFlatButton}" />
@@ -109,7 +109,7 @@
                 Margin="1"
                 Command="{Binding ButtonCommandCreateUser}"
                 CommandParameter="{Binding ElementName=Window}"
-                Content="{DynamicResource LoginLogin}"
+                Content="{x:Static Loc.Window_LabelSave_Content}"
                 FontSize="15"
                 IsEnabled="{Binding InputOk}" />
         </DockPanel>

@@ -9,6 +9,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
     Background="{DynamicResource MaterialDesignPaper}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     WindowStartupLocation="CenterScreen"
@@ -22,9 +23,6 @@
             </MenuItem>
         </ContextMenu>
     </Window.ContextMenu>
-    <Window.DataContext>
-        <viewModel:MainViewModel />
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -37,20 +35,20 @@
                         <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueLightBrush}" Kind="Add" />
                         <Label
                             VerticalContentAlignment="Center"
-                            Content="{DynamicResource MainAdd}"
+                            Content="{x:Static Loc.MainWindow_LabelTextAdd_Content}"
                             Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
                 <Button Command="{Binding ButtonCommandDeleteItem}" Foreground="{DynamicResource PrimaryHueLightBrush}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Delete" />
-                        <Label Content="{DynamicResource MainDelete}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
+                        <Label Content="{x:Static Loc.MainWindow_LabelDelete_Content}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
                 <Button>
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueLightBrush}" Kind="Edit" />
-                        <Label Content="{DynamicResource MainEdit}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
+                        <Label Content="{x:Static Loc.MainWindow_LabelEdit_Content}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
             </ToolBar>
@@ -58,12 +56,11 @@
                 <Button Command="{Binding ButtonCommandOpenSettings}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueLightBrush}" Kind="Settings" />
-                        <Label Content="{DynamicResource MainSettings}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
+                        <Label Content="{x:Static Loc.MainWindow_LabelOpenSettings_Content}" Foreground="{DynamicResource PrimaryHueLightBrush}" />
                     </StackPanel>
                 </Button>
             </ToolBar>
         </ToolBarTray>
-
         <DataGrid
             Grid.Row="1"
             Margin="1"
@@ -84,20 +81,26 @@
                 <DataGridTextColumn
                     Width="0.3*"
                     Binding="{Binding Description, Mode=OneWay}"
-                    Header="{DynamicResource MainGridDescription}"
+                    Header="{x:Static Loc.MainWindow_Grid_Description_Header}"
                     SortDirection="Ascending" />
-                <DataGridCheckBoxColumn
-                    Width="70"
-                    Binding="{Binding Display, UpdateSourceTrigger=PropertyChanged}"
-                    Header="{DynamicResource MainGridShow}" />
+                <DataGridTemplateColumn  Header="{x:Static Loc.MainWindow_Grid_ShowPassword_Header}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                Width="17"
+                                IsChecked="{Binding Display, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
                 <DataGridTextColumn
                     Width="0.3*"
                     Binding="{Binding PasswordDisplay, Mode=OneWay}"
-                    Header="{DynamicResource MainGridPassword}" />
+                    Header="{x:Static Loc.MainWindow_Grid_Password_Header}" />
                 <DataGridTextColumn
                     Width="0.3*"
                     Binding="{Binding Comments, Mode=OneWay}"
-                    Header="{DynamicResource MainGridComments}" />
+                    Header="{x:Static Loc.MainWindow_Grid_Comment_Header}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

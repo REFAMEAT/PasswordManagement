@@ -19,6 +19,16 @@ namespace REFame.PasswordManagement.AppCore.Tests
 
         }
 
+        [Test]
+        public void GetRegisteredTypeCanCreateParameterLessType()
+        {
+            ICore core = new Core();
+
+            var result = core.GetRegisteredType<MyClassForSubClass>();
+
+            Assert.That(result, Is.Not.Null);
+        }
+
         [Test()]
         public void RegisterParameterFullTypeTest()
         {

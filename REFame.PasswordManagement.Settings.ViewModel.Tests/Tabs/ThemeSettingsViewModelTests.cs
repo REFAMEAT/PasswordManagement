@@ -20,7 +20,7 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tests.Tabs
         {
             mockData = new ThemeData()
             {
-                Language = Language.Dummy,
+                Language = "de-de",
                 PrimaryColor = "Blue",
                 SecondaryColor = "Blue",
                 Theme = BaseTheme.Dark

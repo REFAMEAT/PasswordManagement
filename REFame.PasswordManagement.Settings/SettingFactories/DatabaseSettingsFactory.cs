@@ -1,13 +1,14 @@
 ﻿using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.Settings.Contracts;
+using REFame.PasswordManagement.Settings.SettingFactories.Contracts;
 using REFame.PasswordManagement.Settings.ViewModel.Tabs;
 using REFame.PasswordManagement.WpfBase;
 using REFame.PasswordManagement.WpfBase.Mediator;
 
 namespace REFame.PasswordManagement.Settings.SettingFactories
 {
-    public class DatabaseSettingsFactory : ISettingFactory
+    public class DatabaseSettingsFactory : IDatabaseSettingsFactory
     {
         private DatabaseSettingsViewModel viewModel;
         private SettingMediator mediator;

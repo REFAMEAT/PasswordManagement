@@ -36,14 +36,14 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
-            Content="{DynamicResource LoginText}"
+            Content="{x:Static Loc.Login_LabelEnterCredentials_Content}"
             FontSize="20" />
 
         <Label
             Grid.Row="1"
             Grid.Column="0"
             VerticalAlignment="Top"
-            Content="{DynamicResource LoginUserName}"
+            Content="{x:Static Loc.Login_LabelUsername_Content}"
             FontSize="15" />
         <TextBox
             x:Name="userNameTextBox"
@@ -60,7 +60,7 @@
             Grid.Row="2"
             Grid.Column="0"
             VerticalAlignment="Top"
-            Content="{DynamicResource LoginPassword}"
+            Content="{x:Static Loc.Login_LabelPassword_Content}"
             FontSize="15" />
         <PasswordBox
             x:Name="passwordBox"
@@ -76,7 +76,7 @@
             <Button
                 Width="150"
                 Margin="2"
-                Content="{DynamicResource LoginCancel}"
+                Content="{x:Static Loc.Window_LabelCancel_Content}"
                 FontSize="15"
                 IsCancel="True"
                 Style="{DynamicResource MaterialDesignFlatButton}" />
@@ -84,7 +84,7 @@
                 Margin="1"
                 Command="{Binding ButtonCommandLogin}"
                 CommandParameter="{Binding ElementName=Window}"
-                Content="{DynamicResource LoginLogin}"
+                Content="{x:Static Loc.Login_LabelLogin_Content}"
                 FontSize="15" />
         </DockPanel>
     </Grid>

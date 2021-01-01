@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Margin="5">
         <DockPanel>
-            <Label Content="{DynamicResource SettingsTheme}" DockPanel.Dock="Top" />
+            <Label Content="{x:Static Loc.ThemeSettings_LabelTheme_Content}" DockPanel.Dock="Top" />
             <ComboBox
                 DockPanel.Dock="Bottom"
                 FontSize="17"
@@ -17,7 +17,7 @@
                 SelectedItem="{Binding SelectedTheme}" />
         </DockPanel>
         <DockPanel>
-            <Label Content="{DynamicResource SettingsLanguage}" DockPanel.Dock="Top" />
+            <Label Content="{x:Static Loc.ThemeSettings_LabelLanguage_Content}" DockPanel.Dock="Top" />
             <ComboBox
                 DockPanel.Dock="Bottom"
                 FontSize="17"
@@ -25,7 +25,7 @@
                 SelectedItem="{Binding  SelectedLanguage}" />
         </DockPanel>
         <DockPanel>
-            <Label Content="{DynamicResource SettingsColor}" DockPanel.Dock="Top" />
+            <Label Content="{x:Static Loc.ThemeSettings_LabelColor_Content}" DockPanel.Dock="Top" />
             <ComboBox
                 DockPanel.Dock="Bottom"
                 FontSize="17"

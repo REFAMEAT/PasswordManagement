@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MaterialDesignThemes.Wpf;
+using REFame.PasswordManagement.Localization;
 using REFame.PasswordManagement.Model.Enums;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Implementations;
@@ -35,9 +36,9 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
             ThemeItems = themeItems;
 
             // Get all registered Languages
-            LanguageItems = Localizations
+            LanguageItems = AppLocalization
                 .Current
-                .GetAllLanguages()
+                .GetPossibleLanguages()
                 .ConvertAll(x => x.ToString());
 
             AllowedColors = ThemePatterns.SupportedColors;
@@ -65,7 +66,7 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
         {
             ThemeData newTheme = new ThemeData
             {
-                Language = Enum.Parse<Language>(SelectedLanguage),
+                Language = SelectedLanguage,
                 Theme = Enum.Parse<BaseTheme>(SelectedTheme),
                 SecondaryColor = SelectedColor,
                 PrimaryColor = SelectedColor

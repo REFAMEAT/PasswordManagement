@@ -5,8 +5,10 @@ using REFame.PasswordManagement.Backend;
 using REFame.PasswordManagement.Database.DbSet;
 using REFame.PasswordManagement.Database.Model;
 using REFame.PasswordManagement.File.Contracts.Binary;
+using REFame.PasswordManagement.File.Contracts.Config;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
@@ -17,8 +19,14 @@ namespace REFame.PasswordManagement.App.ViewModel
         private ICommand buttonCommandLogin;
         private string userName;
 
-        public LoginViewModel(ILogin logonMethod)
+        public LoginViewModel(
+            ILogin logonMethod, 
+            IConfigurationFactory<DatabaseData> configurationFactory)
         {
+            IConfiguration<DatabaseData> configuration = configurationFactory
+                .SetPath()
+                .Create();
+
             iLogin = logonMethod;
             iLogin.Initialize();
 
@@ -31,7 +39,7 @@ namespace REFame.PasswordManagement.App.ViewModel
 
             USERDATA firstUser = AddUser.CreateUser(true);
 
-            if (firstUser != null && Globals.UseDatabase)
+            if (firstUser != null && configuration.Load().UseDatabase)
             {
                 var data = PWCore
                     .CurrentCore

@@ -6,11 +6,9 @@ using System.Windows.Input;
 using REFame.PasswordManagement.App.Model;
 using REFame.PasswordManagement.App.View;
 using REFame.PasswordManagement.AppCore;
-using REFame.PasswordManagement.Backend;
 using REFame.PasswordManagement.Data;
 using REFame.PasswordManagement.Model;
-using REFame.PasswordManagement.Model.Interfaces;
-using REFame.PasswordManagement.Settings.Call;
+using REFame.PasswordManagement.Settings.Contracts;
 using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
@@ -33,7 +31,6 @@ namespace REFame.PasswordManagement.App.ViewModel
 
         public MainViewModel()
         {
-            bool useDatabase = Globals.UseDatabase;
             dataManager = PWCore.CurrentCore.GetRegisteredType<IDataManager<PasswordData>>();
             Items = ToDisplayData(dataManager.LoadData());
         }
@@ -73,12 +70,16 @@ namespace REFame.PasswordManagement.App.ViewModel
             }
         }
 
-        private async Task DoOpenSettings(object obj)
+        private Task DoOpenSettings(object obj)
         {
-            SettingCall.Open();
+            PWCore.CurrentCore
+                .GetRegisteredType<ISetting>()
+                .Open();
+
+            return Task.CompletedTask;
         }
 
-        private async Task DoAddItem(object obj)
+        private Task DoAddItem(object obj)
         {
             var addPassword = new AddPassword();
             addPassword.Show();
@@ -94,6 +95,8 @@ namespace REFame.PasswordManagement.App.ViewModel
                 await dataManager.AddDataAsync(newItem);
                 Items.Add(new PasswordDataDisplay(newItem));
             };
+
+            return Task.CompletedTask;
         }
 
         private ObservableCollection<PasswordDataDisplay> ToDisplayData(List<PasswordData> data)

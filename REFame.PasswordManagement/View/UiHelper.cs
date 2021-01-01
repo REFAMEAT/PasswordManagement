@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
 using REFame.PasswordManagement.AppCore;
+using REFame.PasswordManagement.Model.Enums;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.WpfBase.Localization;
@@ -22,11 +23,6 @@ namespace REFame.PasswordManagement.App.View
             ThemeData data = await PWCore.CurrentCore.GetRegisteredType<ISettingService<ThemeData>>().Load();
 
             Application.Current.Resources.Clear();
-
-            var languageDictionary = new ResourceDictionary
-            {
-                Source = Localizations.Current.GetRegisteredLanguageUri(data.Language)
-            };
 
             var styleDictionary = new ResourceDictionary
             {
@@ -60,7 +56,6 @@ namespace REFame.PasswordManagement.App.View
                 SecondaryColor = MColor.FromArgb(color.A, color.R, color.G, color.B)
             };
 
-            Application.Current.Resources.MergedDictionaries.Add(languageDictionary);
             Application.Current.Resources.MergedDictionaries.Add(styleDictionary);
             Application.Current.Resources.MergedDictionaries.Add(theme);
             Application.Current.Resources.MergedDictionaries.Add(customStyleDictionary);

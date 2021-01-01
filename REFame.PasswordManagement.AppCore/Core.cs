@@ -42,15 +42,18 @@ namespace REFame.PasswordManagement.AppCore
 
         private object GetRegisteredType(Type type)
         {
-            if (mapping.TryGetValue(type, out var func))
+            object result = null;
+
+            if (type.IsInterface && mapping.TryGetValue(type, out var func))
             {
-                var value = func();
-                return value;
+                result = func?.Invoke();
             }
-            else
+            else if (type.IsClass)
             {
-                return null;
+                result = Resolve(type);
             }
+
+            return result;
         }
 
         public void RegisterType<TInterface, TImplementation>() where TImplementation : TInterface

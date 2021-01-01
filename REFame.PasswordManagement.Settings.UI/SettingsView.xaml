@@ -1,4 +1,4 @@
-﻿<Window x:Class="REFame.PasswordManagement.Settings.UI.Settings"
+﻿<Window x:Class="REFame.PasswordManagement.Settings.UI.SettingsView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -25,14 +25,14 @@
         <DockPanel Grid.Row="1" Margin="5,5,0,10">
             <Button
                 Width="100"
-                Content="{DynamicResource AddCancel}"
+                Content="{x:Static Loc.Window_LabelCancel_Content}"
                 DockPanel.Dock="Left"
                 IsCancel="True"
                 Style="{DynamicResource MaterialDesignFlatButton}" />
             <Button
                 Command="{Binding SaveCommand}"
                 CommandParameter="{Binding ElementName=Window}"
-                Content="{DynamicResource AddApply}"
+                Content="{x:Static Loc.Window_LabelSave_Content}"
                 DockPanel.Dock="Right" />
         </DockPanel>
     </Grid>
@@ -40,7 +40,6 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/REFame.PasswordManagement.WpfBase;component/Localization/StringResources.EN.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/REFame.PasswordManagement.Styles;component/TabControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>

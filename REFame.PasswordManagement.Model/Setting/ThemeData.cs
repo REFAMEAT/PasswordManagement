@@ -11,7 +11,7 @@ namespace REFame.PasswordManagement.Model.Setting
         /// <summary>
         ///     UI-Language
         /// </summary>
-        public Language Language { get; set; }
+        public string Language { get; set; }
 
         /// <summary>
         ///     The applications primary color
