@@ -46,6 +46,10 @@ namespace REFame.PasswordManagement.App
             {
                 WpfCore.Current.RegisterMainWindow<MainWindow>();
             }
+            else
+            {
+                Shutdown(0);
+            }
         }
     }
 }

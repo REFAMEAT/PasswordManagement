@@ -9,15 +9,15 @@ namespace REFame.PasswordManagement.App
     {
         public static WpfCore Current { get; set; } = new WpfCore();
 
-        private WpfCore()
-        {
-
-        }
+        private WpfCore() { }
 
         internal bool Login(ICore appCore)
         {
             ILogin loginMethod = appCore.GetRegisteredType<ILogin>();
             View.Login login = new View.Login(loginMethod);
+
+            Application.Current.MainWindow = login;
+
             login.ShowDialog();
 
             if (login.DialogResult != true)

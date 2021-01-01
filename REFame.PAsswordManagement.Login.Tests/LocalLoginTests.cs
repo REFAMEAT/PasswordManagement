@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.File;
 using REFame.PasswordManagement.File.Binary;
 using REFame.PasswordManagement.File.Binary.Factory;
 using REFame.PasswordManagement.File.Contracts.Binary;
@@ -39,7 +40,7 @@ namespace REFame.PasswordManagement.Login.Tests
                 }
             });
 
-            IBinaryHelperFactory helperFactory = new BinaryHelperFactory();
+            IBinaryHelperFactory helperFactory = new BinaryHelperFactory(new TestFolderProvider());
             helperFactory.SetPath("testfile.bin");
 
             localLogin = new LocalLogin(helperFactory);
@@ -51,7 +52,7 @@ namespace REFame.PasswordManagement.Login.Tests
             Assert.That(
                 () =>
                 {
-                    IBinaryHelperFactory helperFactory = new BinaryHelperFactory();
+                    IBinaryHelperFactory helperFactory = new BinaryHelperFactory(new TestFolderProvider());
                     helperFactory.SetPath("testfile.bin");
                     return new LocalLogin(helperFactory);
                 }, 
@@ -81,7 +82,7 @@ namespace REFame.PasswordManagement.Login.Tests
             System.IO.File.Delete("testfile2.bin");
             System.IO.File.Create("testfile2.bin").Dispose();
 
-            IBinaryHelperFactory binaryHelperFactory = new BinaryHelperFactory().SetPath("testfile2.bin");
+            IBinaryHelperFactory binaryHelperFactory = new BinaryHelperFactory(new TestFolderProvider()).SetPath("testfile2.bin");
             LocalLogin login = new LocalLogin(binaryHelperFactory);
             bool needUser = login.NeedFirstUser();
 
@@ -96,5 +97,20 @@ namespace REFame.PasswordManagement.Login.Tests
 
             Assert.That(localLogin.InitSuccessful, Is.True);
         }
+    }
+
+    class TestFolderProvider : IFolderProvider
+    {
+        public TestFolderProvider()
+        {
+            AppDataFolder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+                "PasswordManagementTest");
+            //if (!Directory.Exists(AppDataFolder))
+            //{
+            //    Directory.CreateDirectory(AppDataFolder);
+            //}
+        }
+        public string AppDataFolder { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using REFame.PasswordManagement.File.Contracts.Config;
 
 namespace REFame.PasswordManagement.File.Config.Factory
@@ -6,9 +7,10 @@ namespace REFame.PasswordManagement.File.Config.Factory
     public class ConfigurationFactory<T> : IConfigurationFactory<T> where T : new()
     {
         private Configuration<T> configuration;
-        public ConfigurationFactory()
+        public ConfigurationFactory(FolderProvider folderProvider)
         {
             configuration = new Configuration<T>();
+            defaultPath = Path.Combine(folderProvider.AppDataFolder, $"{typeof(T).Name}.json");
         }
         public string CurrentPath { get; private set; }
 
@@ -27,12 +29,6 @@ namespace REFame.PasswordManagement.File.Config.Factory
             return this;
         }
 
-        private readonly string defaultPath = System.IO.Path.Combine
-        (
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "REFAME",
-            "PasswordManagement",
-            $"{typeof(T).Name}.json"
-        );
+        private readonly string defaultPath;
     }
 }

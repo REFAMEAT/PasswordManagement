@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.Data.DataManager;
+using REFame.PasswordManagement.File;
 using REFame.PasswordManagement.File.Binary;
 using REFame.PasswordManagement.File.Binary.Factory;
 using REFame.PasswordManagement.File.Contracts.Binary;
@@ -19,6 +20,7 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         public void OneTimeSetup()
         {
             PWCore.Create();
+            PWCore.CurrentCore.RegisterType<IFolderProvider, FolderProvider>();
             PWCore.CurrentCore.RegisterType<IBinaryHelperFactory, BinaryHelperFactory>();
         }
 

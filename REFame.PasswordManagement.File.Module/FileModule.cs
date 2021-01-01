@@ -12,6 +12,7 @@ namespace REFame.PasswordManagement.File.Module
     {
         public Task Initialize(ICore appCore)
         {
+            appCore.RegisterType<IFolderProvider, FolderProvider>();
             appCore.RegisterType<IBinaryHelperFactory, BinaryHelperFactory>();
 
             appCore.RegisterType<IConfigurationFactory<DatabaseData>, ConfigurationFactory<DatabaseData>>();

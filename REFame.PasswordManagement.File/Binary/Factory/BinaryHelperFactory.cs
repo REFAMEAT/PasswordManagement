@@ -9,13 +9,9 @@ namespace REFame.PasswordManagement.File.Binary.Factory
         private readonly string xmlConfigPathDefault;
         private readonly IBinaryHelper binaryHelper;
 
-        public BinaryHelperFactory()
+        public BinaryHelperFactory(IFolderProvider folderProvider)
         {
-            xmlConfigPathDefault = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
-                "REFame",
-                "PasswordManagement",
-                "data.bin");
+            xmlConfigPathDefault = Path.Combine(folderProvider.AppDataFolder, "data.bin");
             binaryHelper = new BinaryHelper();
         }
 
