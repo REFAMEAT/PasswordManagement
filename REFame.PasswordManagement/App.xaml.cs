@@ -3,14 +3,20 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using REFame.PasswordManagement.App.View;
+using REFame.PasswordManagement.App.ViewModel;
 using REFame.PasswordManagement.AppCore;
+using REFame.PasswordManagement.AppCore.Contracts;
 using REFame.PasswordManagement.Data;
 using REFame.PasswordManagement.Database;
+using REFame.PasswordManagement.Database.DbSet;
+using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.File.Contracts.Config;
 using REFame.PasswordManagement.File.Module;
 using REFame.PasswordManagement.Localization;
-using REFame.PasswordManagement.Logging;
 using REFame.PasswordManagement.Login;
+using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.ProgressBar;
 using REFame.PasswordManagement.Services;
@@ -28,7 +34,7 @@ namespace REFame.PasswordManagement.App
 
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
-            Current.DispatcherUnhandledException += (o, args) => Logger.Current.Get().Error(args.Exception);
+            MainWindow = new MainWindow();
 
             PWCore.Create();
             PWCore.CurrentCore
@@ -46,17 +52,60 @@ namespace REFame.PasswordManagement.App
             await runTask;
             Task.WaitAll(runTask);
 
-            InitCulture();
-            WpfCore.Current.RegisterMainWindow<MainWindow>();
-            bool success = WpfCore.Current.Login(PWCore.CurrentCore);
+            CreateFirstUserIfNecessary(PWCore.CurrentCore);
 
-            if (success)
+            InitCulture();
+
+            var success = WpfCore.Current.Login(PWCore.CurrentCore);
+
+            if (!success)
             {
-                WpfCore.Current.ShowMainWindow();
+                Shutdown(0);
             }
             else
             {
-                Shutdown(0);
+                MainWindow.DataContext = PWCore.CurrentCore.GetRegisteredType<MainViewModel>();
+                MainWindow.Show();
+            }
+        }
+
+        private void CreateFirstUserIfNecessary(ICore appCore)
+        {
+            var login = appCore.GetRegisteredType<ILogin>();
+            var useDatabase = appCore
+                .GetRegisteredType<IConfigurationFactory<DatabaseData>>()
+                .SetPath()
+                .Create()
+                .Load()
+                .UseDatabase;
+
+
+            if (!login.NeedFirstUser())
+            {
+                return;
+            }
+
+            USERDATA firstUser = AddUser.CreateUser();
+
+            if (firstUser != null && useDatabase)
+            {
+                var data = PWCore
+                    .CurrentCore
+                    .GetRegisteredType<IDataSet<USERDATA>>();
+                data.Entities.Add(firstUser);
+                data.SaveChanges();
+            }
+            else if (firstUser != null)
+            {
+                PWCore.CurrentCore
+                    .GetRegisteredType<IBinaryHelperFactory>()
+                    .SetPath()
+                    .Create()
+                    .Write(
+                        new BinaryData(
+                            firstUser.USUSERNAME,
+                            firstUser.USPASSWORD,
+                            firstUser.USSALT));
             }
         }
 

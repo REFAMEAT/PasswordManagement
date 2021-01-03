@@ -24,7 +24,7 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
             ThemeData data = themeSetting.Load().Result;
 
             SelectedColor = data.PrimaryColor;
-            SelectedLanguage = data.Language.ToString();
+            SelectedLanguage = data.Language;
             SelectedTheme = data.Theme.ToString();
 
             var themeItems = new List<string>

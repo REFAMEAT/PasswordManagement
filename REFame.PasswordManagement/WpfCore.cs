@@ -27,17 +27,5 @@ namespace REFame.PasswordManagement.App
                 return true;
             }
         }
-
-        internal void RegisterMainWindow<T>() where T : Window
-        {
-            Application.Current.MainWindow = PWCore.CurrentCore.GetRegisteredType<T>();
-
-        }
-
-        internal void ShowMainWindow()
-        {
-            Application.Current.MainWindow.Show();
-            (Application.Current.MainWindow as IInitializable)?.Initialize();
-        }
     }
 }

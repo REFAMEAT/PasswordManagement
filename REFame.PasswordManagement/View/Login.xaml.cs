@@ -1,8 +1,6 @@
 ﻿using System.Windows;
 using REFame.PasswordManagement.App.ViewModel;
-using REFame.PasswordManagement.File.Contracts.Config;
 using REFame.PasswordManagement.Model.Interfaces;
-using REFame.PasswordManagement.Model.Setting;
 
 namespace REFame.PasswordManagement.App.View
 {
@@ -11,13 +9,11 @@ namespace REFame.PasswordManagement.App.View
     /// </summary>
     public partial class Login : Window
     {
-        public Login(
-            ILogin logonMehtod,
-            IConfigurationFactory<DatabaseData> configurationFactory)
+        public Login(ILogin logonMehtod)
         {
             InitializeComponent();
 
-            DataContext = new LoginViewModel(logonMehtod, configurationFactory);
+            DataContext = new LoginViewModel(logonMehtod);
 
             // Focus username text-box on open
             Loaded += (sender, args) => userNameTextBox.Focus();
