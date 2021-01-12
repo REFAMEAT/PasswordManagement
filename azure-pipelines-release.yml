@@ -1,0 +1,42 @@
+trigger: 
+ - none
+
+resources:
+  pipelines:
+    - pipeline: setupbuild
+      source: 'CI PasswordManagement'
+      trigger:
+       branches:
+        - master
+
+variables: 
+  - name: version
+    value: $(resources.pipeline.setupbuild.runName)
+
+jobs:
+  - job: 
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+      - checkout: none
+      - download: 'setupbuild'
+        artifact: 'setup'
+
+      - download: 'setupbuild'
+        artifact: 'setup-package'
+      - task: GitHubRelease@1
+        inputs:
+          gitHubConnection: 'github.com'
+          repositoryName: 'REFAMEAT/PasswordManagement'
+          action: 'create'
+          target: 'main'
+          tagSource: 'userSpecifiedTag'
+          tag: '$(version)'
+          title: 'PasswordManagement Release $(version)'
+          assets: |
+            $(PIPELINE.WORKSPACE)\setupbuild\setup-package\*.nupkg
+            $(PIPELINE.WORKSPACE)\setupbuild\setup-package\RELEASES
+            $(PIPELINE.WORKSPACE)\setupbuild\setup\*.exe
+          isDraft: true
+          isPreRelease: true
+          addChangeLog: false
