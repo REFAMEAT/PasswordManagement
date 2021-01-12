@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,40 +15,51 @@ namespace REFame.PasswordManagement.Update
     {
         public async Task Initialize(ICore appCore)
         {
-            var result = MessageBox.Show
-            ("Do you want to update a new version, if available?", 
-                "Update routine",
-                MessageBoxButton.YesNo);
-
-            if (result == MessageBoxResult.No)
+            if (Debugger.IsAttached)
             {
                 return;
             }
 
-            var progressBar = appCore.GetRegisteredType<IProgressBar>();
-            progressBar.Show();
-            await Task.Delay(100);
-           
-            try
-            {
-                var manager =
-                    await UpdateManager.GitHubUpdateManager("https://github.com/REFAMEAT/PasswordManagement",
-                        "PASSWORDMANAGEMENT");
+            using UpdateManager updateManager = 
+                await UpdateManager.GitHubUpdateManager(
+                "https://github.com/REFAMEAT/PasswordManagement",
+                "PASSWORDMANAGEMENT");
 
-                await manager.UpdateApp(i =>
+            if (!Environment.GetCommandLineArgs().Contains("--squirrel-updated"))
+            {
+                SquirrelAwareApp.HandleEvents(
+                    v => updateManager.CreateShortcutForThisExe(),
+                    v => updateManager.RemoveShortcutForThisExe());
+            }
+
+            UpdateInfo updateInfo = await updateManager.CheckForUpdate(true);
+
+            var progress = appCore.GetRegisteredType<IProgressBar>();
+
+            if (updateInfo.CurrentlyInstalledVersion.Version < updateInfo.FutureReleaseEntry.Version)
+            {
+                if (MessageBox.Show($"New Version is available {updateInfo.FutureReleaseEntry.Version}",
+                    "New version", 
+                    MessageBoxButton.YesNo, 
+                    MessageBoxImage.Information) == MessageBoxResult.Yes)
                 {
-                    progressBar.SetProgress(i); 
-                    
-                });
+                    progress.Show();
+                    await Task.Delay(100);
+
+                    await updateManager.DownloadReleases(updateInfo.ReleasesToApply, x => progress.SetProgress(x))
+                        .ContinueWith((t) =>
+                        {
+                            updateManager.ApplyReleases(updateInfo, progress.SetProgress)
+                                .ContinueWith(x =>
+                                {
+                                    UpdateManager.RestartApp();
+                                    return false;
+                                });
+                        });
+                }
             }
-            catch (Exception ex)
-            {
-                Logger.Current.Get().Error(ex);
-            }
-            finally
-            {
-                progressBar.Close();
-            }
+
+            progress.Close();
         }
     }
 }
