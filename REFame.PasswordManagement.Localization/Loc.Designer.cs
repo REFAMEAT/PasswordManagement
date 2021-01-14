@@ -250,6 +250,24 @@ namespace REFame.PasswordManagement.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading updates.
+        /// </summary>
+        public static string ProgressBar_LabelTitle_Content_Downloading {
+            get {
+                return ResourceManager.GetString("ProgressBar_LabelTitle_Content_Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing updates.
+        /// </summary>
+        public static string ProgressBar_LabelTitle_Content_Installing {
+            get {
+                return ResourceManager.GetString("ProgressBar_LabelTitle_Content_Installing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UI-Color.
         /// </summary>
         public static string ThemeSettings_LabelColor_Content {
@@ -295,7 +313,7 @@ namespace REFame.PasswordManagement.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to No.
         /// </summary>
         public static string Window_No {
             get {
@@ -304,7 +322,7 @@ namespace REFame.PasswordManagement.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Yes.
         /// </summary>
         public static string Window_Yes {
             get {

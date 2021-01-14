@@ -201,4 +201,10 @@
   <data name="Window_No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="ProgressBar_LabelTitle_Content_Installing" xml:space="preserve">
+    <value>Installing updates</value>
+  </data>
+  <data name="ProgressBar_LabelTitle_Content_Downloading" xml:space="preserve">
+    <value>Downloading updates</value>
+  </data>
 </root>

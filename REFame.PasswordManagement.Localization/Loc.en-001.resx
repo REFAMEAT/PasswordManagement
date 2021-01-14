@@ -95,4 +95,10 @@
   <data name="Window_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="ProgressBar_LabelTitle_Content_Installing" xml:space="preserve">
+    <value>Installing updates</value>
+  </data>
+  <data name="ProgressBar_LabelTitle_Content_Downloading" xml:space="preserve">
+    <value>Downloading updates</value>
+  </data>
 </root>

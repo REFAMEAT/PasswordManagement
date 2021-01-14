@@ -1,4 +1,6 @@
-﻿using REFame.PasswordManagement.ProgressBar.View;
+﻿using REFame.PasswordManagement.Localization;
+using REFame.PasswordManagement.ProgressBar.View;
+using REFame.PasswordManagement.WpfBase.Localization;
 
 namespace REFame.PasswordManagement.ProgressBar.Contracts
 {
@@ -22,6 +24,16 @@ namespace REFame.PasswordManagement.ProgressBar.Contracts
         {
             view.Dispatcher.Invoke(() => view.ViewModel.Progress = value);
             Progress = value;
+        }
+
+        public void SetTitle(TitleType type)
+        {
+            view.ViewModel.Title = type switch
+            {
+                TitleType.Installing => Loc.ProgressBar_LabelTitle_Content_Installing,
+                TitleType.Downloading => Loc.ProgressBar_LabelTitle_Content_Downloading,
+                _ => "#Missing translation#"
+            };
         }
 
         public void Close()

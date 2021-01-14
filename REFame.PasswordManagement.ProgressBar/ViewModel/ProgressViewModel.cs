@@ -5,6 +5,7 @@ namespace REFame.PasswordManagement.ProgressBar.ViewModel
     public class ProgressViewModel : BindableBase
     {
         private int progress;
+        private string title;
 
         public ProgressViewModel()
         {
@@ -15,6 +16,12 @@ namespace REFame.PasswordManagement.ProgressBar.ViewModel
         {
             get => progress;
             set => SetProperty(ref progress, value);
+        }
+
+        public string Title
+        {
+            get => title;
+            set => SetProperty(ref title, value);
         }
     }
 }

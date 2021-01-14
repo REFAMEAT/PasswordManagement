@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:REFame.PasswordManagement.ProgressBar.View"
+        xmlns:viewModel="clr-namespace:REFame.PasswordManagement.ProgressBar.ViewModel"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModel:ProgressViewModel}"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Title="Progress" Height="150" Width="300"
+        Title="Progress" Height="150" Width="350"
         MouseDown="ProgressView_OnMouseDown">
     <Grid>
         <Grid.RowDefinitions>
@@ -24,7 +26,7 @@
 
         <Label 
             Grid.Row="1"
-            Content="Updating application"
+            Content="{Binding Title}"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             FontSize="30"/>

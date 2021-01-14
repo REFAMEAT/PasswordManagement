@@ -201,4 +201,10 @@
   <data name="Window_Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
+  <data name="ProgressBar_LabelTitle_Content_Installing" xml:space="preserve">
+    <value>Updates installieren</value>
+  </data>
+  <data name="ProgressBar_LabelTitle_Content_Downloading" xml:space="preserve">
+    <value>Updates herunterladen</value>
+  </data>
 </root>

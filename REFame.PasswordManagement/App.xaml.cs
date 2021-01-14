@@ -36,6 +36,9 @@ namespace REFame.PasswordManagement.App
         {
             MainWindow = new MainWindow();
 
+            AppUpdater updater = new AppUpdater();
+            await updater.UpdateApp();
+
             PWCore.Create();
             PWCore.CurrentCore
                 .RegisterModule<ServiceModule>()
@@ -43,7 +46,6 @@ namespace REFame.PasswordManagement.App
                 .RegisterModule<SettingsModule>()
                 .RegisterModule<UISetup>()
                 .RegisterModule<ProgressBarModule>()
-                .RegisterModule<UpdateModule>()
                 .RegisterModule<DatbaseModule>()
                 .RegisterModule<LoginModule>()
                 .RegisterModule<DataModule>();
