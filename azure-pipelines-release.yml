@@ -24,6 +24,7 @@ jobs:
 
       - download: 'setupbuild'
         artifact: 'setup-package'
+
       - task: GitHubRelease@1
         inputs:
           gitHubConnection: 'github.com'
@@ -37,6 +38,6 @@ jobs:
             $(PIPELINE.WORKSPACE)\setupbuild\setup-package\*.nupkg
             $(PIPELINE.WORKSPACE)\setupbuild\setup-package\RELEASES
             $(PIPELINE.WORKSPACE)\setupbuild\setup\*.exe
-          isDraft: true
-          isPreRelease: true
+          isDraft: false
+          isPreRelease: false
           addChangeLog: false
