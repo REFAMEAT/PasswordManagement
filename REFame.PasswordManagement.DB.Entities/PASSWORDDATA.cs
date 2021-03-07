@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using REFame.PasswordManagement.DB.Entities.Base;
 
-namespace REFame.PasswordManagement.Database.Model
+namespace REFame.PasswordManagement.DB.Entities
 {
     [Table("PASSWORDDATA")]
     public class PASSWORDDATA : GenerateTable

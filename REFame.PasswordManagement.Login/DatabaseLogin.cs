@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using REFame.PasswordManagement.Backend;
-using REFame.PasswordManagement.Database.DbSet;
-using REFame.PasswordManagement.Database.Model;
-using REFame.PasswordManagement.Logging;
+﻿using System.Linq;
+using REFame.PasswordManagement.DB.Contracts;
+using REFame.PasswordManagement.DB.Entities;
 using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Security;
 
@@ -12,16 +8,15 @@ namespace REFame.PasswordManagement.Login
 {
     public class DatabaseLogin : ILogin
     {
-        private readonly IDataSet<USERDATA> userdatas;
-        
-        public DatabaseLogin(IDataSet<USERDATA> dataSet)
+        private IPwmDbContext db;
+
+        public DatabaseLogin(IPwmDbContextFactory dbContextFactory)
         {
-            userdatas = dataSet;
+            this.db = dbContextFactory.Create();
         }
 
         public void Dispose()
         {
-            userdatas.Dispose();
         }
 
         /// <summary>
@@ -32,7 +27,7 @@ namespace REFame.PasswordManagement.Login
         /// <returns></returns>
         public string Validate(string userName, string password)
         {
-            foreach (USERDATA user in userdatas.Entities)
+            foreach (USERDATA user in db.USERDATA)
             {
                 if (Password.GetHash(userName + user.USSALT) == user.USUSERNAME
                     && Password.GetHash(password + user.USSALT) == user.USPASSWORD)
@@ -50,26 +45,14 @@ namespace REFame.PasswordManagement.Login
         /// <returns>true: if there is no user</returns>
         public bool NeedFirstUser()
         {
-            return !userdatas.Entities.ToList().Any();
+            return !db.USERDATA.ToList().Any();
         }
 
         public bool InitSuccessful { get; set; }
 
         public void Initialize()
         {
-            bool canConnect;
-
-            try
-            {
-                canConnect = userdatas.Database.CanConnect();
-            }
-            catch (Exception e)
-            {
-                canConnect = false;
-                Logger.Current.Get().Warning(e);
-            }
-
-            InitSuccessful = canConnect;
+            InitSuccessful = true;
         }
     }
 }

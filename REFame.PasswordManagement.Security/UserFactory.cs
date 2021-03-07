@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.DB.Entities;
 
 namespace REFame.PasswordManagement.Security
 {

@@ -1,8 +1,5 @@
 ﻿using System.Threading.Tasks;
 using REFame.PasswordManagement.AppCore.Contracts;
-using REFame.PasswordManagement.File.Binary;
-using REFame.PasswordManagement.File.Binary.Factory;
-using REFame.PasswordManagement.File.Config;
 using REFame.PasswordManagement.File.Contracts.Config;
 using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Model.Setting;

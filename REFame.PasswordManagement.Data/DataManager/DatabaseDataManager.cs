@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using REFame.PasswordManagement.Backend;
-using REFame.PasswordManagement.Database.DbSet;
-using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.DB.Contracts;
+using REFame.PasswordManagement.DB.Entities;
 using REFame.PasswordManagement.Model;
 
 namespace REFame.PasswordManagement.Data.DataManager
@@ -12,11 +14,11 @@ namespace REFame.PasswordManagement.Data.DataManager
     /// </summary>
     public class DatabaseDataManager : IDataManager<PasswordData>
     {
-        private readonly IDataSet<PASSWORDDATA> passwordData;
+        private readonly IPwmDbContext db;
 
-        public DatabaseDataManager(IDataSet<PASSWORDDATA> dataSet = null)
+        public DatabaseDataManager(IPwmDbContextFactory dbDbContext)
         {
-            passwordData = dataSet;
+            db = dbDbContext.Create();
         }
 
         /// <summary>
@@ -34,8 +36,8 @@ namespace REFame.PasswordManagement.Data.DataManager
                 USERUSID = Globals.CurrentUserId
             };
 
-            passwordData.Entities.Add(data);
-            passwordData.SaveChanges();
+            db.PASSWORDDATA.Add(data);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace REFame.PasswordManagement.Data.DataManager
         {
             var dataDisplay = new List<PasswordData>();
 
-            foreach (PASSWORDDATA x in passwordData.Entities)
+            foreach (PASSWORDDATA x in db.PASSWORDDATA)
             {
                 if (x.USERUSID == Globals.CurrentUserId)
                 {
@@ -70,11 +72,12 @@ namespace REFame.PasswordManagement.Data.DataManager
         /// <returns></returns>
         public bool Remove(PasswordData item)
         {
-            PASSWORDDATA itemToDelete = passwordData.Entities.Find(item.Identifier);
-            passwordData.Remove(itemToDelete);
-            passwordData.SaveChanges();
+            PASSWORDDATA itemToDelete = db.PASSWORDDATA
+                .FirstOrDefault(x => x.PWID == item.Identifier);
+            db.Remove(itemToDelete);
+            db.SaveChanges();
 
-            return passwordData.Entities.Find(item.Identifier) == null;
+            return db.PASSWORDDATA.Where(x => x.PWID == item.Identifier) == null;
         }
 
         public async Task AddDataAsync(PasswordData value)
@@ -88,15 +91,15 @@ namespace REFame.PasswordManagement.Data.DataManager
                 USERUSID = Globals.CurrentUserId
             };
 
-            await passwordData.Entities.AddAsync(data);
-            await passwordData.SaveChangesAsync();
+            db.PASSWORDDATA.Add(data);
+            await db.SaveChangesAsync();
         }
 
         public async Task<List<PasswordData>> LoadDataAsync()
         {
             var dataDisplay = new List<PasswordData>();
 
-            await foreach (var x in passwordData.Entities.AsAsyncEnumerable())
+            await foreach (var x in db.PASSWORDDATA.AsAsyncEnumerable())
             {
                 if (x.USERUSID == Globals.CurrentUserId)
                 {
@@ -115,11 +118,15 @@ namespace REFame.PasswordManagement.Data.DataManager
 
         public async Task<bool> RemoveAsync(PasswordData item)
         {
-            PASSWORDDATA itemToDelete = await passwordData.Entities.FindAsync(item.Identifier);
-            passwordData.Remove(itemToDelete);
-            await passwordData.SaveChangesAsync();
+            PASSWORDDATA itemToDelete = await db.PASSWORDDATA
+                .Where(x => x.PWID == item.Identifier)
+                .FirstOrDefaultAsync();
+            db.Remove(itemToDelete);
+            await db.SaveChangesAsync();
 
-            return await passwordData.Entities.FindAsync(item.Identifier) == null;
+            return db.PASSWORDDATA
+                .Where(x => x.PWID == item.Identifier)
+                .FirstOrDefaultAsync() == null;
         }
     }
 }

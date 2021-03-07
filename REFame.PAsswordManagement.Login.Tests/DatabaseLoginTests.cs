@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using NUnit.Framework;
-using REFame.PasswordManagement.Database.DbSet;
-using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.DB;
+using REFame.PasswordManagement.DB.Contracts;
+using REFame.PasswordManagement.DB.Entities;
+using REFame.PasswordManagement.DB.Internals;
 using REFame.PasswordManagement.Security;
 
 namespace REFame.PasswordManagement.Login.Tests
@@ -13,14 +16,17 @@ namespace REFame.PasswordManagement.Login.Tests
     {
         private DatabaseLogin login;
         private DataSet<USERDATA> dataSet;
+        private Mock<IPwmDbContextFactory> factoryMock;
 
         [SetUp()]
         public void Setup()
         {
-            dataSet = new DataSet<USERDATA>(x
-                => x.UseInMemoryDatabase("DatabaseLogin"));
+            var options = new DbContextOptionsBuilder<Context>();
+            options.UseInMemoryDatabase("PWMTESTDB");
+
+            PwmDbContext db = new PwmDbContext(new Context(options.Options));
             
-            dataSet.Entities.AddRange(new List<USERDATA>()
+            db.USERDATA.AddRange(new List<USERDATA>()
             {
                  UserFactory.CreateUser("user1", "password1"),
                  UserFactory.CreateUser("user2", "password2"),
@@ -30,27 +36,24 @@ namespace REFame.PasswordManagement.Login.Tests
                  UserFactory.CreateUser("user6", "password6"),
             });
 
-            dataSet.SaveChanges();
+            db.SaveChanges();
 
-            login = new DatabaseLogin(dataSet);
+
+            factoryMock = new Mock<IPwmDbContextFactory>();
+            factoryMock
+                .Setup(x => x.Create())
+                .Returns(db);
+
+            login = new DatabaseLogin(factoryMock.Object);
         }
 
         [Test()]
         public void DatabaseLoginTest()
         {
-            var login = new DatabaseLogin(dataSet);
+            var login = new DatabaseLogin(factoryMock.Object);
 
-            Assert.That(() => new DatabaseLogin(dataSet), Throws.Nothing);
+            Assert.That(() => new DatabaseLogin(factoryMock.Object), Throws.Nothing);
             Assert.That(login, Is.Not.Null);
-        }
-
-        [Test()]
-        public void DisposeTest()
-        {
-            login.Dispose();
-
-            Assert.That(() => login.Validate("dummy", "dummy"), 
-                Throws.Exception.TypeOf(typeof(ObjectDisposedException)));
         }
 
         [Test()]
@@ -66,11 +69,14 @@ namespace REFame.PasswordManagement.Login.Tests
         {
             Assert.That(login.NeedFirstUser(), Is.False);
 
-            var dataSet = new DataSet<USERDATA>(
-                x => x.UseInMemoryDatabase("DatabaseLogin"));
+            var options = new DbContextOptionsBuilder<Context>();
+            options.UseInMemoryDatabase("PWMTESTDB");
 
-            dataSet.Entities.RemoveRange(dataSet.Entities);
-            dataSet.SaveChangesAsync();
+            PwmDbContext db = new PwmDbContext(new Context(options.Options));
+
+
+            db.USERDATA.RemoveRange(db.USERDATA);
+            db.SaveChangesAsync();
 
             Assert.That(login.NeedFirstUser(), Is.True);
         }

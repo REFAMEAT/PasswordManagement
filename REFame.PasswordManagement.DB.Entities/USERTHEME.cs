@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using REFame.PasswordManagement.DB.Entities.Base;
 
-namespace REFame.PasswordManagement.Database.Model
+namespace REFame.PasswordManagement.DB.Entities
 {
     public class USERTHEME : GenerateTable
     {

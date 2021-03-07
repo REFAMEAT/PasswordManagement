@@ -1,7 +1,4 @@
 ﻿using System;
-using REFame.PasswordManagement.AppCore;
-using REFame.PasswordManagement.File.Binary;
-using REFame.PasswordManagement.File.Binary.Factory;
 using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Model.Interfaces;

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 using REFame.PasswordManagement.App.ViewModel;
-using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.DB.Entities;
 using REFame.PasswordManagement.Security;
 
 namespace REFame.PasswordManagement.App.View

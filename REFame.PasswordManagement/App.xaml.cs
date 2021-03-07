@@ -7,9 +7,9 @@ using REFame.PasswordManagement.App.ViewModel;
 using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.AppCore.Contracts;
 using REFame.PasswordManagement.Data;
-using REFame.PasswordManagement.Database;
-using REFame.PasswordManagement.Database.DbSet;
-using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.DB;
+using REFame.PasswordManagement.DB.Contracts;
+using REFame.PasswordManagement.DB.Entities;
 using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.File.Contracts.Config;
 using REFame.PasswordManagement.File.Module;
@@ -93,8 +93,9 @@ namespace REFame.PasswordManagement.App
             {
                 var data = PWCore
                     .CurrentCore
-                    .GetRegisteredType<IDataSet<USERDATA>>();
-                data.Entities.Add(firstUser);
+                    .GetRegisteredType<IPwmDbContextFactory>()
+                    .Create();
+                data.USERDATA.Add(firstUser);
                 data.SaveChanges();
             }
             else if (firstUser != null)

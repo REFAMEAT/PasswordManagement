@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using NUnit.Framework;
-using REFame.PasswordManagement.Database.Model;
+using REFame.PasswordManagement.DB.Entities;
 
 namespace REFame.PasswordManagement.Security.Tests
 {

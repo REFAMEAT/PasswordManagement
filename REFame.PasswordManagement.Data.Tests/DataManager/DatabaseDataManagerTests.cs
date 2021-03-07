@@ -3,9 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using REFame.PasswordManagement.Data.DataManager;
-using REFame.PasswordManagement.Database.DbSet;
-using REFame.PasswordManagement.Database.Model;
 using REFame.PasswordManagement.Database.Tests;
+using REFame.PasswordManagement.DB.Contracts;
+using REFame.PasswordManagement.DB.Entities;
 using REFame.PasswordManagement.Model;
 
 namespace REFame.PasswordManagement.Data.Tests.DataManager
@@ -16,22 +16,23 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         [SetUp]
         public async Task Setup()
         {
-            dataSet = new DataSet<PASSWORDDATA>(options);
-            dataManager = new DatabaseDataManager(dataSet);
+            db = dbContextFactory.Create();
+            dataManager = new DatabaseDataManager(dbContextFactory);
 
-            await dataSet.Entities.AddRangeAsync(Data);
+            db.PASSWORDDATA.AddRange(Data);
 
-            await dataSet.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
+
+        private IPwmDbContext db;
 
         [TearDown]
         public void TearDown()
         {
-            dataSet.RemoveRange(dataSet.Entities);
-            dataSet.SaveChanges();
+            db.RemoveRange(db.PASSWORDDATA);
+            db.SaveChanges();
         }
 
-        private DataSet<PASSWORDDATA> dataSet;
         private DatabaseDataManager dataManager;
 
         [Test]
@@ -48,11 +49,11 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         {
             int countBeforeAdd = Data.Length;
 
-            dataManager.AddData(new PasswordData {Identifier = "NewId1"});
-            dataSet.SaveChanges();
+            dataManager.AddData(new PasswordData { Identifier = "NewId1" });
+            db.SaveChanges();
 
-            Assert.That(dataSet.Entities.Count(), Is.EqualTo(++countBeforeAdd));
-            Assert.That(dataSet.Find<PASSWORDDATA>("NewId1"), Is.Not.Null);
+            Assert.That(db.PASSWORDDATA.Count(), Is.EqualTo(++countBeforeAdd));
+            Assert.That(db.PASSWORDDATA.FirstOrDefault(x => x.PWID == "NewId1"), Is.Not.Null);
         }
 
         [Test]
@@ -60,10 +61,11 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         {
             int countBeforeDelete = Data.Length;
 
-            dataManager.Remove(new PasswordData {Identifier = "Id1"});
+            dataManager.Remove(new PasswordData { Identifier = "Id1" });
 
-            Assert.That(dataSet.Entities.Count(), Is.EqualTo(--countBeforeDelete));
-            Assert.That(dataSet.Find<PASSWORDDATA>("Id1"), Is.Null);
+            Assert.That(db.PASSWORDDATA.Count(), Is.EqualTo(--countBeforeDelete));
+            Assert.That(db.PASSWORDDATA.FirstOrDefault(x => x.PWID == "Id1"), Is.Null);
+
         }
 
         [Test]
@@ -81,10 +83,11 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
             int countBeforeAdd = Data.Length;
 
             await dataManager.AddDataAsync(new PasswordData { Identifier = "NewId1" });
-            await dataSet.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
-            Assert.That(dataSet.Entities.Count(), Is.EqualTo(++countBeforeAdd));
-            Assert.That(dataSet.Find<PASSWORDDATA>("NewId1"), Is.Not.Null);
+            Assert.That(db.PASSWORDDATA.Count(), Is.EqualTo(++countBeforeAdd));
+            Assert.That(db.PASSWORDDATA.FirstOrDefault(x => x.PWID == "NewId1"), Is.Not.Null);
+
         }
 
         [Test]
@@ -94,8 +97,9 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
 
             await dataManager.RemoveAsync(new PasswordData { Identifier = "Id1" });
 
-            Assert.That(dataSet.Entities.Count(), Is.EqualTo(--countBeforeDelete));
-            Assert.That(dataSet.Find<PASSWORDDATA>("Id1"), Is.Null);
+            Assert.That(db.PASSWORDDATA.Count(), Is.EqualTo(--countBeforeDelete));
+            Assert.That(db.PASSWORDDATA.FirstOrDefault(x => x.PWID == "Id1"), Is.Null);
+
         }
 
         private PASSWORDDATA[] Data => new[]

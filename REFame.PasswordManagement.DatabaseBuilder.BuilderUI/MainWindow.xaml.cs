@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Data.SqlClient;
-using REFame.PasswordManagement.Database;
+using REFame.PasswordManagement.DB.Entities.Base;
 
 namespace REFame.PasswordManagement.DatabaseBuilder.BuilderUI
 {
