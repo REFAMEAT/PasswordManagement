@@ -79,5 +79,17 @@ namespace REFame.PasswordManagement.Security
             byte[] decryptedData = DecryptString(cipherBytes, pdb.GetBytes(32), pdb.GetBytes(16));
             return Encoding.Unicode.GetString(decryptedData);
         }
+
+        public static string DecryptString(string text)
+        {
+            return DecryptString(text, key);
+        }
+
+        public static string EncryptString(string text)
+        {
+            return EncryptString(text, key);
+        }
+
+        private const string key = "773E75F0-E29D-4FDF-B7A0-BC3A32E3492F-0D14BE72-6C85-433B-977E-71C2670773A7";
     }
 }

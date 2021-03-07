@@ -1,7 +1,7 @@
 ﻿using System;
 using REFame.PasswordManagement.File.Contracts.Binary;
+using REFame.PasswordManagement.Login.Contracts;
 using REFame.PasswordManagement.Model;
-using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Security;
 
 namespace REFame.PasswordManagement.Login

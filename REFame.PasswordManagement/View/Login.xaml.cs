@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 using REFame.PasswordManagement.App.ViewModel;
-using REFame.PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Login.Contracts;
 
 namespace REFame.PasswordManagement.App.View
 {

@@ -241,6 +241,15 @@ namespace REFame.PasswordManagement.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User-management.
+        /// </summary>
+        public static string MainWindow_LabelOpenUserManagement_Content {
+            get {
+                return ResourceManager.GetString("MainWindow_LabelOpenUserManagement_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string MainWindow_LabelTextAdd_Content {
@@ -291,6 +300,24 @@ namespace REFame.PasswordManagement.Localization {
         public static string ThemeSettings_LabelTheme_Content {
             get {
                 return ResourceManager.GetString("ThemeSettings_LabelTheme_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string UserManagementView_Label_Name_Content {
+            get {
+                return ResourceManager.GetString("UserManagementView_Label_Name_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        public static string UserManagementView_Label_UserName_Content {
+            get {
+                return ResourceManager.GetString("UserManagementView_Label_UserName_Content", resourceCulture);
             }
         }
         

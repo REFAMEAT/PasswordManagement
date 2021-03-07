@@ -15,13 +15,14 @@ using REFame.PasswordManagement.File.Contracts.Config;
 using REFame.PasswordManagement.File.Module;
 using REFame.PasswordManagement.Localization;
 using REFame.PasswordManagement.Login;
+using REFame.PasswordManagement.Login.Contracts;
 using REFame.PasswordManagement.Model;
-using REFame.PasswordManagement.Model.Interfaces;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.ProgressBar;
 using REFame.PasswordManagement.Services;
 using REFame.PasswordManagement.Settings;
 using REFame.PasswordManagement.Update;
+using REFame.PasswordManagement.UserManagement;
 
 namespace REFame.PasswordManagement.App
 {
@@ -48,7 +49,8 @@ namespace REFame.PasswordManagement.App
                 .RegisterModule<ProgressBarModule>()
                 .RegisterModule<DatbaseModule>()
                 .RegisterModule<LoginModule>()
-                .RegisterModule<DataModule>();
+                .RegisterModule<DataModule>()
+                .RegisterModule<UserManagementModule>();
 
             Task runTask = PWCore.CurrentCore.Run();
             await runTask;

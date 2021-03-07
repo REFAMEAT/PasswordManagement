@@ -2,7 +2,6 @@
 using System.Windows;
 using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.AppCore.Contracts;
-using REFame.PasswordManagement.Model.Interfaces;
 
 namespace REFame.PasswordManagement.App
 {

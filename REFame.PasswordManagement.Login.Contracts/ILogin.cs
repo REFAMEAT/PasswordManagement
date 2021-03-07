@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace REFame.PasswordManagement.Model.Interfaces
+namespace REFame.PasswordManagement.Login.Contracts
 {
     public interface ILogin : IDisposable
     {
-#nullable enable
         string Validate(string userName, string password);
         bool NeedFirstUser();
         bool InitSuccessful { get; set; }

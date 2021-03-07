@@ -201,6 +201,15 @@
   <data name="Window_No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="MainWindow_LabelOpenUserManagement_Content" xml:space="preserve">
+    <value>User-management</value>
+  </data>
+  <data name="UserManagementView_Label_UserName_Content" xml:space="preserve">
+	  <value>Username:</value>
+  </data>
+  <data name="UserManagementView_Label_Name_Content" xml:space="preserve">
+	  <value>Name:</value>
+  </data>
   <data name="ProgressBar_LabelTitle_Content_Installing" xml:space="preserve">
     <value>Installing updates</value>
   </data>

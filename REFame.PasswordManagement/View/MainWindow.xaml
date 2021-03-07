@@ -60,6 +60,17 @@
                     </StackPanel>
                 </Button>
             </ToolBar>
+
+            <ToolBar Visibility="Collapsed">
+                <Button Command="{Binding CommandOpenUserManagement}" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon 
+                            Foreground="{DynamicResource PrimaryHueLightBrush}" 
+                            Kind="User"/>
+                        <Label Content="{x:Static Loc.MainWindow_LabelOpenUserManagement_Content}"/>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
         </ToolBarTray>
         <DataGrid
             Grid.Row="1"

@@ -201,10 +201,19 @@
   <data name="Window_Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
+  <data name="MainWindow_LabelOpenUserManagement_Content" xml:space="preserve">
+    <value>Benutzerverwaltung</value>
+  </data>
   <data name="ProgressBar_LabelTitle_Content_Installing" xml:space="preserve">
     <value>Updates installieren</value>
   </data>
   <data name="ProgressBar_LabelTitle_Content_Downloading" xml:space="preserve">
     <value>Updates herunterladen</value>
+  </data>
+  <data name="UserManagementView_Label_UserName_Content" xml:space="preserve">
+	  <value>Benutzername:</value>
+  </data>
+  <data name="UserManagementView_Label_Name_Content" xml:space="preserve">
+	  <value>Name:</value>
   </data>
 </root>

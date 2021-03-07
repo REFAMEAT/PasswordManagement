@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using REFame.PasswordManagement.DB.Contracts;
 using REFame.PasswordManagement.DB.Entities;
-using REFame.PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Login.Contracts;
 using REFame.PasswordManagement.Security;
 
 namespace REFame.PasswordManagement.Login

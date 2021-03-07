@@ -22,5 +22,14 @@ namespace REFame.PasswordManagement.DB.Entities
 
         [Column("USSALT", TypeName = "nvarchar(MAX)")]
         public string USSALT { get; set; }
+
+        [Column("USPHONE", TypeName = "nvarchar(MAX)")]
+        public string USPHONE { get; set; }
+
+        [Column("USMAIL", TypeName = "nvarchar(MAX)")]
+        public string USMAIL { get; set; }
+
+        [Column("USTITLE", TypeName = "nvarchar(MAX)")]
+        public string USTITLE { get; set; }
     }
 }

@@ -7,8 +7,10 @@ using REFame.PasswordManagement.App.Model;
 using REFame.PasswordManagement.App.View;
 using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.Data;
+using REFame.PasswordManagement.Data.Contracts;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Settings.Contracts;
+using REFame.PasswordManagement.UserManagement.Contracts;
 using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
@@ -16,9 +18,6 @@ namespace REFame.PasswordManagement.App.ViewModel
     public class MainViewModel : BindableBase
     {
         private readonly IDataManager<PasswordData> dataManager;
-        private ICommand buttonCommandAddItem;
-        private ICommand buttonCommandDeleteItem;
-        private ICommand buttonCommandOpenSettings;
 
         private ObservableCollection<PasswordDataDisplay> items;
         private PasswordDataDisplay selectedItem;
@@ -27,17 +26,17 @@ namespace REFame.PasswordManagement.App.ViewModel
         {
             this.dataManager = dataManager;
             Items = ToDisplayData(dataManager.LoadData());
+
+            ButtonCommandOpenSettings = new AsyncCommand(DoOpenSettings);
+            ButtonCommandAddItem = new AsyncCommand(DoAddItem);
+            ButtonCommandDeleteItem = new AsyncCommand(DoDeleteItem);
+            CommandOpenUserManagement = new AsyncCommand(OpenUserManagement);
         }
 
-        public MainViewModel()
-        {
-            dataManager = PWCore.CurrentCore.GetRegisteredType<IDataManager<PasswordData>>();
-            Items = ToDisplayData(dataManager.LoadData());
-        }
-
-        public ICommand ButtonCommandOpenSettings => buttonCommandOpenSettings ??= new AsyncCommand(DoOpenSettings);
-        public ICommand ButtonCommandAddItem => buttonCommandAddItem ??= new AsyncCommand(DoAddItem);
-        public ICommand ButtonCommandDeleteItem => buttonCommandDeleteItem ??= new AsyncCommand(DoDeleteItem);
+        public ICommand ButtonCommandOpenSettings { get; set; }
+        public ICommand ButtonCommandAddItem { get; set; }
+        public ICommand ButtonCommandDeleteItem { get; set; }
+        public ICommand CommandOpenUserManagement { get; set; }
 
         public ObservableCollection<PasswordDataDisplay> Items
         {
@@ -97,6 +96,13 @@ namespace REFame.PasswordManagement.App.ViewModel
             };
 
             return Task.CompletedTask;
+        }
+
+        private async Task OpenUserManagement()
+        {
+            await PWCore.CurrentCore
+                .GetRegisteredType<IUserMgmt>()
+                .Open();
         }
 
         private ObservableCollection<PasswordDataDisplay> ToDisplayData(List<PasswordData> data)

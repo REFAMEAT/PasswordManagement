@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace REFame.PasswordManagement.Data
+namespace REFame.PasswordManagement.Data.Contracts
 {
     public interface IDataManager<T> where T : class
     {

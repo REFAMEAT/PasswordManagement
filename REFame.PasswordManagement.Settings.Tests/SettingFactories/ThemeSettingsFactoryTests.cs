@@ -2,14 +2,11 @@
 using MaterialDesignThemes.Wpf;
 using Moq;
 using NUnit.Framework;
-using REFame.PasswordManagement.Model.Enums;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.Settings.SettingFactories;
 using REFame.PasswordManagement.Settings.ViewModel.Tabs;
-using REFame.PasswordManagement.WpfBase;
 using REFame.PasswordManagement.WpfBase.Mediator;
-using ITheme = REFame.PasswordManagement.Model.Interfaces.ITheme;
 
 namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
 {

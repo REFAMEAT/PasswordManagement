@@ -3,11 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using REFame.PasswordManagement.Backend;
+using REFame.PasswordManagement.Data.Contracts;
 using REFame.PasswordManagement.DB.Contracts;
 using REFame.PasswordManagement.DB.Entities;
 using REFame.PasswordManagement.Model;
 
-namespace REFame.PasswordManagement.Data.DataManager
+namespace REFame.PasswordManagement.Data
 {
     /// <summary>
     ///     A Data-Manager for the connection to the Database

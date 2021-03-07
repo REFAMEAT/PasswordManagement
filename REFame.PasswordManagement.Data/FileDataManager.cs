@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using REFame.PasswordManagement.AppCore;
+using REFame.PasswordManagement.Data.Contracts;
 using REFame.PasswordManagement.File.Contracts.Binary;
 using REFame.PasswordManagement.Model;
 
-namespace REFame.PasswordManagement.Data.DataManager
+namespace REFame.PasswordManagement.Data
 {
     /// <summary>
     ///     A Data-Manager for managing entities in local binary Files

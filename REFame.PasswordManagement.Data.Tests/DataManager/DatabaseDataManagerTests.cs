@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using REFame.PasswordManagement.Data.DataManager;
 using REFame.PasswordManagement.Database.Tests;
 using REFame.PasswordManagement.DB.Contracts;
 using REFame.PasswordManagement.DB.Entities;

@@ -22,7 +22,7 @@ namespace REFame.PasswordManagement.App.View
         {
             ThemeData data = await PWCore.CurrentCore.GetRegisteredType<ISettingService<ThemeData>>().Load();
 
-            Application.Current.Resources.Clear();
+            Application.Current.Resources.MergedDictionaries.Clear();
 
             var styleDictionary = new ResourceDictionary
             {

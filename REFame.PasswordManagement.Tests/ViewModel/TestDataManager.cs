@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using REFame.PasswordManagement.Data;
+using REFame.PasswordManagement.Data.Contracts;
 using REFame.PasswordManagement.Model;
 
 namespace REFame.PasswordManagement.Tests.ViewModel

@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using Microsoft.Cci;
 using REFame.PasswordManagement.Backend;
-using REFame.PasswordManagement.Model.Interfaces;
+using REFame.PasswordManagement.Login.Contracts;
 using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.App.ViewModel
