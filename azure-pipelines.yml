@@ -47,7 +47,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '$(Build.SourcesDirectory)\REFame.PasswordManagement\REFame.PasswordManagement.App.csproj'
+    projects: '$(Build.SourcesDirectory)\src\REFame.PasswordManagement\REFame.PasswordManagement.App.csproj'
     arguments: '-c Release -r win-x64 -o $(Build.ArtifactStagingDirectory)\App -p:Version=$(Build.BuildNumber)'
     includeNuGetOrg: true
 
@@ -63,7 +63,7 @@ steps:
   displayName: Run Deploy.exe
   inputs:
     filename: '$(Agent.TempDirectory)\Deploy\Deploy.exe'
-    arguments: '-l $(Build.ArtifactStagingDirectory)\App -v $(Build.BuildNumber) -t $(Agent.TempDirectory)\DeployTemp -w  $(Build.SourcesDirectory)\REFame.PasswordManagement -o $(Build.ArtifactStagingDirectory)\Setup'
+    arguments: '-l $(Build.ArtifactStagingDirectory)\App -v $(Build.BuildNumber) -t $(Agent.TempDirectory)\DeployTemp -w  $(Build.SourcesDirectory)\src\REFame.PasswordManagement -o $(Build.ArtifactStagingDirectory)\Setup'
 
 - task: PowerShell@2
   displayName: Rename Setup.exe
