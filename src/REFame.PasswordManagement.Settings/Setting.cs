@@ -17,8 +17,9 @@ namespace REFame.PasswordManagement.Settings
 
             var settingsViewModelFactory = new SettingsViewModelFactory();
             settingsViewModelFactory.ReportMediators(settings.Mediators);
-            settings.SetViewModel(settingsViewModelFactory);
+            settingsViewModelFactory.SetOnClose(settings.Close);
 
+            settings.SetViewModel(settingsViewModelFactory);
             settings.Show();
         }
 
@@ -29,13 +30,6 @@ namespace REFame.PasswordManagement.Settings
                 Owner = Application.Current.MainWindow, 
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
-
-            settings.Resources.MergedDictionaries.Clear();
-
-            foreach (ResourceDictionary dictionary in Application.Current.Resources.MergedDictionaries)
-            {
-                settings.Resources.MergedDictionaries.Add(dictionary);
-            }
 
             return settings;
         }

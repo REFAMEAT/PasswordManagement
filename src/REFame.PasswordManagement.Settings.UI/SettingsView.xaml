@@ -1,11 +1,12 @@
-﻿<Window x:Class="REFame.PasswordManagement.Settings.UI.SettingsView"
+﻿<PwmWindow x:Class="REFame.PasswordManagement.Settings.UI.SettingsView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:REFame.PasswordManagement.Settings.ViewModel;assembly=REFame.PasswordManagement.Settings.ViewModel"
         Title="Settings"
         Width="370"
-        Height="450"
+        Height="500"
         Background="{DynamicResource MaterialDesignPaper}"
         ResizeMode="CanResize"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -15,6 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="45" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>        
         <TabControl
             x:Name="TabControl"
@@ -22,8 +24,16 @@
             Background="{DynamicResource MaterialDesignPaper}"
             Foreground="{DynamicResource MaterialDesignBody}"/>
 
-        <DockPanel Grid.Row="1" Margin="5,5,0,10">
+        <Label 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="5" 
+            Grid.Row="1"
+            Content="{x:Static Loc.SettingsView_LabelRestartRequired_Content}"/>
+
+        <DockPanel Grid.Row="2" Margin="5,5,5,10">
             <Button
+                Command="{Binding CloseCommand}"
                 Width="100"
                 Content="{x:Static Loc.Window_LabelCancel_Content}"
                 DockPanel.Dock="Left"
@@ -45,4 +55,4 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-</Window>
+</PwmWindow>

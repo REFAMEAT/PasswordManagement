@@ -1,0 +1,11 @@
+<Project>
+	<PropertyGroup>
+		<TargetFramework>net5-windows</TargetFramework>
+		<AppFrameworkVersion>net5-windows</AppFrameworkVersion>
+		<LibraryFrameworkVersion>net5-windows</LibraryFrameworkVersion>
+		<RunTimeIdentifier>win-x64</RunTimeIdentifier>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<UseWPF>True</UseWPF>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+</Project>

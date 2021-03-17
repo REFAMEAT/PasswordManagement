@@ -216,4 +216,7 @@
   <data name="UserManagementView_Label_Name_Content" xml:space="preserve">
 	  <value>Name:</value>
   </data>
+  <data name="SettingsView_LabelRestartRequired_Content" xml:space="preserve">
+	  <value>Änderungen benötigen evtl. einen Neustart der App</value>
+  </data>
 </root>

@@ -11,7 +11,7 @@ namespace REFame.PasswordManagement.Settings.UI
     /// <summary>
     /// Interaction logic for Settings.xaml
     /// </summary>
-    public partial class SettingsView : Window
+    public partial class SettingsView : PwmWindow
     {
         public List<SettingMediator> Mediators { get; } = new List<SettingMediator>();
 

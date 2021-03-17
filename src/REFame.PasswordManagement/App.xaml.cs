@@ -53,10 +53,6 @@ namespace REFame.PasswordManagement.App
 
         private async Task InitUI()
         {
-            // Register method when theme-change is requested
-            ThemeMediator.ChangeThemeRequested +=
-                async (sender, args) => await UiHelper.AdjustApplicationStyle();
-
             // Adjust current App-Style
             await UiHelper.AdjustApplicationStyle();
         }

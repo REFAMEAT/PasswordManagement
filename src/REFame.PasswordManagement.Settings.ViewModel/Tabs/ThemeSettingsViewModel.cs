@@ -71,7 +71,6 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
             };
 
             await themeSetting.Save(newTheme);
-            ThemeMediator.RequestChangeTheme(newTheme);
         }
     }
 }

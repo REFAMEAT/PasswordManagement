@@ -277,6 +277,15 @@ namespace REFame.PasswordManagement.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SettingsView_LabelRestartRequired_Content {
+            get {
+                return ResourceManager.GetString("SettingsView_LabelRestartRequired_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UI-Color.
         /// </summary>
         public static string ThemeSettings_LabelColor_Content {
@@ -304,7 +313,7 @@ namespace REFame.PasswordManagement.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Name:.
         /// </summary>
         public static string UserManagementView_Label_Name_Content {
             get {
@@ -313,7 +322,7 @@ namespace REFame.PasswordManagement.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username.
+        ///   Looks up a localized string similar to Username:.
         /// </summary>
         public static string UserManagementView_Label_UserName_Content {
             get {

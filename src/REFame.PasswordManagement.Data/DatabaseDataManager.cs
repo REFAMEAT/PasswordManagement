@@ -125,9 +125,10 @@ namespace REFame.PasswordManagement.Data
             db.Remove(itemToDelete);
             await db.SaveChangesAsync();
 
-            return db.PASSWORDDATA
-                .Where(x => x.PWID == item.Identifier)
-                .FirstOrDefaultAsync() == null;
+            var deletedPassword = db.PASSWORDDATA
+                .Where(x => x.PWID == item.Identifier);
+
+            return !deletedPassword.Any();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using REFame.PasswordManagement.App.View;
 using REFame.PasswordManagement.Model;
 using REFame.PasswordManagement.Security;
@@ -35,13 +36,13 @@ namespace REFame.PasswordManagement.App.ViewModel
             set => SetProperty(ref comment, value);
         }
 
-        public ICommand ButtonCommandApply => buttonCommandAddPassword ??= new Command(DoApply);
+        public ICommand ButtonCommandApply => buttonCommandAddPassword ??= new AsyncCommand(DoApply);
 
         /// <summary>
         ///     Create the Data and Close Window
         /// </summary>
         /// <param name="obj">The <see cref="AddPassword" /> to close</param>
-        private void DoApply(object obj)
+        private async Task DoApply(object obj)
         {
             if (!(obj is AddPassword window))
             {

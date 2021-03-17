@@ -16,7 +16,10 @@
     mc:Ignorable="d">
     <Window.ContextMenu>
         <ContextMenu>
-            <MenuItem Command="{Binding ButtonCommandDeleteItem}" Header="{DynamicResource MainDelete}">
+            <MenuItem 
+                Command="{Binding ButtonCommandDeleteItem}" 
+                Header="{x:Static Loc.MainWindow_LabelDelete_Content}"
+                Foreground="{DynamicResource MaterialDesignBody}">
                 <MenuItem.Icon>
                     <materialDesign:PackIcon Kind="Delete" />
                 </MenuItem.Icon>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using REFame.PasswordManagement.Settings.ViewModel;
 using REFame.PasswordManagement.WpfBase;
 using REFame.PasswordManagement.WpfBase.Mediator;
@@ -17,6 +18,11 @@ namespace REFame.PasswordManagement.Settings
         public void ReportMediators(List<SettingMediator> mediators)
         {
             viewModel.SettingMediators.AddRange(mediators);
+        }
+
+        public void SetOnClose(Action onCloseAction)
+        {
+            viewModel.OnCloseAction = onCloseAction;
         }
     }
 }

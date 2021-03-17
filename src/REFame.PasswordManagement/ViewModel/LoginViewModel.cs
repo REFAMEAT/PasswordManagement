@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using REFame.PasswordManagement.Backend;
 using REFame.PasswordManagement.Login.Contracts;
@@ -26,9 +27,9 @@ namespace REFame.PasswordManagement.App.ViewModel
             set => SetProperty(ref userName, value);
         }
 
-        public ICommand ButtonCommandLogin => buttonCommandLogin ??= new Command(DoLogin);
+        public ICommand ButtonCommandLogin => buttonCommandLogin ??= new AsyncCommand(DoLogin);
 
-        private void DoLogin(object obj)
+        private async Task DoLogin(object obj)
         {
             if (!(obj is View.Login login))
             {
