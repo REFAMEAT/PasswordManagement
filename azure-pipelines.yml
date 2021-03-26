@@ -6,6 +6,7 @@
 trigger:
 - master
 - develop
+- release/*
 
 pool: 
   vmImage: windows-latest
@@ -90,3 +91,15 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)\Setup\PASSWORDMANAGEMENT-$(Build.BuildNumber)-full.nupkg'
     ArtifactName: 'setup-package'
     publishLocation: 'Container'
+
+- task: CreatePullRequest@1
+  condition: contains(variables['build.sourceBranch'], 'refs/heads/realease/2')
+  inputs:
+    repoType: 'Azure DevOps'
+    repositorySelector: 'select'
+    projectId: 'bb73abc5-91aa-4c8f-8916-3764e5a0b91c'
+    gitRepositoryId: '87146dd3-eaaa-4546-8b73-33cd6f471464'
+    sourceBranch: '$(Build.SourceBranch)'
+    targetBranch: 'master'
+    title: 'Release $(Build.BuildNumber)'
+    linkWorkItems: false

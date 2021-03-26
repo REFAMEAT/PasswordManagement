@@ -30,7 +30,7 @@ jobs:
           gitHubConnection: 'github.com'
           repositoryName: 'REFAMEAT/PasswordManagement'
           action: 'create'
-          target: 'main'
+          target: 'master'
           tagSource: 'userSpecifiedTag'
           tag: '$(version)'
           title: 'PasswordManagement Release $(version)'
@@ -38,6 +38,4 @@ jobs:
             $(PIPELINE.WORKSPACE)\setupbuild\setup-package\*.nupkg
             $(PIPELINE.WORKSPACE)\setupbuild\setup-package\RELEASES
             $(PIPELINE.WORKSPACE)\setupbuild\setup\*.exe
-          isDraft: false
-          isPreRelease: false
           addChangeLog: false
