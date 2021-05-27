@@ -1,14 +1,14 @@
 ﻿<Window
-    x:Class="REFame.PasswordManagement.App.View.AddUser"
+    x:Class="REFame.PasswordManagement.UserManagement.UI.View.AddUserView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="clr-namespace:REFame.PasswordManagement.App.ViewModel"
-    x:Name="Window"
+    xmlns:viewModel="clr-namespace:REFame.PasswordManagement.UserManagement.UI.ViewModel"
+    x:Name="window"
     Title="AddUser"
-    Width="450"
-    Height="250"
+    Width="500"
+    Height="500"
     Background="{DynamicResource MaterialDesignPaper}"
     ResizeMode="CanMinimize"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -18,7 +18,7 @@
         <KeyBinding
             Key="Enter"
             Command="{Binding ButtonCommandCreateUser}"
-            CommandParameter="{Binding ElementName=Window}" />
+            CommandParameter="{Binding ElementName=window}" />
     </Window.InputBindings>
     <Window.DataContext>
         <viewModel:AddUserViewModel />
@@ -26,6 +26,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -47,55 +50,112 @@
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            VerticalAlignment="Top"
-            Content="{x:Static Loc.AddUser_LabelUsername_Content}"
-            FontSize="15" />
+            VerticalAlignment="Center"
+            Content="Titel"
+            FontSize="15"/>
         <TextBox
-            x:Name="userNameTextBox"
+            TextChanged="TextChanged"
             Grid.Row="1"
             Grid.Column="1"
             Width="200"
             Height="30"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="15"
+            Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            Content="Name"
+            FontSize="15"/>
+        <TextBox
+            TextChanged="TextChanged"
+            x:Name="nameTextBox"
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="200"
+            Height="30"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="15"
+            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            Content="{x:Static Loc.AddUser_LabelUsername_Content}"
+            FontSize="15" />
+        <TextBox
+            TextChanged="TextChanged"
+            x:Name="userNameTextBox"
+            Grid.Row="3"
+            Grid.Column="1"
+            Width="200"
+            Height="30"
+            VerticalAlignment="Center"
             VerticalContentAlignment="Center"
             FontSize="15"
             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label
-            Grid.Row="2"
+            Grid.Row="4"
             Grid.Column="0"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
             Content="{x:Static Loc.AddUser_LabelPassword_Content}"
             FontSize="15" />
         <PasswordBox
             x:Name="passwordBox"
-            Grid.Row="2"
+            Grid.Row="4"
             Grid.Column="1"
             Width="200"
             Height="30"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
             VerticalContentAlignment="Center"
             FontSize="15"
-            PasswordChanged="PasswordBox_PasswordChanged" />
+            PasswordChanged="TextChanged" />
 
         <Label
-            Grid.Row="3"
+            Grid.Row="5"
             Grid.Column="0"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
             Content="{x:Static Loc.AddUser_LabelRepeatPassword_Content}"
             FontSize="15" />
         <PasswordBox
             x:Name="repeatPasswordBox"
-            Grid.Row="3"
+            Grid.Row="5"
             Grid.Column="1"
             Width="200"
             Height="30"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
             VerticalContentAlignment="Center"
             FontSize="15"
-            PasswordChanged="PasswordBox_PasswordChanged" />
+            PasswordChanged="TextChanged" />
 
-        <DockPanel Grid.Row="4" Grid.ColumnSpan="2">
+        <Label
+            Grid.Row="6"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            Content="E-Mail"
+            FontSize="15"/>
+        <TextBox
+            TextChanged="TextChanged"
+            Grid.Row="6"
+            Grid.Column="1"
+            Width="200"
+            Height="30"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="15"
+            Text="{Binding EMail, UpdateSourceTrigger=PropertyChanged}" />
+
+
+        <DockPanel
+            Grid.Row="7" 
+            Grid.ColumnSpan="2" 
+            Grid.Column="0">
             <Button
                 Width="150"
                 Margin="2"
@@ -105,10 +165,9 @@
                 IsCancel="True"
                 Style="{DynamicResource MaterialDesignFlatButton}" />
             <Button
-                x:Name="buttonCreateUser"
                 Margin="1"
                 Command="{Binding ButtonCommandCreateUser}"
-                CommandParameter="{Binding ElementName=Window}"
+                CommandParameter="{Binding ElementName=window}"
                 Content="{x:Static Loc.Window_LabelSave_Content}"
                 FontSize="15"
                 IsEnabled="{Binding InputOk}" />

@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using REFame.PasswordManagement.DB.Entities.Base;
 
+// ReSharper disable InconsistentNaming
+
 namespace REFame.PasswordManagement.DB.Entities
 {
     [Table("PASSWORDDATA")]

@@ -18,7 +18,11 @@ namespace REFame.PasswordManagement.Settings.ViewModel
         public SettingsViewModel()
         {
             SettingMediators = new List<SettingMediator>();
-            CloseCommand = new AsyncCommand(async () => OnCloseAction?.Invoke());
+            CloseCommand = new AsyncCommand(() =>
+            {
+                OnCloseAction?.Invoke();
+                return Task.CompletedTask;
+            });
             SaveCommand = new AsyncCommand(Save);
         }
 

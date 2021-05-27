@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using REFame.PasswordManagement.Backend;
 using REFame.PasswordManagement.Login.Contracts;
 using REFame.PasswordManagement.WpfBase;
 
@@ -18,7 +17,6 @@ namespace REFame.PasswordManagement.App.ViewModel
         {
             iLogin = logonMethod;
             this.onWrongPassword = onWrongPassword;
-            iLogin.Initialize();
         }
 
         public string UserName
@@ -40,8 +38,7 @@ namespace REFame.PasswordManagement.App.ViewModel
 
             if (userId != null)
             {
-                login.DialogResult = true;
-                Globals.CurrentUserId = userId;
+                login.DialogResult = true;  
                 login.Close(); 
             }
             else

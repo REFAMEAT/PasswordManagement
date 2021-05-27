@@ -2,7 +2,6 @@
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using REFame.PasswordManagement.DB;
 using REFame.PasswordManagement.DB.Entities.Base;
@@ -53,8 +52,6 @@ namespace REFame.PasswordManagement.DatabaseBuilder.BuilderUI
 
         private void SqliteButton_Click(object sender, RoutedEventArgs e)
         {
-            IFolderProvider folder = new FolderProvider();
-
             SqLiteConnectionStringBuilder stringBuilder 
                 = new SqLiteConnectionStringBuilder(new FolderProvider());
 

@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using REFame.PasswordManagement.DB.Entities.Base;
 
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
+
 namespace REFame.PasswordManagement.DB.Entities
 {
     public class USERTHEME : GenerateTable

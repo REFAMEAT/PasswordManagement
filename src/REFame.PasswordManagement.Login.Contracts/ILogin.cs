@@ -6,7 +6,5 @@ namespace REFame.PasswordManagement.Login.Contracts
     {
         string Validate(string userName, string password);
         bool NeedFirstUser();
-        bool InitSuccessful { get; set; }
-        void Initialize();
     }
 }

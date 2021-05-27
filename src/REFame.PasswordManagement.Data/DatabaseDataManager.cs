@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using REFame.PasswordManagement.Backend;
 using REFame.PasswordManagement.Data.Contracts;
 using REFame.PasswordManagement.DB.Contracts;
 using REFame.PasswordManagement.DB.Entities;
+using REFame.PasswordManagement.Login.Contracts;
 using REFame.PasswordManagement.Model;
 
 namespace REFame.PasswordManagement.Data
@@ -15,10 +15,12 @@ namespace REFame.PasswordManagement.Data
     /// </summary>
     public class DatabaseDataManager : IDataManager<PasswordData>
     {
+        private readonly IUserInfo userInfo;
         private readonly IPwmDbContext db;
 
-        public DatabaseDataManager(IPwmDbContextFactory dbDbContext)
+        public DatabaseDataManager(IPwmDbContextFactory dbDbContext, IUserInfo userInfo)
         {
+            this.userInfo = userInfo;
             db = dbDbContext.Create();
         }
 
@@ -34,7 +36,7 @@ namespace REFame.PasswordManagement.Data
                 PWDATA = value.Password,
                 PWCOMMENT = value.Comments,
                 PWDESCRIPTION = value.Description,
-                USERUSID = Globals.CurrentUserId
+                USERUSID = userInfo.User.Identifier
             };
 
             db.PASSWORDDATA.Add(data);
@@ -51,7 +53,7 @@ namespace REFame.PasswordManagement.Data
 
             foreach (PASSWORDDATA x in db.PASSWORDDATA)
             {
-                if (x.USERUSID == Globals.CurrentUserId)
+                if (x.USERUSID == userInfo.User.Identifier)
                 {
                     dataDisplay.Add(new PasswordData
                     {
@@ -89,7 +91,7 @@ namespace REFame.PasswordManagement.Data
                 PWDATA = value.Password,
                 PWCOMMENT = value.Comments,
                 PWDESCRIPTION = value.Description,
-                USERUSID = Globals.CurrentUserId
+                USERUSID = userInfo.User.Identifier
             };
 
             db.PASSWORDDATA.Add(data);
@@ -102,7 +104,7 @@ namespace REFame.PasswordManagement.Data
 
             await foreach (var x in db.PASSWORDDATA.AsAsyncEnumerable())
             {
-                if (x.USERUSID == Globals.CurrentUserId)
+                if (x.USERUSID == userInfo.User.Identifier)
                 {
                     dataDisplay.Add(new PasswordData
                     {

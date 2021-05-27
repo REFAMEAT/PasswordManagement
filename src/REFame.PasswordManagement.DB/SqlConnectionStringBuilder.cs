@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using REFame.PasswordManagement.Configuration.Contracts;
+﻿using REFame.PasswordManagement.Configuration.Contracts;
 using REFame.PasswordManagement.DB.Contracts;
 using REFame.PasswordManagement.Model.Setting;
 

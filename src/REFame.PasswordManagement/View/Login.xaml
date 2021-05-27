@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:REFame.PasswordManagement.App.ViewModel"
-    x:Name="Window"
+    x:Name="window"
     Title="Login"
     Width="400"
     d:DataContext="{d:DesignInstance viewModel:LoginViewModel}"
@@ -19,7 +19,7 @@
         <KeyBinding
             Key="Enter"
             Command="{Binding ButtonCommandLogin}"
-            CommandParameter="{Binding ElementName=Window}" />
+            CommandParameter="{Binding ElementName=window}" />
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -74,7 +74,10 @@
             VerticalContentAlignment="Center"
             FontSize="15" />
 
-        <DockPanel Grid.Row="3" Grid.ColumnSpan="2">
+        <DockPanel 
+            Grid.Row="3" 
+            Grid.ColumnSpan="2"
+            Grid.Column="0">
             <Button
                 Width="150"
                 Margin="2"
@@ -85,7 +88,7 @@
             <Button
                 Margin="1"
                 Command="{Binding ButtonCommandLogin}"
-                CommandParameter="{Binding ElementName=Window}"
+                CommandParameter="{Binding ElementName=window}"
                 Content="{x:Static Loc.Login_LabelLogin_Content}"
                 FontSize="15" />
         </DockPanel>

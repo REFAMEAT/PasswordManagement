@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using NUnit.Framework;
-using REFame.PasswordManagement.WpfBase;
 
-namespace REFame.PasswordManagement.WpfBaseTests
+namespace REFame.PasswordManagement.WpfBase.Tests
 {
     public class AsyncCommandTests
     {

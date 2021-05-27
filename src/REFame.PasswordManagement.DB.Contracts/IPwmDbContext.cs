@@ -4,6 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using REFame.PasswordManagement.DB.Entities;
 
+// ReSharper disable InconsistentNaming
+
 namespace REFame.PasswordManagement.DB.Contracts
 {
     public interface IPwmDbContext : IDbContext

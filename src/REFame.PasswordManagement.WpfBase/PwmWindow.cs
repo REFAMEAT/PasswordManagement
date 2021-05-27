@@ -1,10 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
-using REFame.PasswordManagement.Localization;
 
 namespace REFame.PasswordManagement.WpfBase
 {

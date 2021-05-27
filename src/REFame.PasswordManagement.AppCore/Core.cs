@@ -19,6 +19,18 @@ namespace REFame.PasswordManagement.AppCore
             mapping = new Dictionary<Type, Func<object>>();
         }
 
+        public object Resolve(Type type)
+        {
+            if (GetRegisteredType(type) is { } result)
+            {
+                return result;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
         public TInterface GetRegisteredType<TInterface>()
         {
             if (GetRegisteredType(typeof(TInterface)) is TInterface result)
@@ -41,7 +53,7 @@ namespace REFame.PasswordManagement.AppCore
             }
             else if (type.IsClass)
             {
-                result = Resolve(type);
+                result = InternalResolve(type);
             }
 
             return result;
@@ -49,10 +61,17 @@ namespace REFame.PasswordManagement.AppCore
 
         public void RegisterType<TInterface, TImplementation>() where TImplementation : TInterface
         {
-            mapping.TryAdd(typeof(TInterface), () => Resolve(typeof(TImplementation)));
+            mapping.TryAdd(typeof(TInterface), () => InternalResolve(typeof(TImplementation)));
         }
 
-        private object Resolve(Type type)
+        public void RegisterSingleton<T>(T value)
+        {
+            mapping.TryAdd(typeof(T), () => value);
+        }
+
+        public ICoreInformation CoreInformation { get; set; }
+
+        private object InternalResolve(Type type)
         {
             var constructors = type
                 .GetConstructors()

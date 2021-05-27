@@ -11,11 +11,18 @@ namespace REFame.PasswordManagement.Settings.SettingFactories
     {
         private ThemeSettingsViewModel viewModel;
         private SettingMediator mediator;
-        public ISettingService<ThemeData> OverrideSettingService { get; set; }
+        private ISettingService<ThemeData> setting;
+
+        public ThemeSettingsFactory(ISettingService<ThemeData> setting)
+        {
+            this.setting = setting;
+        }
+
+        //public ISettingService<ThemeData> OverrideSettingService { get; set; }
 
         public BindableBase GetViewModel()
         {
-            return viewModel ??= new ThemeSettingsViewModel(OverrideSettingService);
+            return viewModel ??= new ThemeSettingsViewModel(setting);
         }
 
         public SettingMediator GetMediator()

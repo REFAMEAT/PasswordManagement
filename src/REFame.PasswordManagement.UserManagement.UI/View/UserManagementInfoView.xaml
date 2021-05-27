@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="REFame.PasswordManagement.UserManagement.UI.View.UserManagementInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:REFame.PasswordManagement.UserManagement.UI.View"
+             xmlns:viewModel="clr-namespace:REFame.PasswordManagement.UserManagement.UI.ViewModel"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModel:UserManagementViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <Style x:Key="LabelStyle" TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
+                        <Setter Property="Width" Value="50"/>
+                        <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
+                    </Style>
+                    <Style x:Key="TextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignTextBoxBase}">
+                        <Setter Property="IsReadOnly" Value="False"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox 
+                ItemsSource="{Binding User}"
+                SelectedItem="{Binding SelectedUser}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding UserName}"></Label>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <GridSplitter 
+                Grid.Column="1" 
+                Width="5" 
+                HorizontalAlignment="Stretch"/>
+
+        <StackPanel 
+                Orientation="Vertical" 
+                Grid.Column="2" 
+                Margin="5,0">
+            <DockPanel Margin="0,5">
+                <Label 
+                        Width="80"
+                        Style="{StaticResource LabelStyle}" 
+                        Content="{x:Static Loc.UserManagementView_Label_UserName_Content}"/>
+                <TextBox 
+                        Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding SelectedUser.UserName}"/>
+            </DockPanel>
+
+            <DockPanel Margin="0,5">
+                <Label 
+                        Width="80"
+                        Style="{StaticResource LabelStyle}" 
+                        Content="{x:Static Loc.UserManagementView_Label_Name_Content}"/>
+                <TextBox 
+                        Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding SelectedUser.FullName}"/>
+            </DockPanel>
+
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Margin="2">Disable Account</Button>
+                <Button Grid.Column="1" Margin="2">Reset Password</Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -39,10 +39,9 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
         [Test]
         public void GetViewModelTest()
         {
-            ThemeSettingsFactory ThemeSettingsFactory = new ThemeSettingsFactory();
-            ThemeSettingsFactory.OverrideSettingService = mock.Object;
+            ThemeSettingsFactory themeSettingsFactory = new ThemeSettingsFactory(mock.Object);
 
-            var viewModel = ThemeSettingsFactory.GetViewModel() as ThemeSettingsViewModel;
+            var viewModel = themeSettingsFactory.GetViewModel() as ThemeSettingsViewModel;
 
             Assert.That(viewModel, Is.Not.Null);
         }
@@ -50,22 +49,20 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
         [Test]
         public void GetMediatorThrowsNullReference()
         {
-            ThemeSettingsFactory ThemeSettingsFactory = new ThemeSettingsFactory();
-            ThemeSettingsFactory.OverrideSettingService = mock.Object;
+            ThemeSettingsFactory themeSettingsFactory = new ThemeSettingsFactory(mock.Object);
 
             // View-Model is not yet setted
-            Assert.That(() => ThemeSettingsFactory.GetMediator(),
+            Assert.That(() => themeSettingsFactory.GetMediator(),
                 Throws.Exception.TypeOf(typeof(NullReferenceException)));
         }
 
         [Test]
         public void GetMediator()
         {
-            ThemeSettingsFactory ThemeSettingsFactory = new ThemeSettingsFactory();
-            ThemeSettingsFactory.OverrideSettingService = mock.Object;
-            ThemeSettingsFactory.GetViewModel();
+            ThemeSettingsFactory themeSettingsFactory = new ThemeSettingsFactory(mock.Object);
+            themeSettingsFactory.GetViewModel();
 
-            SettingMediator mediator = ThemeSettingsFactory.GetMediator();
+            SettingMediator mediator = themeSettingsFactory.GetMediator();
 
             Assert.That(mediator, Is.Not.Null);
         }

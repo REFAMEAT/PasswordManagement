@@ -63,6 +63,7 @@ namespace REFame.PasswordManagement.App.Model
         }
 
         [NotifyPropertyChangedInvocator]
+        // ReSharper disable once RedundantAssignment
         protected virtual void SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             field = value;

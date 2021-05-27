@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using REFame.PasswordManagement.DB.Entities;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable InconsistentNaming
+
 namespace REFame.PasswordManagement.DB.Internals
 {
     public class Context : DbContext

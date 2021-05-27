@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.UserManagement.Contracts;
 using REFame.PasswordManagement.UserManagement.UI;
 
@@ -8,7 +9,7 @@ namespace REFame.PasswordManagement.UserManagement
     {
         public Task Open()
         {
-            UserManagementView view = new UserManagementView();
+            UserManagementView view = PWCore.CurrentCore.GetRegisteredType<UserManagementView>();
             view.Show();
 
             return Task.CompletedTask;

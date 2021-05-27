@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using REFame.PasswordManagement.AppCore;
 using REFame.PasswordManagement.DB.Contracts;
 using REFame.PasswordManagement.DB.Entities;
 using REFame.PasswordManagement.Login.Contracts;
@@ -8,9 +9,10 @@ namespace REFame.PasswordManagement.Login
 {
     public class DatabaseLogin : ILogin
     {
-        private IPwmDbContext db;
+        private readonly IPwmDbContext db;
 
-        public DatabaseLogin(IPwmDbContextFactory dbContextFactory)
+        public DatabaseLogin(
+            IPwmDbContextFactory dbContextFactory)
         {
             this.db = dbContextFactory.Create();
         }
@@ -29,9 +31,10 @@ namespace REFame.PasswordManagement.Login
         {
             foreach (USERDATA user in db.USERDATA)
             {
-                if (Password.GetHash(userName + user.USSALT) == user.USUSERNAME
+                if (Encryption.DecryptString(user.USUSERNAME) == userName
                     && Password.GetHash(password + user.USSALT) == user.USPASSWORD)
                 {
+                    PWCore.CurrentCore.RegisterSingleton(new UserInfo(UserFactory.CreateUser(user)) as IUserInfo);
                     return user.USID;
                 }
             }
@@ -51,15 +54,8 @@ namespace REFame.PasswordManagement.Login
             }
             catch (System.Exception)
             {
-                return false;
+                return true;
             }
-        }
-
-        public bool InitSuccessful { get; set; }
-
-        public void Initialize()
-        {
-            InitSuccessful = true;
         }
     }
 }

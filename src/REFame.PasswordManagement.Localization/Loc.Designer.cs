@@ -277,7 +277,7 @@ namespace REFame.PasswordManagement.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Some changes may require a restart.
         /// </summary>
         public static string SettingsView_LabelRestartRequired_Content {
             get {
@@ -309,6 +309,15 @@ namespace REFame.PasswordManagement.Localization {
         public static string ThemeSettings_LabelTheme_Content {
             get {
                 return ResourceManager.GetString("ThemeSettings_LabelTheme_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usermanagement.
+        /// </summary>
+        public static string UserManagement_View_Title {
+            get {
+                return ResourceManager.GetString("UserManagement_View_Title", resourceCulture);
             }
         }
         

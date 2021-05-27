@@ -25,7 +25,7 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
                 DatabaseName = "MockDatabaseName",
                 ServerName = "MockServerName",
                 IntegratedSecurity = false,
-                UseDatabase = true
+                Type = DataBaseType.Mssql
             };
 
             mock
@@ -40,8 +40,7 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
         [Test]
         public void GetViewModelTest()
         {
-            DatabaseSettingsFactory databaseSettingsFactory = new DatabaseSettingsFactory();
-            databaseSettingsFactory.OverrideSettingService = mock.Object;
+            DatabaseSettingsFactory databaseSettingsFactory = new DatabaseSettingsFactory(mock.Object);
 
             var viewModel = databaseSettingsFactory.GetViewModel() as DatabaseSettingsViewModel;
 
@@ -51,8 +50,7 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
         [Test]
         public void GetMediatorThrowsNullReference()
         {
-            DatabaseSettingsFactory databaseSettingsFactory = new DatabaseSettingsFactory();
-            databaseSettingsFactory.OverrideSettingService = mock.Object;
+            DatabaseSettingsFactory databaseSettingsFactory = new DatabaseSettingsFactory(mock.Object);
 
             // View-Model is not yet setted
             Assert.That(() => databaseSettingsFactory.GetMediator(), 
@@ -62,8 +60,7 @@ namespace REFame.PasswordManagement.Settings.Tests.SettingFactories
         [Test]
         public void GetMediator()
         {
-            DatabaseSettingsFactory databaseSettingsFactory = new DatabaseSettingsFactory();
-            databaseSettingsFactory.OverrideSettingService = mock.Object;
+            DatabaseSettingsFactory databaseSettingsFactory = new DatabaseSettingsFactory(mock.Object);
             databaseSettingsFactory.GetViewModel();
 
             SettingMediator mediator = databaseSettingsFactory.GetMediator();

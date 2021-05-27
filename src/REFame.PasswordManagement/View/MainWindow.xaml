@@ -64,7 +64,7 @@
                 </Button>
             </ToolBar>
 
-            <ToolBar Visibility="Collapsed">
+            <ToolBar Visibility="Visible">
                 <Button Command="{Binding CommandOpenUserManagement}" >
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon 
@@ -100,6 +100,7 @@
                 <DataGridTemplateColumn  Header="{x:Static Loc.MainWindow_Grid_ShowPassword_Header}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                             <CheckBox
                                 Width="17"
                                 IsChecked="{Binding Display, UpdateSourceTrigger=PropertyChanged}"/>

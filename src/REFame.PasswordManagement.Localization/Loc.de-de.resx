@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MainWindow_ctor_Title" xml:space="preserve">
-    <value>PasswordManagement {0} (de-de)</value>
+	  <value>PasswordManagement {0} (de-de) Benutzer: {1}</value>
   </data>
   <data name="MainWindow_LabelTextAdd_Content" xml:space="preserve">
     <value>Hinzufügen</value>
@@ -139,7 +139,7 @@
     <value>Passwort</value>
   </data>
   <data name="AddUser_LabelUser_Content" xml:space="preserve">
-    <value>Benutzername</value>
+	  <value>Name</value>
   </data>
   <data name="Login_LabelUsername_Content" xml:space="preserve">
     <value>Benutzername</value>
@@ -218,5 +218,8 @@
   </data>
   <data name="SettingsView_LabelRestartRequired_Content" xml:space="preserve">
 	  <value>Änderungen benötigen evtl. einen Neustart der App</value>
+  </data>
+  <data name="UserManagement_View_Title" xml:space="preserve">
+	  <value>Benutzerverwaltung</value>
   </data>
 </root>

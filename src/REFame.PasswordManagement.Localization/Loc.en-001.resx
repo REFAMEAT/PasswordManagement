@@ -11,9 +11,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MainWindow_ctor_Title" xml:space="preserve">
-    <value>PasswordManagement {0} (en-001)</value>
-  </data>
+	<data name="MainWindow_ctor_Title" xml:space="preserve">
+		<value>PasswordManagement {0} (en-en) User: {1}</value>
+	</data>
   <data name="MainWindow_LabelTextAdd_Content" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -32,9 +32,9 @@
   <data name="Login_LabelPassword_Content" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="AddUser_LabelUser_Content" xml:space="preserve">
-    <value>Username</value>
-  </data>
+	<data name="AddUser_LabelUser_Content" xml:space="preserve">
+		<value>Name</value>
+	</data>
   <data name="Login_LabelUsername_Content" xml:space="preserve">
     <value>Username</value>
   </data>
@@ -112,5 +112,8 @@
   </data>
 	<data name="SettingsView_LabelRestartRequired_Content" xml:space="preserve">
 		<value> Some changes may require a restart</value>
+	</data>
+	<data name="UserManagement_View_Title" xml:space="preserve">
+		<value>Usermanagement</value>
 	</data>
 </root>

@@ -1,5 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using REFame.PasswordManagement.DB.Contracts;
+using REFame.PasswordManagement.DB.Entities;
+using REFame.PasswordManagement.Login.Contracts;
+using REFame.PasswordManagement.Security;
+using REFame.PasswordManagement.UserManagement.Contracts;
 using REFame.PasswordManagement.WpfBase;
 
 namespace REFame.PasswordManagement.UserManagement.UI.ViewModel
@@ -7,32 +14,55 @@ namespace REFame.PasswordManagement.UserManagement.UI.ViewModel
     public class UserManagementViewModel : BindableBase
     {
         private User selectedUser;
+        private readonly IPwmDbContext db;
+        private readonly INewUserService newUserService;
 
-        public UserManagementViewModel()
+        public UserManagementViewModel(
+            IPwmDbContextFactory factory, 
+            INewUserService newUserService)
         {
-            User = new ObservableCollection<User>(new List<User>
-            {
-                new User {UserName = "felix.eckl", Name = "Felix Eckl"},
-                new User {UserName = "hannes.pleyer", Name = "Hannes Pleyer"},
-                new User {UserName = "lea.eckl", Name = "Lea Eckl"},
-                new User {UserName = "jakob.eckl", Name = "Jakob Eckl"},
-                new User {UserName = "alex.pleyer", Name = "Alexandra Pleyer-Missios"},
-            });
-        }
+            this.newUserService = newUserService;
+            db = factory.Create();
 
-        public ObservableCollection<User> User { get; set; }
+            var users = new List<User>();
+            foreach (USERDATA userdata in this.db.USERDATA)
+            {
+                users.Add(new User()
+                {
+                    UserName = Encryption.DecryptString(userdata.USUSERNAME),
+                    FullName = Encryption.DecryptString(userdata.USNAME),
+                });
+            }
+
+            User = new ObservableCollection<User>(users);
+
+            AddNewUserCommand = new AsyncCommand(AddNewUser);
+        }
+        
+        public ICommand AddNewUserCommand { get; }
+
+        public ObservableCollection<User> User { get; }
 
         public User SelectedUser
         {
             get => selectedUser;
             set => SetProperty(ref selectedUser, value);
         }
-    }
 
-    public class User
-    {
-        public string UserName { get; set; }
 
-        public string Name { get; set; }
+        private async Task AddNewUser()
+        {
+            (User newUser, string password) = newUserService.Create();
+
+            if (newUser != null)
+            {
+                var newUserData = UserFactory.CreateUser(newUser, password);
+
+                db.USERDATA.Add(newUserData);
+
+                await db.SaveChangesAsync(); 
+
+            }
+        }
     }
 }

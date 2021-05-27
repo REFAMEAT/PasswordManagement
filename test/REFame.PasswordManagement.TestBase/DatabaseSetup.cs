@@ -8,13 +8,12 @@ using REFame.PasswordManagement.DB.Internals;
 
 [assembly: InternalsVisibleTo("REFame.PasswordManagement.Data.Tests")]
 
-namespace REFame.PasswordManagement.Database.Tests
+namespace REFame.PasswordManagement.TestBase
 {
     public class DatabaseSetup
     {
-        protected IPwmDbContextFactory dbContextFactory;
-
-        private DbContextOptions<Context> dbContextOptions;
+        protected readonly IPwmDbContextFactory dbContextFactory;
+        private readonly DbContextOptions<Context> dbContextOptions;
 
         protected DatabaseSetup()
         {

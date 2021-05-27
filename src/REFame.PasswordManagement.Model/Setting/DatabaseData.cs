@@ -7,6 +7,13 @@
         public string Password { get; set; }
         public string Username { get; set; }
         public bool IntegratedSecurity { get; set; }
-        public bool UseDatabase { get; set; }
+        public DataBaseType Type { get; set; }
+    }
+
+    public enum DataBaseType
+    {
+        Mssql,
+        SqLite,
+        AccessDatabase,
     }
 }

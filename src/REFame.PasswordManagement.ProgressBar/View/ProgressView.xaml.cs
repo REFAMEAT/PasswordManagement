@@ -15,9 +15,14 @@ namespace REFame.PasswordManagement.ProgressBar.View
 
             Resources.MergedDictionaries.Clear();
 
-            foreach (var dictionary in Application.Current.Resources.MergedDictionaries)
-            { 
-                Resources.MergedDictionaries.Add(dictionary);
+            var list = Application.Current?.Resources?.MergedDictionaries;
+
+            if (list != null)
+            {
+                foreach (ResourceDictionary dictionary in list)
+                {
+                    Resources.MergedDictionaries.Add(dictionary);
+                } 
             }
 
             ViewModel = new ProgressViewModel();

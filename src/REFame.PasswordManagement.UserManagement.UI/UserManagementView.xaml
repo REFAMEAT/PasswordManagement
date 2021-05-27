@@ -3,91 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:REFame.PasswordManagement.UserManagement.UI"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:REFame.PasswordManagement.UserManagement.UI.ViewModel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:view="clr-namespace:REFame.PasswordManagement.UserManagement.UI.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Title="UserManagementView" 
+        Title="{x:Static Loc.UserManagement_View_Title}" 
+        d:DataContext="{d:DesignInstance viewModel:UserManagementViewModel}"
         Height="450" 
         Width="800">
-    <PwmWindow.DataContext>
-        <viewModel:UserManagementViewModel/>
-    </PwmWindow.DataContext>
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary>
-                    <Style x:Key="LabelStyle" TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
-                        <Setter Property="Width" Value="50"/>
-                        <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
-                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
-                    </Style>
-                    <Style x:Key="TextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignTextBoxBase}">
-                        <Setter Property="IsReadOnly" Value="False"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="VerticalContentAlignment" Value="Bottom"/>
-                    </Style>
-                </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ToolBarTray></ToolBarTray>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <ListBox 
-                ItemsSource="{Binding User}"
-                SelectedItem="{Binding SelectedUser}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Label Content="{Binding UserName}"></Label>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-            <GridSplitter 
-                Grid.Column="1" 
-                Width="5" 
-                HorizontalAlignment="Stretch"/>
-
-            <StackPanel 
-                Orientation="Vertical" 
-                Grid.Column="2" 
-                Margin="5,0">
-                <DockPanel Margin="0,5">
-                    <Label 
-                        Width="80"
-                        Style="{StaticResource LabelStyle}" 
-                        Content="{x:Static Loc.UserManagementView_Label_UserName_Content}"/>
-                    <TextBox 
-                        Style="{StaticResource TextBoxStyle}"
-                        Text="{Binding SelectedUser.UserName}"/>
-                </DockPanel>
-
-                <DockPanel Margin="0,5">
-                    <Label 
-                        Width="80"
-                        Style="{StaticResource LabelStyle}" 
-                        Content="{x:Static Loc.UserManagementView_Label_Name_Content}"/>
-                    <TextBox 
-                        Style="{StaticResource TextBoxStyle}"
-                        Text="{Binding SelectedUser.Name}"/>
-                </DockPanel>
-            </StackPanel>
-        </Grid>
+        <view:UserManagementHeaderView 
+            Grid.Row="0"/>
+        <view:UserManagementInfoView
+            Grid.Row="1"/>
     </Grid>
 </PwmWindow>

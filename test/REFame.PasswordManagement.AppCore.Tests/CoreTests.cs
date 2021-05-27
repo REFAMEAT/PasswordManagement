@@ -70,14 +70,18 @@ namespace REFame.PasswordManagement.AppCore.Tests
 
     class MyClass : IInterface
     {
+        // ReSharper disable once NotAccessedField.Local
+        private IInterfaceForSubClass parameter;
+
         public MyClass(IInterfaceForSubClass parameter)
         {
-
+            this.parameter = parameter;
         }
     }
 
     class MyClassForSubClass : IInterfaceForSubClass
     {
+        // ReSharper disable once EmptyConstructor
         public MyClassForSubClass()
         {
 

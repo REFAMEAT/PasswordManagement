@@ -36,7 +36,7 @@ namespace REFame.PasswordManagement.Settings.UI
                 Style = (Style)Resources["StyleTabControl"]
             };
 
-            TabControl.Items.Add(tabItem);
+            tabControl.Items.Add(tabItem);
             Mediators.Add(mediator);
         }
 

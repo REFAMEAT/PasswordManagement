@@ -20,6 +20,11 @@ namespace REFame.PasswordManagement.App.View
             // Pose the Window in the middle-front of the MainWindow
             Application curApp = Application.Current;
             Window mainWindow = curApp.Windows[0];
+            if (mainWindow == null)
+            {
+                return;
+            }
+
             Left = mainWindow.Left + (mainWindow.Width - ActualWidth) / 2;
             Top = mainWindow.Top + (mainWindow.Height - ActualHeight) / 2;
         }

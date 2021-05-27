@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using REFame.PasswordManagement.AppCore.Contracts;
+﻿using REFame.PasswordManagement.AppCore.Contracts;
 using REFame.PasswordManagement.Configuration;
 using REFame.PasswordManagement.Configuration.Contracts;
 using REFame.PasswordManagement.Data;
@@ -25,7 +24,7 @@ namespace REFame.PasswordManagement.DependencyInjection
 {
     public static class CoreExtensions
     {
-        public static async Task<ICore> RegisterTypes(this ICore appCore)
+        public static ICore RegisterTypes(this ICore appCore)
         {
             // Register types for Service
             appCore.RegisterType<ISettingService<DatabaseData>, DatabaseSettingService>();
@@ -54,6 +53,7 @@ namespace REFame.PasswordManagement.DependencyInjection
             appCore.RegisterType<ILogin, DatabaseLogin>();
 
             // Register types for UserManagement
+            appCore.RegisterType<INewUserService, NewUserService>();
             appCore.RegisterType<IUserMgmt, UserMgmt>();
 
             return appCore;

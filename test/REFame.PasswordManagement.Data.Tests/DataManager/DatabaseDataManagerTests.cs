@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using REFame.PasswordManagement.Database.Tests;
 using REFame.PasswordManagement.DB.Contracts;
 using REFame.PasswordManagement.DB.Entities;
+using REFame.PasswordManagement.Login;
+using REFame.PasswordManagement.Login.Contracts;
 using REFame.PasswordManagement.Model;
+using REFame.PasswordManagement.TestBase;
 
 namespace REFame.PasswordManagement.Data.Tests.DataManager
 {
@@ -16,7 +18,7 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
         public async Task Setup()
         {
             db = dbContextFactory.Create();
-            dataManager = new DatabaseDataManager(dbContextFactory);
+            dataManager = new DatabaseDataManager(dbContextFactory, new UserInfo(new User(){ Identifier = "GUID1"}));
 
             db.PASSWORDDATA.AddRange(Data);
 
@@ -103,15 +105,15 @@ namespace REFame.PasswordManagement.Data.Tests.DataManager
 
         private PASSWORDDATA[] Data => new[]
         {
-            new PASSWORDDATA {PWID = "Id1", PWCOMMENT = "test1", PWDATA = "safePassword1"},
-            new PASSWORDDATA {PWID = "Id3", PWCOMMENT = "test3", PWDATA = "safePassword3"},
-            new PASSWORDDATA {PWID = "Id4", PWCOMMENT = "test4", PWDATA = "safePassword4"},
-            new PASSWORDDATA {PWID = "Id5", PWCOMMENT = "test5", PWDATA = "safePassword5"},
-            new PASSWORDDATA {PWID = "Id6", PWCOMMENT = "test6", PWDATA = "safePassword6"},
-            new PASSWORDDATA {PWID = "Id7", PWCOMMENT = "test7", PWDATA = "safePassword7"},
-            new PASSWORDDATA {PWID = "Id8", PWCOMMENT = "test8", PWDATA = "safePassword8"},
-            new PASSWORDDATA {PWID = "Id2", PWCOMMENT = "test2", PWDATA = "safePassword2"},
-            new PASSWORDDATA {PWID = "Id9", PWCOMMENT = "test9", PWDATA = "safePassword9"}
+            new PASSWORDDATA {PWID = "Id1", PWCOMMENT = "test1", PWDATA = "safePassword1", USERUSID = "GUID1"},
+            new PASSWORDDATA {PWID = "Id3", PWCOMMENT = "test3", PWDATA = "safePassword3", USERUSID = "GUID1"},
+            new PASSWORDDATA {PWID = "Id4", PWCOMMENT = "test4", PWDATA = "safePassword4", USERUSID = "GUID1"},
+            new PASSWORDDATA {PWID = "Id5", PWCOMMENT = "test5", PWDATA = "safePassword5", USERUSID = "GUID1"},
+            new PASSWORDDATA {PWID = "Id6", PWCOMMENT = "test6", PWDATA = "safePassword6", USERUSID = "GUID1"},
+            new PASSWORDDATA {PWID = "Id7", PWCOMMENT = "test7", PWDATA = "safePassword7", USERUSID = "GUID1"},
+            new PASSWORDDATA {PWID = "Id8", PWCOMMENT = "test8", PWDATA = "safePassword8", USERUSID = "GUID1"},
+            new PASSWORDDATA {PWID = "Id2", PWCOMMENT = "test2", PWDATA = "safePassword2", USERUSID = "GUID1"},
+            new PASSWORDDATA {PWID = "Id9", PWCOMMENT = "test9", PWDATA = "safePassword9", USERUSID = "GUID1"}
         };
     }
 }

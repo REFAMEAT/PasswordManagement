@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using MaterialDesignThemes.Wpf;
 using REFame.PasswordManagement.Localization;
 using REFame.PasswordManagement.Model.Setting;
-using REFame.PasswordManagement.Services.Implementations;
 using REFame.PasswordManagement.Services.Interfaces;
 using REFame.PasswordManagement.WpfBase;
 using REFame.PasswordManagement.WpfBase.Mediator;
@@ -17,7 +16,7 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
 
         public ThemeSettingsViewModel(ISettingService<ThemeData> themeSetting)
         {
-            this.themeSetting = themeSetting ??= new ThemeSettingService();
+            this.themeSetting = themeSetting;
 
             ThemeData data = themeSetting.Load().Result;
 

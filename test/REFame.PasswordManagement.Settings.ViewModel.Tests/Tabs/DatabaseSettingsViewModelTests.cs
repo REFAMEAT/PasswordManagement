@@ -23,7 +23,7 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tests.Tabs
                 DatabaseName = "MockDatabaseName",
                 ServerName = "MockServerName",
                 IntegratedSecurity = false,
-                UseDatabase = true
+                Type = DataBaseType.Mssql
             };
 
             mock
@@ -45,7 +45,6 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tests.Tabs
             Assert.That(viewModel.DatabaseName, Is.EqualTo(mockData.DatabaseName));
             Assert.That(viewModel.ServerName, Is.EqualTo(mockData.ServerName));
             Assert.That(viewModel.IntegratedSecurity, Is.False);
-            Assert.That(viewModel.UseDatabase, Is.True);
         }
 
         [Test]

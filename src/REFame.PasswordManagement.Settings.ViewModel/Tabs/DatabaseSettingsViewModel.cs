@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Xaml;
 using REFame.PasswordManagement.Model.Setting;
 using REFame.PasswordManagement.Services.Implementations;
 using REFame.PasswordManagement.Services.Interfaces;
@@ -13,9 +13,9 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
         private SettingMediator settingMediator;
         private readonly ISettingService<DatabaseData> settings;
 
-        public DatabaseSettingsViewModel(ISettingService<DatabaseData> settings = null)
+        public DatabaseSettingsViewModel(ISettingService<DatabaseData> settings)
         {
-            this.settings = settings ?? new DatabaseSettingService();
+            this.settings = settings;
             DatabaseData data = this.settings.Load().Result;
 
             DatabaseName = data.DatabaseName;
@@ -23,7 +23,6 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
             Password = data.Password;
             Username = data.Username;
             IntegratedSecurity = data.IntegratedSecurity;
-            UseDatabase = data.UseDatabase;
         }
 
         public SettingMediator SettingMediator
@@ -41,7 +40,7 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
         public string Password { get; set; }
         public string Username { get; set; }
         public bool IntegratedSecurity { get; set; }
-        public bool UseDatabase { get; set; }
+        public DataBaseType Type { get; set; }
 
         public async void SettingMediatorOnSaveRequested(object sender, EventArgs e)
         {
@@ -51,7 +50,6 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tabs
                 IntegratedSecurity = IntegratedSecurity,
                 Password = Password,
                 ServerName = ServerName,
-                UseDatabase = UseDatabase,
                 Username = Username
             });
         }

@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using NUnit.Framework;
 using REFame.PasswordManagement.DB.Entities;
+using REFame.PasswordManagement.Login.Contracts;
 
 namespace REFame.PasswordManagement.Security.Tests
 {
@@ -18,7 +19,7 @@ namespace REFame.PasswordManagement.Security.Tests
             sw.Start();
             for (var i = 0; i < executeTimes; i++)
             {
-                UserFactory.CreateUser("test", "test");
+                UserFactory.CreateUser(new User(){UserName = "username", FullName = "User Name"},"test");
             }
 
             sw.Stop();
@@ -29,12 +30,13 @@ namespace REFame.PasswordManagement.Security.Tests
         [Test]
         public void UserFactoryCreateTest()
         {
-            var userName = "Max Mustermann";
+            var userName = "Max.Mustermann";
+            var fullName = "Max Mustermann";
             var password = "MusterPassword";
 
-            USERDATA userData = UserFactory.CreateUser(userName, password);
+            USERDATA userData = UserFactory.CreateUser(new User(){ UserName =  userName, FullName = fullName}, password);
 
-            string cryptUserName = Password.GetHash(userName + userData.USSALT);
+            string cryptUserName = Encryption.EncryptString(userName);
             string cryptPassword = Password.GetHash(password + userData.USSALT);
 
 

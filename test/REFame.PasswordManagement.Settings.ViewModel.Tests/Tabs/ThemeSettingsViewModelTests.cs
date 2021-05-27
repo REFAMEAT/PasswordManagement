@@ -39,7 +39,7 @@ namespace REFame.PasswordManagement.Settings.ViewModel.Tests.Tabs
         {
             var viewModel = new ThemeSettingsViewModel(mock.Object);
 
-            Assert.That(viewModel.SelectedLanguage, Is.EqualTo(mockData.Language.ToString()));
+            Assert.That(viewModel.SelectedLanguage, Is.EqualTo(mockData.Language));
             Assert.That(viewModel.SelectedColor, Is.EqualTo(mockData.PrimaryColor));
             Assert.That(viewModel.SelectedTheme, Is.EqualTo(mockData.Theme.ToString()));
         }
